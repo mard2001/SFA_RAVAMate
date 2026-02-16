@@ -1,0 +1,769 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Vehicle List</title>
+    <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/BOOTSTRAP3/css/bootstrap.min.css"/>
+    <script src="/BOOTSTRAP3/AJAX/jquery.min.js"></script>
+    <script src="/BOOTSTRAP3/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/css/mdDesign.css">
+
+    <link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+     
+   <!--=================================data reports import-=============================-->
+
+   <script type="text/javascript" src="/DATERANGEPICKER/moment.min.js"></script>
+    <script type="text/javascript" src="/DATERANGEPICKER/daterangepicker.js"></script>
+    <link rel="stylesheet" href="/DATERANGEPICKER/daterangepicker.css">
+    <link rel="stylesheet" href="/Commonusrs/DATATABLES/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="/Commonusrs/DATATABLES/editor.dataTables.min.css"/>
+    <link rel="stylesheet" href="/Commonusrs/DATATABLES/buttons.dataTables.min.css "/>
+
+</head>
+
+<body class="" id="page-top">
+    <div id="main">
+        <h4 class="display-4">
+           <!-- <a href="#" id='navBtn' class="btn btn-primary"  style='margin-right: 15px;'>
+             <span class="glyphicon glyphicon-menu-hamburger"></span> 
+           </a> -->
+          <span class='glyphicon glyphicon-file'></span> Vehicle List
+          <span class="nav navbar-nav navbar-right">
+                  <li class="dropdown">
+                      <a style='float:right;' href="#" class="dropdown-toggle" data-toggle="dropdown" id='dropThisDown'>
+                          <span class="label label-pill label-danger count" style='border-radius: 10px; font-size: 10px;'></span>
+                          <span class="fa fa-bell"></span>
+                      </a>
+                      <ul class="dropdown-menu" style='padding: 0'>
+                        <div id='notif-body'>
+                           <div id='notifs-icon-div'></div>
+                        </div>
+                        <a type="button" class="btn btn-default btn-block" href='mdAlert_bohol.php' id='seeAll' >See all</a>
+                      </ul>
+                  </li>
+                   <li class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user"></i>
+                      </a>
+                      <ul class="dropdown-menu dropdown-user">
+                          <li><a href="Profile.html"><i class="fa fa-user"></i> My Account</a>
+                          </li>
+                          <li class="divider"></li>
+                          <li><a href="#" id="admin-logout-btn"><i class="fa fa-sign-out-alt"></i> Logout</a>
+                          </li>
+                      </ul>
+                   </li>
+                
+              </span>
+          </h4>
+         <div class="panel" style='background-color:#2c8dd6; color: white; margin-top: 20px;'>
+
+                <div class="panel-heading">
+                  <span class='glyphicon glyphicon-list-alt'></span>
+                  <span id="titleHeading" class="display-4"></span>
+
+                  <!-- <div id="reportrange1" class="pull-right" style="background-color: transparent; cursor: pointer; color: white;">
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                        <span>Filter by Date</span> <b class="caret"></b>
+                    </div> -->
+                </div>
+                <div class="panel-body" style='background-color:#fff; color: black;'> 
+                  <!--<button class="btn btn-success btn-sm" id="appvBtn">APPROVE</button>-->
+                    <!-- <div class="loading-table">
+                         <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i> Rendering data ...
+                          <span class="sr-only">Loading...</span>
+                    </div> -->
+                    <table id="stockRequest_TAB" class="display nowrap" width="100%">
+                      <thead>
+                         <tr>
+                           <th>VEHICLEID</th>
+                           <th>PLATENUMBER</th>
+                           <th>DESCRIPTION</th>
+                           <th>BTDT DRIVER</th>
+                           <th>REGISTRATION NO.</th>
+                           <th>REGISTRATION EXPIRY</th>
+                           <th>SMSGateway</th>
+                         </tr>
+                      </thead>
+                      <tbody></tbody>
+                      <!-- <tfoot>
+                          <tr>
+                              <th colspan="13" style="text-align:right">Total Sales:</th>
+                              <th></th>
+                          </tr>
+                      </tfoot> -->
+                    </table>
+                 </div>
+               </div>
+         </div><!--main panel end-->
+
+    <div id="salesDmodal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-800">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title"><i class="fas fa-list"></i> Sales Details</h4>
+          </div>
+          <div class="modal-body">
+              <table class="table table-hover table-condensed table-striped">
+                <tr>
+                  <td>Reference No.</td>
+                  <td id="refnoH" class=""></td>
+                </tr>
+                <tr>
+                  <td>Delivery Date</td>
+                  <td id="transactionDateH" class=""></td>
+                </tr>
+                <tr>
+                  <td>Customer</td>
+                  <td id="customerH" class=""></td>
+                </tr>
+                <tr>
+                  <td>Address</td>
+                  <td id="addressH" class=""></td>
+                </tr>
+                <tr>
+                  <td>Total Range</td>
+                  <td id="rangeH" class=""></td>
+                </tr>
+                <tr>
+                  <td>Time Spent (Min.)</td>
+                  <td id="timepentH" class=""></td>
+                </tr>
+                <tr>
+                  <td>Total Amount</td>
+                  <td id="amountH" class=""></td>
+                </tr>
+                <tr>
+                  <td>Remarks</td>
+                  <td id="remarksH" class=""></td>
+                </tr>
+              </table>
+              <table class="table table-hover table-striped fixed_header">
+                <thead>
+                  <tr>
+                    <th>STOCKCODE</th>
+                    <th style="text-align: left !important;">DESCRIPTION</th>
+                    <th style="text-align: right !important;">QUANTITY</th>
+                    <th style="text-align: right !important;">AMOUNT</th>
+                  </tr>
+                </thead>
+                <tbody id="salesDetailsBody"></tbody>
+              </table>
+
+              <input type="hidden" id="salesman">
+              <input type="hidden" id="transaction">
+              <input type="hidden" id="custCode">
+              <input type="hidden" id="custName">
+              <input type="hidden" id="sku">
+              <input type="hidden" id="amount">
+              <input type="hidden" id="address">
+              <input type="hidden" id="contactPerson">
+              <input type="hidden" id="deldate">
+              <input type="hidden" id="refNo">
+              <input type="hidden" id="salesmanCode">
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-info" data-dismiss="modal" onclick="pInvDetails()">PRINT</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="modal fade" id="duplicateUserModal" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">SESSION ENDED</h4>
+              </div>
+              <div class="modal-body">
+                <p>Sorry, your session has been disconnected. Another user is currently using your account.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="cofirmationDupUser()">GOT IT</button>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <div class="modal fade" id="dssmodal" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">DAILY SALES SUMMARY (DSS)</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table table-hover" style="text-align:left;">
+                <tr>
+                  <td>Date:</td>
+                  <td>
+                    <span id="dssdatePicker"> &nbsp; 
+                      <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                      <span id="datestring"></span>
+                    </span>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" onclick="execprintDSS()">View</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="addvehicleModal" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Add Vehicle</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table table-hover" style="text-align:left;">
+                <tr>
+                  <td>Plate Number:</td>
+                  <td>
+                    <input type="text" class="form-control" id="n_plateno">
+                  </td>
+                </tr>
+                <tr>
+                    <td>Desciption:</td>
+                    <td>
+                      <input type="text" class="form-control" id="n_description">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Registration No.:</td>
+                    <td>
+                      <input type="text" class="form-control" id="n_registrationno">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Registration Expiry:</td>
+                    <td>
+                      <input type="date" class="form-control" id="registrationexpiry">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Loading Capacity (Volume):</td>
+                    <td>
+                      <input type="text" class="form-control" id="capvolume">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Loading Capacity (Value):</td>
+                    <td>
+                      <input type="text" class="form-control" id="capvalue">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>SMS Gateway:</td>
+                    <td>
+                      <input type="text" class="form-control" id="n_smsgateway">
+                    </td>
+                  </tr>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" onclick="addvehicle()">Add</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="modal fade" id="uptvehicleModal" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Update Vehicle</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table table-hover" style="text-align:left;">
+                <tr>
+                    <td>Plate Number:</td>
+                    <td>
+                      <input type="text" class="form-control" id="upt_plateno">
+                    </td>
+                  </tr>
+                  <tr>
+                      <td>Desciption:</td>
+                      <td>
+                        <input type="text" class="form-control" id="upt_description">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Registration No.:</td>
+                      <td>
+                        <input type="text" class="form-control" id="upt_registrationno">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Registration Expiry:</td>
+                      <td>
+                        <input type="date" class="form-control" id="upt_registrationexpiry">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>SMS Gateway:</td>
+                      <td>
+                        <input type="text" class="form-control" id="upt_smsgateway">
+                      </td>
+                    </tr>
+                    <tr>
+                        <td>Loading Capacity (Volume):</td>
+                        <td>
+                          <input type="text" class="form-control" id="upt_volume">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Loading Capacity (Value):</td>
+                        <td>
+                          <input type="text" class="form-control" id="upt_value">
+                        </td>
+                      </tr>
+                    <tr>
+                        <td>BTDT Driver:</td>
+                        <td>
+                          <select name="" id="upt_driver" class="form-control"></select>
+                        </td>
+                      </tr>
+              </table>
+
+              <input type="hidden" id="vehicleIDHOLDER">
+              <input type="hidden" id="mdCodeHolder">
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-danger pull-left" onclick="remove_vehicle()">Delete</button>
+              <button class="btn btn-danger pull-left" onclick="remove_user_linking()">Remove Link</button>
+              <button type="button" class="btn btn-warning" onclick="update_vehicle()">Update</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    <script src="/Commonusrs/DATATABLES/jquery.dataTables.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/dataTables.buttons.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/buttons.print.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/buttons.html5.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/jszip.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/ellipsis.js"></script>
+
+    <script type="text/javascript" src="/js/jasonday-printThis-c814846/printThis.js"></script>
+    <script src="/HASH/md5.js"></script>
+    <script src="/HASH/aes.js"></script>
+    <script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+    <script type="text/javascript" src="/web/web-commons.js"></script>
+    <script type="text/javascript" src="/js/bootbox.min.js"></script>
+    <script type="text/javascript" src="/js/scrolling.js"></script>
+    <script src="js/chatApi.js"></script>
+    <script type="text/javascript">
+        
+        var user = localStorage.getItem("adminUserName");
+      var usertype = localStorage.getItem("usertype");
+
+    //   var s = localStorage.getItem("srvr");
+    //   var u = localStorage.getItem("usrnm");
+    //   var p = localStorage.getItem("psswrd");
+    //   var d = localStorage.getItem("dtbse");
+    //   var con_info = [s, p, u, d];
+
+      determineUserType(usertype); 
+      
+      dsspicker();
+      var dssdate;
+      function dsspicker(){
+        $('#datestring').html('Pick a date');
+        $('#dssdatePicker').daterangepicker({
+            "singleDatePicker": true,
+            "startDate": moment(),
+            "endDate": moment(),
+            "maxDate": moment(),
+        }, function(start, end, label) {
+          dssdate = start.format('YYYY-MM-DD');
+          var today = moment().format('YYYY-MM-DD');
+          $('#datestring').html(dssdate);
+        });
+      }
+
+      getcompname();
+      function getcompname(){
+      $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {"type":"GET_COMPANYNAME", "CONN":con_info},
+          dataType: "json",
+          crossDomain: true,
+          cache: false,            
+            success: function(r){ 
+            $('#titleHeading').html(r[0].company.toUpperCase() +' / Vehicle List v.1.0.0');
+            }
+        });
+      } 
+      
+      var sourceDat;
+      function stockRequestSourceData(){
+      
+         $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {"type":"GET_VEHICLE_LIST", "CONN":con_info},
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(r){ 
+                  sourceDat = r;
+                //   tableData.clear().rows.add(r).draw();
+               }
+            });
+      }
+
+    
+      stockRequestSourceData();
+      datatableApp();
+          
+      var tableData;
+      function datatableApp(){
+           tableData = $('#stockRequest_TAB').DataTable({
+              "dom": 'Bfrtip',
+              "responsive": true,
+              "data": sourceDat,
+              "scrollX": true,
+              columns: [
+                  { data: "vehicleID" },
+                  { data: "plateNumber" },
+                  { data: "make" },
+                  { data: "DRIVERNAME" },
+                  { data: "registrationNo" },
+                  { data: "registrationExpiry" },
+                  { data: "SMSGateway" }
+                ],
+                buttons: [
+                  {
+                      extend: 'collection',
+                      text: 'Export',
+                      autoClose: true,
+                      buttons: [
+                      'print', 'csv', 'excel'
+                      ]
+                  },
+                  {
+                        text: 'Add Vehicle',
+                        action: function(e, dt, node, config){
+                            $('#addvehicleModal').modal('show');
+                        }   
+                  },
+                  
+              ],
+            columnDefs: [
+    		// 			{
+    		// 				targets: 12,
+    		// 				className: 'dt-body-left',
+            //     render: $.fn.dataTable.render.ellipsis(20)
+            //   },
+            //   {
+    		// 				targets: 13,
+    		// 				className: 'dt-body-right'
+    		// 			}
+  				  ],rowCallback: function(row, data, index){
+                // var stat = data.DRIVERNAME.toString();
+                  if(data.DRIVERNAME != null){
+                    $(row).find('td:eq(3)').css({'font-weight': 'bold', 'font-size':'10px;'});
+                    // $(row).find('td:eq(3)').html('&#10003; VALID');
+                  }else{
+                    $(row).find('td:eq(3)').css({'color': 'red', 'font-size':'10px;'});
+                    $(row).find('td:eq(3)').html('NO DRIVER');
+                  }
+            }
+            
+        });
+
+      $('#stockRequest_TAB tbody').on('click', 'tr', function () {
+            var tr = $(this).closest('tr');
+            var row = tableData.row(tr);
+            viewDetails(row.data());
+      });
+
+      function viewDetails(r){
+        
+        $('#upt_plateno').val(r.plateNumber);
+        $('#upt_description').val(r.make);
+        $('#upt_registrationno').val(r.registrationNo);
+        $('#registrationexpiry').val(r.registrationExpiry);
+        $('#upt_smsgateway').val(r.SMSGateway);
+
+        $('#vehicleIDHOLDER').val(r.vehicleID);
+        $('#upt_driver').val(r.driverID);
+
+        $('#mdCodeHolder').val(r.driverID);
+
+        $('#uptvehicleModal').modal('show');
+      }
+    }
+
+
+    function execprintDSS(){
+      if(dssdate == 'undefined' || dssdate == null){
+        alert('Please select a date.');
+      }else{
+        localStorage.setItem('DSSdateSelected', dssdate);
+        window.open('https://mybuddy-sfa.com/SFA/print-dashboard-dailysales.html', '_blank');
+      }  
+    }
+
+       (function($) {
+          $.fn.clickToggle = function(func1, func2) {
+              var funcs = [func1, func2];
+              this.data('toggleclicked', 0);
+              this.click(function() {
+                  var data = $(this).data();
+                  var tc = data.toggleclicked;
+                  $.proxy(funcs[tc], this)();
+                  data.toggleclicked = (tc + 1) % 2;
+              });
+              return this;
+          };
+         }(jQuery));
+
+       
+          $("#navBtn").clickToggle(function() {   
+            openNav();
+          }, function() {
+              closeNav();
+          });
+
+          $(window).bind("load", function () {
+              $('#work-in-progress').fadeOut();
+          });
+        
+          function imgError2(image) {
+            image.onerror = "";
+            image.src = "../img/salesmanPic.jpg";
+            return true;
+          }  
+
+          function openNav() {
+              document.getElementById("mySidenav").style.width = "270px";
+              document.getElementById("main").style.marginLeft = "270px";
+          }
+
+          function closeNav() {
+              document.getElementById("mySidenav").style.width = "0";
+              document.getElementById("main").style.marginLeft= "0";
+          }
+
+
+        function addvehicle(){
+
+            var plateno = $('#n_plateno').val();
+            var description = $('#n_description').val();
+            var regno = $('#n_registrationno').val();
+            var regnoexpiry= $('#registrationexpiry').val();
+            var smsgateway = $('#n_smsgateway').val();
+
+            var capvolume= $('#capvolume').val();
+            var capvalue = $('#capvalue').val();
+
+            var f = confirm("Are you sure you want to add this vehicle?");
+            if(f){
+                $.ajax ({
+                    url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+                    type: "GET",
+                    data: {
+                            "type":"EXEC_ADD_VEHICLE",
+                            "CONN":con_info,
+                            plateno:plateno,
+                            description:description,
+                            regno:regno,
+                            regnoexpiry:regnoexpiry,
+                            smsgateway:smsgateway,
+                            capvolume:capvolume,
+                            capvalue:capvalue
+                        },
+                    dataType: "json",
+                    crossDomain: true,
+                    cache: false,  
+                    async: false,          
+                    success: function(r){ 
+                        if(r == '1'){
+                            alert('Vehicle ' +plateno+ ' successfully added.');
+                            stockRequestSourceData();
+                            get_btdt_drivers();
+                            tableData.clear().rows.add(sourceDat).draw();
+                            $('#vehicleModal').modal('hide');
+
+
+
+                        }else if(r == '2'){
+                            alert('Platenumber ' +plateno+ ' already exist please insert another vehicle.');
+                        }
+                    }
+                });
+            }
+           
+        }
+
+        function remove_vehicle(){
+
+        var vehicleID = $('#vehicleIDHOLDER').val();
+
+        var f = confirm("Are you sure you want to remove this vehicle?");
+        if(f){
+            $.ajax ({
+                url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+                type: "GET",
+                data: {
+                        "type":"EXEC_DELETE_VEHICLE",
+                        "CONN":con_info,
+                        vehicleID:vehicleID
+                    },
+                dataType: "json",
+                crossDomain: true,
+                cache: false,  
+                async: false,          
+                success: function(r){ 
+                    if(r){
+                        alert('Vehicle successfully remove.');
+                    }
+
+                    stockRequestSourceData();
+                    tableData.clear().rows.add(sourceDat).draw();
+
+                    get_btdt_drivers();
+                    $('#uptvehicleModal').modal('hide');
+                }
+            });
+        }
+
+        }
+
+
+        function remove_user_linking(){
+
+            var mdCode = $('#mdCodeHolder').val();
+
+            var f = confirm("Are you sure you want to remove this vehicle?");
+            if(f){
+                $.ajax ({
+                    url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+                    type: "GET",
+                    data: {
+                            "type":"EXEC_REMOVE_VEHICLE_LINKING",
+                            "CONN":con_info,
+                            mdCode:mdCode
+                        },
+                    dataType: "json",
+                    crossDomain: true,
+                    cache: false,  
+                    async: false,          
+                    success: function(r){ 
+                        if(r){
+                            alert('Vehicle linking successfully remove.');
+                        }
+
+                        stockRequestSourceData();
+                        tableData.clear().rows.add(sourceDat).draw();
+
+                        get_btdt_drivers();
+                        $('#uptvehicleModal').modal('hide');
+                    }
+                });
+            }
+
+        }
+
+        get_btdt_drivers();
+        function get_btdt_drivers(){
+            $.ajax ({
+                url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+                type: "GET",
+                data: {
+                        "type":"GET_BTDT_DRIVERS",
+                        "CONN":con_info
+                    },
+                dataType: "json",
+                crossDomain: true,
+                cache: false,  
+                async: false,          
+                success: function(r){ 
+                    var cont = `<option selected disabled hidden value="">choose here..</option>`;
+                    for(var x = 0; x < r.length; x++){
+                        cont += `<option value=`+r[x].mdCode+`>`+r[x].driver+`</option>`;
+                    }
+                    $('#upt_driver').html(cont);
+                }
+            });
+
+        }
+
+
+        function update_vehicle(){
+            var plateno = $('#upt_plateno').val();
+            var description = $('#upt_description').val();
+            var regno = $('#upt_registrationno').val();
+            var regnoexpiry= $('#upt_registrationexpiry').val();
+            var smsgateway = $('#upt_smsgateway').val();
+
+            var capvolume= $('#capvolume').val();
+            var capvalue = $('#capvalue').val();
+
+            var driverID = $('#upt_driver').val();
+            var upt_volume = $('#upt_volume').val();
+            var upt_value = $('#upt_value').val();
+
+            var vehicleID = $('#vehicleIDHOLDER').val();
+            
+            var f = confirm("Are you sure you want to update this vehicle?");
+            if(f){
+                $.ajax ({
+                    url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+                    type: "GET",
+                    data: {
+                            "type":"EXEC_UPDATE_VEHICLE",
+                            "CONN":con_info,
+                            plateno:plateno,
+                            description:description,
+                            regno:regno,
+                            regnoexpiry:regnoexpiry,
+                            smsgateway:smsgateway,
+                            capvolume:upt_volume,
+                            capvalue:upt_value,
+                            driverID:driverID,
+                            vehicleID:vehicleID
+                        },
+                    dataType: "json",
+                    crossDomain: true,
+                    cache: false,  
+                    async: false,          
+                    success: function(r){ 
+                        alert('Vehicle ' +plateno+ ' successfully updated.');
+                        stockRequestSourceData();
+                        tableData.clear().rows.add(sourceDat).draw();
+
+                        get_btdt_drivers();
+                        $('#uptvehicleModal').modal('hide');
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

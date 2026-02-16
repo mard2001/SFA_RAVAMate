@@ -1,0 +1,2549 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    Data Maintenance
+  </title>
+<meta http-equiv='cache-control' content='no-cache'>
+<meta http-equiv='expires' content='0'>
+<meta http-equiv='pragma' content='no-cache'>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/BOOTSTRAP3/css/bootstrap.min.css"/>
+<script src="/BOOTSTRAP3/AJAX/jquery.min.js"></script>
+<script src="/BOOTSTRAP3/js/bootstrap.min.js"></script>
+ 
+<link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+<!-- <link rel="stylesheet" href="MULTISELECT/bootstrap-select.min.css"/> -->
+<link rel="stylesheet" href="/css/mdDesign.css">
+
+<script type="text/javascript" src="/DATERANGEPICKER/moment.min.js"></script>
+<script type="text/javascript" src="/DATERANGEPICKER/daterangepicker.js"></script>
+<link rel="stylesheet" href="/DATERANGEPICKER/daterangepicker.css">
+
+<link rel="stylesheet" href="/js/multi/dist/css/bootstrap-multiselect.css" type="text/css"/>
+</head>
+ <!--<div id="work-in-progress">
+          <div style="margin: 0 auto;">
+            <img src="img/fast.png" style="height: 80px; width: 480px; z-index: 1;"></br>
+            <img src="img/orbit-400px.gif" style="position: block; height: 200px;">
+          </div>
+   </div>-->
+<body>
+
+ <div id="mySidenav" class="sidenav">
+  <div class='image'><img alt='mdbuddylogo' class='logoMd' src='/img/mdbuddylogo_jeff.png'/></div>
+    <a href="Dashboard"> <span class='glyphicon glyphicon-home'></span> Dashboard</a>
+    <a href="digitalMapping"> <span class='glyphicon glyphicon-map-marker'></span> Digital Mapping</a>
+    <a href="customerMapping"> <span class="fa fa-users" aria-hidden="true"></span> Customer Mapping</a>
+    <a href="territoryGeofencing"> <span class='glyphicon glyphicon-cog'></span> Territory Geofencing</a>
+   <a data-toggle="collapse" href="#collapse1" id='navDrop'> <span class='glyphicon glyphicon-duplicate' id='changeIcon'></span> Reports
+     <i class="glyphicon glyphicon-menu-down pull-right"></i> </a>
+      <div id="collapse1" class="panel-collapse collapse" style="margin-left: 17px; font-size: 9px !important">
+      <a href="salesReport"> Sales Report</a>
+      <a href="fastsosyotransaction"> Fastsosyo Transaction</a>
+      <a href="salesAudit"> Sales Audit</a>
+        <a href="transactionLedger"> Transaction Ledger</a>
+        <a href="UnprocessedOrders"> Unprocessed Orders</a>
+        <a href="dsr"> DSR</a>
+        <a href="dcr"> Daily Collection</a>
+        <a href="stockRequest"> Stock Request</a>
+        <a href="unuploaded"> Unuploaded</a>
+        <a href="BOReport"> BO</a>
+        <a href="inventory"> Inventory Valuation</a>
+        <a href="Stocktake Report"> Stocktake</a>
+        <a href="jobberMaintenance"> Jobber</a>
+        <a href="syncreport">Sync Report</a>
+        <a href="soaprvreport">SO Approval</a>
+      </div>
+   <a data-toggle="collapse" href="#collapse2" id='navDrop' class="maintenanceCont"> <span class="fa fa-cogs" aria-hidden="true" id='changeIcon'></span> Maintenance
+    <i class="glyphicon glyphicon-menu-down pull-right"></i> </a>
+      <div id="collapse2" class="panel-collapse collapse" style="margin-left: 17px; font-size: 9px !important">
+      <a href="dataMaintenance.php" class="activeYes"> Data</a>
+        <a href="customer"> Customer</a>
+        <a href="cmf">CMF</a>
+        <a href="geoReset"> Georeset</a>
+        <a href="salesman"> Salesman</a>
+        <a href="product"> Product</a>
+        <a href="productbtdt"> BTDT Product</a>
+        <a href="customerTagging"> Tagging</a>
+        <a href="bankmaintenance"> Bank</a>
+        <a href="mcpcalibration">MCP Calibration</a>
+      </div>
+  <!-- <a href="Alert"> <span class='glyphicon glyphicon-envelope'></span> Alert Messages</a> -->
+</div>
+
+  <div id="main">
+        <h4 class="display-4 dispMargin">
+          <a href="#" id='navBtn' class="btn btn-primary"  style='margin-right: 15px;'>
+           <span class="glyphicon glyphicon-menu-hamburger"></span> 
+          </a>
+          <span class='glyphicon glyphicon-cog'></span> Data Maintenance <small>v.8.9</small>
+            <span class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                    <a style='float:right;' href="#" class="dropdown-toggle" data-toggle="dropdown" id='dropThisDown'>
+                        <span class="label label-pill label-danger count" style='border-radius: 10px; font-size: 10px;'></span>
+                        <span class="fa fa-bell"></span>
+                    </a>
+                    
+                       <ul class="dropdown-menu" style='padding: 0'>
+                        <div id='notif-body'>
+                            <div id='notifs-icon-div'></div>
+                        </div>
+                        <a type="button" class="btn btn-default btn-block" href='mdAlert_bohol.php' id='seeAll' >See all</a>
+                       </ul>
+                </li>
+
+                 <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                      <i class="fa fa-user-circle-o"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="Profile.html"><i class="fa fa-user-circle-o"></i> My Account</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="#" id="admin-logout-btn"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                        </li>
+                    </ul>
+                 </li>
+              
+            </span>
+       </h4>
+
+         <div class="panel cust-panel">
+           <div class="panel-heading">
+                <i class='glyphicon glyphicon-cog'></i> <span id="titleHeading"></span>
+                
+                <span class="pull-right" style="cursor: pointer;" onclick="databasepurge()">
+                    <i class="glyphicon glyphicon-hdd"></i>
+                </span>
+           </div>
+            <div class="panel-body" style='background-color:#fff; color: black;'>   
+               <!--<button class='btn btn-info' onclick='custSync()'>Sync Customer</button>
+               <button class='btn btn-info' onclick='executeInventorySync()'>Sync Inventory</button>
+               <button class='btn btn-info' onclick='executeQueingSync()'>Sync SFA Queuing</button>-->
+
+                 <div class="row">
+                    <div class="col-sm-6">
+                        <div class="card card-block">
+                          <h3 class="card-title">BI Processing</h3>
+                          <p class="card-text">This feature enables MyBuddy to transform data into robust analytics, improving reporting and governance.<br><br>
+                            Please note that we exclusively retain your recently uploaded data for analytics purposes.
+                          </p>
+        
+                          <a href="#" class="btn btn-sm btn-primary" onclick='show_bi_agreement("bi")'>UPLOAD DATA</a>
+                          <a href="#" class="btn btn-sm btn-info" onclick='view_analytics()'> VIEW ANALYTICS</a>
+                        </div>
+                      </div>
+
+
+                      <div class="col-sm-6">
+                        <div class="card card-block">
+                          <h3 class="card-title">BTDT Overview</h3>
+                          <p class="card-text">
+                            <!-- This feature enables MyBuddy to transform data into robust analytics, improving reporting and governance.<br><br> -->
+                            Please note that we exclusively retain your recently uploaded data for analytics purposes.
+                          </p>
+      
+                          <a href="#" class="btn btn-sm btn-primary" onclick='show_bi_agreement("btdt")'>UPLOAD DATA</a>
+                          <a href="#" class="btn btn-sm btn-info" onclick='view_analytics_1()'> VIEW ANALYTICS</a>
+                          <a href="#" class="btn btn-sm btn-warning" onclick='view_otd_monitoring()'> OTD MONITORING</a>
+                        </div>
+                      </div>
+
+
+                      <div class="col-sm-6">
+                        <div class="card card-block">
+                          <h3 class="card-title">SOSYO Latest Order</h3>
+                          <p class="card-text">
+                            <!-- This feature enables MyBuddy to transform data into robust analytics, improving reporting and governance.<br><br> -->
+                            Please note that we exclusively retain your recently uploaded data for fastsosyo purposes.
+                          </p>
+      
+                          <a href="#" class="btn btn-sm btn-primary" onclick='show_bi_agreement("sosyo_latest")'>UPLOAD DATA</a>
+                          <!-- <a href="#" class="btn btn-sm btn-info" onclick='view_analytics_1()'> VIEW ANALYTICS</a> -->
+                        </div>
+                      </div>
+
+
+                      <div class="col-sm-6">
+                        <div class="card card-block">
+                          <h3 class="card-title">SOSYO Relavance</h3>
+                          <p class="card-text">
+                            <!-- This feature enables MyBuddy to transform data into robust analytics, improving reporting and governance.<br><br> -->
+                            Please note that we exclusively retain your recently uploaded data for fastsosyo purposes.
+                          </p>
+      
+                          <a href="#" class="btn btn-sm btn-primary" onclick='show_bi_agreement("sosyo_relevance")'>UPLOAD DATA</a>
+                          <!-- <a href="#" class="btn btn-sm btn-info" onclick='view_analytics_1()'> VIEW ANALYTICS</a> -->
+                        </div>
+                      </div>
+
+
+                      <div class="col-sm-6">
+                        <div class="card card-block">
+                          <h3 class="card-title">SOSYO Featured Items</h3>
+                          <p class="card-text">
+                            <!-- This feature enables MyBuddy to transform data into robust analytics, improving reporting and governance.<br><br> -->
+                            Please note that we exclusively retain your recently uploaded data for fastsosyo purposes.
+                          </p>
+      
+                          <a href="#" class="btn btn-sm btn-primary" onclick='show_bi_agreement("sosyo_featured")'>UPLOAD DATA</a>
+                          <!-- <a href="#" class="btn btn-sm btn-info" onclick='view_analytics_1()'> VIEW ANALYTICS</a> -->
+                        </div>
+                      </div>
+
+
+                      <div class="col-sm-6">
+                        <div class="card card-block">
+                          <h3 class="card-title">Sync OTD Monitoring</h3>
+                          <p class="card-text">
+                            <!-- This feature enables MyBuddy to transform data into robust analytics, improving reporting and governance.<br><br> -->
+                            Please note that we exclusively retain your recently uploaded data for fastsosyo purposes.
+                          </p>
+      
+                          <a href="#" class="btn btn-sm btn-primary" onclick='show_bi_agreement("sosyo_otd_monitoring")'>UPLOAD DATA</a>
+                          <a href="#" class="btn btn-sm btn-info" onclick='view_analytics_otd()'> VIEW ANALYTICS</a>
+                        </div>
+                      </div>
+           </div>
+         </div><!--main panel end-->
+
+
+         <div class="modal fade" id="syncbtdtDriverModal" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Select BTDT Driver</h4>
+              </div>
+              <div class="modal-body">
+                <table class="table table-striped">
+                  <tr>
+                    <td>BTDT Driver:</td>
+                    <td><select id="btdtdrvierList" name="btdtdrvierList[]"></select>
+                   </td>
+                  </tr>
+                  <tr>
+                    <td>Booking Date:</td>
+                    <td><span class="dssdatePicker" style="text-align: left; margin-left: 70px;"> &nbsp; 
+                      <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                      <span class="datestring"></span>
+                     </span>
+                   </td>
+                </table>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="execSyncBtdt()">Execute</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+         <div class="modal fade" id="SyncInventoryModal" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Data Replication</h4>
+                </div>
+                <div class="modal-body">
+                  <table>
+                    <tr>
+                      <td>SALESMAN:</td>
+                      <td><select id="salesmanList" name="salesmanList[]"></select>
+                     </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="execDatareplication()">Execute</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="SyncInvoiceModal" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Sync invoice to iDeliver</h4>
+                </div>
+                <div class="modal-body">
+                  <table>
+                    <tr>
+                      <td>INVOICE DATE:</td>
+                      <td><span class="dssdatePicker" style="text-align: left; margin-left: 70px;"> &nbsp; 
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                        <span class="datestring"></span>
+                       </span>
+                     </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="execSyncInvoiceIdeliver()">Execute</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal fade" id="syncStockRequestModal" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">STOCK REQUEST SYNCHING</h4>
+                </div>
+                <div class="modal-body">
+                  <table class="table table-hover">
+                    <tr>
+                      <td>SALESMAN:</td>
+                      <td><select id="salesmanList_stk" name="salesmanList_stk[]" multiple="multiple"></select>
+                     </td>
+                    </tr>
+                    <tr>
+                      <td>DATE:</td>
+                      <td><span class="dssdatePicker" style="text-align: left; margin-left: 70px;"> &nbsp; 
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                        <span class="datestring"></span>
+                       </span>
+                     </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="exec_stockTake()">Execute</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="syncBetaModal" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">SFA QUEUING</h4>
+                </div>
+                <div class="modal-body">
+                  <table class="table table-hover">
+                    <tr>
+                      <td>SALESMAN:</td>
+                      <td><select id="salesmanList_beta" name="salesmanList_beta[]" multiple="multiple"></select>
+                     </td>
+                    </tr>
+                    <tr>
+                      <td>DATE:</td>
+                      <td><span class="dssdatePicker" style="text-align: left; margin-left: 70px;"> &nbsp; 
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                        <span class="datestring"></span>
+                       </span>
+                     </td>
+                    </tr>
+                    <tr>
+                      <!-- <td>PRIORITIZE SYNCHING:</td> -->
+                      <td colspan="2"><span class="text-indicator-priosyching"></span>
+                        <label class="switch pull-right"><input type="checkbox" class="priosyching">
+                          <span class="slider round"></span>
+                        </label></td>
+                    </tr>
+                  </table>
+
+                  <br>
+                  <small class="text-info"><b>Note:</b> By prioritizing syncing, salesman sending and syncing functionalities will be temporarily turned off until SFA Sync is complete.</small>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="executeQueingSync_beta()">Execute</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal fade" id="purgeModal" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">CLEAN DATABASE DATA</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" placeholder="Enter password" id="purgePass" style="font-size: 15px; font-weight:bold; height: 50px; text-align: center;">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="checkpurgepass()">Proceed</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="duplicateUserModal" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">SESSION ENDED</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>Sorry, your session has been disconnected. Another user is currently using your account.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" onclick="cofirmationDupUser()">GOT IT</button>
+                    </div>
+                  </div>
+                </div>
+          </div>
+
+
+          <div class="modal fade" id="skutaggingModal" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">BTDT SKU Tagging</h4>
+                </div>
+                <div class="modal-body">
+                  <table class="table" style="width: 100%;">
+                    <thead>
+                      <tr>
+                        <td>BTDT Driver</td>
+                        <td>
+                            <select id="bdtdDriverSelection" name="bdtdDriverSelection[]"></select>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Booking Date</td>
+                        <td>
+                          <span id="btdtBookingDate" style="text-align: left; margin-left: 70px;"> &nbsp; 
+                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                            <span id="btdtspan"></span>
+
+                           </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">
+                          <button class="btn btn-primary" style="float: right; text-align: right;" onclick="searchbtdtSku()">Search</button>
+                        </td>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                  <hr>
+                  <h4 class="skuDetailsTable"><span id="btdtdrivername"></span> SKU Transaction List</h4>
+                  <br>
+                  <div style="max-height: 350px; overflow: auto;">
+                    <table class="table table-hover table-sm skuDetailsTable" style="width: 100%;" id="">
+                      <thead>
+                        <tr>
+                          <th>Stock Code</th>
+                          <th>Description</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody id="skuDetailstbody"></tbody>
+                    </table>
+                  </div>
+                 
+                </div>
+                <!-- <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="">Execute</button>
+                </div> -->
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal fade" id="productselectionModal" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Replaced Product: <b id="stockCodetoReplaced"></b></h4>
+                </div>
+                <div class="modal-body">
+                  <table class="table" style="width: 100%;">
+                    <tbody>
+                      <tr>
+                        <td>Product</td>
+                        <td>
+                            <select id="btdtProductList" name="btdtProductList[]"></select>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                 
+                  <input type="hidden" id="btdtstockCodeHolder">
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-primary" style="float: right; text-align: right;"  onclick="replacedBtdtProduct()">Replace</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="biModal" role="dialog">
+            <div class="modal-dialog" style="color: black !important;">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="">BI Processing</h4>
+                </div>
+                <div class="modal-body">
+                    <label for="">Select Days Covered:</label>
+                    <!-- <select id="daysCoveredSelect" class="form-control form-control-lg">
+                      <option value="" selected disabled hidden>Choose here..</option>
+                      <option value="7">7 Days</option>
+                      <option value="14">14 Days</option>
+                      <option value="30">30 Days</option>
+                      <option value="60">60 Days</option>
+                      <option value="90">90 Days</option>
+                      <option value="custom">Custom</option>
+
+                    </select> -->
+                    <!-- <span> -->
+                      <div id="reportrange1" style="transparent; cursor: pointer; color: black; text-align: center !important;">
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                          <span>Filter by Date</span> <b class="caret"></b>
+                      </div>
+                    <!-- </span> -->
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-primary" style="float: right; text-align: right;"  onclick="exec_biprocessing()">Execute</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="modal fade" id="customDaysModal" role="dialog">
+            <div class="modal-dialog" style="color: black !important;">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="">Custom Days</h4>
+                </div>
+                <div class="modal-body">
+                    <label for="">No. of Days Covered:</label>
+                    <input type="text" class="form-control form-control-lg" id="customDays">
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-primary" style="float: right; text-align: right;"  onclick="exec_biprocessing_custom()">Execute</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal fade" id="otdmonitoringModal" role="dialog">
+            <div class="modal-dialog" style="color: black !important;">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="">Upload OTD Monitoring</h4>
+                </div>
+                <div class="modal-body">
+                      <div id="reportrange3" style="transparent; cursor: pointer; color: black; text-align: center !important;">
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                          <span>Select date to upload</span> <b class="caret"></b>
+                      </div>
+                    <!-- </span> -->
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-primary" style="float: right; text-align: right;"  onclick="exec_otdmonitoring()">Execute</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+
+          <div class="modal fade" id="btdtModal" role="dialog">
+            <div class="modal-dialog" style="color: black !important;">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="">BTDT Processing</h4>
+                </div>
+                <div class="modal-body">
+                    <label for="">Select Days Covered:</label>
+                    <!-- <select id="daysCoveredSelect" class="form-control form-control-lg">
+                      <option value="" selected disabled hidden>Choose here..</option>
+                      <option value="7">7 Days</option>
+                      <option value="14">14 Days</option>
+                      <option value="30">30 Days</option>
+                      <option value="60">60 Days</option>
+                      <option value="90">90 Days</option>
+                      <option value="custom">Custom</option>
+
+                    </select> -->
+                    <!-- <span> -->
+                      <div id="reportrange2" style="transparent; cursor: pointer; color: black; text-align: center !important;">
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                          <span>Filter by Date</span> <b class="caret"></b>
+                      </div>
+                    <!-- </span> -->
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-primary" style="float: right; text-align: right;"  onclick="exec_btdtprocessing()">Execute</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="modal fade" id="customDaysModal" role="dialog">
+            <div class="modal-dialog" style="color: black !important;">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="">Custom Days</h4>
+                </div>
+                <div class="modal-body">
+                    <label for="">No. of Days Covered:</label>
+                    <input type="text" class="form-control form-control-lg" id="customDays">
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-primary" style="float: right; text-align: right;"  onclick="exec_biprocessing_custom()">Execute</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal fade" id="desclaimerModal" role="dialog">
+            <div class="modal-dialog" style="color: black !important;">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="">Data Privacy Agreement</h4>
+                </div>
+                <div class="modal-body">
+                  <p> The data I have furnished herein will be collected, utilized, stored, and managed during sales analytics processing.  
+                    <br><br>
+                    I consent to collecting, using, and storing this information to facilitate MyByuddy Sales Analytics.  
+                    <br><br>
+                    It is explicit that the data will be retained for the duration required to fulfill the requirements of the MyBuddy Sales Analytics.
+                  </p>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-primary" id="bi_databtn" onclick="show_bi_sync_modal()">I AGREE</button>
+                  <button class="btn btn-primary" id="btdt_databtn" onclick="show_btdt_sync_modal()">I AGREE</button>
+                  <button class="btn btn-primary" id="btdt_sosyo" onclick="show_sosyo_sync_modal()">I AGREE</button>
+                  <button class="btn btn-primary" id="btdt_sosyo_relavance" onclick="show_sosyo_relavance()">I AGREE</button>
+                  <button class="btn btn-primary" id="btdt_sosyo_featuredItems" onclick="show_sosyo_featured()">I AGREE</button>
+                  <button class="btn btn-primary" id="bi_otdmonitoring" onclick="show_otd_monitoring()">I AGREE</button>
+                  <button class="btn btn-default" data-dismiss="modal">DISAGREE</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          
+
+          
+  </div><!--#main-->
+     <!-- Bootstrap core JavaScript-->
+  <script type="text/javascript" src="/web/web-commons.js"></script>
+  <script type="text/javascript" src="/js/bootbox.min.js"></script>
+  <script type="text/javascript" src="/js/multi/dist/js/bootstrap-multiselect.js"></script>
+  <script src="/HASH/md5.js"></script>
+  <script src="/HASH/aes.js"></script>
+  <script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+  <script src="js/chatApi.js"></script>
+  <script src="js/nstprg.js"></script>
+  <!-- <script type="text/javascript" src="js/duplicate-user.js"></script> -->
+  <script>
+  var usernm = localStorage.getItem("username");
+  var user = localStorage.getItem("adminUserName");
+      $('#userConnection').val(user);
+
+      $(window).on('beforeunload', function(){ 
+        var e = confirm('Do you really want to close?');
+        if(e){
+
+            insertsyncLogs('testing');
+        }
+      });
+
+      var GLBLCIDHOLDER;
+      var GBLCOMPANYNAME = '';
+      // checkuser_gtmtype();
+      getcompname();
+      function getcompname(){
+      $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {"type":"GET_COMPANYNAME", "CONN":con_info},
+          dataType: "json",
+          crossDomain: true,
+          cache: false,          
+          async: false,  
+            success: function(r){ 
+            $('#titleHeading').html(r[0].company.toUpperCase());
+            GLBLCIDHOLDER = r[0].DIST_CD;
+            GBLCOMPANYNAME = r[0].DIST_INDI;
+            }
+        });
+      } 
+      /*NOTIFICATION SECTION*/
+    //  showNotif();
+
+    $('#navDrop').click(function() {
+      $("i", this).toggleClass("glyphicon-menu-up glyphicon-menu-down");
+    });
+    
+    // $(document).on('click', '.dropdown-toggle', function(){
+    //   $('.count').html('');
+    //    showNotif('yes');
+    // });
+    $('#purgePass').val('').change();
+
+  //   setInterval(function(){
+  //    //loadPopup();
+  //    //showNotif();
+  //  }, 9000); 
+
+    dsspicker();
+    var dssdate;
+    function dsspicker(){
+      $('.datestring').html('Pick a date here..');
+      $('.dssdatePicker').daterangepicker({
+          "singleDatePicker": true,
+          "startDate": moment(),
+          "endDate": moment(),
+          "maxDate": moment(),
+      }, function(start, end, label) {
+        dssdate = start.format('YYYY-MM-DD');
+        var today = moment().format('YYYY-MM-DD');
+        $('.datestring').html(dssdate);
+      });
+
+      $('#btdtspan').html('Pick a date here..');
+      $('#btdtBookingDate').daterangepicker({
+          "singleDatePicker": true,
+          "startDate": moment(),
+          "endDate": moment(),
+          "maxDate": moment(),
+      }, function(start, end, label) {
+        dssdate = start.format('YYYY-MM-DD');
+        var today = moment().format('YYYY-MM-DD');
+        $('#btdtspan').html(dssdate);
+      });
+
+      
+    }
+    
+
+    function betasSync(){
+      salesmansendingchecker();
+      $('#syncBetaModal').modal('show');
+    }
+    
+    loadSalesman();
+
+    function loadSalesman(){
+     $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {"type":"dsr_salesmanLoad", "CONN":con_info},
+          dataType: "json",
+          crossDomain: true,
+          cache: false,          
+          async: false,  
+            success: function(data){ 
+              for(var x = 0; x<data.length; x++){
+                  $('#salesmanList').append('<option value="'+data[x].mdCode+'">'+data[x].Salesman+'</option>');
+
+                  $('#salesmanList_beta').append('<option value="'+data[x].mdCode+'">'+data[x].Salesman+'</option>');
+
+                  $('#salesmanList_stk').append('<option value="'+data[x].mdCode+'">'+data[x].Salesman+'</option>');
+
+                  
+               }
+
+               $('#salesmanList').multiselect({
+                  numberDisplayed: 1,
+                  enableCaseInsensitiveFiltering: true,
+                  includeSelectAllOption: true,
+                  selectAllNumber: true,
+                  buttonWidth: '300px',
+                  maxHeight: 300
+               });
+
+               $('#salesmanList_beta').multiselect({
+                  numberDisplayed: 1,
+                  enableCaseInsensitiveFiltering: true,
+                  includeSelectAllOption: true,
+                  selectAllNumber: true,
+                  buttonWidth: '300px',
+                  maxHeight: 300
+               });
+
+               $('#salesmanList_stk').multiselect({
+                  numberDisplayed: 1,
+                  enableCaseInsensitiveFiltering: true,
+                  includeSelectAllOption: true,
+                  selectAllNumber: true,
+                  buttonWidth: '300px',
+                  maxHeight: 300
+               });
+             }
+        });
+    }
+
+    getProductList();
+    function getProductList(){
+     $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {"type":"GET_ALL_PRODUCT_BTDT", "CONN":con_info},
+          dataType: "json",
+          crossDomain: true,
+          cache: false,          
+          async: false,  
+            success: function(data){ 
+              for(var x = 0; x<data.length; x++){
+                  $('#btdtProductList').append('<option value="'+data[x].stockCode+'">'+data[x].stockCode+' - '+data[x].Description+'</option>');                  
+               }
+
+               $('#btdtProductList').multiselect({
+                  numberDisplayed: 1,
+                  enableCaseInsensitiveFiltering: true,
+                  includeSelectAllOption: true,
+                  selectAllNumber: true,
+                  buttonWidth: '300px',
+                  maxHeight: 300
+               });
+
+              
+             }
+        });
+    }
+
+     function loadPopup(){
+           //notification
+
+             $.ajax ({
+              url: "../geofencing/GeofencingAPI.php",
+              type: "GET",
+              data: {"type":"view_notifications_popUp"},
+              dataType: "html",
+              crossDomain: true,
+              cache: false,            
+                success: function(response){ 
+               // console.log('Notification function has been refresh');                
+                $(".content").html(response);
+                
+                }
+            });
+        }
+
+        function showNotif(view=''){
+           //notification
+
+             $.ajax ({
+              url: "../geofencing/GeofencingAPI.php",
+              type: "GET",
+              data: {"type":"view_notifications_icon_"+user, "view":view},
+              dataType: "JSON",
+              crossDomain: true,
+              cache: false,            
+                success: function(response){ 
+               // console.log('Notification function has been refresh');                
+                $("#notifs-icon-div").html(response.notification);
+
+                  if(response.unseen_notification > 0)
+                  {
+                   $('.count').html(response.unseen_notification);
+                  }
+                
+                }
+            });
+        }
+        
+        function executeInventorySync(){
+            $('#SyncInventoryModal').modal('show');
+        }
+
+
+        $('#daysCoveredSelect').on('change', function() {
+            var val = this.value;
+
+            if(val == 'custom'){
+              $('#biModal').modal('hide');
+              $('#customDaysModal').modal('show');
+            }
+        });
+        // generate_bi_days();
+        function generate_bi_days(){
+            var cont = '<option selected disabled hidden>Choose here..</option>';
+            for(var x = 0; x < 100; x+10){
+                cont+=`<option value=`+(x+1)+`>`+(x+1)+` days</option>`;
+            }
+            $('#daysCoveredSelect').html(cont);
+        }
+        function show_bi_sync_modal(){
+            $('#desclaimerModal').modal('hide');
+            $('#biModal').modal('show');
+        }
+
+        function show_btdt_sync_modal(){
+            $('#desclaimerModal').modal('hide');
+            $('#btdtModal').modal('show');
+        }
+
+        function show_sosyo_sync_modal(){
+          $('#desclaimerModal').modal('hide');
+          var dialog = bootbox.dialog({
+              message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> processing data please wait...</p>',
+              backdrop: true
+              // closeButton: false
+              });
+          var message = 'Successfully Saved!';
+          var botboxMsg = '';
+          var ajaxTime= new Date().getTime();
+          $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/bi/biapplicationApi.php",
+              type: "POST",
+              data: {
+                      "type":"SYNC_SOSYO",
+                      "distributor":GLBLCIDHOLDER,
+                      "CONN":con_info
+                  }, 
+              dataType: 'json',     
+              crossDomain: true,
+              cache: false,   
+              success: function(response){   
+              if(response){
+                  botboxMsg = '<b style="color: green;">Success!</b><p>Sosyo data successfully sync. Thank You!</p>';
+              }else{
+                  botboxMsg = '<b style="color: red;">Ops! Unable to Proceed to Sosyo Processing!</b>' + response;
+              }
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+              botboxMsg = '<b style="color: red;">Ops! Unable to Proceed to Sosyo Processing!</b>' + XMLHttpRequest.responseText;
+              var totalTime = new Date().getTime()-ajaxTime;
+              dialog.init(function(){
+                      setTimeout(function(){
+                      dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                  }, 1000);
+              });
+              }
+              }).done(function () {
+                      dialog.init(function(){
+                          setTimeout(function(){
+                              dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                          }, 1000);
+                  });
+              });
+        }
+
+        function show_sosyo_relavance(){
+          $('#desclaimerModal').modal('hide');
+          var dialog = bootbox.dialog({
+              message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> processing data please wait...</p>',
+              backdrop: true
+              // closeButton: false
+              });
+          var message = 'Successfully Saved!';
+          var botboxMsg = '';
+          var ajaxTime= new Date().getTime();
+          $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/bi/biapplicationApi.php",
+              type: "POST",
+              data: {
+                      "type":"SYNC_SOSYO_RELEVANCE",
+                      "distributor":GLBLCIDHOLDER,
+                      "CONN":con_info
+                  }, 
+              dataType: 'json',     
+              crossDomain: true,
+              cache: false,   
+              success: function(response){   
+              if(response){
+                  botboxMsg = '<b style="color: green;">Success!</b><p>Sosyo Relevance data successfully sync. Thank You!</p>';
+              }else{
+                  botboxMsg = '<b style="color: red;">Ops! Unable to Proceed to Sosyo Relevance Processing!</b>' + response;
+              }
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+              botboxMsg = '<b style="color: red;">Ops! Unable to Proceed to Sosyo Relevance Processing!</b>' + XMLHttpRequest.responseText;
+              var totalTime = new Date().getTime()-ajaxTime;
+              dialog.init(function(){
+                      setTimeout(function(){
+                      dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                  }, 1000);
+              });
+              }
+              }).done(function () {
+                      dialog.init(function(){
+                          setTimeout(function(){
+                              dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                          }, 1000);
+                  });
+              });
+        }
+
+
+        function show_sosyo_featured(){
+          $('#desclaimerModal').modal('hide');
+          var dialog = bootbox.dialog({
+              message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> processing data please wait...</p>',
+              backdrop: true
+              // closeButton: false
+              });
+          var message = 'Successfully Saved!';
+          var botboxMsg = '';
+          var ajaxTime= new Date().getTime();
+          $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/bi/biapplicationApi.php",
+              type: "POST",
+              data: {
+                      "type":"SYNC_SOSYO_FEATUREDITEMS",
+                      "distributor":GLBLCIDHOLDER,
+                      "CONN":con_info
+                  }, 
+              dataType: 'json',     
+              crossDomain: true,
+              cache: false,   
+              success: function(response){   
+              if(response){
+                  botboxMsg = '<b style="color: green;">Success!</b><p>Sosyo Featured Items data successfully sync. Thank You!</p>';
+              }else{
+                  botboxMsg = '<b style="color: red;">Ops! Unable to Proceed to Sosyo Featured Items Processing!</b>' + response;
+              }
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+              botboxMsg = '<b style="color: red;">Ops! Unable to Proceed to Sosyo Featured Items Processing!</b>' + XMLHttpRequest.responseText;
+              var totalTime = new Date().getTime()-ajaxTime;
+              dialog.init(function(){
+                      setTimeout(function(){
+                      dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                  }, 1000);
+              });
+              }
+              }).done(function () {
+                      dialog.init(function(){
+                          setTimeout(function(){
+                              dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                          }, 1000);
+                  });
+              });
+        }
+        function show_bi_agreement(stat){
+
+          if(stat == 'btdt'){
+
+            $('#bi_databtn').hide();
+            $('#btdt_databtn').show();
+            $('#btdt_sosyo').hide();
+            $('#btdt_sosyo_relavance').hide();
+            $('#btdt_sosyo_featuredItems').hide();
+            $('#bi_otdmonitoring').hide();
+
+          }else if(stat == 'sosyo_latest'){
+
+            $('#bi_databtn').hide();
+            $('#btdt_databtn').hide();
+            $('#btdt_sosyo').show();
+            $('#btdt_sosyo_relavance').hide();
+            $('#btdt_sosyo_featuredItems').hide();
+            $('#bi_otdmonitoring').hide();
+
+          }else if(stat == 'sosyo_relevance'){
+
+            $('#bi_databtn').hide();
+            $('#btdt_databtn').hide();
+            $('#btdt_sosyo').hide();
+            $('#btdt_sosyo_relavance').show();
+            $('#btdt_sosyo_featuredItems').hide();
+            $('#bi_otdmonitoring').hide();
+
+          }else if(stat == 'sosyo_featured'){
+
+            $('#bi_databtn').hide();
+            $('#btdt_databtn').hide();
+            $('#btdt_sosyo').hide();
+            $('#btdt_sosyo_relavance').hide();
+            $('#btdt_sosyo_featuredItems').show();
+            $('#bi_otdmonitoring').hide();
+
+          }else if(stat == 'sosyo_otd_monitoring'){
+
+            console.log('otd monitoring');
+            
+            $('#bi_databtn').hide();
+            $('#btdt_databtn').hide();
+            $('#btdt_sosyo').hide();
+            $('#btdt_sosyo_relavance').hide();
+            $('#btdt_sosyo_featuredItems').hide();
+            $('#bi_otdmonitoring').show();
+
+          }else{
+            $('#bi_databtn').show();
+            $('#btdt_databtn').hide();
+            $('#btdt_sosyo').hide();
+            $('#btdt_sosyo_relavance').hide();
+            $('#btdt_sosyo_featuredItems').hide();
+            $('#bi_otdmonitoring').hide();
+
+          }
+        
+
+          $('#desclaimerModal').modal('show');
+        }
+
+
+        function show_otd_monitoring(){
+          $('#desclaimerModal').modal('hide');
+          $('#otdmonitoringModal').modal('show');
+        }
+
+        function exec_otdmonitoring(){
+
+          $('#otdmonitoringModal').modal('hide');
+          // var distCode = localStorage.getItem('DISTCD');
+           var f = confirm("Are you sure you want to continue?");
+              if(f){
+
+                var dialog = bootbox.dialog({
+                    message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> processing data please wait...</p>',
+                    backdrop: true
+                    // closeButton: false
+                    });
+                var message = 'Successfully Saved!';
+                var botboxMsg = '';
+                var ajaxTime= new Date().getTime();
+                  
+                  $.ajax ({
+                    url: GLOBALLINKAPI+"/nestle/connectionString/bi/biapplicationApi.php",
+                        type: "POST",
+                        data: {
+                                "type":"SYNC_SOSYO_OTDMONITORING", 
+                                "distributor":GLBLCIDHOLDER,
+                                'start':startPickDate,
+                                'end':endPickDate,
+                                "CONN":con_info
+                              },
+                        dataType: "JSON",
+                        crossDomain: true,
+                        cache: false,     
+                        // async: false,       
+                          success: function(r){ 
+                            if(r){
+                                botboxMsg = '<b style="color: green;">Success!</b><p>OTD monitoring sync was successful. Thank You!</p>';
+                            }else{
+                                botboxMsg = '<b style="color: red;">Ops! Unable to Proceed to OTD monitoring!</b>' + response;
+                            }
+
+                            $('#otdmonitoringModal').modal('hide');
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                          botboxMsg = '<b style="color: red;">Ops! Unable to Proceed to OTD monitoring!</b>' + XMLHttpRequest.responseText;
+                          var totalTime = new Date().getTime()-ajaxTime;
+                          dialog.init(function(){
+                                  setTimeout(function(){
+                                  dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                              }, 1000);
+                          });
+                        }
+                        }).done(function () {
+                                dialog.init(function(){
+                                    setTimeout(function(){
+                                        dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                                    }, 1000);
+                            });
+                        });
+              }
+        }
+        
+        function exec_btdtprocessing(){
+          $('#btdtModal').modal('hide');
+            // var days = $('#daysCoveredSelect').val();
+
+            if(startPickDate == undefined){
+                alert('Please select days covered for this module.');
+            }else{
+                var r = confirm('This could take time, please wait while we process your request.');
+                    if(r){
+                        var dialog = bootbox.dialog({
+                            message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> processing data please wait...</p>',
+                            backdrop: true
+                            // closeButton: false
+                            });
+                        var message = 'Successfully Saved!';
+                        var botboxMsg = '';
+                        var ajaxTime= new Date().getTime();
+                        $.ajax ({
+                            url: GLOBALLINKAPI+"/nestle/connectionString/bi/biapplicationApi.php",
+                            type: "POST",
+                            data: {
+                                    "type":"SYNC_BTDT_DATA",
+                                    // "dayscovered":days,
+                                    "startDate":startPickDate,
+                                    "endDate":endPickDate,
+                                    "distributor":GBLCOMPANYNAME,
+                                    "CONN":con_info
+                                }, 
+                            dataType: 'json',     
+                            crossDomain: true,
+                            cache: false,   
+                            success: function(response){   
+                            if(response){
+                                botboxMsg = '<b style="color: green;">Success!</b><p>BTDT data successfully sync. Thank You!</p>';
+                            }else{
+                                botboxMsg = '<b style="color: red;">Ops! Unable to Proceed to BTDT Processing!</b>' + response;
+                            }
+                            },
+                            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            botboxMsg = '<b style="color: red;">Ops! Unable to Proceed to BTDT Processing!</b>' + XMLHttpRequest.responseText;
+                            var totalTime = new Date().getTime()-ajaxTime;
+                            dialog.init(function(){
+                                    setTimeout(function(){
+                                    dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                                }, 1000);
+                            });
+                            }
+                            }).done(function () {
+                                    dialog.init(function(){
+                                        setTimeout(function(){
+                                            dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                                        }, 1000);
+                                });
+                            });
+                    }
+            }
+        }
+
+        function exec_biprocessing(){
+            $('#biModal').modal('hide');
+            // var days = $('#daysCoveredSelect').val();
+
+            if(startPickDate == undefined){
+                alert('Please select days covered for this module.');
+            }else{
+                var r = confirm('This could take time, please wait while we process your request.');
+                    if(r){
+                        var dialog = bootbox.dialog({
+                            message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> processing data please wait...</p>',
+                            backdrop: true
+                            // closeButton: false
+                            });
+                        var message = 'Successfully Saved!';
+                        var botboxMsg = '';
+                        var ajaxTime= new Date().getTime();
+                        $.ajax ({
+                            url: GLOBALLINKAPI+"/nestle/connectionString/bi/biapplicationApi.php",
+                            type: "POST",
+                            data: {
+                                    "type":"SYNC_BI",
+                                    // "dayscovered":days,
+                                    "startDate":startPickDate,
+                                    "endDate":endPickDate,
+                                    "distributor":GBLCOMPANYNAME,
+                                    "CONN":con_info
+                                }, 
+                            dataType: 'json',     
+                            crossDomain: true,
+                            cache: false,   
+                            success: function(response){   
+                            if(response){
+                                botboxMsg = '<b style="color: green;">Success!</b><p>BI data successfully sync. Thank You!</p>';
+                            }else{
+                                botboxMsg = '<b style="color: red;">Ops! Unable to Proceed to BI Processing!</b>' + response;
+                            }
+                            },
+                            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            botboxMsg = '<b style="color: red;">Ops! Unable to Proceed to BI Processing!</b>' + XMLHttpRequest.responseText;
+                            var totalTime = new Date().getTime()-ajaxTime;
+                            dialog.init(function(){
+                                    setTimeout(function(){
+                                    dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                                }, 1000);
+                            });
+                            }
+                            }).done(function () {
+                                    dialog.init(function(){
+                                        setTimeout(function(){
+                                            dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                                        }, 1000);
+                                });
+                            });
+                    }
+            }
+            
+        }
+
+        
+        function exec_biprocessing_custom(){
+          $('#customDaysModal').modal('hide');
+          $('#biModal').modal('hide');
+          var days = $('#customDays').val();
+              var r = confirm('This could take time, please wait while we process your request.');
+                if(r){
+                    var dialog = bootbox.dialog({
+                        message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> processing data please wait...</p>',
+                        backdrop: true
+                        // closeButton: false
+                        });
+                    var message = 'Successfully Saved!';
+                    var botboxMsg = '';
+                    var ajaxTime= new Date().getTime();
+                    $.ajax ({
+                        url: GLOBALLINKAPI+"/nestle/connectionString/bi/biapplicationApi.php",
+                        type: "POST",
+                        data: {
+                                "type":"SYNC_BI",
+                                "dayscovered":days,
+                                "distributor":GBLCOMPANYNAME,
+                                "CONN":con_info
+                            }, 
+                        dataType: 'json',     
+                        crossDomain: true,
+                        cache: false,   
+                        success: function(response){   
+                        if(response){
+                            botboxMsg = '<b style="color: green;">Success!</b><p>BI data successfully sync. Thank You!</p>';
+                        }else{
+                            botboxMsg = '<b style="color: red;">Ops! Unable to Proceed to BI Processing!</b>' + response;
+                        }
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        botboxMsg = '<b style="color: red;">Ops! Unable to Proceed to BI Processing!</b>' + XMLHttpRequest.responseText;
+                        var totalTime = new Date().getTime()-ajaxTime;
+                        dialog.init(function(){
+                                setTimeout(function(){
+                                dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                            }, 1000);
+                        });
+                        }
+                        }).done(function () {
+                                dialog.init(function(){
+                                    setTimeout(function(){
+                                        dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                                    }, 1000);
+                            });
+                        });
+                }
+        }
+
+        function executSyncSweeperTransaction(){
+          var r = confirm('This could take time, please wait while we process your request.');
+          if(r){
+
+            var dialog = bootbox.dialog({
+                  message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Syncing sweeper transaction please wait...</p>',
+                  backdrop: true
+                // closeButton: false
+                });
+            var message = 'Successfully Saved!';
+            var botboxMsg = '';
+            var ajaxTime= new Date().getTime();
+            $.ajax ({
+                url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+                type: "GET",
+                data: {"type":"SYNC_SWEEPER_TRANSACTION", "CONN":con_info}, 
+                dataType: 'json',     
+                crossDomain: true,
+                cache: false,   
+                success: function(response){   
+                if(response){
+                    botboxMsg = '<b style="color: green;">Success!</b><p>Ideliver invoice successfully sync. Thank You!</p>';
+                  }else{
+                    botboxMsg = '<b style="color: red;">Ops! Unable to Sync to Invoice!</b>' + response;
+                  }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  botboxMsg = '<b style="color: red;">Ops! Unable to Sync to Invoice!</b>' + XMLHttpRequest.responseText;
+                  var totalTime = new Date().getTime()-ajaxTime;
+                  dialog.init(function(){
+                        setTimeout(function(){
+                          dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                      }, 1000);
+                  });
+                }
+                }).done(function () {
+                        dialog.init(function(){
+                              setTimeout(function(){
+                                dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                            }, 1000);
+                      });
+                });
+          }
+        }
+
+        function execAlignMCP(){
+          var r = confirm('This could take time, please wait while we process your request.');
+          if(r){
+
+            var dialog = bootbox.dialog({
+                  message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Re-aligning sosyo mcp and customer assignment please wait...</p>',
+                  backdrop: true
+                // closeButton: false
+                });
+            var message = 'Successfully Saved!';
+            var botboxMsg = '';
+            var ajaxTime= new Date().getTime();
+            $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/POST_applicationApi.php",
+              type: "POST",
+                data: {
+                        "type":"MCP_REALIGNMENT", 
+                        "site":GLBLCIDHOLDER,
+                        "CONN":con_info
+                      }, 
+                dataType: 'json',     
+                crossDomain: true,
+                cache: false,   
+                success: function(response){   
+                if(response){
+                    botboxMsg = '<b style="color: green;">Success!</b><p>MCP realignment was successfull. Thank You!</p>';
+                  }else{
+                    botboxMsg = '<b style="color: red;">Ops! Unable to Re-align MCP!</b>' + response;
+                  }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  botboxMsg = '<b style="color: red;">Ops! Unable to Re-align MCP!</b>' + XMLHttpRequest.responseText;
+                  var totalTime = new Date().getTime()-ajaxTime;
+                  dialog.init(function(){
+                        setTimeout(function(){
+                          dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                      }, 1000);
+                  });
+                }
+                }).done(function () {
+                        dialog.init(function(){
+                              setTimeout(function(){
+                                dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                            }, 1000);
+                      });
+                });
+          }
+        }
+
+
+        function execSyncBtdt(){
+          var r = confirm('This could take time, please wait while we process your request.');
+          if(r){
+
+            var dialog = bootbox.dialog({
+                  message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Re-aligning sosyo mcp and customer assignment please wait...</p>',
+                  backdrop: true
+                // closeButton: false
+                });
+            var message = 'Successfully Saved!';
+            var botboxMsg = '';
+            var ajaxTime= new Date().getTime();
+
+            var btdtdriver = $('#btdtdrvierList').val();
+            $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/POST_applicationApi.php",
+              type: "POST",
+                data: {
+                        "type":"SYNC_BTDT_DATA",
+                        "btdtdrivermdCode":btdtdriver,
+                        "bookingDate":dssdate,
+                        "CONN":con_info
+                      }, 
+                dataType: 'json',     
+                crossDomain: true,
+                cache: false,   
+                success: function(response){   
+                if(response){
+                    botboxMsg = '<b style="color: green;">Success!</b><p>Sync BTDT was successfull. Thank You!</p>';
+                  }else{
+                    botboxMsg = '<b style="color: red;">Ops! Unable to Sync BTDT data!</b>' + response;
+                  }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  botboxMsg = '<b style="color: red;">Ops! Unable to Sync BTDT data!</b>' + XMLHttpRequest.responseText;
+                  var totalTime = new Date().getTime()-ajaxTime;
+                  dialog.init(function(){
+                        setTimeout(function(){
+                          dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                      }, 1000);
+                  });
+                }
+                }).done(function () {
+                        dialog.init(function(){
+                              setTimeout(function(){
+                                dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                            }, 1000);
+                      });
+                });
+          }
+        }
+        
+        function invSync(){
+        var r = confirm('This could take time, please wait while we process your request.');
+        if(r){
+
+          insertsyncLogs('INVENTORY_SYNC');
+
+          var mdCode = $('#salesmanList').val();
+          var dialog = bootbox.dialog({
+                message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Syncing inventory please wait...</p>',
+                backdrop: true
+               // closeButton: false
+              });
+          var message = 'Successfully Saved!';
+          var botboxMsg = '';
+          var ajaxTime= new Date().getTime();
+          $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {"type":"SyncInventory", "mdCode":mdCode,"CONN":con_info , "site":user}, 
+              dataType: 'json',     
+              crossDomain: true,
+              cache: false,   
+              success: function(response){   
+               if(response){
+                  botboxMsg = '<b style="color: green;">Success!</b><p>Buddy inventory Successfully updated. Thank You!</p>';
+                }else{
+                  botboxMsg = '<b style="color: red;">Ops! Unable to Sync to Inventory!</b>' + response;
+                }
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                botboxMsg = '<b style="color: red;">Ops! Unable to Sync to Inventory!</b>' + XMLHttpRequest.responseText;
+                var totalTime = new Date().getTime()-ajaxTime;
+                dialog.init(function(){
+                      setTimeout(function(){
+                        dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                    }, 1000);
+                });
+               }
+              }).done(function () {
+                      dialog.init(function(){
+                            setTimeout(function(){
+                              dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                          }, 1000);
+                    });
+               });
+        }
+      }
+
+      function custSync(){
+        var r = confirm('This could take time, please wait while we process your request.');
+        if(r){
+
+          insertsyncLogs('CUSTOMER_SYNC');
+          var dialog = bootbox.dialog({
+             // title: '<h4 id="botboxT">Server Response</h4>',
+              message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Syncing customer please wait...</p>',
+              backdrop: true
+              //closeButton: false
+            });
+        var message = 'Successfully Saved!';
+        var botboxMsg = '';
+        var ajaxTime= new Date().getTime();
+        $.ajax ({
+            url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {"type":"SyncCustomer", "CONN":con_info}, 
+            dataType: 'json',     
+            crossDomain: true,
+            cache: false,   
+            success: function(response){   
+                 if(response == 1){
+                    botboxMsg = '<b style="color: green;">Success!</b><p>Buddy customers Successfully updated. Thank You!</p>';
+                  }else{
+                    botboxMsg = '<b style="color: red;">Ops! Unable to Sync to Customer!</b>' + response;
+                  }
+              },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              botboxMsg = '<b style="color: red;">Ops! Unable to Sync to Customer!</b> Please try again. ' + XMLHttpRequest.responseText;
+              dialog.init(function(){
+                    setTimeout(function(){
+                      dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                  }, 1000);
+              });
+             }
+          }).done(function () {
+                  dialog.init(function(){
+                        setTimeout(function(){
+                            dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                        }, 1000);
+                  });    
+          });
+        }
+      }
+
+      function custSync2(){
+        var r = confirm('This could take time, please wait while we process your request.');
+        if(r){
+          insertsyncLogs('CUSTOMER_SYNC');
+          var dialog = bootbox.dialog({
+             // title: '<h4 id="botboxT">Server Response</h4>',
+              message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Syncing customer please wait...</p>',
+              backdrop: true
+              //closeButton: false
+            });
+        var message = 'Successfully Saved!';
+        var botboxMsg = '';
+        var ajaxTime= new Date().getTime();
+        $.ajax ({
+            url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {"type":"SyncCustomer2", "CONN":con_info}, 
+            dataType: 'json',     
+            crossDomain: true,
+            cache: false,   
+            success: function(response){   
+                 if(response == 1){
+                    botboxMsg = '<b style="color: green;">Success!</b><p>Buddy customers Successfully updated. Thank You!</p>';
+                  }else{
+                    botboxMsg = '<b style="color: red;">Ops! Unable to Sync to Customer!</b>' + response;
+                  }
+              },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              botboxMsg = '<b style="color: red;">Ops! Unable to Sync to Customer!</b> Please try again. ' + XMLHttpRequest.responseText;
+              dialog.init(function(){
+                    setTimeout(function(){
+                      dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                  }, 1000);
+              });
+             }
+          }).done(function () {
+                  dialog.init(function(){
+                        setTimeout(function(){
+                            dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                        }, 1000);
+                  });    
+          });
+        }
+      }
+
+      function sync_saleman_image(){
+            var r = confirm('This could take time, please wait while we process your request.');
+          if(r){
+
+            var dialog = bootbox.dialog({
+                  message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Converting salesman images please wait...</p>',
+                  backdrop: true
+                // closeButton: false
+                });
+            var message = 'Successfully Saved!';
+            var botboxMsg = '';
+            var ajaxTime= new Date().getTime();
+            $.ajax ({
+              url: "https://fastdevs-api.com/BUDDYGBLAPI/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+                data: {
+                        "type":"GET_SALESMAN_IMAGES_FOR_CONVERTION", 
+                        // "site":GLBLCIDHOLDER,
+                        "companyName":GBLCOMPANYNAME,
+                        "CONN":con_info
+                      }, 
+                dataType: 'json',     
+                crossDomain: true,
+                cache: false,   
+                success: function(response){   
+                if(response){
+                    botboxMsg = '<b style="color: green;">Success!</b><p>Converting salesman images to .jpeg was successfull. Thank You!</p>';
+                  }else{
+                    botboxMsg = '<b style="color: red;">Ops! Unable to convert salesman image!</b>' + response;
+                  }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  botboxMsg = '<b style="color: red;">Ops! Unable to convert salesman image!</b>' + XMLHttpRequest.responseText;
+                  var totalTime = new Date().getTime()-ajaxTime;
+                  dialog.init(function(){
+                        setTimeout(function(){
+                          dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                      }, 1000);
+                  });
+                }
+                }).done(function () {
+                        dialog.init(function(){
+                              setTimeout(function(){
+                                dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                            }, 1000);
+                      });
+                });
+          }
+        }
+        function sync_saleman_image(){
+            var r = confirm('This could take time, please wait while we process your request.');
+          if(r){
+
+            var dialog = bootbox.dialog({
+                  message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Converting salesman images please wait...</p>',
+                  backdrop: true
+                // closeButton: false
+                });
+            var message = 'Successfully Saved!';
+            var botboxMsg = '';
+            var ajaxTime= new Date().getTime();
+            $.ajax ({
+              url: "https://fastdevs-api.com/BUDDYGBLAPI/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+                data: {
+                        "type":"GET_SALESMAN_IMAGES_FOR_CONVERTION", 
+                        // "site":GLBLCIDHOLDER,
+                        "companyName":GBLCOMPANYNAME,
+                        "CONN":con_info
+                      }, 
+                dataType: 'json',     
+                crossDomain: true,
+                cache: false,   
+                success: function(response){   
+                if(response){
+                    botboxMsg = '<b style="color: green;">Success!</b><p>Converting salesman images to .jpeg was successfull. Thank You!</p>';
+                  }else{
+                    botboxMsg = '<b style="color: red;">Ops! Unable to convert salesman image!</b>' + response;
+                  }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  botboxMsg = '<b style="color: red;">Ops! Unable to convert salesman image!</b>' + XMLHttpRequest.responseText;
+                  var totalTime = new Date().getTime()-ajaxTime;
+                  dialog.init(function(){
+                        setTimeout(function(){
+                          dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                      }, 1000);
+                  });
+                }
+                }).done(function () {
+                        dialog.init(function(){
+                              setTimeout(function(){
+                                dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                            }, 1000);
+                      });
+                });
+          }
+        }
+
+
+      function executeQueingSync_beta(){
+        
+
+        var salesmanList = $('#salesmanList_beta').val();
+        if(salesmanList == undefined || salesmanList == ''){
+          alert('Please select a salesman');
+        }else if(dssdate == ''){
+          alert('Please select a date');
+        }else{
+          var r = confirm('This could take time, please wait while we process your request.');
+          if(r){
+
+            insertsyncLogs('QUEUING_SYNC');
+            exec_salesman_sending_priority();
+
+            var salesmanList = $('#salesmanList_beta').val();
+            var dialog = bootbox.dialog({
+                // title: '<h4 id="botboxT">Server Response</h4>',
+                  message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Syncing SFA queues please wait...</p>',
+                  backdrop: true
+                  //closeButton: false
+                });
+            var message = 'Successfully Saved!';
+            var botboxMsg = '';
+            var ajaxTime= new Date().getTime();
+            $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/POST_applicationApi.php",
+              type: "POST",
+              data: {
+                      "type":"SYNC_SFA_QUEUING_BETA",
+                      "CONN":con_info,
+                      "date":dssdate,
+                      "salesman":salesmanList
+                    }, 
+              dataType: 'json',     
+              crossDomain: true,
+              cache: false,   
+              success: function(response){   
+                    if(response == 1){
+                      botboxMsg = '<b style="color: green;">Success!</b><p>SFA Queuing successfully updated. Thank You!</p>';
+                    }else{
+                      botboxMsg = '<b style="color: red;">Ops! Unable to Sync to SFA Queuing!</b>' + response;
+                    }
+                },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                botboxMsg = '<b style="color: red;">Ops! Unable to Sync to SFA Queuing!</b>' + XMLHttpRequest.responseText;
+                dialog.init(function(){
+                      setTimeout(function(){
+                        dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                    }, 1000);
+                });
+              }
+            }).done(function () {
+                    dialog.init(function(){
+                          setTimeout(function(){
+                              dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                          }, 1000);
+                    });
+                      
+            });
+          }
+        }
+      }
+
+      function goSyncinVoice(){
+        $('#SyncInvoiceModal').modal('show');
+        
+      }
+
+      function execSyncInvoiceIdeliver(){
+      
+          if(dssdate == null || dssdate == '' || dssdate == undefined){
+            alert('Unable to Proceed:\nPlease select invoice date.');
+          }else{
+
+            var r = confirm('This could take time, please wait while we process your request.');
+            if(r){
+              console.log(dssdate);
+
+            $('#SyncInvoiceModal').modal('hide');
+          var dialog = bootbox.dialog({
+                message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Syncing inventory please wait...</p>',
+                backdrop: true
+               // closeButton: false
+              });
+          var message = 'Successfully Saved!';
+          var botboxMsg = '';
+          var ajaxTime= new Date().getTime();
+          $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/POST_applicationAPI.php",
+              type: "POST",
+              data: {"type":"SYNC_IDELIVER_INVOICE", "CONN":con_info , "site":GLBLCIDHOLDER, 'dateselected':dssdate}, 
+              dataType: 'json',     
+              crossDomain: true,
+              cache: false,   
+              success: function(response){   
+               if(response){
+                  botboxMsg = '<b style="color: green;">Success!</b><p>Ideliver invoice date '+dssdate+' was successfully sync. Thank You!</p>';
+                }else{
+                  botboxMsg = '<b style="color: red;">Ops! Unable to Sync to Invoice!</b>' + response;
+                }
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                botboxMsg = '<b style="color: red;">Ops! Unable to Sync to Invoice!</b>' + XMLHttpRequest.responseText;
+                var totalTime = new Date().getTime()-ajaxTime;
+                dialog.init(function(){
+                      setTimeout(function(){
+                        dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                    }, 1000);
+                });
+               }
+              }).done(function () {
+                      dialog.init(function(){
+                            setTimeout(function(){
+                              dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                          }, 1000);
+                    });
+               });
+          }
+          
+        }
+      }
+      function executeQueingSync(){
+        var r = confirm('This could take time, please wait while we process your request.');
+        if(r){
+          insertsyncLogs('QUEUING_SYNC');
+          var dialog = bootbox.dialog({
+               // title: '<h4 id="botboxT">Server Response</h4>',
+                message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Syncing SFA queues please wait...</p>',
+                backdrop: true
+                //closeButton: false
+              });
+          var message = 'Successfully Saved!';
+          var botboxMsg = '';
+          var ajaxTime= new Date().getTime();
+          $.ajax ({
+                    url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+                    type: "GET",
+                    data: {"type":"SYNC_SFA_QUEUING", "CONN":con_info}, 
+                    dataType: 'json',     
+                    crossDomain: true,
+                    cache: false,   
+                    success: function(response){   
+                         if(response == 1){
+                            botboxMsg = '<b style="color: green;">Success!</b><p>SFA Queuing successfully updated. Thank You!</p>';
+                          }else{
+                            botboxMsg = '<b style="color: red;">Ops! Unable to Sync SFA QUEUING!</b>' + response;
+                          }
+                      },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                      botboxMsg = '<b style="color: red;">Ops! Unable to Sync SFA QUEUING!</b>' + XMLHttpRequest.responseText;
+                      dialog.init(function(){
+                            setTimeout(function(){
+                              dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                          }, 1000);
+                      });
+                     }
+                  }).done(function () {
+                          dialog.init(function(){
+                                setTimeout(function(){
+                                    dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                                }, 1000);
+                          });
+                           
+                     });
+        }
+      }
+
+      function exec_view_stocktakeModal(){
+        $('#syncStockRequestModal').modal('show');
+      }
+      
+      function exec_stockTake(){
+        var r = confirm('This could take time, please wait while we process your request.');
+        if(r){
+          insertsyncLogs('STOCKREQUEST_SYNC');
+          var salesmanList = $('#salesmanList_stk').val();
+          var dialog = bootbox.dialog({
+                message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Syncing stock request please wait...</p>',
+                backdrop: true
+               // closeButton: false
+              });
+          var message = 'Successfully Saved!';
+          var botboxMsg = '';
+          var ajaxTime= new Date().getTime();
+          $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/POST_applicationAPI.php",
+              type: "POST",
+              data: {
+                    "type":"SYNC_STOCKTAKE",
+                    "CONN":con_info,
+                    "date":dssdate,
+                    "salesman":salesmanList
+                  }, 
+              dataType: 'json',     
+              crossDomain: true,
+              cache: false,   
+              success: function(response){   
+               if(response){
+                  botboxMsg = '<b style="color: green;">Success!</b><p>Sync Stock Request was Successful. Thank You!</p>';
+                }else{
+                  botboxMsg = '<b style="color: red;">Ops! Unable to sync Stock Request data!</b>' + response;
+                }
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                botboxMsg = '<b style="color: red;">Ops! Unable to sync Stock Request data!</b>' + XMLHttpRequest.responseText;
+                var totalTime = new Date().getTime()-ajaxTime;
+                dialog.init(function(){
+                      setTimeout(function(){
+                        dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                    }, 1000);
+                });
+               }
+              }).done(function () {
+                      dialog.init(function(){
+                            setTimeout(function(){
+                              dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                          }, 1000);
+                    });
+               });
+        }
+      }
+
+      function execDatareplication(){
+        var r = confirm('This could take time, please wait while we process your request.');
+        if(r){
+          insertsyncLogs('DATA_DUPLICATION');
+          var mdCode = $('#salesmanList').val();
+          var dialog = bootbox.dialog({
+                message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Syncing inventory please wait...</p>',
+                backdrop: true
+               // closeButton: false
+              });
+          var message = 'Successfully Saved!';
+          var botboxMsg = '';
+          var ajaxTime= new Date().getTime();
+          $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {"type":"SYNC_DATA_REPLACATION", "mdCode":mdCode,"CONN":con_info}, 
+              dataType: 'json',     
+              crossDomain: true,
+              cache: false,   
+              success: function(response){   
+               if(response){
+                  botboxMsg = '<b style="color: green;">Success!</b><p>Buddy Data Replication was Successful. Thank You!</p>';
+                }else{
+                  botboxMsg = '<b style="color: red;">Ops! Unable to replacate data!</b>' + response;
+                }
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                botboxMsg = '<b style="color: red;">Ops! Unable to replacate data!</b>' + XMLHttpRequest.responseText;
+                var totalTime = new Date().getTime()-ajaxTime;
+                dialog.init(function(){
+                      setTimeout(function(){
+                        dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                    }, 1000);
+                });
+               }
+              }).done(function () {
+                      dialog.init(function(){
+                            setTimeout(function(){
+                              dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                          }, 1000);
+                    });
+               });
+        }
+      }
+
+  
+      function insertsyncLogs(description){
+        var lockby = localStorage.getItem('user_id') +'-'+localStorage.getItem('fullname');
+          $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {
+                      "type":"INSERT_SYNC_LOGS",
+                      "description":description,
+                      "isLock":'1',
+                      "lockby":lockby,
+                      "CONN":con_info
+                    }, 
+              dataType: 'json',     
+              crossDomain: true,
+              cache: false,   
+              success: function(r){   
+                console.log(r);
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                var botboxMsg = '<b style="color: red;">Ops! Unable to replacate data!</b>' + XMLHttpRequest.responseText;
+                console.log(botboxMsg);
+               }
+          });
+      }
+      
+
+      //delivery tagging
+      function goSyncDelTagging(){
+        var r = confirm('This could take time, please wait while we process your request.');
+            if(r){
+              var dialog = bootbox.dialog({
+                    message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Syncing inventory please wait...</p>',
+                    backdrop: true
+                  // closeButton: false
+                  });
+              var message = 'Successfully Saved!';
+              var botboxMsg = '';
+              var ajaxTime= new Date().getTime();
+              $.ajax ({
+                  url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+                  type: "GET",
+                  data: {"type":"SYNC_IDELIVER_DELIVERY_TAGGING", "CONN":con_info , "site":GLBLCIDHOLDER}, 
+                  dataType: 'json',     
+                  crossDomain: true,
+                  cache: false,   
+                  success: function(response){   
+                  if(response){
+                      botboxMsg = '<b style="color: green;">Success!</b><p>Ideliver delivery tagging data successfully sync. Thank You!</p>';
+                    }else{
+                      botboxMsg = '<b style="color: red;">Ops! Unable to Sync Delivery tagging!</b>' + response;
+                    }
+                  },
+                  error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    botboxMsg = '<b style="color: red;">Ops! Unable to Sync Delivery tagging!</b>' + XMLHttpRequest.responseText;
+                    var totalTime = new Date().getTime()-ajaxTime;
+                    dialog.init(function(){
+                          setTimeout(function(){
+                            dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                        }, 1000);
+                    });
+                  }
+                  }).done(function () {
+                          dialog.init(function(){
+                                setTimeout(function(){
+                                  dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                              }, 1000);
+                        });
+                  });
+            }
+      }
+
+
+     function openBtdtDrivermodal(){
+        $('#syncbtdtDriverModal').modal('show');
+     }
+
+     loadBTDTDrivers();
+     function loadBTDTDrivers(){
+     $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {"type":"get_all_btdt_Drivers", "CONN":con_info},
+          dataType: "json",
+          crossDomain: true,
+          cache: false,          
+          async: false,  
+            success: function(data){ 
+              $('#btdtdrvierList').html('<option value="" selected disabled hidden>Choose here..</option>');
+              for(var x = 0; x<data.length; x++){
+                  $('#btdtdrvierList').append('<option value="'+data[x].mdCode+'">'+data[x].Salesman+'</option>');
+               }
+
+               $('#btdtdrvierList').multiselect({
+                  numberDisplayed: 1,
+                  enableCaseInsensitiveFiltering: true,
+                  includeSelectAllOption: true,
+                  selectAllNumber: true,
+                  buttonWidth: '300px',
+                  maxHeight: 300
+               });
+
+             }
+        });
+    }
+
+    loadActiveBTDTDrivers();
+    function loadActiveBTDTDrivers(){
+     $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {"type":"get_all_active_btdt_Drivers", "CONN":con_info},
+          dataType: "json",
+          crossDomain: true,
+          cache: false,          
+          async: false,  
+            success: function(data){ 
+              $('#bdtdDriverSelection').html('<option value="" selected disabled hidden>Choose here..</option>');
+              for(var x = 0; x<data.length; x++){
+                  $('#bdtdDriverSelection').append('<option value="'+data[x].mdCode+'">'+data[x].Salesman+'</option>');
+               }
+
+  
+               $('#bdtdDriverSelection').multiselect({
+                  numberDisplayed: 1,
+                  enableCaseInsensitiveFiltering: true,
+                  includeSelectAllOption: true,
+                  selectAllNumber: true,
+                  buttonWidth: '300px',
+                  maxHeight: 300
+               });
+             }
+        });
+    }
+
+    function showskutaggingbtdt(){
+      $('#skutaggingModal').modal('show');
+    }
+
+    $('.skuDetailsTable').hide();
+
+    function searchbtdtSku(){
+      var bdtdDriverSelection = $('#bdtdDriverSelection').val();
+      var btdtspan = $('#btdtspan').text();
+      $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {
+                  "type":"GET_BTDT_PRODUCT",
+                  "btdtDriver":bdtdDriverSelection,
+                  "btdtbookingDate":btdtspan, 
+                  "CONN":con_info
+                },
+          dataType: "json",
+          crossDomain: true,
+          cache: false,          
+          async: false,  
+            success: function(r){ 
+
+              $('#btdtdrivername').html($('#bdtdDriverSelection option:selected').text());
+
+              var cont = ``;
+
+              for(var x = 0; x < r.length; x++){
+                cont += `<tr>
+                          <td>`+r[x].stockCode+`</td>
+                          <td>`+r[x].Description+`</td>`+
+                          '<td><button class="btn btn-danger btn-sm" onclick="replacedmodal(\''+r[x].stockCode+'\')">Replace</button></td>'+`
+                        </tr>`;
+              }
+
+              $('#skuDetailstbody').html(cont);
+             }
+        });
+
+        $('.skuDetailsTable').show();
+    }
+
+
+
+    function replacedmodal(stockCode){
+      $('#stockCodetoReplaced').html(stockCode);
+      $('#btdtstockCodeHolder').val(stockCode);
+
+      $('#productselectionModal').modal('show');
+
+    }
+
+
+    function replacedBtdtProduct(){
+      var stockCode = $('#btdtstockCodeHolder').val();
+      var newstockCode = $('#btdtProductList').val();
+      var btdtspan = $('#btdtspan').text();
+      var f = confirm('Are you sure you want to replaced '+stockCode+' to '+newstockCode+' ?');
+      if(f){
+
+        $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {
+                  "type":"EXEC_REPLACED_BDTDT_PRODUCT",
+                  "stockCode":stockCode,
+                  "newstockCode":newstockCode, 
+                  "bookingDate":btdtspan,
+                  "CONN":con_info
+                },
+          dataType: "json",
+          crossDomain: true,
+          cache: false,          
+          async: false,  
+            success: function(r){ 
+                if(r){
+                  $('#btdtstockCodeHolder').val('');
+                  $('#productselectionModal').modal('hide');
+
+                  alert('Stockcode '+stockCode+' successfully replaced to ' + newstockCode);
+                }
+             }
+        });
+
+        // console.log('sulod');
+
+      }
+
+    }
+
+
+    function exec_salesman_sending_priority(){
+      $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {
+                  "type":"UPDATE_SALESMAN_SENDING",
+                  'switchChecker':priosychingData,
+                  "CONN":con_info
+                },
+          dataType: "json",
+          crossDomain: true,
+          cache: false,          
+          async: false,  
+            success: function(r){ 
+               if(priosychingData == 1){
+                alert('Success:\nPriority syching is enabled.');
+               }else{
+                alert('Success:\nPriority syching is disabled.');
+               }
+             }
+        });
+    }
+
+
+
+    function salesmansendingchecker(){
+        $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {
+                  "type":"SALESMAN_SENDING_CHECKER",
+                  "CONN":con_info
+                },
+          dataType: "json",
+          crossDomain: true,
+          cache: false,          
+          async: false,  
+            success: function(r){ 
+                if(r == 1){
+                  $('.priosyching').prop("checked", true);
+                  $('.text-indicator-priosyching').html('PRIORITIZE SYNCHING: <b style="color: green">ENABLED</b>');
+                }else{
+                  $('.priosyching').prop("checked", false);
+                  $('.text-indicator-priosyching').html('PRIORITIZE SYNCHING: <b style="color: red">DISABLED</b>');
+                }
+             }
+        });
+    }
+
+    var priosychingData = '';
+    $('.priosyching').click(function() {
+          if($('.priosyching').prop("checked") == true){
+              $('.text-indicator-priosyching').html('PRIORITIZE SYNCHING: <b style="color: green">ENABLED</b>');
+              // priosychingData = '1';
+              // console.log('priosyching val: ' + priosychingData);
+              priosychingData = 1;
+              // exec_salesman_sending_priority(1);
+            }
+            else if($('.priosyching').prop("checked") == false){
+                $('.text-indicator-priosyching').html('PRIORITIZE SYNCHING: <b style="color: red">DISABLED</b>');
+                // priosychingData = '0';
+              // console.log('priosyching val: ' + priosychingData);
+              priosychingData = 0;
+              // exec_salesman_sending_priority(0);
+            }
+        });
+
+    $(window).bind("load", function () {
+          $('#work-in-progress').fadeOut();
+
+      });
+
+  function myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+          x.className += " responsive";
+      } else {
+          x.className = "topnav";
+      }
+  } 
+
+
+  datePicker();
+      var startPickDate, endPickDate;
+      function datePicker(){
+       var start = moment().subtract(29, 'days');
+        var end = moment();
+
+        $('#reportrange1').daterangepicker({
+            "alwaysShowCalendars": true,
+            "startDate": start,
+            "endDate": end,
+            "maxDate": moment(),
+            "applyClass": "btn-primary",
+            "autoApply": false,
+            ranges: {
+               'Today': [moment(), moment()],
+               'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+               'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+               'This Month': [moment().startOf('month'), moment().endOf('month')],
+               'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        }, function(start, end, label) {
+            $('#reportrange1 span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            startPickDate = start.format('YYYY-MM-DD');
+            endPickDate = end.format('YYYY-MM-DD')
+          });
+
+        $('#reportrange1').on('apply.daterangepicker', function(ev, picker) {
+          $('#stockRequest_TAB').hide();
+          var start = picker.startDate.format('YYYY-MM-DD');
+          var end = picker.endDate.format('YYYY-MM-DD');
+          // dashBoard_direct_marker(start, end);
+
+          startPickDate = start;
+          endPickDate = end;
+
+        });
+
+
+        $('#reportrange2').daterangepicker({
+            "alwaysShowCalendars": true,
+            "startDate": start,
+            "endDate": end,
+            "maxDate": moment(),
+            "applyClass": "btn-primary",
+            "autoApply": false,
+            ranges: {
+               'Today': [moment(), moment()],
+               'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+               'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+               'This Month': [moment().startOf('month'), moment().endOf('month')],
+               'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        }, function(start, end, label) {
+            $('#reportrange2 span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            startPickDate = start.format('YYYY-MM-DD');
+            endPickDate = end.format('YYYY-MM-DD')
+          });
+
+        $('#reportrange2').on('apply.daterangepicker', function(ev, picker) {
+            $('#stockRequest_TAB').hide();
+            var start = picker.startDate.format('YYYY-MM-DD');
+            var end = picker.endDate.format('YYYY-MM-DD');
+            // dashBoard_direct_marker(start, end);
+
+            startPickDate = start;
+            endPickDate = end;
+
+        });
+
+
+        $('#reportrange3').daterangepicker({
+            "alwaysShowCalendars": true,
+            "startDate": start,
+            "endDate": end,
+            "maxDate": moment(),
+            "applyClass": "btn-primary",
+            "autoApply": false,
+            ranges: {
+               'Today': [moment(), moment()],
+               'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+               'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+               'This Month': [moment().startOf('month'), moment().endOf('month')],
+               'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        }, function(start, end, label) {
+            $('#reportrange3 span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            startPickDate = start.format('YYYY-MM-DD');
+            endPickDate = end.format('YYYY-MM-DD')
+          });
+
+        $('#reportrange3').on('apply.daterangepicker', function(ev, picker) {
+            $('#stockRequest_TAB').hide();
+            var start = picker.startDate.format('YYYY-MM-DD');
+            var end = picker.endDate.format('YYYY-MM-DD');
+            // dashBoard_direct_marker(start, end);
+
+            startPickDate = start;
+            endPickDate = end;
+
+        });
+      }
+
+
+  $.fn.inputFilter = function(callback, errMsg) {
+    return this.on("input keydown keyup mousedown mouseup select contextmenu drop focusout", function(e) {
+      if (callback(this.value)) {
+        // Accepted value
+        if (["keydown","mousedown","focusout"].indexOf(e.type) >= 0){
+          $(this).removeClass("input-error");
+          this.setCustomValidity("");
+        }
+        this.oldValue = this.value;
+        this.oldSelectionStart = this.selectionStart;
+        this.oldSelectionEnd = this.selectionEnd;
+      } else if (this.hasOwnProperty("oldValue")) {
+        // Rejected value - restore the previous one
+        $(this).addClass("input-error");
+        this.setCustomValidity(errMsg);
+        this.reportValidity();
+        this.value = this.oldValue;
+        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+      } else {
+        // Rejected value - nothing to restore
+        this.value = "";
+      }
+    });
+  };
+
+
+  $("#customDays").inputFilter(function(value) {
+    return /^\d*$/.test(value);    // Allow digits only, using a RegExp
+  },"Only digits allowed");
+
+  (function($) {
+    $.fn.clickToggle = function(func1, func2) {
+        var funcs = [func1, func2];
+        this.data('toggleclicked', 0);
+        this.click(function() {
+            var data = $(this).data();
+            var tc = data.toggleclicked;
+            $.proxy(funcs[tc], this)();
+            data.toggleclicked = (tc + 1) % 2;
+        });
+        return this;
+    };
+   }(jQuery));
+
+ 
+    $("#navBtn").clickToggle(function() {   
+      openNav();
+    }, function() {
+        closeNav();
+    });
+  
+function imgError2(image) {
+      image.onerror = "";
+      image.src = "../img/salesmanPic.jpg";
+      return true;
+    }  
+
+    function view_analytics(){
+      var siteCode = GBLCOMPANYNAME;
+      localStorage.setItem('BIID', siteCode);
+      var win = window.open('mybuddy_bi_reports', '_blank');
+      if (win) {
+          //Browser has allowed it to be opened
+          win.focus();
+      } else {
+          //Browser has blocked it
+          alert('Please allow popups for this website');
+      }
+
+    }
+
+    function view_analytics_otd(){
+      var siteCode = GLBLCIDHOLDER;
+      localStorage.setItem('BIID', siteCode);
+      var win = window.open('otd_bi_report', '_blank');
+      if (win) {
+          //Browser has allowed it to be opened
+          win.focus();
+      } else {
+          //Browser has blocked it
+          alert('Please allow popups for this website');
+      }
+    }
+
+    function view_analytics_1(){
+      var siteCode = GBLCOMPANYNAME;
+      localStorage.setItem('BIID', siteCode);
+      var win = window.open('btdt_bi_reports', '_blank');
+      //https://fastbi-analytics.com/public/dashboard/2482acf8-204a-4f3e-89d4-822c2325916c?tab=5-dashboard&sitecode='+siteCode+'&date_filter=thismonth#hide_parameters=sitecode
+      if (win) {
+          //Browser has allowed it to be opened
+          win.focus();
+      } else {
+          //Browser has blocked it
+          alert('Please allow popups for this website');
+      }
+
+    }
+
+    function view_otd_monitoring()
+    {
+      var win = window.open('btdt_otd_monitoring', '_blank');
+      //https://fastbi-analytics.com/public/dashboard/2482acf8-204a-4f3e-89d4-822c2325916c?tab=5-dashboard&sitecode='+siteCode+'&date_filter=thismonth#hide_parameters=sitecode
+      if (win) {
+          //Browser has allowed it to be opened
+          win.focus();
+      } else {
+          //Browser has blocked it
+          alert('Please allow popups for this website');
+      }
+    }
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "270px";
+    document.getElementById("main").style.marginLeft = "270px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+}
+
+
+</script>
+
+     
+</body>
+</html> 

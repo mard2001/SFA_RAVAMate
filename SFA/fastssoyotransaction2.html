@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+     Fastsosyo Transaction
+  </title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 
+ <link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png"/>
+ <link rel="stylesheet" href="/css/mdDesign.css"/>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">
+  <link rel="stylesheet" href="/js/bootstrap-multiselect-master/dist/css/bootstrap-multiselect.css" type="text/css"/>
+
+  <style>
+    @media (min-width: 768px) {
+      .modal-xl {
+        width: 90%;
+      max-width:1200px;
+      }
+    }
+
+    .overModal{
+      overflow-y:inherit !important;;
+    }
+
+    .font-weight-bold{
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body onload="init()">
+  <div id="mySidenav" class="sidenav">
+  <div class='image'><img alt='mdbuddylogo' class='logoMd' src='/img/mdbuddylogo_jeff.png'/></div>
+    <a href="https://mybuddy-sfa.com/SFA/Dashboard"> <span class='glyphicon glyphicon-home'></span> Dashboard</a>
+    <a href="https://mybuddy-sfa.com/SFA/digitalMapping"> <span class='glyphicon glyphicon-map-marker'></span> Digital Mapping</a>
+    <a href="https://mybuddy-sfa.com/SFA/customerMapping"> <span class="fa fa-users" aria-hidden="true"></span> Customer Mapping</a>
+    <a href="territoryGeofencing"> <span class='glyphicon glyphicon-cog'></span> Territory Geofencing</a>
+   <a data-toggle="collapse" href="#collapse1" id='navDrop'> <span class='glyphicon glyphicon-duplicate' id='changeIcon'></span> Reports
+    <i class="glyphicon glyphicon-menu-down pull-right"></i> </a>
+      <div id="collapse1" class="panel-collapse collapse" style="margin-left: 17px; font-size: 5px !important">
+        <a href="salesReport"> Sales Report</a>
+        <a href="fastsosyotransaction"> Fastsosyo Transaction</a>
+        <a href="salesAudit"> Sales Audit</a>
+        <a href="transactionLedger"> Transaction Ledger</a>
+        <a href="UnprocessedOrders"> Unprocessed Orders</a>
+        <a href="dsr"> DSR</a>
+        <a href="dcr"> Daily Collection</a>
+        <a href="stockRequest"> Stock Request</a>
+        <a href="unuploaded"> Unuploaded</a>
+        <a href="BOReport"> BO</a>
+        <a href="Stocktake Report"> Stocktake</a>
+        <a href="inventory"> Inventory Valuation</a>
+        <a href="jobberMaintenance"> Jobber</a>
+        <a href="syncreport">Sync Report</a>
+        <a href="soaprvreport">SO Approval</a>
+      </div>
+   <a data-toggle="collapse" href="#collapse2" id='navDrop' class="maintenanceCont"> <span class="fa fa-cogs" aria-hidden="true" id='changeIcon'></span> Maintenance
+    <i class="glyphicon glyphicon-menu-down pull-right"></i> </a>
+      <div id="collapse2" class="panel-collapse collapse" style="margin-left: 17px; font-size: 9px !important">
+        <a href="dataMaintenance"> Data</a>
+        <a href="customer"> Customer</a>
+        <a href="cmf">CMF</a>
+        <a href="geoReset"> Georeset</a>
+        <a href="salesman"> Salesman</a>
+        <a href="product"> Product</a>
+        <a href="customerTagging"> Tagging</a>
+        <a href="bankmaintenance"> Bank</a>
+        <a href="mcpcalibration">MCP Calibration</a>
+      </div>
+  <!-- <a href="Alert"> <span class='glyphicon glyphicon-envelope'></span> Alert Messages</a> -->
+  <hr />
+  <a href="https://mybuddy-sfa.com/SFA/v2/dashboard">Switch to New Dashboard</a>
+  <hr>
+  <a href="fastsosyotranscation" class='activeYes'><span class='glyphicon glyphicon-duplicate'></span> Fastsosyo Transaction</a>
+   <!--<div class='hideNav'>
+      <a href="#" class="btn btn-primary btn-nav" onclick='closeNav()'>
+          <span class='glyphicon glyphicon-menu-left' style='color:white;'></span>
+      </a>
+    </div>-->
+  </div>
+  <div id="main">
+  <h4 class="display-4 dispMargin">
+          <a href="#" id='navBtn' class="btn btn-primary"  style='margin-right: 15px; outline: none;'>
+            <span class="glyphicon glyphicon-menu-hamburger"></span> 
+          </a>
+          <span onclick='closeNav()'>
+            <i class="fas fa-clipboard-list"></i> Fastsosyo Transaction
+            <!--<span class='pull-right' >
+                  <img src="img/colpal.png" alt="nutriasia" style="float:right;">
+            </span>-->
+              <span class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                  <a style='float:right;' href="#" class="dropdown-toggle" data-toggle="dropdown" id='dropThisDown'>
+                      <span class="label label-pill label-danger count" style='border-radius: 10px; font-size: 10px;'></span>
+                      <span class="fa fa-bell"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-pill">
+                    <div id="notificationElement" class="scroll" data-simplebar>
+                        <div id='notifs-icon-div'></div>
+                    </div>
+                    <a type="button" class="btn btn-default btn-block" href='Alert' id='seeAll' >See all</a>
+                  </ul>
+                </li>
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fas fa-user"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-user">
+                      <li><a href="Profile.html"><i class="fas fa-user"></i> My Account</a>
+                      </li>
+                      <li class="divider"></li>
+                      <li><a href="#" id="admin-logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                      </li>
+                  </ul>
+                </li>
+              </span>
+            </span>
+          </h4>
+
+         <div class="panel cust-panel">
+               <div class="panel-heading">
+                   <i class="fas fa-clipboard-list"></i> <span id="titleHeading"></span>
+                   <span class="pull-right"><button class="btn btn-info btn-xs" onclick="feedback()">Feedback Form</button></span>
+               </div>
+                <div class="panel-body" style='background-color:#fff; color: black;'>   
+                  <div class="table-responsive">
+                    <table class="table table-hover display nowrap customerList" style="width: 100%;">
+                       <thead>
+                        <tr>
+                          <th>TRANSDATE</th>
+                          <th>STORE NAME</th>
+                          <th>CUSTCODE</th>
+                          <th class=""># SKU</th>
+                          <th class="">AMOUNT</th>
+                          <th>SALESMAN</th>
+                          <th>STATUS</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
+               </div>
+         </div><!--main panel end-->
+
+         <div class="modal fade" id="tojobbermodal" role="dialog">
+            <div class="modal-dialog modal-xl">
+              <!-- Modal content-->
+              <div class="modal-content" style="overflow:hidden;">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Customer Details</h4>
+                </div>
+                <div class="modal-body overModal">
+                    <div>
+                        <div style="float: left; width: 50%;">
+                          <div class="validateGroup">
+                            <h5><legend>Validate</legend></h5>
+                            <table class="table table-hover">
+                              <tr>
+                                <td>Salesman:</td>
+                                <td id="">
+                                   <select id="salesmanList" class="form-control">
+                                      <option value="" disabled selected hidden>Select salesman</option>
+                                    </select> 
+                                    <!-- <input type="text" name="" id="salesman_aio" class="job-inpt-data-h"> -->
+                               </td>
+                              </tr>
+                              <tr>
+                                <td>Customer Code:</td>
+                                <td id="">
+                                   <select id="customerListSelect" class="form-control">
+                                      <option value="" disabled selected hidden>Select customer code</option>
+                                    </select> 
+                                    <!-- <input type="text" name="" id="salesman_aio" class="job-inpt-data-h"> -->
+                               </td>
+                              </tr>
+                            </table>
+                          </div>
+                         
+                            <H5><legend>Details</legend></H5>
+                            <table class="table table-hover">
+                              <tr>
+                                <td>Reference No:</td>
+                                <td><input type="text" name="" id="refNo_aio" class="job-inpt-data-h form-control font-weight-bold"></td>
+                              </tr>
+                              <tr>
+                                <td># SKU:</td>
+                                <td><input type="text" name="" id="sku_aio" class="job-inpt-data-h form-control font-weight-bold"></td>
+                              </tr>
+                              <tr>
+                                <td>Amount:</td>
+                                <td><input type="text" name="" id="amount_aio" class="job-inpt-data-h form-control font-weight-bold"></td>
+                              </tr>
+                                <tr>
+                                  <td>Store:</td>
+                                  <td><input type="text" name="" id="storename_aio" class="job-inpt-data-h form-control font-weight-bold"></td>
+                                </tr>
+                                <tr>
+                                  <td>Owner:</td>
+                                  <td id=""><input type="text" name="" id="owner_aio" class="job-inpt-data-h form-control font-weight-bold"></td>
+                                </tr>
+                                <tr>
+                                    <td>Contact #:</td>
+                                    <td>
+                                        <input type="text" id="storecontno_aio" class="job-inpt-data-h form-control font-weight-bold">
+                                    </td>
+                                </tr>
+                                <tr>
+                                  <td>Address:</td>
+                                  <td><input type="text" name="" id="address_aio" class="job-inpt-data-h form-control font-weight-bold"></td>
+                                </tr>
+                                <tr>
+                                    <td>Latlng:</td>
+                                    <td ><input type="text" name="" id="latlng_aio" class="job-inpt-data-h form-control font-weight-bold"></td>
+                                </tr>
+                                <tr>
+                                  <td>CustCode:</td>
+                                  <td id=""><input type="text" name="" id="customerCode_aio" class="job-inpt-data-h form-control font-weight-bold"></td>
+                                </tr>
+                                
+                              </table>
+
+                              <div class="conf_section">
+                                <table class="table table-sm">
+                                  <tr>
+                                    <td>Salesman Assigned:</td>
+                                    <td>
+                                      <input type="text" name="" id="salesman_conf" class="job-inpt-data-h form-control font-weight-bold">
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>Customer Code:</td>
+                                    <td>
+                                      <input type="text" name="" id="customer_conf" class="job-inpt-data-h form-control font-weight-bold">
+                                    </td>
+                                  </tr>
+                                </table>
+                              </div>
+                        </div>
+                        <div style="width: 50%; float: right;" class="pull-right">
+                            <div id="map" style="height: 650px;"></div>
+                        </div>
+
+                     <input type="hidden" name="" id="storeIDHolder">
+                     <input type="hidden" id="salesman_res">
+                     <input type="hidden" id="storeID_res">
+                     <input type="hidden" id="customer_res">
+                     <input type="hidden" id="refno_res">
+                     <input type="hidden" id="transactionID_res">
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+                  <small class="text-info pull-left infoFooter"></small>
+
+                  <button class="btn btn-info" style="float:left;" id="" onclick="printPickList()">Print PickList</button>
+                  <button class="btn btn-warning" style="float:left;" id="" onclick="sentDetails()">Send Details (via sms)</button>
+                  <button type="button" class="btn btn-primary resendBtn" onclick="resend_transaction()">Resend Transaction</button>
+                  <button type="button" class="btn btn-primary validateGroup" id="addJobberBtn" data-dismiss="modal" onclick="exec_asignSalesman()">Verify Transaction (send as draft)</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+              
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="sentDetailsModal" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Send Transaction via SMS</h4>
+                </div>
+                
+                <div class="modal-body">
+                  <label for="">Salesman Phonenumber:</label>
+                  <input type="text" class="form-control form-control-lg" id="salesman_phonenum" maxlength="11" placeholder="09XXXXXXXXX" >
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" onclick="sentTransItems()">Send</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+            </div>
+           </div>
+
+          <div class="modal fade" id="duplicateUserModal" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">SESSION ENDED</h4>
+                </div>
+                <div class="modal-body">
+                  <p>Sorry, your session has been disconnected. Another user is currently using your account.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" onclick="cofirmationDupUser()">GOT IT</button>
+                </div>
+              </div>
+            </div>
+           </div>
+
+           <div class="modal fade" id="preselectedAccts" role="dialog">
+            <div class="modal-dialog  modal-xl">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Pilot Accounts</h4>
+                </div>
+                <div class="modal-body">
+                  <div style="height: 500px; overflow-y: auto;">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <td>Salesman</td>
+                          <td>CustCode</td>
+                          <td>Customer Name</td>
+                          <td>Link Status</td>
+                        </tr>
+                      </thead>
+                      <tbody id="preselactsBody"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+           </div>
+
+           
+  </div><!--#main-->
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=quarterly&key=AIzaSyAt0Pxe9_3DTav3DmUQzHfgd07s_LcJo7I"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js "></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="/web/web-commons.js"></script>
+    <script src="/HASH/md5.js"></script>
+    <script src="/HASH/aes.js"></script>
+    <script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+    <script type="text/javascript" src="/js/bootbox.min.js"></script>
+    <!-- <script type="text/javascript" src="/js/dynamicHeader.js"></script> -->
+    <script type="text/javascript" src="/js/bootstrap-multiselect-master/dist/js/bootstrap-multiselect.js"></script>
+    <!-- <script src="js/chatApi.js"></script> -->
+    <!-- <script type="text/javascript" src="js/duplicate-user.js"></script> -->
+    <script>
+    var user = localStorage.getItem("adminUserName");
+	  var usernm = localStorage.getItem("username");
+    $('#customerListSelect').html('<option value="">Select a salesman first..</option>');
+
+    function sentDetails(){
+      $('#salesman_phonenum').val('');
+      $('#sentDetailsModal').modal('show');
+    }
+
+    function sentTransItems(){
+      var transID = $('#transactionID_res').val();
+      var phonenumber =  $('#salesman_phonenum').val();
+
+      if($.trim(phonenumber) == ''){
+        alert('Phonenumber is required.');
+      }else{
+        $.ajax ({
+          url: "/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {
+                  "type":"EXEC_SEND_TRANSDETAILS_TO_SALESMAN",
+                  'transactionID':transID,
+                  'contactno':phonenumber,
+                   "CONN":con_info
+                },
+          dataType: "json",
+          crossDomain: true,
+          cache: false,         
+          async: false,   
+            success: function(r){ 
+              if(r){
+                alert('Transaction items successfully sent to salesman.');
+                $('#sentDetailsModal').modal('hide');
+              }
+            },error: function(jqXHR, textStatus, errorThrown) {
+                alert('ERROR CONNECTING TO SERVER:\n Please Check your connection settings.');
+            }
+        });
+      }
+    }
+    getcompname();
+    function getcompname(){
+      $.ajax ({
+          url: "/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {"type":"GET_COMPANYNAME", "CONN":con_info},
+          dataType: "json",
+          crossDomain: true,
+          cache: false,         
+          async: false,   
+            success: function(r){ 
+                localStorage.setItem('DISTCD', r[0].DIST_CD);
+                $('#titleHeading').html(r[0].company.toUpperCase() +' / Fastsosyo Transactions / v.1.0');
+            },error: function(jqXHR, textStatus, errorThrown) {
+                alert('ERROR CONNECTING TO SERVER:\n Please Check your connection settings.');
+            }
+        });
+    } 
+
+      $('.job-inpt-data-h').attr('disabled', 'disabled');
+      showNotif();
+
+      $('#navDrop').click(function() {
+        $("i", this).toggleClass("glyphicon-menu-up glyphicon-menu-down");
+      });
+      
+      $(document).on('click', '.dropdown-toggle', function(){
+        $('.count').html('');
+         showNotif('yes');
+      });
+
+    //   setInterval(function(){
+    //    //loadPopup();
+    //    showNotif();
+    //  }, 9000); 
+
+    function feedback(){
+      window.open('feedback', '_blank');
+    }
+
+    getDistPreselectedAcs();
+      function getDistPreselectedAcs(){
+        $.ajax ({
+          url: "/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {
+                  "type":"GET_AIO_DISTRIBUTORSCUSTOMERLIST",
+                  "DIST_CODE":$.trim(localStorage.getItem('DISTCD')),
+                  "CONN":con_info
+                },
+          dataType: "JSON",
+          crossDomain: true,
+          cache: false,     
+          async: false,       
+            success: function(r){ 
+              var cont = '';
+              for(var x = 0; x < r.length; x++){
+                var statChecker = '';
+                if(r[x].isLIkedTo == null || r[x].isLIkedTo == ''){
+                  statChecker = '<b style="color: green;">AVAILABLE</b>';
+                }else{
+                  statChecker = '<b style="color: red;">USED</b>';
+                }
+                cont += `<tr>
+                          <td>`+r[x].partnerID+`<td>
+                          <td>`+r[x].custCode+`</td>
+                          <td>`+r[x].custName+`</td>
+                          <td>`+statChecker+`</td>
+                        </tr>`;
+              }
+              $('#preselactsBody').html(cont);
+            }
+        });
+      }
+      customerData();
+      customerDataTable();
+      
+
+      var sourceData;
+      function customerData(){
+        $.ajax ({
+          url: "/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {
+                  "type":"GET_AIO_TRANSACTION",
+                  "DIST_CODE":$.trim(localStorage.getItem('DISTCD')),
+                  "CONN":con_info
+                },
+          dataType: "JSON",
+          crossDomain: true,
+          cache: false,     
+          async: false,       
+            success: function(r){ 
+              sourceData = r;
+            }
+        });
+      }
+      var tableData;
+      function customerDataTable(){
+         tableData =  $('table.customerList').DataTable({
+                    "dom": 'Bfrtip',
+                    "data": sourceData,
+                    "scrollX": true,
+                    "ordering": true,
+                    "columns": [
+                        { "data": "deliveryDate"},
+                        { "data": "STORENAME"},
+                        { "data": "custCode"},
+                        { "data": "TOTALSKU" },
+                        { "data": "totalAmount"},
+                        { "data": "partnerID" },
+                        { "data": "status" }
+                    ],
+                    "aoColumnDefs": [
+                    { 
+                      "sClass": "text-right", "aTargets": [ 4 ],
+                      // "sClass": "text-center", "aTargets": [ 2 ]  
+                    }
+                    //You can also set 'sType' to 'numeric' and use the built in css.           
+                  ],
+                  buttons:  [
+                          {
+                              text: 'Reload',
+                              className: 'filterdate_booking',
+                              action: function(e, dt, node, config){
+                                customerData();
+                                tableData.clear().rows.add(sourceData).draw();
+                              }
+                          },
+                          {
+                              text: 'Pre Selected Accounts',
+                              className: 'filterdate_booking',
+                              action: function(e, dt, node, config){
+
+                                //getDistPreselectedAcs();
+                                $('#preselectedAccts').modal('show');
+                              }
+                          }
+                  ],
+                    "language": {
+                      "emptyTable": "No available records as of now."
+                    },
+                    // "aaSorting": [[ 0, "desc" ]],
+                    rowCallback: function(row, data, index){
+                      var statIndicator = data.status.toString();
+                      var salesmanIndi = $(row).find('td:eq(4)').text();
+                      var mdCode = data.partnerID.toString();
+                      var STORENAME = data.STORENAME.toString().toUpperCase();
+                      // console.log(salesmanOBj);
+
+                      $(row).find('td:eq(1)').html(STORENAME);
+                      
+                      if(statIndicator == '1'){ 
+                        // $(row).find('td:eq(2)').text('BOOKING');
+                        $(row).find('td:eq(6)').css({'color': 'white', "background-color": "#e06335", "text-align":"center"});
+                        $(row).find('td:eq(6)').text('PENDING');
+                      }else{
+                        $(row).find('td:eq(6)').text('VERIFIED');
+                        $(row).find('td:eq(6)').css({'color': 'white', "background-color": "#00A86B", "text-align":"center"});
+                      }
+
+                      if(salesmanIndi == null || salesmanIndi == 'null' || salesmanIndi == ''){
+                        $(row).find('td:eq(5)').text('---');
+                      }
+                      // else{
+                      //   var salesmanOBj = getSalesmanDetails(mdCode);
+                      //   $(row).find('td:eq(4)').text(mdCode+'_'+salesmanOBj[0].Salesman);
+                      // }
+                  }
+           });
+
+        $('table.customerList tbody').on('click', 'tr', function () {
+            var tr = $(this).closest('tr');
+            var row = tableData.row(tr);
+            exec_savetojobber(row.data());
+        });
+
+        function exec_savetojobber(r){
+            if(r.status == '1'){
+              $('.validateGroup').show();
+              $('.conf_section').hide();
+              $('.resendBtn').hide();
+            }else{
+
+              $('#salesman_res').val(r.partnerID);
+              $('#storeID_res').val(r.STOREID);
+              $('#customer_res').val(r.custCode);
+              $('#refno_res').val(r.refno);
+
+              var salesmanDetails = getSalesmanDetails(r.partnerID);
+              $('#salesman_conf').val(salesmanDetails[0].Salesman).show();
+              $('#customer_conf').val(displaycustomer(r.custCode)).show();
+              $('.validateGroup').hide();
+              $('.conf_section').show();
+              $('.resendBtn').show();
+            }
+
+            showmarker(r.LATITUDE, r.LONGITUDE, r.STORENAME, r.ADDRESS);
+            $('#storeIDHolder').val(r.STOREID);
+            $('#refNo_aio').val(r.refno);
+            $('#storename_aio').val(r.STORENAME.toUpperCase());
+            $('#owner_aio').val(r.STOREOWNER);
+            $('#address_aio').val(r.ADDRESS);
+            $('#sku_aio').val(r.TOTALSKU);
+            $('#amount_aio').val(r.totalAmount);
+            $('#customerCode_aio').val(displaycustomer(r.custCode));
+            $('#salesman_aio').val(r.partnerID);
+            $('#storecontno_aio').val(r.STORECONTNO);
+            $('#latlng_aio').val(r.LATITUDE+', '+r.LONGITUDE);
+            $('#transactionID_res').val(r.transactionID);
+            
+            if(r.partnerID == null || r.partnerID == 'null'){
+                $('#salesman_aio').val('---');
+            }
+
+            if(r.custCode == null || r.custCode == 'null'){
+                $('#customerCode_aio').val('---');
+            }
+
+            $('#tojobbermodal').modal('show');
+            
+        }
+      }
+
+      function displaycustomer(cust){
+        if(cust == 'NEW_CUSTOMER'){
+          return cust;
+        }else{
+          return getCustomerName(cust);
+        }
+      }
+
+      function islockOnverifyer(r){
+        
+        if(r == 0){
+          return '<strong style="color: red;">NO</strong>';
+        }
+         return '<strong style="color: #5ee663;">YES</strong>';
+      }
+
+      function exec_insertCustomer(){
+        var r = confirm("Press 'OK' to proceed.");
+        if(r){
+          $('#addJobberBtn').html('<i class="fa fa-spinner fa-spin"></i> updating.. ');
+          $( "#addJobberBtn").prop( "disabled", true );
+          var custCode = $('#custCodeH').val();
+          $.ajax ({
+            url: "/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {
+                    "type":"UPDATE_ORDERTYPE", 
+                    "CONN":con_info,
+                    "custCode":custCode
+                  },
+            dataType: "JSON",
+            crossDomain: true,
+            cache: false,     
+            async: false,       
+              success: function(r){ 
+                if(r){
+                  customerData();
+                  tableData.clear().rows.add(sourceData).draw();
+                  alert('Customer succesfully updated!');
+                }else{
+                  alert('UNABLE TO INSERT: Customer is already in the jobber list!');
+                }
+                  $("#addJobberBtn").prop( "disabled", false );
+                  $('#addJobberBtn').html('Add');
+               
+              },error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert('ERROR CUSTOMER UPDATE: ' + JSON.stringify(XMLHttpRequest.responseText));
+                $( "#addJobberBtn").prop( "disabled", false );
+                $('#addJobberBtn').html('Add');
+              }
+          });
+        }
+      }
+
+      function exec_insertCustomer_revert(){
+        var r = confirm("Press 'OK' to proceed.");
+        if(r){
+          $('#revertBtn').html('<i class="fa fa-spinner fa-spin"></i> updating.. ');
+          $( "#revertBtn").prop( "disabled", true );
+          var custCode = $('#custCodeH').val();
+          $.ajax ({
+            url: "/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {
+                    "type":"UPDATE_ORDERTYPE_REVERT", 
+                    "CONN":con_info,
+                    "custCode":custCode
+                  },
+            dataType: "JSON",
+            crossDomain: true,
+            cache: false,     
+            async: false,       
+              success: function(r){ 
+                if(r){
+                  customerData();
+                  tableData.clear().rows.add(sourceData).draw();
+                  alert('Customer succesfully updated!');
+                }else{
+                  alert('UNABLE TO INSERT: Customer is already in the jobber list!');
+                }
+                  $("#revertBtn").prop( "disabled", false );
+                  $('#revertBtn').html('Add');
+               
+              },error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert('ERROR CUSTOMER UPDATE: ' + JSON.stringify(XMLHttpRequest.responseText));
+                $( "#revertBtn").prop( "disabled", false );
+                $('#revertBtn').html('Add');
+              }
+          });
+        }
+      }
+
+      function showNotif(view=''){
+         $.ajax ({
+          url: "../geofencing/GeofencingAPI.php",
+          type: "GET",
+          data: {"type":"view_notifications_icon_"+user, "view":view},
+          dataType: "JSON",
+          crossDomain: true,
+          cache: false,            
+            success: function(response){ 
+           // console.log('Notification function has been refresh');                
+            $("#notifs-icon-div").html(response.notification);
+              if(response.unseen_notification > 0)
+              {
+               $('.count').html(response.unseen_notification);
+              }
+            }
+        });
+      }
+
+    function getToken(mdCode){
+        var token = '';
+        $.ajax ({
+            url: "/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {
+                    "type":"GET_USER_TOKEN",
+                    "CONN":con_info,
+                    "mdCode":mdCode
+                },
+            dataType: "json",
+            crossDomain: true,
+            cache: false,
+            async: false,         
+            success: function(r){
+            token = r;
+            }
+        });
+        return token;
+    }
+
+    function printPickList(){
+        var transID = $('#transactionID_res').val();
+        var phoneNumber =  $('#storecontno_aio').val();
+        var custName = $('#customer_conf').val();
+        localStorage.setItem('PRTBRTRANSID', transID);
+        localStorage.setItem('STOREPHONENUMBER', phoneNumber);
+        localStorage.setItem('SOSYOSTORENAME', custName);
+        window.open('print_picklist.html', '_blank');
+    }
+
+    function getSalesmanDetails(mdCode){
+        var details = [];
+        $.ajax ({
+            url: "/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {
+                    "type":"GET_AIO_SALESAMAN_DETAILS",
+                    "CONN":con_info,
+                    "mdCode":mdCode
+                },
+            dataType: "json",
+            crossDomain: true,
+            cache: false,
+            async: false,         
+            success: function(r){
+              details = r;
+            }
+        });
+        return details;
+    }
+
+    function getCustomerName(custCode){
+        var customer = '';
+        $.ajax ({
+            url: "/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {
+                    "type":"GET_MYBUDDY_STORENAME",
+                    "CONN":con_info,
+                    "custCode":custCode
+                },
+            dataType: "json",
+            crossDomain: true,
+            cache: false,
+            async: false,         
+            success: function(r){
+              customer = r[0].custCode+'_'+r[0].custName;
+            }
+        });
+        return customer;
+    }
+
+    function getAioStoreToken(storeID){
+      var token = '';
+        $.ajax ({
+            url: "/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {
+                    "type":"GET_AIO_TOKEN",
+                    "CONN":con_info,
+                    "storeID":storeID
+                },
+            dataType: "json",
+            crossDomain: true,
+            cache: false,
+            async: false,         
+            success: function(r){
+              token = r;
+            }
+        });
+        return token;
+    }
+
+
+   
+        
+    $(window).bind("load", function () {
+        $('#work-in-progress').fadeOut();
+    });
+
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    } 
+
+
+    (function($) {
+      $.fn.clickToggle = function(func1, func2) {
+          var funcs = [func1, func2];
+          this.data('toggleclicked', 0);
+          this.click(function() {
+              var data = $(this).data();
+              var tc = data.toggleclicked;
+              $.proxy(funcs[tc], this)();
+              data.toggleclicked = (tc + 1) % 2;
+          });
+          return this;
+      };
+    }(jQuery));
+
+     
+    $("#navBtn").clickToggle(function() {   
+        openNav();
+      }, function() {
+        closeNav();
+    });
+      
+    function imgError2(image) {
+      image.onerror = "";
+      image.src = "../img/salesmanPic.jpg";
+      return true;
+    }  
+       
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "270px";
+        document.getElementById("main").style.marginLeft = "270px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft= "0";
+    }
+
+    var infoWindow = new google.maps.InfoWindow;
+    function showmarker(latval, lngval, storeName, address){
+      var contentString = '<p>Storename: <strong>' + storeName.toUpperCase() + '</strong></p>'+
+                          'Address: <strong>'+ address+'</strong>';
+        var myLatLng = { lat: parseFloat(latval), lng: parseFloat(lngval) };
+        var marker = new google.maps.Marker({
+            position: myLatLng,
+            map,
+            infowindow: infoWindow,
+            content: contentString,
+            title: storeName,
+        });
+        map.setCenter(marker.getPosition());  
+        infoWindow.setContent(contentString);
+        infoWindow.open(map, marker);
+    }
+    
+    siteLocation();
+    var map, marker, icon;
+    function init(){
+        // navigator.geolocation.getCurrentPosition(onSuccess, onError, { timeout: 60000 });
+
+        // function onSuccess(position) {
+
+        // var lat = position.coords.latitude;
+        // var lng = position.coords.longitude;
+
+        var lat = parseFloat(sitelat);
+        var lang = parseFloat(sitelng);
+
+        map = new google.maps.Map(document.getElementById('map'), {
+            mapTypeControl: false,
+            center: {lat, lang},
+            zoom: 15
+        });
+
+    //}//onsuccess
+
+    // function onError(error) {
+    //         alert('code: ' + error.code + '\n' +
+    //             'message: ' + error.message + '\n');
+    //     }//onError   
+    // google.maps.event.addDomListener(window, 'load', onSuccess);
+    }//init  
+
+
+    allSalesman();
+    function allSalesman(){
+      $.ajax ({
+            url: "/nestle/connectionString/applicationipAPI.php", 
+            type: "GET",
+            data: {"type":"get_all_salesman_georeset", "CONN":con_info},
+            dataType: "html",
+            crossDomain: true,
+            cache: false,            
+            success: function(response){                  
+              var data = JSON.parse(response);
+              for(var x = 0; x<data.length; x++){
+                $('#salesmanList').append('<option value="'+data[x].mdCode+'">'+data[x].mdSalesmancode+' '+data[x].Salesman+'</option>');
+              }
+                $('#salesmanList').multiselect({
+                  numberDisplayed: 1,
+                  enableCaseInsensitiveFiltering: true,
+                  includeSelectAllOption: true,
+                  selectAllNumber: true,
+                  buttonWidth: '300px',
+                  maxHeight: 300
+
+                });
+            }//success here;
+        })
+    }
+
+    $('#salesmanList').on('change', function() {
+      // alert( this.value );
+      allcustomer(this.value);
+    });
+
+    
+    function allcustomer(){
+      var mdCode = $('#salesmanList').val();
+      $.ajax ({
+            url: "/nestle/connectionString/applicationipAPI.php", 
+            type: "GET",
+            data: {
+                    "type":"CUSTOMER_LIST_AIO",
+                    "CONN":con_info,
+                    "mdCode":mdCode
+                  },
+            dataType: "html",
+            crossDomain: true,
+            cache: false,            
+            success: function(response){                  
+              var data = JSON.parse(response);
+              for(var x = 0; x<data.length; x++){
+                $('#customerListSelect').append('<option value="'+data[x].custCode+'">'+data[x].custCode+' '+data[x].custName+'</option>');
+              }
+                $('#customerListSelect').multiselect({
+                  numberDisplayed: 1,
+                  enableCaseInsensitiveFiltering: true,
+                  includeSelectAllOption: true,
+                  selectAllNumber: true,
+                  buttonWidth: '300px',
+                  maxHeight: 300
+
+                });
+            }//success here;
+        });
+      
+    }
+
+    function resend_transaction(){
+      var mdCode = $('#salesman_res').val();
+        var storeID = $('#storeID_res').val();
+        var custCode = $('#customer_res').val();
+        var refNo = $('#refno_res').val();
+
+        var f = confirm('Are you sure you want to resend this transaction?');
+        if(f){
+            $.ajax({        
+                url: "/nestle/connectionString/applicationipAPI.php", 
+                type: "GET",
+                data: {
+                            "type":"get_aio_transactionID",
+                            "CONN":con_info,
+                            "storeID":storeID
+                        },
+                dataType: "html",
+                crossDomain: true,
+                cache: false,            
+                async: false,
+                success : function(r) {
+                    var transactionID = r.replace(/\s/g,'');
+                    resend_linking_aio_transaction(mdCode, transactionID, storeID, custCode, refNo);
+                    // alert('Transaction has been verified.');
+                }
+            });
+        }
+    }
+
+    function resend_linking_aio_transaction(mdCode, transactionID, storeID, custCode, refNo){
+      console.log('transactionID:' + transactionID);
+        $.ajax({        
+                url: "/nestle/connectionString/applicationipAPI.php", 
+                type: "GET",
+                data: {
+                        "type":"UPDATE_LINKING_AIOTRANSACTION", 
+                        "CONN":con_info,
+                        'mdCode':mdCode,
+                        'storeID':storeID,
+                        'transactionID':transactionID,
+                        'custCode':custCode
+                    },
+                dataType: "html",
+                crossDomain: true,
+                cache: false,        
+                async: false,    
+                success : function(r) {
+                    pushnotif(transactionID, mdCode, custCode);
+                    //pushnotifAIOcustomer(refNo, mdCode);
+                    alert('Transaction has been resend.');
+                }
+            });
+    }
+
+    function check_if_custcode_preselectedAccs(custCode, mdCode){
+      // var checker = 0;
+        $.ajax({        
+                url: "/nestle/connectionString/applicationipAPI.php", 
+                type: "GET",
+                data: {
+                        "type":"CHECK_PRESELECTEDACCTS", 
+                        "CONN":con_info,
+                        'custCode':custCode,
+                        'distCode':$.trim(localStorage.getItem('DISTCD')),
+                        'mdCode':mdCode
+                    },
+                dataType: "json",
+                crossDomain: true,
+                cache: false,        
+                async: false,    
+                success : function(r) {
+                 var checker = 0;
+                  if(r.length == 0){
+                   console.log('wa na link');
+                   checker = 0;
+                   UPDATE_PRESELECTEDACCTS(custCode, mdCode);
+                  }else{
+                    checker = 1;
+                   alert(custCode + ': CUSTOMER CODE ALREADY USED.');
+                  }
+
+                  return checker;
+                }
+            });
+    }
+
+    function UPDATE_PRESELECTEDACCTS(custCode, mdCode){
+        $.ajax({        
+                url: "/nestle/connectionString/applicationipAPI.php", 
+                type: "GET",
+                data: {
+                        "type":"UPDATE_PRESELECTEDACCTS", 
+                        "CONN":con_info,
+                        'custCode':custCode,
+                        'distCode':$.trim(localStorage.getItem('DISTCD')),
+                        'mdCode':mdCode
+                    },
+                dataType: "json",
+                crossDomain: true,
+                cache: false,        
+                async: false
+            });
+    }
+
+    
+       
+    function exec_asignSalesman(){
+        var mdCode = $('#salesmanList').val();
+        var storeID = $('#storeIDHolder').val();
+        var custCode = $('#customerListSelect').val();
+        var refNo = $('#refNo_aio').val();
+
+        var f = confirm('Are you sure you want to continue?');
+        if(f){
+          // var chekeru = check_if_custcode_preselectedAccs(custCode, mdCode);
+          // alert(chekeru);
+            $.ajax({        
+                url: "/nestle/connectionString/applicationipAPI.php", 
+                type: "GET",
+                data: {
+                            "type":"get_aio_transactionID",
+                            "CONN":con_info,
+                            "storeID":storeID
+                        },
+                dataType: "html",
+                crossDomain: true,
+                cache: false,            
+                async: false,
+                success : function(r) {
+                    var transactionID = r.replace(/\s/g,'');
+                    update_linking_aio_transaction(mdCode, transactionID, storeID, custCode, refNo);
+                    // alert('Transaction has been verified.');
+                }
+            });
+        }
+        // pushnotif(transactionID, mdCode);
+    }
+
+    function update_linking_aio_transaction(mdCode, transactionID, storeID, custCode, refNo){
+      console.log('transactionID:' + transactionID);
+        $.ajax({        
+                url: "/nestle/connectionString/applicationipAPI.php", 
+                type: "GET",
+                data: {
+                        "type":"UPDATE_LINKING_AIOTRANSACTION", 
+                        "CONN":con_info,
+                        'mdCode':mdCode,
+                        'storeID':storeID,
+                        'transactionID':transactionID,
+                        'custCode':custCode
+                    },
+                dataType: "html",
+                crossDomain: true,
+                cache: false,        
+                async: false,    
+                success : function(r) {
+                    pushnotif(transactionID, mdCode, custCode);
+                    pushnotifAIOcustomer(refNo, mdCode, custCode);
+                    alert('Transaction has been verified.');
+                }
+            });
+    }
+
+    function pushnotif(transactionID, mdCode, custCode){
+        var storeID = $('#storeIDHolder').val();
+        var token = getToken(mdCode);
+        var customername = getCustomerName(custCode);
+        var customerToken = getAioStoreToken(storeID);
+        var header = 'Order Request';
+        var message = 'Fastsosyo Order from: ' + customername;
+        alert(message);
+    
+            $.ajax({        
+            type : 'POST',
+            url : "https://fcm.googleapis.com/fcm/send",
+            headers : {
+                Authorization : 'key=' + 
+                'AAAA4OmJn2o:APA91bGBe9aHcLoJxAkkJbwN9ozac6St2BimIOVtWtb7dv-GV50v2S5-vIQzS_bZfxgl9385wyBeW4qA2GOR-BfnBV63mOHFDKMEfgZn9PNM-EAbvBtKFPEYszCLZ0OxZZPPvjyfqQMD'
+                //sir roy api 'AAAA6gFzY08:APA91bGhXSORj4yKI5GDwvYIsIRCqJJn2UwO7dz_l5ZFjGmUsMj2-zpOu9R1RA7QSh0ECQ_zRibaoDLv1Z5fzk3LXqqUuaKlKJ_18ba822I4iHpgVtjSdMGdLaB37IPoGt2zFmx9Kmfy'
+            },
+            contentType : 'application/json',
+            dataType: 'json',
+            data: JSON.stringify({"to": token,
+                "data": {
+                        "title": header,
+                        "body": message,
+                        "transactionID":transactionID,
+                        "custCode":custCode,
+                        "customerToken": customerToken,
+                        "click_action":"FLUTTER_NOTIFICATION_CLICK",
+                        "index":"3"
+                    }
+                }),
+            //change "to" parameter located in tblUser column TOKEN
+            success : function(response) {
+              console.log(response);
+            },
+            error : function(xhr, status, error) {
+                console.log(xhr.error);                   
+            }
+        });
+    }
+
+    function sendSMS(message, phoneNumber){
+      $.ajax ({
+        url: "/nestle/connectionString/applicationipAPI.php", 
+        type: "GET",
+        data: {
+            "type": "AIO_BROADCAST_SIRROY",
+            "CONN":con_info,
+            "phoneNumber" : phoneNumber,
+            "message" : message,
+            "smstype":"ORDER_CONFIRMATION"
+          },
+        crossDomain: true,
+        cache: false
+      });
+    }
+
+    //pushnotifAIOcustomer('2-321312', '999-test');
+    function pushnotifAIOcustomer(refno, mdCode, custCode){
+      var storeID = $('#storeIDHolder').val();
+      var tokenCustomer = getAioStoreToken(storeID);
+      var salesmantoken = getToken(mdCode);
+
+      var storenumber = $('#storecontno_aio').val();
+
+      var salesmanObj = getSalesmanDetails(mdCode);
+      console.log(salesmanObj);
+      var salesman = salesmanObj[0].Salesman;
+      var phonenumber = salesmanObj[0].phonenumber;
+      var latitude = salesmanObj[0].latitude;
+      var longitude = salesmanObj[0].longitude;
+
+      var header = 'Order Status';
+      var message = 'Order# '+refno+' is now processed; our sales representative '+salesman+' will be reaching you anytime soon.\n\n'+
+      'You may reach him at '+phonenumber+' for some clarifications. Thank you!';
+
+      var sms_message = 'Order# '+refno+' is now processed; our sales representative '+salesman+' will be reaching you anytime soon.\n\n'+
+      'You may reach him at '+phonenumber+' for some clarifications. Thank you!\n\n-FASTSOSYO';
+
+      sendSMS(sms_message, storenumber);
+
+      $.ajax({        
+        type : 'POST',
+        url : "https://fcm.googleapis.com/fcm/send",
+        headers : {
+          Authorization : 'key='+
+          'AAAAAd0KUZg:APA91bG2txpQ42o-x0Hk13eBhL1iEYU_cZh6CDydc44i1ULgkvuasIgrFnaS0E65AtbWRqDGXehOQl3v3NFHN5F4h8gl8VvHdcKu_hjfyRmQvTjhiApP4r5Lw9-Pa9EAFILwWSsczyzu'
+          //'AAAAl6T0xOs:APA91bF0EvvM36u1T3vuz4hTl8ZY24IrnIKgktQsCidLjsZcw7Y1SXCKUCdiFtrV__h7371pox8u4hTjWJRlJeRQhPeEAHbGURDekudXaszhNW6SwyCnhAF4a90JUebE9eXaUf7T3Vxk'
+        },
+        
+        contentType : 'application/json',
+        dataType: 'json',
+        data: JSON.stringify({
+          //"to": "eYAoHZHHT5qqMwY6NRXUFo:APA91bFI6oPFuBvUTdFzcyJ0-oDL7zRMe1TFvg8rekEn1N_MV5t5tIXn3hSRhgMob1ngxzp1s93ZdbWNs-jdseuJxBh-F3DDqPm5czY54uBCcm17lnq_gF4BSby4ZQcYIVgRetFsdDck",
+          "to":tokenCustomer,
+          "notification": {
+            "title": header,
+            "body": message
+          },
+          "data": {
+                "title":header,
+                "body":message,
+                "Name":salesman,
+                "mdCode":mdCode,
+                "custCode":custCode,
+                "PhoneNumber":phonenumber,
+                "token":salesmantoken,
+                "longitude":longitude,
+                "latitude":latitude,
+              }
+          }),
+        //change "to" parameter located in tblUser column TOKEN
+        success : function(response) {
+          console.log(response);
+        },
+        error : function(xhr, status, error) {
+          console.log(xhr.error);        
+          alert('Message was not sent!');        
+        }
+      });
+    }
+
+    // Restricts input for the set of matched elements to the given inputFilter function.
+(function($) {
+  $.fn.inputFilter = function(callback, errMsg) {
+    return this.on("input keydown keyup mousedown mouseup select contextmenu drop focusout", function(e) {
+      if (callback(this.value)) {
+        // Accepted value
+        if (["keydown","mousedown","focusout"].indexOf(e.type) >= 0){
+          $(this).removeClass("input-error");
+          this.setCustomValidity("");
+        }
+        this.oldValue = this.value;
+        this.oldSelectionStart = this.selectionStart;
+        this.oldSelectionEnd = this.selectionEnd;
+      } else if (this.hasOwnProperty("oldValue")) {
+        // Rejected value - restore the previous one
+        $(this).addClass("input-error");
+        this.setCustomValidity(errMsg);
+        this.reportValidity();
+        this.value = this.oldValue;
+        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+      } else {
+        // Rejected value - nothing to restore
+        this.value = "";
+      }
+    });
+  };
+}(jQuery));
+
+  $("#salesman_phonenum").inputFilter(function(value) {
+    return /^\d*$/.test(value);    // Allow digits only, using a RegExp
+  },"Only digits allowed");
+       
+</script>
+
+     
+</body>
+</html> 

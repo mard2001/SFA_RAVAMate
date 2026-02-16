@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Range Summary</title>
+  <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/BOOTSTRAP3/css/bootstrap.min.css"/>
+  <script src="/BOOTSTRAP3/AJAX/jquery.min.js"></script>
+  <script src="/BOOTSTRAP3/js/bootstrap.min.js"></script>
+   
+  <link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+  <!-- <link rel="stylesheet" href="MULTISELECT/bootstrap-select.min.css"/> -->
+  <link rel="stylesheet" href="/css/mdDesign.css">
+  
+  <script type="text/javascript" src="/DATERANGEPICKER/moment.min.js"></script>
+  <script type="text/javascript" src="/DATERANGEPICKER/daterangepicker.js"></script>
+  <link rel="stylesheet" href="/DATERANGEPICKER/daterangepicker.css">
+  
+  <link rel="stylesheet" href="/js/multi/dist/css/bootstrap-multiselect.css" type="text/css"/>
+     
+   <!--=================================data reports import-=============================-->
+
+   <script type="text/javascript" src="/DATERANGEPICKER/moment.min.js"></script>
+    <script type="text/javascript" src="/DATERANGEPICKER/daterangepicker.js"></script>
+    <link rel="stylesheet" href="/DATERANGEPICKER/daterangepicker.css">
+    <link rel="stylesheet" href="/Commonusrs/DATATABLES/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="/Commonusrs/DATATABLES/editor.dataTables.min.css"/>
+    <link rel="stylesheet" href="/Commonusrs/DATATABLES/buttons.dataTables.min.css "/>
+
+</head>
+
+<body class="" id="page-top">
+  <div id="mySidenav" class="sidenav">
+    <div class='image'><img alt='mdbuddylogo' class='logoMd' src='/img/mdbuddylogo_jeff.png'/></div>
+      <a href="https://mybuddy-sfa.com/SFA/Dashboard"> <span class='glyphicon glyphicon-home'></span> Dashboard</a>
+      <a href="https://mybuddy-sfa.com/SFA/digitalMapping"> <span class='glyphicon glyphicon-map-marker'></span> Digital Mapping</a>
+      <a href="https://mybuddy-sfa.com/SFA/customerMapping"> <span class="fa fa-users" aria-hidden="true"></span> Customer Mapping</a>
+      <a href="territoryGeofencing"> <span class='glyphicon glyphicon-cog'></span> Territory Geofencing</a>
+     <a data-toggle="collapse" href="#collapse1" id='navDrop'> <span class='glyphicon glyphicon-duplicate' id='changeIcon'></span> Reports
+       <i class="glyphicon glyphicon-menu-down pull-right"></i> </a>
+        <div id="collapse1" class="panel-collapse collapse" style="margin-left: 17px; font-size: 9px !important">
+          <a href="salesReport" class="activeYes"> Sales Report</a>
+          <a href="fastsosyotransaction"> Fastsosyo Transaction</a>
+          <a href="salesAudit"> Sales Audit</a>
+          <a href="transactionLedger"> Transaction Ledger</a>
+          <a href="UnprocessedOrders"> Unprocessed Orders</a>
+          <a href="dsr"> DSR</a>
+          <a href="dcr"> Daily Collection</a>
+          <a href="stockRequest"> Stock Request</a>
+          <a href="unuploaded"> Unuploaded</a>
+          <a href="BOReport"> BO</a>
+          <a href="Stocktake Report"> Stocktake</a>
+          <a href="inventory"> Inventory Valuation</a>
+          <a href="jobberMaintenance"> Jobber</a>
+          <a href="customerTagging">Customer Tagging</a>
+          <a href="bankmaintenance"> Bank</a>
+          <a href="syncreport">Sync Report</a>
+          <a href="mcpcalibration">MCP Calibration</a>
+        </div>
+     <a data-toggle="collapse" href="#collapse2" id='navDrop' class="maintenanceCont"> <span class="fa fa-cogs" aria-hidden="true" id='changeIcon'></span> Maintenance
+      <i class="glyphicon glyphicon-menu-down pull-right"></i> </a>
+        <div id="collapse2" class="panel-collapse collapse" style="margin-left: 17px; font-size: 9px !important">
+          <a href="dataMaintenance"> Data</a>
+          <a href="customer"> Customer</a>
+          <a href="cmf">CMF</a>
+          <a href="geoReset"> Georeset</a>
+          <a href="salesman"> Salesman</a>
+          <a href="product"> Product</a>
+          <a href="productbtdt"> BTDT Product</a>
+        </div>
+    <!-- <a href="Alert"> <span class='glyphicon glyphicon-envelope'></span> Alert Messages</a> -->
+    <hr />
+    <a href="https://mybuddy-sfa.com/SFA/v2/dashboard">Switch to New Dashboard</a>
+   
+  </div>
+    <div id="main">
+        <h4 class="display-4">
+           <a href="#" id='navBtn' class="btn btn-primary"  style='margin-right: 15px;'>
+             <span class="glyphicon glyphicon-menu-hamburger"></span> 
+           </a>
+          <span class='glyphicon glyphicon-file'></span> Range Summary
+          <span class="nav navbar-nav navbar-right">
+                  <li class="dropdown">
+                      <a style='float:right;' href="#" class="dropdown-toggle" data-toggle="dropdown" id='dropThisDown'>
+                          <span class="label label-pill label-danger count" style='border-radius: 10px; font-size: 10px;'></span>
+                          <span class="fa fa-bell"></span>
+                      </a>
+                      <ul class="dropdown-menu" style='padding: 0'>
+                        <div id='notif-body'>
+                           <div id='notifs-icon-div'></div>
+                        </div>
+                        <a type="button" class="btn btn-default btn-block" href='mdAlert_bohol.php' id='seeAll' >See all</a>
+                      </ul>
+                  </li>
+                   <li class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user"></i>
+                      </a>
+                      <ul class="dropdown-menu dropdown-user">
+                          <li><a href="Profile.html"><i class="fa fa-user"></i> My Account</a>
+                          </li>
+                          <li class="divider"></li>
+                          <li><a href="#" id="admin-logout-btn"><i class="fa fa-sign-out-alt"></i> Logout</a>
+                          </li>
+                      </ul>
+                   </li>
+                
+              </span>
+          </h4>
+         <div class="panel" style='background-color:#2c8dd6; color: white; margin-top: 20px;'>
+
+                <div class="panel-heading">
+                  <span class='glyphicon glyphicon-list-alt'></span>
+                  <span id="titleHeading" class="display-4"></span>
+
+                  <div id="reportrange1" class="pull-right" style="background-color: transparent; cursor: pointer; color: white;">
+                        <i class="glyphicon glyphicon-user"></i>&nbsp;
+                        <span>Filter by Salesman</span> <b class="caret"></b>
+                    </div>
+                </div>
+                <div class="panel-body" style='background-color:#fff; color: black;'> 
+                  <!--<button class="btn btn-success btn-sm" id="appvBtn">APPROVE</button>-->
+                    <div class="loading-table">
+                         <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i> Rendering data ...
+                          <span class="sr-only">Loading...</span>
+                    </div>
+                    <table id="stockRequest_TAB" class="display nowrap" width="100%">
+                      <thead>
+                         <tr>
+                           <th>MDCODE</th>
+                           <th>SALESPERSON</th>
+                           <th>CUSTCODE</th>
+                           <th>CUSTOMER</th>
+                           <th>RANGE TARGET</th>
+                           <th>HIT SKU</th>
+                           <th>REMARKS</th>
+                         </tr>
+                      </thead>
+                      <tbody></tbody>
+                      <!-- <tfoot>
+                          <tr>
+                              <th colspan="13" style="text-align:right">Total Sales:</th>
+                              <th></th>
+                          </tr>
+                      </tfoot> -->
+                    </table>
+                 </div>
+               </div>
+         </div><!--main panel end-->
+
+    <div id="salesDmodal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-800">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title"><i class="fas fa-list"></i> Sales Details</h4>
+          </div>
+          <div class="modal-body">
+              <table class="table table-hover table-condensed table-striped">
+                <tr>
+                  <td>Reference No.</td>
+                  <td id="refnoH" class=""></td>
+                </tr>
+                <tr>
+                  <td>Delivery Date</td>
+                  <td id="transactionDateH" class=""></td>
+                </tr>
+                <tr>
+                  <td>Customer</td>
+                  <td id="customerH" class=""></td>
+                </tr>
+                <tr>
+                  <td>Address</td>
+                  <td id="addressH" class=""></td>
+                </tr>
+                <tr>
+                  <td>Total Range</td>
+                  <td id="rangeH" class=""></td>
+                </tr>
+                <tr>
+                  <td>Time Spent (Min.)</td>
+                  <td id="timepentH" class=""></td>
+                </tr>
+                <tr>
+                  <td>Total Amount</td>
+                  <td id="amountH" class=""></td>
+                </tr>
+                <tr>
+                  <td>Remarks</td>
+                  <td id="remarksH" class=""></td>
+                </tr>
+              </table>
+              <table class="table table-hover table-striped fixed_header">
+                <thead>
+                  <tr>
+                    <th>STOCKCODE</th>
+                    <th style="text-align: left !important;">DESCRIPTION</th>
+                    <th style="text-align: right !important;">QUANTITY</th>
+                    <th style="text-align: right !important;">AMOUNT</th>
+                  </tr>
+                </thead>
+                <tbody id="salesDetailsBody"></tbody>
+              </table>
+
+              <input type="hidden" id="salesman">
+              <input type="hidden" id="transaction">
+              <input type="hidden" id="custCode">
+              <input type="hidden" id="custName">
+              <input type="hidden" id="sku">
+              <input type="hidden" id="amount">
+              <input type="hidden" id="address">
+              <input type="hidden" id="contactPerson">
+              <input type="hidden" id="deldate">
+              <input type="hidden" id="refNo">
+              <input type="hidden" id="salesmanCode">
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-info" data-dismiss="modal" onclick="pInvDetails()">PRINT</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="modal fade" id="duplicateUserModal" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">SESSION ENDED</h4>
+              </div>
+              <div class="modal-body">
+                <p>Sorry, your session has been disconnected. Another user is currently using your account.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="cofirmationDupUser()">GOT IT</button>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <div class="modal fade" id="SyncInventoryModal" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Data Replication</h4>
+            </div>
+            <div class="modal-body">
+              <table>
+                <tr>
+                  <td>SALESMAN:</td>
+                  <td><select id="salesmanList" name="salesmanList[]"></select>
+                 </td>
+                </tr>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="stockRequestSourceData()">Execute</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    
+    <script src="/Commonusrs/DATATABLES/jquery.dataTables.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/dataTables.buttons.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/buttons.print.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/buttons.html5.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/jszip.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/ellipsis.js"></script>
+
+    <script type="text/javascript" src="/js/jasonday-printThis-c814846/printThis.js"></script>
+    <script src="/HASH/md5.js"></script>
+    <script src="/HASH/aes.js"></script>
+    <script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+    <script type="text/javascript" src="/web/web-commons.js"></script>
+    <script type="text/javascript" src="/js/bootbox.min.js"></script>
+    <script type="text/javascript" src="/js/scrolling.js"></script>
+    <script type="text/javascript" src="/js/multi/dist/js/bootstrap-multiselect.js"></script>
+    <script type="text/javascript" src="js/rangesummary.js"></script>
+    <script src="js/chatApi.js"></script>
+    <script type="text/javascript">
+        function pInvDetails(){
+          var salesman = $('#salesman').val();
+          var transactionID = $('#transaction').val();
+          var custCode = $('#custCode').val();
+          var custName = $('#custName').val();
+          var sku = $('#sku').val();
+          var amount = $('#amount').val();
+          var address = $('#address').val();
+          var contactPerson = $('#contactPerson').val();
+          var deldate = $('#deldate').val();
+          var refNo = $('#refNo').val();
+          var salesmanCode = $('#salesmanCode').val();
+
+          localStorage.setItem("salesmanINV", salesman);
+          localStorage.setItem("transactionIDINV", transactionID);
+          localStorage.setItem("custCodeINV", custCode);
+          localStorage.setItem("custNameINV", custName);
+          localStorage.setItem("contactPersonINV", contactPerson);
+          localStorage.setItem("skuINV", sku);
+          localStorage.setItem("amountINV", amount);
+          localStorage.setItem("addressINV", address);
+          localStorage.setItem("deldateINV", deldate);
+          localStorage.setItem("refNoINV", refNo);
+          localStorage.setItem("salesmanCodeINV", salesmanCode);
+          
+          window.open('inv_print_details.html', '_blank'); 
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.divContainer{
+    display: flex;
+}
+
+.mainDiv{
+    height: 90vh;
+    margin: 0;
+    padding: 0;
+}
+
+.headerDiv{
+    height: 10vh;
+}
+.headerDiv .rightHeader  button:hover{
+    background-color: var(--cust-primary);
+    color: var(--cust-white);
+}
+
+.headerDiv .rightHeader .exportBtn{
+    box-shadow: 2px 2px 10px #a3a2a2;
+}
+
+.headerDiv .rightHeader .buttonIcon span{
+    margin-left: -9px;
+    margin-right: 10px;
+    padding: 4px 8px;
+    border: 2px solid var(--cust-white);
+    border-radius: 50%;
+    box-shadow: 1px 1px 3px #a3a2a2;
+}
+
+.mcpmapbuttonsdiv button{
+    margin-bottom: 3px;
+    /* padding: 6px; */
+    font-size: 25px;
+    height: 40px;
+    width: 40px;
+    background-color: var(--cust-primary);
+    color: var(--cust-white);
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.mapOuterDiv{
+    z-index: 10;
+}
+
+.showlistBtn{
+    margin-right: 10px;
+    background-color: rgba(4, 11, 47, 0.85);
+    color: var(--cust-white);
+}
+
+.showlistBtn:hover{
+    background-color: rgba(4, 11, 47, 0.5);
+    color: var(--cust-white);
+}
+
+#toggleTableListBtn{
+    background-color: rgba(4, 11, 47, 0.85);
+    color: var(--cust-white);
+}
+
+#toggleTableListBtn:hover{
+    background-color: rgba(4, 11, 47, 0.5);
+    color: var(--cust-white);
+}
+
+.collapseTable{
+    width: 700px;
+}
+
+.tableDetails .salesmanTableHeader th{
+    font-size: 18px;
+    background-color: var(--cust-primary);
+    color: var(--cust-white);
+}
+.tableDetails .tableFooterDiv{
+    background-color: var(--cust-primary);
+    color: var(--cust-white);
+    padding: 0 50px 0 20px;
+}
+
+.tableFooterDiv button{
+    background-color: var(--cust-white);
+    color: var(--cust-primary);
+    padding: 2px 35px 2px 15px;
+    border: 2px solid var(--cust-primary);
+    border-radius: 20px;
+}
+
+.tableFooterDiv button:hover{
+    border: 2px solid var(--cust-white);
+}
+
+.salesmanTable {
+    width: 100%;
+}
+
+.salesmanTable thead {
+    display: block;
+}
+
+.salesmanTable tbody {
+    display: block; 
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+.fenceTable {
+    width: 100%;
+}
+
+.fenceTable thead {
+    display: block;
+}
+
+.fenceTable tbody {
+    display: block; 
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+.fenceTable thead tr th,
+.fenceTable tbody tr td{
+    width: 175px;
+}
+
+.refreshbtn{
+    color: #D3D3D3;
+}
+
+.refreshbtn:hover{
+    color: #a3a2a2;
+}
+
+/* NEW FENCE MODAL */
+
+.modalHeader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -45px;
+}
+
+.modalHeader .modalHeaderdiv{
+    background-color:var(--cust-primary);
+    color: var(--cust-white);
+    margin: auto;
+    padding: 10px 90px 0 90px;
+    border: 5px solid var(--cust-white);
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
+}
+
+.modalCustomInputDiv label{
+    background-color: #D3D3D3;
+    padding: 0 40px;
+    margin-bottom: 0;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+
+.modalCustomInputDiv input{
+    text-align: center;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    box-shadow: 2px 2px 10px #a3a2a2;
+}
+
+.modal-footer button{
+    background-color: var(--cust-primary);
+    color: var(--cust-white);
+    padding: 5px 40px;
+    border-radius: 20px;
+}
+
+
+.is-fullscreen{
+    border-width: 0 2px 2px 0;
+}

@@ -1,0 +1,394 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CUSTOMER </title>
+        <link rel="icon" class="pageIconLink" href="" />
+
+        <!-- BOOTSTRAP -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+
+        <!-- GOOGLE MATERIAL ICON -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        
+        <!-- PICTOGRAMMERS ICON -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.3.67/css/materialdesignicons.min.css" />
+        
+        <!-- FONT AWESOME -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <!-- CSS STYLESHEETS -->
+        <link rel="stylesheet" href="constant/dynamicColor_stylesheet.css">
+        <link rel="stylesheet" href="css/offcanvas_stylesheet.css">
+        <link rel="stylesheet" href="css/customer_stylesheet.css">
+        <link rel="stylesheet" href="css/latestDatatable_stylesheet.css">
+
+        <!-- SWAL SWEET ALERT 2 -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    
+        <!-- DATE PICKER -->
+    <link rel="stylesheet" href="DATERANGEPICKER/daterangepicker.css">
+
+    <!--DATA TABLES CSS LATEST VERSION-->
+    <link rel="stylesheet" href="Commonusrs/DataTables/datatables.css"/>
+
+
+        <!--=================================virtual select import-=============================-->
+        <link rel="stylesheet" href="css/virtual-select/virtual-select.min.css"  type="text/css"/>
+        <script src="js/virtual-select/virtual-select.min.js"></script>
+
+    </head>
+    <body>
+        <div class="mainDiv container-fluid">
+            <div class="headerDiv d-flex justify-content-between align-items-center py-3" style="color: #FFF;">
+                <div class="leftHeader d-flex align-items-center mx-3">
+                    <button class="btn menubtn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasExample" style="color: #FFF;">
+                        <span class="material-symbols-outlined">
+                            menu
+                        </span>
+                    </button>
+                    <div id="navbarCompanyDetails" class="d-flex">
+                    </div>
+                </div>
+                <h1 class="text-center">Customer</h1>
+                <div class="rightHeader d-flex justify-content-end align-items-center mx-3" id="defaultrightHeader" style="width: 260px;">
+                    <div class="navbarDropdowns"></div>
+                </div>
+            </div>
+
+            <div class="contentDiv ">
+                <div class="salesRepDivHeader d-flex justify-content-between px-3 py-3">
+                    <div class="leftsideHeader">
+                        <span class="mdi mdi-web" style="font-size: 20px;"></span>
+                        <span id="titleHeading"></span>
+                    </div>
+                    <!-- <div class="righsideHeader pull-right" id="reportrange1" style="background-color: transparent; cursor: pointer; color: white;">
+                        <span>Filter by Date</span> 
+                        <i class="mdi mdi-calendar-month-outline" style="font-size: 20px;"></i>    
+                        <i class="fa-solid fa-caret-down"></i>
+                    </div> -->
+                </div>
+                <div class="lowerHeaderDiv d-flex justify-content-between px-3">
+                    <div id="dt-body-right" class="buttonsDiv order-2 order-md-1">
+                        <!-- <button class="buttondiv" id="excelBtn" aria-controls="stockRequest_TAB">
+                            <span class="mdi mdi-microsoft-excel"></span>
+                            <span>Excel</span>
+                        </button>
+                        <button class="buttondiv" id="printBtn" aria-controls="stockRequest_TAB">
+                            <span class="mdi mdi-printer-outline"></span>
+                            <span>Print</span>
+                        </button>
+                        <button class="buttondiv" id="copyBtn" aria-controls="stockRequest_TAB">
+                            <span class="mdi mdi-content-copy"></span>
+                            <span>Copy</span>
+                        </button> -->
+                    </div>
+                    <div class="searchDiv order-1 order-md-2">
+                        <div class="searchbar" id="stockRequest_TAB_filterSearchBar" class="dataTables_filter">
+                            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                            <input type="text" class="search-input" name="search" id="stockRequest_TAB_filterSearchBarInputField" placeholder="Search" aria-controls="stockRequest_TAB">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contentTableDiv px-3 mx-1" >
+                    <div class="loading-table m-auto text-center py-5" style="background-color: #FFF; border-radius: 10px;">
+                        <i class="fa fa-spinner fa-spin fa-3x fa-fw" style="font-size: 16px;"></i> Rendering data ...
+                        <span class="sr-only">Loading...</span>
+                   </div>
+                    <table id="stockRequest_TAB" class="display table table-striped table-hover customerList" style="width: 100%; font-size: 10px;"></table>
+                </div>
+            </div>
+
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+                <div class="offcanvas-header d-flex justify-content-between">
+                    <button type="button" class="btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                        <span class="material-symbols-outlined">
+                            menu
+                        </span>
+                    </button>
+                    <div class="rightHeader d-flex justify-content-around align-items-center mx-3" id="smallScreenrightHeader">
+                        <div class="navbarDropdowns"></div>
+                    </div>
+                </div>
+                <div class="offcanvas_headTitleDiv">
+                </div>
+                <div class="offcanvas-body px-0">
+                    <div class="list-group">
+                        <div id="sidebarTabItems">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="tojobbermodal" role="dialog" data-bs-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">CUSTOMER DETAILS</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-hover customDetailsTable">
+                            <tr>
+                                <td>SALES PERSON:</td>
+                                <td><input type="text" name="" id="mdCodeH" class="job-inpt-data-h"></td>
+                            </tr>
+                            <tr>
+                                <td>CUSTOMER NAME:</td>
+                                <td id=""><input type="text" name="" id="customerH" class="job-inpt-data-h"></td>
+                            </tr>
+                            <tr>
+                                <td>MOBILE:</td>
+                                <td><input type="text" name="" id="contactnumH" class="job-inpt-data-h"></td>
+                            </tr>
+                            <tr>
+                                <td>LANDLINE:</td>
+                                <td><input type="text" name="" id="landline" class="job-inpt-data-h"></td>
+                            </tr>
+                            <tr>
+                                <td>CONTACT PERSON:</td>
+                                <td id=""><input type="text" name="" id="contactPersonH" class="job-inpt-data-h"></td>
+                            </tr>
+                            <tr>
+                                <td>ADDRESS:</td>
+                                <td id=""><input type="text" name="" id="addressH" class="job-inpt-data-h"></td>
+                            </tr>
+                            <tr>
+                                <td>CUST TYPE:</td>
+                                <td id=""><input type="text" name="" id="custTypeH" class="job-inpt-data-h"></td>
+                            </tr>
+                            <tr>
+                                <td>MCP DAY:</td>
+                                <td id=""><input type="text" name="" id="mcpDay" class="job-inpt-data-h"></td>
+                            </tr>
+                            <tr>
+                                <td>FREQUENCY CATEGORY:</td>
+                                <td id=""><input type="text" name="" id="frequencyCategory" class="job-inpt-data-h"></td>
+                            </tr>
+                            <tr>
+                                <td>MCP SCHEDULE:</td>
+                                <td id=""><input type="text" name="" id="mcpSchedule" class="job-inpt-data-h"></td>
+                            </tr>
+                            <tr>
+                                <td>PRICE CODE:</td>
+                                <td id=""><input type="text" name="" id="priceCode" class="job-inpt-data-h"></td>
+                            </tr>
+                            <tr>
+                                <td>PRINT SORTING:</td>
+                                <td id="">
+                                   <select name="" id="printsorting" class="form-control">
+                                    <option value="Y">Aphabetical</option>
+                                    <option value="N">Chronological</option>
+                                   </select>
+                                </td>
+                            </tr>
+                        </table>
+                        <input type="hidden" name="" id="custCodeH">
+                        <input type="hidden" name="" id="custID">
+                    </div>
+                    <div class="modal-footer">
+                        <!-- <button type="button" class="btn btn-danger" onclick="delCustomer()">Delete Customer</button> -->
+                        <div>
+
+                            <button type="button" class="btn btn-warning" id="uptsortingbtn" onclick="updateprintsorting()">Update</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    <!-- <div class="modal-footer justify-content-between">
+                        <small class="text-info pull-left infoFooter"></small>
+                        <div>
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" id="addJobberBtn" data-dismiss="modal" onclick="exec_insertCustomer()">Yes</button>
+                            <button type="button" class="btn btn-primary" id="revertBtn" data-dismiss="modal" onclick="exec_insertCustomer_revert()">Yes</button>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="addCustomerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <form action="" method="post" id="addCustomerForm">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Add Customer</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row h-100">
+                                <div class="row">
+                                    <span style="font-size:12px;" class="text-secondary">Salesman Assigned:</span>
+                                    <div class="col-9">
+                                        <div class="mb-3">
+                                            <label for="mdCode">MdCode</label>
+                                            <!-- <div id="VSmdCode" name="filter" style="width: 200px" class="form-control bg-white p-0 mx-1 needField">MdCode</div>
+                                            <input type="text" id="mdCode" name="mdCode" class="form-control bg-white" required placeholder="mdCode"> -->
+                                            <select id="VSmdCode" name="VSmdCode[]"></select>
+                                        </div> 
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <span style="font-size:12px;" class="text-secondary">Customer Details:</span>
+                                    <div class="col-4 customerIDDIV">
+                                        <div class="mb-3">
+                                            <label for="customerID">Customer ID</label>
+                                            <input type="text" id="customerID" name="customerID" class="form-control bg-white" required placeholder="customerID">
+                                        </div>
+                                    </div>
+                                    <div class="col-8 customerIDDIV">
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="mb-3">
+                                            <label for="custCode">CustCode</label>
+                                            <input type="text" id="custCode" name="custCode" class="form-control bg-white needField" required placeholder="custCode">
+                                        </div>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="mb-3">
+                                            <label for="custName">Name</label>
+                                            <input type="text" id="custName" name="custName" class="form-control bg-white needField" required placeholder="custName">
+                                        </div>    
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="mb-3">
+                                            <label for="contactPerson">Contact Person</label>
+                                            <input type="text" id="contactPerson" name="contactPerson" class="form-control bg-white" required placeholder="contactPerson">
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="mb-3">
+                                            <label for="contactCellNumber">Contact Cell Number</label>
+                                            <input type="text" id="contactCellNumber" name="contactCellNumber" class="form-control bg-white" required placeholder="contactCellNumber">
+                                        </div>    
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="mb-3">
+                                            <label for="contactLandline">Contact Landline</label>
+                                            <input type="text" id="contactLandline" name="contactLandline" class="form-control bg-white" required placeholder="contactLandline">
+                                        </div>    
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            <label for="address">Address</label>
+                                            <input type="text" id="address" name="address" class="form-control bg-white needField" required placeholder="address">
+                                        </div>    
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="mb-3">
+                                            <label for="frequencyCategory">Frequency</label>
+                                            <input type="text" id="frequencyCategory" name="frequencyCategory" class="form-control bg-white needField" required placeholder="frequencyCategory" onkeypress="return /[0-9]/.test(event.key)">
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="mb-3">
+                                            <label for="mcpDay">MCP Day</label>
+                                            <input type="text" id="mcpDay" name="mcpDay" class="form-control bg-white needField" required placeholder="mcpDay" onkeypress="return /[0-9]/.test(event.key)">
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="mb-3">
+                                            <label for="mcpSchedule">MCP Schedule</label>
+                                            <input type="text" id="mcpSchedule" name="mcpSchedule" class="form-control bg-white needField" required placeholder="mcpSchedule">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-3">
+                                            <label for="priceCode">Price Code</label>
+                                            <input type="text" id="priceCode" name="priceCode" class="form-control bg-white needField" required placeholder="priceCode" onkeypress="return /[0-9]/.test(event.key)" maxlength="2">
+                                        </div>    
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-3">
+                                            <label for="custType">Customer Type</label>
+                                            <input type="text" id="custType" name="custType" class="form-control bg-white needField" required placeholder="custType">
+                                        </div>    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Add New Customer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade modal-lg" id="uploadCsv">
+            <div class="modal-dialog">
+                <div class="modal-content w-100">
+                    <div class="modal-body h-100">
+                        <form>
+                            <div class="row h-100">
+                                <div id="uploaderDiv">
+                                    <div class="upload-container">
+                                        <input class="form-control p-2" type="file" id="formFileMultiple" multiple>
+                                    </div>
+                                    <div id="uploadStatus" class="upload-status">
+                                        <div class="d-flex">
+                                            <div class="col-10">
+                                                <span style="font-size: 16px;">Uploaded files (<span id="totalFiles"
+                                                        class="text-primary">0</span></span>)
+                                            </div>
+                                            <div style="font-size: 14px;" class="col-2 text-end px-3">
+                                                <span id="totalUploadSuccess">0</span>
+                                                /
+                                                <span id="totalFile">0</span>
+                                            </div>
+                                        </div>
+                                        <hr class="my-1">
+    
+                                        <div id="fileListDiv" class="p-1">
+                                            <table class="table fs-6">
+                                                <tbody id="fileListTable">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+    
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button id="uploadBtn2" class="btn btn-primary px-4">Upload</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SWEET ALERT -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!-- DATA TABLES JS LATEST VERSION -->
+        <script src="Commonusrs/DataTables/datatables.min.js"></script>
+
+        <script type="text/javascript" src="js/jasonday-printThis-c814846/printThis.js"></script>
+        <script type="text/javascript" src="js/mainjs.js"></script>
+
+        <!-- DATE PICKER -->
+        <script type="text/javascript" src="DATERANGEPICKER/moment.min.js"></script>
+        <script type="text/javascript" src="DATERANGEPICKER/daterangepicker.js"></script>
+
+        <script src="HASH/md5.js"></script>
+        <script src="HASH/aes.js"></script>
+        <script src="nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+        <script type="text/javascript" src="web/web-commons.js"></script>
+        <script type="text/javascript" src="js/bootbox.min.js"></script>
+        <script type="text/javascript" src="js/scrolling.js"></script>
+        <script type="text/javascript" src="constant/dynamicScript.js"></script>
+        <script type="text/javascript" src="js/customer.js"></script>
+    </body>
+    </html>

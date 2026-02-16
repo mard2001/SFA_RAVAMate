@@ -1,0 +1,498 @@
+
+body{
+    height: 100vh;
+}
+
+.modal {
+    z-index: 1200; /* Ensure it's above the fullscreen map */
+}
+
+.mainheaderDiv{
+    position: absolute;
+    top: 30;
+    z-index: 10;
+    width: 100%;
+}
+.mainMapScreenDiv{
+    height: 100vh;
+}
+
+.mapScreenDiv{
+    margin-top: -120px;
+    background-color: var(--cust-white);
+    padding-bottom: 20px;
+    transition: 0.5s;
+}
+
+.dropMenuActive{
+    margin-top: 0;
+}
+
+.menubtn{
+    position: absolute;
+    padding: 30px;
+}
+
+.menubtn span{
+    color: var(--cust-primary);
+}
+
+.buttonmainDiv button{
+    margin: 0 10px;
+    box-shadow: 1px 3px 5px #8f8f8f;
+    width: 250px;
+    vertical-align: middle;
+    border: none;
+}
+
+.buttonmainDiv button:hover{
+    background-color: var(--cust-primary);
+    color: var(--cust-white);
+}
+
+.buttonmainDivFocused{
+    background-color: var(--cust-primary);
+    color: var(--cust-white);
+}
+
+.buttonmainDiv .buttonIcon span{
+    margin-left: -9px;
+    margin-right: 10px;
+    padding: 4px 8px;
+    border: 2px solid var(--cust-white);
+    border-radius: 50%;
+    box-shadow: 1px 1px 3px #a3a2a2;
+}
+
+.arrowDiv{
+    background-color: transparent;
+}
+
+.arrowDiv span{
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: var(--cust-primary);
+    color: var(--cust-white);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.rotate{
+    -moz-transition: all 0.5s linear;
+    -webkit-transition: all 0.5s linear;
+    transition: all 0.5s linear;
+}
+
+.down{
+    -moz-transform:rotate(180deg);
+    -webkit-transform:rotate(180deg);
+    transform:rotate(180deg);
+}
+
+.mapbuttonsdiv button{
+    margin-bottom: 3px;
+    /* padding: 6px; */
+    font-size: 18px;
+    height: 2.1rem;
+    width: 2.1rem;
+    background-color: var(--cust-primary);
+    color: var(--cust-white);
+    border-radius: 50%;
+}
+
+.daterangepicker-title {
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1365a2;
+}
+
+.digiMapPopup{
+    display: none;
+    margin: auto;
+    justify-content: center;
+}
+
+.digiMapPopup .dashboardSalesmanTable{
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 50px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+#floatTab #dashboardDisplay tr td{
+    color: #e4e2e2 !important;
+    border-bottom: 1px solid #444444;
+}
+
+#outerContainer_dataTable{
+    margin: 48px 0 0 10px;
+    padding-top: 10px;
+    border-radius: 5px;
+    background-color: rgba(4, 11, 47, 0.7);
+    color: var(--cust-white);
+}
+
+.displaySalesmanDataTable thead tr th{
+    color: var(--cust-white);
+    white-space: nowrap;
+}
+
+.dispalysalesMappingTable thead tr th{
+    color: var(--cust-white);
+    white-space: nowrap;
+}
+
+#salesmanChart{
+    width: 120px !important;
+    height: 120px !important;
+    text-align: start;
+    font-size: 12px;
+}
+
+#salesMappingSelection{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(4, 11, 47, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    width: 375px !important;
+    margin-bottom: 10px;
+}
+
+/*  CUSTOMER MAPPING */
+#custSelection{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(4, 11, 47, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    width: 375px !important;
+    margin-bottom: 10px;
+}
+
+#CM_floatTab{
+    color: var(--cust-white);
+}
+
+#CM_dashboardDisplay tr td{
+    padding: 5px 10px;
+}
+
+
+/* MAP LOADER */
+.maploaderDiv{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgb(108, 109, 112, 0.6);
+    z-index: 100;
+}
+
+.maploader{
+    position: absolute;
+    top: 40%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: inline-block;
+    border-top: 5px solid var(--cust-white);
+    border-right: 3px solid transparent;
+    box-sizing: border-box;
+    animation: animate 2s linear infinite;
+}
+
+.loaderInnderDiv{
+    position: absolute;
+    width: 100%;
+    height: 92%;
+    background: rgb(108, 109, 112, 0.6) !important;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.dashboardLoader{
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: inline-block;
+    border-top: 5px solid var(--cust-white);
+    border-right: 3px solid transparent;
+    /* background: rgb(108, 109, 112, 0.6); */
+    box-sizing: border-box;
+    animation: animate 2s linear infinite;
+    z-index: 101;
+}
+
+/* MAP CONTROLS */
+#sideClyders{
+    margin-right: 20px;
+    margin-bottom: 10px;
+    padding: 10px 28px 5px 28px;
+    color: var(--cust-primary);
+    /* width: 180px; */
+    /* border: 1px solid #6c757d; */
+    border-radius: 15px;
+    background-color: var(--cust-white);
+    font: 400 11px Roboto, Arial, sans-serif;
+    box-shadow: -3px 10px 15px var(--cust-primary-map);
+
+}
+
+.sideClydersBody .sideClydersInnerDiv{
+    padding:  0 0 3px 0;
+}
+
+#sideClyders .form-check-input,
+#sideClyders2 .form-check-input{
+    height: 1.3em;
+    width: 2.3em;
+}
+
+#sideClyders .form-check-input:checked,
+#sideClyders2 .form-check-input:checked {
+    background-color: var(--cust-primary8);
+    border-color: var(--cust-primary8);
+}
+
+#sideClyders .form-check-label,
+#sideClyders2 .form-check-label{
+    color: #607080;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+#sideClyders .form-switch {
+    padding-left: 2.5em;
+}
+
+#sideClyders .form-check,
+#sideClyders2 .form-check {
+    display: block;
+    min-height: 1.5rem;
+    /* padding-left: 1.7em; */
+    margin-bottom: .125rem;
+}
+
+.ProductiveBtn{
+    font-size: 9px;
+    color: #607080 !important;
+}
+
+.ProductiveList li{
+    color: #607080;
+    font-size: 14px;
+}
+
+.ProductiveList li:hover{
+    cursor: pointer;
+}
+
+.heatMapBtn{
+    font-size: 9px;
+    color: #607080 !important;
+}
+
+.heatMapList li{
+    color: #607080;
+    font-size: 14px;
+}
+
+.heatMapList li:hover{
+    cursor: pointer;
+}
+
+.colorLegendBtn{
+    font-size: 9px;
+    color: #607080 !important;
+}
+
+.colorLegendList li{
+    color: #607080;
+    font-size: 14px;
+}
+
+
+.colorLegendList li:hover{
+    cursor: pointer;
+}
+
+#salesmanDataTable_body tr:hover{
+    background-color: rgba(4, 11, 47, 0.5);
+    cursor: pointer;
+}
+
+.mapControl{
+    height: 10px;
+    width: 10px;
+}
+
+
+.gm-style-iw-chr{
+    height: 25px !important;
+    align-items: center;
+}
+
+.gm-ui-hover-effect{
+    width: 20px !important;
+    height: 10px  !important;
+}
+
+.gm-ui-hover-effect span{
+    width: 10px !important;
+    height: 10px  !important;
+    margin: 0 0 0 12px !important;
+}
+
+.disbledBtn{
+    color: #607080;
+}
+.btn:disabled{
+    border-color: transparent;
+}
+
+.sliderDropdown{
+    position: absolute;
+    inset: 0px 0px auto auto;
+    margin: 0px;
+    transform: translate(-36px);
+}
+
+/* DIGITAL MAPPING MINI DASHBOARD */
+ #digiMapDashboard{
+    margin-bottom: 15px ;
+}
+
+.boxcont{
+    min-width: 130px;
+    height: 130px;
+    padding: 5px 5px 15px 10px;
+    background-color: rgba(255, 255, 255, 0.85);
+    box-shadow: -3px 10px 15px var(--cust-primary-map);
+    border-radius: 8px;
+    display: inline-grid;
+    text-align: start;
+}
+
+.digiMapDash_salesman .imageDiv{
+    margin: 5px 0 10px 0;
+    background-color: #276f9e;
+    border-radius: 50%;
+    padding: 7px ;
+    height: 45px;
+    width: 45px;
+    text-align: center;
+}
+
+.digiMapDash_salesman img{
+    height: 30px;
+    width: 30px;
+}
+
+.digiMapDash_store .imageDiv{
+    margin: 5px 0 10px 0;
+    background-color: #e5aa13;
+    border-radius: 50%;
+    padding: 7px ;
+    height: 45px;
+    width: 45px;
+    text-align: center;
+}
+
+.digiMapDash_store img{
+    height: 30px;
+    width: 30px;
+}
+
+.digiMapDash_sales .imageDiv{
+    margin: 5px 0 10px 0;
+    background-color: #2f9e27;
+    border-radius: 50%;
+    padding: 7px ;
+    height: 45px;
+    width: 45px;
+    text-align: center;
+}
+
+.digiMapDash_sales img{
+    height: 30px;
+    width: 30px;
+}
+
+
+.digiMapDash_salesman_label,
+.digiMapDash_store_label,
+.digiMapDash_sales_label{
+    font-size: 8.5px;
+    font-weight: 500;
+    color: var(--cust-grey3);
+}
+
+.digiMapDash_salesman_total,
+.digiMapDash_store_total,
+.digiMapDash_sales_total{
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--cust-primary6);
+    white-space: nowrap;
+}
+
+.productOuterCont .productMainCont .dt-buttons{
+    margin-left: 10px;
+}
+
+#mapStatusOuterCont{
+    background-color: rgba(4, 11, 47, 0.7);
+    color: var(--cust-white);
+    margin: 0 0 30px 10px;
+    border-radius: 5px;
+    /* min-width: 250px; */
+}
+
+#mapStatusHeader{
+    background-color: rgba(4, 11, 47, 1);
+    padding: 10px 20px 8px 20px;
+    text-align: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+#mapStatusHeader p{
+    margin-bottom: 0;
+}
+
+#mapStatusOuterCont table{
+    background-color: transparent !important;
+    margin: 10px 20px;
+}
+
+#mapStatusOuterCont table tbody th{
+    padding: 5px;
+    padding-right: 30px;
+}
+
+#mapStatusOuterCont table tbody tr{
+    padding: 5px;
+}
+
+
+
+@keyframes animate{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}

@@ -1,0 +1,776 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--main-font-family);
+    font-optical-sizing: var(--main-font-optical-sizing);
+    font-weight: var(--main-font-weight);
+    font-style: var(--main-font-style);
+}
+
+html, body{
+    background-image: var(--main-background);
+    background-color: var(--main-backgroundColor);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    min-height: 100%;
+}
+
+/* NAVIGATION */
+
+.headerDiv{
+    height: 10vh;
+    color: var(--cust-white);
+}
+
+.logoTextDiv{
+    margin-left: 10px;
+}
+
+.textHeader{
+    margin-bottom: 0;
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: -5px;
+}
+
+.textHeaderRed{
+    color: var(--cust-red);
+}
+
+.logoTextDiv .textSubHeader{
+    font-size: 12px;
+}
+
+.headerDiv .rightHeader button{
+    font-size: 1.4rem;
+    color: var(--cust-white);
+}
+
+.headerDiv .rightHeader  button:hover{
+    color: var(--cust-white);
+}
+
+.headerDiv .rightHeader .exportBtn{
+    box-shadow: 2px 2px 10px #a3a2a2;
+}
+
+/* HEADER */
+
+.salesRepDivHeader{
+    background-image: linear-gradient(var(--cust-primary), var(--cust-primary10));
+    color: var(--cust-white);
+}
+
+/* CONTENT */
+
+.contentDiv{
+    background-color: var(--cust-neutralWhite6);
+    padding-bottom: 20px;
+}
+
+.buttonsDiv .buttondiv {
+    position: relative;
+    display: inline-block;
+    border: none;
+    border-radius: 20px;
+    border: 1px solid var(--cust-gre2);
+    margin: 10px 5px;
+    padding: 5px 30px;
+    background: #e0e0e0;
+    color: #333;
+    font-weight: 500;
+    font-size: 14px;
+    box-shadow: 
+                4px 4px 8px rgba(0, 0, 0, 0.08),
+                inset 10px 10px 9px var(--cust-grey4),
+                inset -10px -10px 9px var(--cust-white);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+/* Hover - glow with shine */
+.buttonsDiv .buttondiv:hover {
+    color: var(--cust-white);
+    background: var(--cust-primary);
+    box-shadow:
+        inset 3px 3px 6px rgba(0, 0, 0, 0.2),
+        inset -3px -3px 6px rgba(255, 255, 255, 0.05);
+}
+
+/* Shine animation */
+.buttonsDiv .buttondiv::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75px;
+    width: 50px;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-25deg);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.buttonsDiv .buttondiv:hover::before {
+    animation: shineNeumorphic 0.6s ease;
+}
+
+/* Pressed effect */
+.buttonsDiv .buttondiv:active {
+    box-shadow:
+        inset 4px 4px 8px rgba(0, 0, 0, 0.15),
+        inset -4px -4px 8px rgba(255, 255, 255, 0.2);
+    transform: scale(0.98);
+}
+
+.transacBtn{
+    margin: 3px 0;
+    padding: 5px 25px 5px 0;
+    border: none;
+    border-radius: 30px;
+    text-align: left;
+    background-image: url("../img/transacBtnBG.png");
+    background-size: 45%;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    box-shadow: 2px 2px 10px var(--cust-grey);
+}
+
+.transacBtn:hover{
+    box-shadow: 2px 2px 10px #0E40F2;
+}
+
+.transacBtnIcon{
+    border: 5px solid #203499;
+    border-radius: 50%;
+    background-image: linear-gradient(#031844, #0E40F2);
+    color: var(--cust-white);
+    font-size: 25px;
+    padding: 5px;
+    margin-right: 20px;
+}
+
+
+.defaultDataTableBtns{
+    display: none;
+}
+
+.searchDiv{
+    margin: 13px 10px;
+}
+
+.searchDiv .searchbar{
+    width: 300px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 20px;
+    background: var(--cust-neutralWhite7);
+}
+
+.searchDiv .searchbar .search-input{
+    font-size: 16px;
+    color: var(--cust-primary);
+    margin-left: 14px;
+    outline: none;
+    border: none;
+    background: transparent;
+    flex: 1;
+}
+
+.div1{
+    text-align: start;
+    
+}
+
+.div1 div{
+    padding: 5px 30px 5px 15px;
+    /* margin: auto; */
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px var(--cust-grey);
+    width: max-content;
+    background-color: var(--cust-white);
+}
+
+.div1 div .mdi{
+    padding: 5px;
+    margin-right: 10px;
+    font-size: 25px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 10px var(--cust-grey);
+    color: var(--cust-grey);
+}
+
+.btn-valid{
+    padding: 10px 50px;
+    font-size: 18px;
+    background-color: var(--cust-success);
+    color: var(--cust-white);
+}
+
+.btn-cancelled{
+    padding: 10px 40px;
+    font-size: 18px;    
+    background-color: var(--cust-red2);
+    color: var(--cust-white);
+}
+
+.bootbox-close-button{
+    float: right;
+    border: none;
+    background: transparent;
+}
+
+/* DataTables */
+.dataTableTop1{
+    background-color: var(--cust-neutralWhite6);
+}
+
+.dataTableMainDiv{
+    background-color: var(--cust-white);
+    border-radius: 20px;
+    /* margin-top: 130px; */
+}
+
+#tableTitle{
+    background-image: url(../img/tableTitleBG.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:center;
+    color: var(--cust-white);
+    padding: 20px 190px;
+    display: flex; /* Use flexbox for easier vertical alignment */
+    justify-content: center; /* Center horizontally */
+    align-items: center;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 30px;
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.dataTables_paginate.paging_simple_numbers{
+    padding: 2px 10px;
+    margin: auto;
+    /* margin-top: 80px; */
+    margin-bottom: 5px;
+    border-radius: 10px;
+    background-color: var(--cust-white);
+    height: 40px;
+    box-shadow: 2px 2px 10px var(--cust-grey);
+    font-size: 12px;
+}
+
+.dt-button.buttons-collection {
+    border-radius: 10px;
+    padding: 5px 20px;
+    box-shadow: 2px 2px 10px var(--cust-grey)
+}
+
+#stockRequest_TAB_filter{
+    width: 300px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 20px;
+    background: var(--cust-neutralWhite7);
+}
+
+#stockRequest_TAB_filter input{
+    font-size: 16px;
+    color: var(--cust-primary);
+    margin-left: 14px;
+    outline: none;
+    border: none;
+    background: transparent;
+    flex: 1;
+}
+
+.dataTableSubDiv{
+    text-align: end;
+    padding-right: 20px;
+}
+
+.dataTables_wrapper .dataTables_info{
+    float: right !important;
+    font-size: 13px;
+}
+
+.dataTables_wrapper .dataTables_filter{
+    float: right !important;
+}
+
+.dataTables_scroll{
+    background-color: var(--cust-white);
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.dt-buttons{
+    margin: 15px 0 0 10px;
+}
+
+table.dataTable tbody tr{
+    cursor: pointer;
+}
+
+.allCells{
+    width: 550px !important;
+}
+
+/* Fullscreen modal */
+.modal-fullscreen{
+    height: 85vh;
+    position: absolute;
+    bottom: 0;
+}
+
+.detailsModalHeader{
+    background-image: linear-gradient(var(--cust-primary9), var(--cust-primary10));
+}
+
+.detailsModalHeader button{
+    background-color: var(--cust-red);
+    border: 5px solid var(--cust-white);
+    border-radius: 50%;
+    font-size: 10px;
+}
+
+.dt-body-center{
+    text-align: center;
+}
+
+.modalbuttondiv {
+    border: none;
+    border-radius: 20px;
+    margin: 10px 5px;
+    padding: 5px 40px;
+    box-shadow: 2px 2px 10px var(--cust-grey);
+    background-color: var(--cust-white);
+    position: relative;
+    display: inline-block;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.modalbuttondiv::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75px;
+    width: 50px; /* âœ… Add width */
+    height: 100%; /* âœ… Add height */
+    background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(255, 255, 255, 0) 100%
+    ); /* âœ… The actual â€œshineâ€ */
+    transform: skewX(-25deg);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.modalbuttondiv:hover::before {
+    animation: shineNeumorphic 0.6s ease;
+}
+
+/* Optional: color hover changes */
+#savaChangesBtn:hover {
+    background-color: var(--cust-primary);
+    color: var(--cust-white);
+}
+
+#resetBTN:hover {
+    background-color: var(--cust-red);
+    color: var(--cust-white);
+}
+
+#holdBTN:hover {
+    background-color: var(--cust-grey);
+    color: var(--cust-white);
+}
+
+.modalSurroundOpacity{
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.headButtonDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/* lefttmost column */
+.salesManMainDiv{
+    box-shadow: 2px 2px 10px var(--cust-grey);
+    border-radius: 23px;
+    padding: 10px;
+    min-height: 631.5px;
+}
+
+.salesManMainDiv .salesManHeaderRow{
+    background-image: url(../img/backgroundCircle_Right.png), linear-gradient(var(--cust-primary9), var(--cust-primary10));
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    border-top-left-radius: 23px;
+    border-top-right-radius: 23px;
+    color: var(--cust-white);    
+}
+
+.salesManMainDiv .salesManHeaderRow .salesmanDetails img{
+    margin-top: 20px;
+    border-radius: 50%;
+    /* border: 3px solid var(--cust-red); */
+}
+
+.salesManMainDiv .salesManHeaderRow .salesmanDetailsName{
+    padding-left: 10px;
+}
+
+.salesManMainDiv .salesManHeaderRow .salesmanDetailsName p{
+    font-size: 11px;
+    margin-bottom: 0;
+}
+
+.salesManMainDiv .salesManRow{
+    padding: 5px 5px 5px 10px;
+    box-shadow: 2px 2px 10px var(--cust-grey);
+    border-radius: 23px;
+    margin: 5px 0 ;
+}
+
+.salesManMainDiv .salesManRow p{
+    text-align: start;
+}
+
+.salesManMainDiv .salesManRow.btdtfield{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 5px 5px 10px;
+    box-shadow: 2px 2px 10px var(--cust-grey);
+    border-radius: 23px;
+    margin: 5px 0 ;
+}
+
+.salesManMainDiv .salesManRow.rowButton{
+    width: 100%;
+    background-image: linear-gradient(var(--cust-primary), var(--cust-primary10));
+    color: var(--cust-white);
+}
+
+.salesManMainDiv .salesManRow.rowButton:hover{
+    background-image: linear-gradient(#2f3449, #06279c);
+    background-color: var(--cust-white) !important;
+    color: var(--cust-white);
+}
+
+.salesManMainDiv .salesManRow.rowToggle{
+    padding: 15px 10px !important;
+    border-radius: 30px !important;
+}
+
+.salesManMainDiv .salesManRow p{
+    margin-bottom: 0;
+    font-size: 12px;
+}
+
+.salesManMainDiv .salesManRow input,
+.salesManMainDiv .salesManRow select{
+    max-width: 180px;
+    border-radius: 23px;
+    text-align: right;
+    font-size: 12px;
+}
+
+.salesManMainDiv .salesManRow p:first-child{
+    font-weight: 500;
+    color: #7D7D7D;
+}
+
+.salesManRow.rowToggle div{
+    font-size: 14px;
+}
+
+
+/*swtich toogle*/
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 20px;
+} 
+  
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+  
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #FF3C3C;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 2px;
+    background-color: var(--cust-white);
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+input:checked + .slider {
+    background-color: #2BA600;
+}
+  
+input:focus + .slider {
+    box-shadow: 0 0 1px #2BA600;
+}
+  
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+  
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+  
+.slider.round:before {
+    border-radius: 50%;
+}
+/*switch toggle end*/
+
+
+/* Assigned Salesman List Modal */
+#assignedSalesmanListModal .modal-content{
+    border-radius: 25px;
+}
+#assignedSalesmanListModal .modal-header{
+    background-image: linear-gradient(var(--cust-primary), var(--cust-primary10));
+    color: var(--cust-white);
+    /* height: 100px; */
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.removeSalesmanBtn{
+    border: none;
+    background: transparent;
+    color: #FF3C3C;
+}
+
+.addAccBtn{
+    background-image: linear-gradient(var(--cust-primary), var(--cust-primary10));
+    color: var(--cust-white);
+    border-radius: 30px;
+    padding: 8px 30px;
+}
+
+.addAccBtn:hover{
+    background-image: linear-gradient(#2f3449, #06279c);
+    color: var(--cust-white);
+}
+
+/* Rightmost column */
+.colorCodeMainDiv{
+    box-shadow: 2px 2px 10px var(--cust-grey);
+    border-radius: 23px;
+    padding: 10px;
+    min-height: 631.5px;
+}
+
+.colorCodeMainDiv .colorCodeHeaderRow{
+    background-image: url(../img/backgroundCircle_Left.png), url(../img/backgroundCircle_Right.png), linear-gradient(var(--cust-primary9), var(--cust-primary10));
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left, right, center;
+    border-top-left-radius: 23px;
+    border-top-right-radius: 23px;
+    color: var(--cust-white);
+}
+
+.noteBox{
+    border-radius: 20px;
+    box-shadow: 0 15px 10px #dbdada;
+}
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    padding-right: 40px; /* space for the button */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #666;
+}
+
+@media only screen and (min-width: 1400px) {
+    #addSalesmanModal .modal-dialog{
+        max-width: 50vw !important;
+        margin: auto !important;
+    }
+}
+
+
+@media only screen and (max-width: 1400px) {
+    .salesManRow.rowToggle div{
+        font-size: 10px;
+    }
+    #addSalesmanModal .modal-dialog{
+        max-width: 60vw !important;
+        margin: auto !important;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .salesManMainDiv .salesManRow p{
+        margin-bottom: 0;
+        font-size: 11px;
+    }
+    
+    .salesManMainDiv .salesManRow input,
+    .salesManMainDiv .salesManRow select{
+        max-width: 152px;
+        font-size: 11px;
+    }
+
+    .salesManRow.rowToggle{
+        font-size: 10px;
+    }
+
+    .buttonsDiv .buttondiv{
+        font-size: 14px;
+        min-width: 60px;
+        padding: 5px 20px;
+        
+    }
+    #addSalesmanModal .modal-dialog{
+        max-width: 70vw !important;
+        margin: auto !important;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .modalbuttondiv{
+        padding: 5px 10px;
+        font-size: 11px;
+        font-weight: 700;
+    }
+    .headButtonDiv{
+        /* display: inline; */
+        justify-content: center;
+    }
+
+    .buttonsDiv .buttondiv{
+        font-size: 12px;
+        min-width: 60px;
+        padding: 5px 15px;
+        
+    }
+    
+    #addSalesmanModal .modal-dialog{
+        max-width: 90vw !important;
+        margin: auto !important;
+    }
+
+}
+
+@media only screen and (max-width: 786px) {
+    #tableTitle{ 
+        padding: 20px 140px; 
+        font-size: 15px;
+        font-weight: 900;
+    } 
+    .buttonsDiv .buttondiv{
+        font-size: 10px;
+        min-width: 40px;
+        padding: 5px 15px;
+        
+    }
+}
+
+@media screen and (max-width: 767px){
+    .lowerHeaderDiv {
+        flex-direction: column;
+    }
+    .dataTableSubDiv{
+        flex-direction: column;
+    }
+    .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate {
+        float: right !important;
+    }
+    #tableTitle{
+        padding: 20px 100px;
+        font-size: 12px;
+        font-weight: 900;
+    }
+    .salesRepDivHeader {
+        font-size: 12px !important;
+    }
+}
+
+@media screen and (max-width: 576px){
+    .buttonsDiv{
+        display: flex;
+        justify-content: center;
+    }
+    .buttonsDiv .buttondiv{
+        font-size: 10px;
+        min-width: 40px;
+        padding: 5px 30px;
+        
+    }
+    .searchDiv{
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@keyframes shineNeumorphic {
+    0% {
+        left: -75px;
+    }
+    100% {
+        left: 130%;
+    }
+}

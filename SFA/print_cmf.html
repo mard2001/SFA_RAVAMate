@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  	<meta name="description" content="">
+  	<meta name="author" content="">
+	<title>Print CMF</title>
+	<link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+	<!-- <link rel="stylesheet" type="text/css" href="css/dss.css"> -->
+
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+	body{
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+	}
+
+	#heading{
+	  text-align: center;
+      float: center;
+	}
+
+	#subHeading{
+	  text-align: left;
+	  padding: 10px;
+	  float: left;
+	}
+
+	table {
+	  /* border-collapse: collapse; */
+	  text-align: left;
+   
+	}
+
+	th, thead, td {
+	  /* border: 1px solid black; */
+	}
+
+	td:nth-child(1){
+			/* border-left: none !important; */
+	}
+
+	td:nth-child(9){
+		/* border-right: none !important; */
+	}
+
+	/* tbody tr:nth-child(even) {
+	  background-color: #e1e9eb;
+	} */
+
+	h3{
+		letter-spacing: 2px;
+	}
+	
+	.text-left{
+		text-align: left !important;
+	}
+
+	.text-right{
+		text-align: right;
+	}
+
+	td{
+		padding: 2px;
+	}
+
+	.subHeading2{
+		float: right;
+	}
+
+	.print{
+		background-color:#36a357;
+	}
+
+	.export{
+		background-color:#3676a3;
+	}
+
+	.btn{
+		width: 200px;
+		padding: 5px;
+		outline: none;
+		border: none;
+		color: white;
+        bottom: 20px !important;
+	}
+
+	.btn:hover{
+		cursor: pointer;
+	}
+
+	.explabel{
+		text-align: left !important;
+	}
+
+    .inpt{
+        width: 100%;
+        height: 30px;
+        font-size: 14px;
+        font: weight 30px;
+        text-transform:capitalize;
+    }
+
+    .subhead{
+        font-weight: bold;
+    }
+    
+    #mainCont{
+        width: 60%;
+        margin: 0 auto;
+    }
+    </style>
+</head>
+<body>
+
+    <div id="mainCont">
+
+    <div class="subHeading2">
+        <span class="print btn" onclick="execprint()"><i class="fas fa-print"></i> PRINT</span>
+        <!-- <span class="export btn" onclick="fnExcelReport()"><i class="fas fa-file-excel"></i> EXPORT</span> -->
+    </div>
+    
+        <div id="heading">
+            <h3 id="company">--=</h3>
+            <span>CMF - CUSTOMER MAINTENANCE FORM</span><br>
+            <span>For Distributor Use Only</span><br><br>
+        </div>
+        <div style="float: right;">
+            CMF Form No: <input disabled style="border-bottom: solid 1px black; border-top: none; border-left: none; font-weight: bold; text-align: center; border-right: none; width: 50px; font-size: 12px;" type="text" id="cmfID">
+        </div><br><br><br>
+        <div id="body">
+            <table style="border: 1px; width: 100%;" id="exceltbl">
+                <tr>
+                    <td>DATE REQUESTED</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="dateAndTime">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5" class="subhead">
+                        GENERAL INFORMATION
+                    </td>
+                </tr>
+                <tr>
+                    <td >CUSTOMER CODE</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="custCode">
+                    </td>
+                </tr>
+                <tr>
+                    <td>SOLD TO NAME</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="storename">
+                    </td>
+                </tr>
+                <tr>
+                    <td>CUSTOMER NAME</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="custname">
+                    </td>
+                </tr>
+                <tr>
+                    <td>TAX IDENTIFICATION NUMBER</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="tin">
+                    </td>
+                </tr>
+                <tr>
+                    <td>CUSTOMER CONTACT PERSON</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="custContperson">
+                    </td>
+                </tr>
+                <tr>
+                    <td>CUSTOMER CONTACT NUMBER</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="custContnumber">
+                    </td>
+                </tr>
+                <tr>
+                    <td>EMAIL ADDRESS</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="custEmail">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="subhead">SOLD TO ADDRESS:</td>
+                </tr>
+                <tr>
+                    <td>LINE 1: (No., Street, Brgy)</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="st_line1">
+                    </td>
+                </tr>
+                <tr>
+                    <td>LINE 2: (Municipality, City, Prov.)</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="st_line2">
+                    </td>
+                </tr>
+                <tr>
+                    <td>LINE 3: (Other Info.)</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="st_line3">
+                    </td>
+                </tr>
+                <tr>
+                    <td>POSTAL CODE</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="st_postalcode">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="subhead">SHIP TO ADDRESS:</td>
+                </tr>
+                <tr>
+                    <td>LINE 1: (No., Street, Brgy)</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="shp_line1">
+                    </td>
+                </tr>
+                <tr>
+                    <td>LINE 2: (Municipality, City, Prov.)</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="shp_line2">
+                    </td>
+                </tr>
+                <tr>
+                    <td>LINE 3: (Other Info.)</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="shp_line3">
+                    </td>
+                </tr>
+                <tr>
+                    <td>POSTAL CODE</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="shp_postalcode">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="subhead">GEOGRAPHIC AREA</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="graphicarea">
+                    </td>
+                </tr>
+                <tr>
+                    <td>PUBLIC MARKET</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="publicmarket">
+                    </td>
+                </tr>
+                <TR>
+                    <TD colspan="4">GEOLOCATION TAG</TD>
+                </TR>
+                <tr>
+                    <td>LONGITUDE</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="longitude">
+                    </td>
+                </tr>
+                <tr>
+                    <td>LATITUDE</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="latitude">
+                    </td>
+                </tr>
+                <tr>
+                    <td>TAX EXEMPTION</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="taxexemption">
+                    </td>
+                </tr>
+                <tr>
+                    <td>TAX EXEMPTION NO.</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="taxexemptionNo">
+                    </td>
+                </tr>
+                <TR>
+                    <TD colspan="4" class="subhead">OTHER INFO</TD>
+                </TR>
+                <tr>
+                    <td>CHAIN</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="chain">
+                    </td>
+                </tr>
+                <tr>
+                    <td>CUSTOMER CLASS</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="custClass">
+                    </td>
+                </tr>
+                <tr>
+                    <td>BUSINESS UNIT</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="businessUnit">
+                    </td>
+                </tr>
+                <tr>
+                    <td>COVERAGE</td>
+                    <td>Day Covered</td>
+                    <td colspan="">
+                        <input type="text" class="inpt" id="dascovered">
+                    </td>
+                    <td style="padding-left: 10px;">Frequency</td>
+                    <td colspan="">
+                        <input type="text" class="inpt" id="frequency">
+                    </td>
+                </tr>
+                <tr>
+                    <td>TRADE ASSET #1 CODE</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="trade1">
+                    </td>
+                </tr>
+                <tr>
+                    <td>TRADE ASSET #2 CODE</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="trade2">
+                    </td>
+                </tr>
+                <tr>
+                    <td>TRADE ASSET #3 CODE</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="trade3">
+                    </td>
+                </tr>
+                <tr>
+                    <td>CONTACT PRICING</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="contactPricing">
+                    </td>
+                </tr>
+                <tr>
+                    <td>BUYING GROUP</td>
+                    <td colspan="4">
+                        <input type="text" class="inpt" id="buyinggrouop">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="subhead">NAME AND SIGNATURE</td>
+                    <td colspan="2">
+                        <input type="text" class="inpt" id="nameandsinature">
+                    </td>
+                    <td class="subhead" style="padding-left: 10px;">DATE</td>
+                    <td colspan="">
+                        <input type="text" class="inpt">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="subhead">REQUESTED BY: (Salesman)</td>
+                    <td colspan="2">
+                        <input type="text" class="inpt" id="req_Salesman">
+                    </td>
+                    <td class="subhead" style="padding-left: 10px;">DATE</td>
+                    <td colspan="">
+                        <input type="text" class="inpt">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="subhead">VALIDATED BY: (GTM, DMCS)</td>
+                    <td colspan="2">
+                        <input type="text" class="inpt" id="valitedby">
+                    </td>
+                    <td class="subhead" style="padding-left: 10px;">DATE</td>
+                    <td colspan="">
+                        <input type="text" class="inpt">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="subhead">APPROVED BY: (OM)</td>
+                    <td colspan="2">
+                        <input type="text" class="inpt">
+                    </td>
+                    <td class="subhead" style="padding-left: 10px;">DATE</td>
+                    <td colspan="">
+                        <input type="text" class="inpt">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="subhead">ENCODED BY: (Encoder)</td>
+                    <td colspan="2">
+                        <input type="text" class="inpt">
+                    </td>
+                    <td class="subhead" style="padding-left: 10px;">DATE</td>
+                    <td colspan="">
+                        <input type="text" class="inpt">
+                    </td>
+                </tr>
+            </table>
+        </div>    
+    </div>
+	
+	<iframe id="txtArea1" style="display:none"></iframe>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="/HASH/md5.js"></script>
+<script src="/HASH/aes.js"></script>
+<script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+<script type="text/javascript">
+	var user = localStorage.getItem("adminUserName");
+	var dateselected = localStorage.getItem("DSSdateSelected");
+    var cmfID = localStorage.getItem("CMFID");
+
+	cmfData();
+	getcompname();
+
+	$('.hidethis').hide();
+	function execprint(){
+		$('.print').hide();
+		$('.export').hide();
+        $("#mainCont").css({
+            "font-size": "10px",
+            "width":"100%",
+            "top":"-200px !important;"
+        });
+        
+        $(".inpt").css(
+            {
+                'height': '15',
+                'font-size': '10',
+                'font': 'weight 0'
+            }
+        );
+		window.print();
+		$('.print').show();
+		$('.export').show();
+        // $('#mainCont').css({'width':'60%'});
+        $("#mainCont").css({
+            "font-size": "14px",
+            "width":"60%",
+            "margin":"0 auto"
+        });
+
+        $(".inpt").css(
+            {
+                'height': '30px',
+                'font-size': '14px',
+                'font': 'weight 30px'
+            }
+        );
+	}
+
+	function cmfData(){
+		$.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {
+                        "type":"GET_CMF_DATA_VIAID",
+                         "CMFID":cmfID,
+                         "CONN":con_info
+                    },
+              dataType: "json",
+              crossDomain: true,
+              cache: false,            
+                success: function(r){ 
+                    $('#storename').val(r[0].SOLDTONAME);
+                    $('#custCode').val(r[0].CUSTCODE);
+                    $('#custname').val(r[0].CUSTNAME);
+                    $('#tin').val(r[0].TIN);
+                    $('#custContperson').val(r[0].CUST_CONT_PERSON);
+                    $('#custContnumber').val(r[0].CUST_CONTNO);
+                    $('#custEmail').val(r[0].EMAIL);
+                    $('#st_line1').val(r[0].SLD_STREET_BRGY);
+                    $('#st_line2').val(r[0].SLD_MUNICIPALITY_CITY_PROV);
+                    $('#st_line3').val(r[0].SLD_OTHERINFO);
+                    $('#st_postalcode').val(r[0].SLD_POSTALCODE);
+                    $('#shp_line1').val(r[0].SHP_STREET_BRGY);
+                    $('#shp_line2').val(r[0].SHP_MUNICIPALITY_CITY_PROV);
+                    $('#shp_line3').val(r[0].SHP_OTHERINFO);
+                    $('#shp_postalcode').val(r[0].SHIP_POSTALCODE);
+                    $('#graphicarea').val(r[0].GEOAREA);
+                    $('#publicmarket').val(r[0].PUBLICMARKET);
+                    $('#longitude').val(r[0].LONGITUDE);
+                    $('#latitude').val(r[0].LATITUDE);
+                    $('#taxexemption').val(r[0].TAXEXP);
+                    $('#taxexemptionNo').val(r[0].TAXEXP_NO);
+                    $('#chain').val(r[0].CHAIN);
+                    $('#custClass').val(r[0].CUST_CLASS);
+                    $('#businessUnit').val(r[0].BS_UNIT);
+                    $('#dascovered').val(r[0].COV_DAY);
+                    $('#frequency').val(r[0].COV_FREQ);
+                    $('#trade1').val(r[0].TRADE_CODE_1);
+                    $('#trade2').val(r[0].TRADE_CODE_2);
+                    $('#trade3').val(r[0].TRADE_CODE_3);
+                    $('#trade4').val(r[0].TRADE_CODE_4);
+                    $('#buyinggrouop').val(r[0].BUY_GROUP);
+                    $('#nameandsinature').val(r[0].CUSTNAME);
+                    $('#req_Salesman').val(r[0].REQ_BY);
+                }
+            });
+
+		
+	}
+	
+	function getcompname(){
+			$.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {"type":"GET_COMPANYNAME", "CONN":con_info},
+              dataType: "json",
+              crossDomain: true,
+              cache: false,            
+                success: function(r){ 
+	            	$('#company').html(r[0].company.toUpperCase());
+	            	//$('#dateAndTime').html(r[0].serverTime);
+					$('#dateAndTime').val(dateselected);
+					$('#compExp').html(r[0].company.toUpperCase());
+					$('#dateExp').html(dateselected);
+                    $('#cmfID').val(cmfID);
+                }
+            });
+	}
+
+	function getmiss(miss){
+		if(miss == '()'){
+			return '-';
+		}
+		return miss;
+	}
+
+	function fnExcelReport(){
+		var tab_text="<html xmlns='http://www.w3.org/1999/xhtml' lang='el-GR' lang='el-GR'>";
+		var tab_text=tab_text+"<?php Response.AddHeader('Content-Disposition', 'inline;filename=Dailysales.xls') ?>";
+		var tab_text=tab_text+"<meta http-equiv='content-type' content='text/plain; charset=UTF-8'/>";
+		var tab_text=tab_text+"<table border='1px'><tr>";
+		var textRange; var j=0;
+		tab = document.getElementById('exceltbl'); // id of table
+
+		for(j = 0 ; j < tab.rows.length ; j++)
+		{
+		tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
+		}
+
+		tab_text=tab_text+"</table>";
+		tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");
+		tab_text= tab_text.replace(/<img[^>]*>/gi,"");
+		tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, "");
+		tab_text= tab_text.replace(/<button[^>]*>|<\/button>/gi, "");
+
+		var ua = window.navigator.userAgent;
+		var msie = ua.indexOf("MSIE ");
+
+		sa = window.open('data:application/vnd.ms-excel,filename=Dailysales.xls,' + encodeURIComponent(tab_text));
+
+		return (sa);
+      /*var tab_text="<table border='2px'><tr>";
+      var textRange; var j=0;
+      tab = document.getElementById('exceltbl'); // id of table
+
+      for(j = 0 ; j < tab.rows.length ; j++) 
+      {     
+          tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
+          //tab_text=tab_text+"</tr>";
+      }
+
+      tab_text=tab_text+"</table>";
+      tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+      tab_text= tab_text.replace(/<img[^>]*>/gi,""); // remove if u want images in your table
+      tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+      var ua = window.navigator.userAgent;
+      var msie = ua.indexOf("MSIE "); 
+
+      if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+      {
+          txtArea1.document.open("txt/html","replace");
+          txtArea1.document.write(tab_text);
+          txtArea1.document.close();
+          txtArea1.focus(); 
+          sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
+      }  
+      else                 //other browser not tested on IE 11
+          sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));  
+
+      return (sa);*/
+
+  	}
+</script>
+
+</html>

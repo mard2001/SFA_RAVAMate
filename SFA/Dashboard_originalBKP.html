@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css">
+  
+  <link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+  <link rel="stylesheet" href="/css/mdDesign.css">
+
+  <style>
+      .hidden{
+      	display: none;
+      }
+  </style>
+</head>
+
+  <!--<div id="work-in-progress">
+          <div style="margin: 0 auto;">
+            <img src="img/fast.png" style="height: 80px; width: 480px; z-index: 1;"><br/>
+            <img src="img/orbit-400px.gif" style="position: block; height: 200px;">
+          </div>
+   </div>-->
+
+<body class="" id="page-top" onload="init()">
+  <div id="mySidenav" class="sidenav">
+  <div class='image'><img alt='mdbuddylogo' class='logoMd' src='/img/mdbuddylogo_jeff.png'/></div>
+    <a class='activeYes' href="https://mybuddy.dynns.com/SFA/Dashboard"> <span class='glyphicon glyphicon-home'></span> Dashboard</a>
+    <a href="https://mybuddy.dynns.com/SFA/digitalMapping"> <span class='glyphicon glyphicon-map-marker'></span> Digital Mapping</a>
+    <a href="https://mybuddy.dynns.com/SFA/customerMapping"> <span class="fa fa-users" aria-hidden="true"></span> Customer Mapping</a>
+    <a href="territoryGeofencing"> <span class='glyphicon glyphicon-cog'></span> Territory Geofencing</a>
+   <a data-toggle="collapse" href="#collapse1" id='navDrop'> <span class='glyphicon glyphicon-duplicate' id='changeIcon'></span> Reports
+    <i class="glyphicon glyphicon-menu-down pull-right"></i> </a>
+      <div id="collapse1" class="panel-collapse collapse" style="margin-left: 17px; font-size: 5px !important">
+        <a href="salesReport"> Sales Report</a>
+        <a href="fastsosyotransaction"> Fastsosyo Transaction</a>
+        <a href="transactionLedger"> Transaction Ledger</a>
+        <a href="UnprocessedOrders"> Unprocessed Orders</a>
+        <a href="dsr"> DSR</a>
+        <a href="stockRequest"> Stock Request</a>
+        <a href="unuploaded"> Unuploaded</a>
+        <a href="BOreport"> BO</a>
+        <a href="Stocktake Report"> Stocktake</a>
+        <a href="inventory"> Inventory Valuation</a>
+        <a href="jobberMaintenance"> Jobber</a>
+      </div>
+   <a data-toggle="collapse" href="#collapse2" id='navDrop' class="maintenanceCont"> <span class="fa fa-cogs" aria-hidden="true" id='changeIcon'></span> Maintenance
+    <i class="glyphicon glyphicon-menu-down pull-right"></i> </a>
+      <div id="collapse2" class="panel-collapse collapse" style="margin-left: 17px; font-size: 9px !important">
+        <a href="dataMaintenance"> Data</a>
+        <a href="customer"> Customer</a>
+        <a href="geoReset"> Georeset</a>
+        <a href="salesman"> Salesman</a>
+        <a href="product"> Product</a>
+      </div>
+  <!-- <a href="Alert"> <span class='glyphicon glyphicon-envelope'></span> Alert Messages</a> -->
+  <hr />
+  <a href="https://mybuddy-sfa.com/SFA/v2/dashboard">Switch to New Dashboard</a>
+   <!--<div class='hideNav'>
+      <a href="#" class="btn btn-primary btn-nav" onclick='closeNav()'>
+          <span class='glyphicon glyphicon-menu-left' style='color:white;'></span>
+      </a>
+    </div>-->
+</div>
+    <div id="main">
+        <h4 class="display-4 dispMargin">
+          <a href="#" id='navBtn' class="btn btn-primary"  style='margin-right: 15px; outline: none;'>
+            <span class="glyphicon glyphicon-menu-hamburger"></span> 
+          </a>
+          <span onclick='closeNav()'>
+            <span class='glyphicon glyphicon-home'></span> Dashboard
+            <!--<span class='pull-right' >
+                  <img src="img/colpal.png" alt="nutriasia" style="float:right;">
+            </span>-->
+              <span class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                  <a style='float:right;' href="#" class="dropdown-toggle" data-toggle="dropdown" id='dropThisDown'>
+                      <span class="label label-pill label-danger count" style='border-radius: 10px; font-size: 10px;'></span>
+                      <span class="fa fa-bell"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-pill">
+                    <div id="notificationElement" class="scroll" data-simplebar>
+                        <div id='notifs-icon-div'></div>
+                    </div>
+                    <a type="button" class="btn btn-default btn-block" href='Alert' id='seeAll' >See all</a>
+                  </ul>
+                </li>
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fas fa-user"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-user">
+                      <li><a href="Profile.html"><i class="fas fa-user"></i> My Account</a>
+                      </li>
+                      <li class="divider"></li>
+                      <li><a href="#" id="admin-logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                      </li>
+                  </ul>
+                </li>
+              </span>
+            </span>
+          </h4>
+         <div class="panel cust-panel" onclick='closeNav()'>
+               <div class="panel-heading">
+                    <i class="fas fa-map-marker"></i> <span id='headingTitle'></span>
+                   <span class="pull-right">
+                       <span id="datePicker"> &nbsp; 
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                       </span>
+                       <span id='time'></span>
+                       <span class="dropdown">
+                           <i class="fa fa-cog dropdown-toggle" id='drop' type="button" data-toggle="dropdown"></i>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                              <li><a href="#" id='' class=''><input type="checkbox" id="geofenceBox"> Show Geofence</a></li>
+                              <li><a href="#" id='catboxholder'><input type="checkbox" id="categoryBox"> View Products</a>
+                              </li>
+                              <!--<li><a href="#" id='isolateBtn'><input type="checkbox" id="isolationBox"> Salesman Isolation</a>
+                              </li>-->
+                              <li class="divider"></li>
+                              <li><a href="#" onclick='changeColor()'>
+                              <i aria-hidden="true"></i><i class="fas fa-palette"></i> Change Color</a></li>
+                              <li><a href="#" onclick='printDSS()'>
+                              <i aria-hidden="true"></i><i class="fas fa-print"></i> PRINT DSS</a></li>
+                            </ul>
+                       </span>
+                    </span>
+               </div>
+                <div class="containerMain"> 
+                    <div class="outerContMain" id='outerContainer_id'> 
+                      <div class="loading-table">
+                         <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i> Rendering data ...
+                          <span class="sr-only">Loading...</span>
+                      </div>
+                     <!-- <div id='productSelectedCont'>
+                        <div id='productColor'></div>
+                        <div id='productName'></div>
+                        <div id='salesAndContri'></div>
+                      </div>-->
+                        <div id='salesmanCategory'>
+                           <div class="arrow-side"><i onclick="flip1()" id='arrIconHolder' class="fa fa-angle-left arrow-side-icon" aria-hidden="true"></i></div> 
+                            <div class='container_salesman'>
+                             <table class='fixedHead'>
+                                   <thead>
+                                      <tr>
+                                        <th width='50%'>
+                                          <div class="dropdown">
+                                            <button class="btn btn-primary btn-xs dropdown-toggle salesmanCatIndi" type="button" data-toggle="dropdown">All Salesman
+                                            <span class="caret"></span></button>
+                                            <ul class="dropdown-menu selectCustDD"></ul>
+                                          </div>
+                                        </th>
+                                        <th width=''>Calls</th>
+                                        <th width=''>Unproductive</th>
+                                        <th width=''>Selling Hours</th>
+                                        <th width=''>Sales</th>
+                                     </tr>
+                                  </thead>
+                              </table>
+                              <div id="scrollHolder" class="scroll" data-simplebar>
+                                 <table class='table table-condensed' id='floatTab'>
+                                  <tbody id='dashboardDisplay'>
+                                  </tbody>
+                                  </table> 
+                               </div>
+                               <div id='overAllTotal'>
+                                    <span class='pull-right' id='total'></span>
+                               </div>  
+                           </div>
+                        </div>
+                       <!--product category-->
+                      <div id='categoryTable' class="categoryProp hidden">
+                        <div class="arrow-side2"><i onclick="flip2()" class="fa fa-angle-left arrow-side-icon2" aria-hidden="true"></i></div>
+                        <div class='container_productCat'>
+                          <div class="scroll" data-simplebar>
+                            <table class="table product-data-container">
+                              <thead>
+                                 <tr>
+                                  <th>CATEGORY</th>
+                                  <th class="text-center">SALES</th>
+                                  <th class="text-right">CONTRIBUTION</th>
+                                 </tr>
+                              </thead>
+                              <tbody id='cateogoryDataTable'></tbody>
+                           </table>
+                          </div>
+                          <div class="table-footer footerDetails"></div>
+                         </div>
+                        </div>
+
+                      <div id="selectedCategoryProd" class="hidden">
+                        <span class="fa fa-times pull-right closeBtn"></span>
+                        <div id="prodSelName"></div>
+                        <div id="prodSelFooter">
+                              <span id="prodSelSales"></span>
+                              <span id="prodSelPercent" class="pull-right"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div id='mapBtnsContainer'>
+                      <button class='btn btn-sm btn-dash' id='fullScreen'><i class="fas fa-expand fs_icon"></i></button>
+                        <br/> 
+                      <button class='btn btn-sm btn-dash' id='setSatellite'><i class="fas fa-globe-americas sat_icon"></i></button>
+                        <br/>     
+                      <button class='btn btn-sm btn-dash' id='zoomIn'><i class="fas fa-search-plus"></i></button>
+                        <br/>
+                      <button class='btn btn-sm btn-dash' id='zoomOut'><i class="fas fa-search-minus"></i></button>
+                    </div>
+
+                    <div id="mapUserControlCont">
+                      <button class='btn btn-sm btnrestore' id='restorBtn' onclick='restoreLoc()'><img src="/img/loc-marker.png"></button>
+                    </div>
+
+                    <div id="dispModal_deviation" class="deviationcont hidden">
+                      <span aria-hidden="true" class="pull-right closeFirstTransBtn">&times;</span>
+                      <div class="text-center" style='margin-bottom: 13px;'>
+                        <img style='text-align: center;' src="../img/salesmanPic.jpg" class='salesmanPic_dev' id='salesmanImage' alt='no available image' onerror="imgError(this)"/> 
+                      </div>
+
+                         <table class="devationTable" id=''>
+                          <tr>
+                            <td>Name</td>
+                            <td id="salesman_name"></td>
+                          </tr>
+						              <tr>
+                            <td>Call Time</td>
+                            <td id="calltime"></td>
+                          </tr>
+                          <tr>
+                            <td>Time Started</td>
+                            <td id="dateTime_transaction"></td>
+                          </tr>
+
+                           <tr>
+                            <td>Remarks</td>
+                            <td id="salesman_remarks"></td>
+                          </tr>
+
+                           <tr class="mobileNoCont">
+                              <td>Mobile No.</td>
+                              <td id="salesman_num"></td>
+                           </tr>
+
+                            <tr>
+                              <td>First Store</td>
+                              <td data-toggle="tooltip" data-placement="top" title="Click to view on map!"><button id='firstCallLoc' onclick='showOnMap()' class="btn btn-primary btn-xs"></button></td>
+                            </tr>
+                              <input type="hidden" name="salesman-code" id="salesman-code">
+                              <input type="hidden" name="latLng" id='latLng'/>
+                        </table>
+                    </div>
+
+                    <div id="map"></div>
+                    <input type="hidden" name="" id="lateDateHolder">
+                    <div id="lateSalesmanCont">
+                      <table id='lateSalesman'>
+                        <tbody>
+                        </tbody>
+                      </table>
+                    </div>
+                 </div>
+               </div>
+              
+         </div><!--main panel end-->
+
+          <div class="modal fade" id="dssmodal" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">DAILY SALES SUMMARY (DSS)</h4>
+                </div>
+                <div class="modal-body">
+                  <p>Date: 
+                    <span id="dssdatePicker"> &nbsp; 
+                      <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                      <span id="datestring"></span>
+                    </span>
+                  </p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" onclick="execprintDSS()">View</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+         
+         <div class="modal fade" id="deviationRemaingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header modal-header-info">
+                              <h4>Salesman Deviation</h4>
+                          </div>
+                          <div class="modal-body devRemainBody">
+                             
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          </div>
+                      </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
+              </div><!-- /.modal -->
+
+         <div class="modal fade" id="dispModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header modal-header-info">
+                              <h2>Territory Information</h2>
+                          </div>
+                          <div class="modal-body">
+                              <table class="table table-striped">
+                          <tr>
+                            <td><label>Territory Name:</label></td>
+                            <td><p id="name-lbl"></p></td>
+                          </tr>
+
+                          <tr>
+                            <td><label>Salesman:</label></td>
+                            <td><p id="disp-salesman"></p></td>
+                          </tr>
+
+                           <tr>
+                            <td><label>Date Created:</label></td>
+                            <td><p id="date-created"></p></td>
+                          </tr>
+
+                            <tr>
+                              <td><label>Color:</label></td>
+                              <td><p id="terrcolor"></p></td>
+                           </tr>
+                        
+                              <input type="hidden" name="mpa-id" id="mpa-id">
+                        
+                        </table>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          </div>
+                      </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
+              </div><!-- /.modal -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=quarterly&key=AIzaSyAt0Pxe9_3DTav3DmUQzHfgd07s_LcJo7I"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+    <script type="text/javascript" src="/web/web-commons.js"></script>
+    <script type="text/javascript" src="/web/commons-useradminguest.js"></script>
+    <script type="text/javascript" src="/js/bootbox.min.js"></script>
+    <script type="text/javascript" src="js/dashboardIP.js"></script>
+    <script type="text/javascript" src="/js/scrolling.js"></script>
+    <script type="text/javascript" src="/push/push.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();   
+      });
+    </script>
+    
+</body>
+
+</html>

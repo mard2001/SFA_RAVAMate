@@ -1,0 +1,1703 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Dynamic Route Planning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
+ 
+  <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/BOOTSTRAP3/css/bootstrap.min.css"/>
+  <script src="/BOOTSTRAP3/AJAX/jquery.min.js"></script>
+  <script src="/BOOTSTRAP3/js/bootstrap.min.js"></script>
+  
+  <link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+  <link rel="stylesheet" href="/css/mdDesign.css"/>
+  
+  <script type="text/javascript" src="/DATERANGEPICKER/moment.min.js"></script>
+  <script type="text/javascript" src="/DATERANGEPICKER/daterangepicker.js"></script>
+  <link rel="stylesheet" href="/DATERANGEPICKER/daterangepicker.css">
+  
+  <link rel="stylesheet" href="/Commonusrs/DATATABLES/jquery.dataTables.min.css"/>
+  <link rel="stylesheet" href="/Commonusrs/DATATABLES/editor.dataTables.min.css"/>
+  <link rel="stylesheet" href="/Commonusrs/DATATABLES/select.dataTables.min.css"/>
+  <link rel="stylesheet" href="/Commonusrs/DATATABLES/buttons.dataTables.min.css "/>
+  <link rel="stylesheet" href="/js/multi/dist/css/bootstrap-multiselect.css" type="text/css"/>
+
+    <STYLE>
+      /* .checker{
+        margin-top: 20px;
+      } */
+
+      .tabtables tbody tr{
+        cursor: pointer;
+      }
+
+      /* thead input {
+        width: 100%;
+      } */
+
+      .dt-checkbox-select-all{
+        height: 100px !important;
+        width: 100px !important;
+      }
+    </STYLE>
+</head>
+
+<body class="" id="page-top">
+  <div id="mySidenav" class="sidenav">
+  <div class='image'><img alt='mdbuddylogo' class='logoMd' src='/img/mdbuddylogo_jeff.png'/></div>
+    <a href="https://mybuddy-sfa.com/SFA/Dashboard"> <span class='glyphicon glyphicon-home'></span> Dashboard</a>
+    <a href="https://mybuddy-sfa.com/SFA/digitalMapping"> <span class='glyphicon glyphicon-map-marker'></span> Digital Mapping</a>
+    <a href="https://mybuddy-sfa.com/SFA/customerMapping"> <span class="fa fa-users" aria-hidden="true"></span> Customer Mapping</a>
+    <a href="territoryGeofencing"> <span class='glyphicon glyphicon-cog'></span> Territory Geofencing</a>
+   <a data-toggle="collapse" href="#collapse1" id='navDrop'> <span class='glyphicon glyphicon-duplicate'></span> Reports<i class="glyphicon glyphicon-menu-down pull-right"></i> </a>
+      <div id="collapse1" class="panel-collapse collapse" style="margin-left: 17px; font-size: 9px !important">
+        <a href="salesReport"> Sales Report</a>
+        <a href="fastsosyotransaction"> Fastsosyo Transaction</a>
+        <a href="salesAudit"> Sales Audit</a>
+        <a href="transactionLedger"> Transaction Ledger</a>
+        <a href="UnprocessedOrders" class="activeYes"> Unprocessed Orders</a>
+        <a href="dsr"> DSR</a>
+        <a href="dcr"> Daily Collection</a>
+        <a href="stockRequest"> Stock Request</a>
+        <a href="unuploaded"> Unuploaded</a>
+        <a href="BOReport"> BO</a>
+        <a href="Stocktake Report"> Stocktake</a>
+        <a href="inventory"> Inventory Valuation</a>
+        <a href="jobberMaintenance"> Jobber</a>
+        <a href="syncreport">Sync Report</a>
+        <a href="soaprvreport">SO Approval</a>
+      </div>
+   <a data-toggle="collapse" href="#collapse2" id='navDrop' class="maintenanceCont"> <span class="fa fa-cogs" aria-hidden="true" id='changeIcon'></span> Maintenance
+    <i class="glyphicon glyphicon-menu-down pull-right"></i> </a>
+      <div id="collapse2" class="panel-collapse collapse" style="margin-left: 17px; font-size: 9px !important">
+        <a href="dataMaintenance"> Data</a>
+        <a href="customer"> Customer</a>
+        <a href="cmf">CMF</a>
+        <a href="geoReset"> Georeset</a>
+        <a href="salesman"> Salesman</a>
+        <a href="product"> Product</a>
+        <a href="productbtdt"> BTDT Product</a>
+        <a href="customerTagging"> Tagging</a>
+        <a href="bankmaintenance"> Bank</a>
+        <a href="mcpcalibration">MCP Calibration</a>
+        
+      </div>
+  <!-- <a href="Alert"> <span class='glyphicon glyphicon-envelope'></span> Alert Messages</a> -->
+  <hr />
+  <a href="https://mybuddy-sfa.com/SFA/v2/dashboard">Switch to New Dashboard</a>
+</div>
+    <div id="main">
+        <h4 class="display-4 dispMargin">
+           <a href="#" id='navBtn' class="btn btn-primary"  style='margin-right: 15px;'>
+             <span class="glyphicon glyphicon-menu-hamburger"></span> 
+           </a>
+          <span class='glyphicon glyphicon-file'></span> DYNAMIC ROUTE PLANNING
+          <span class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                    <a style='float:right;' href="#" class="dropdown-toggle" data-toggle="dropdown" id='dropThisDown'>
+                        <span class="label label-pill label-danger count" style='border-radius: 10px; font-size: 10px;'></span>
+                        <span class="fa fa-bell"></span>
+                    </a>
+                    
+                       <ul class="dropdown-menu" style='padding: 0'>
+                        <div id='notif-body'>
+                            <div id='notifs-icon-div'></div>
+                        </div>
+                        <a type="button" class="btn btn-default btn-block" href='mdAlert_bohol.php' id='seeAll' >See all</a>
+                       </ul>
+                </li>
+
+                  <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                      <i class="fa fa-user"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="Profile.html"><i class="fa fa-user-circle-o"></i> My Account</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="#" id="admin-logout-btn"><i class="fa fa-sign-out-alt"></i> Logout</a>
+                        </li>
+                    </ul>
+                 </li>
+            </span>
+          </h4>
+         <div class="panel cust-panel">
+                <div class="panel-heading">
+                  <span class='glyphicon glyphicon-list-alt'></span>
+                  <span id="titleHeading" class="display-4"></span>
+
+                  <span class="pull-right">
+                    <button class="btn btn-xs btn-danger" onclick="syncBTDTOrder()"><i class="fa fa-server"></i> SYNC BTDT ORDERS</button>
+                    <button class="btn btn-xs btn-danger" onclick="usemapdr()"><i class="fa fa-map"></i> Use Map</button>
+                  </span>
+                </div>
+                <div class="panel-body" style='background-color:#fff; color: black;'> 
+                  <div class="btn-group tabbt" style="margin-bottom: 20px;">
+                    <button type="button" class="btn tabbt btn1 activeTab">Route List</button>
+                    <button type="button" class="btn tabbt btn2">Transaction List</button>
+                  </div> 
+                    <div id="pending_stockrequestlist">
+                      <!-- <h4 class="text-primary">Booking</h4> -->
+                      <!-- <hr> -->
+                      <table class="table table-hover display nowrap tabtables pendingTBL" style="width: 100% !important;">
+                        <thead>
+                           <tr>
+                             <th>TRANSACTION ID</th>
+                             <th>PLATENO</th>
+                             <th>TOTAL DROPS</th>
+                             <th>LOADINGCAP</th>
+                             <TH>BALANCE</TH>
+                             <th>TOTALAMOUNT</th>
+                             <TH>UNLOADING DATE</TH>
+                             <TH>STATUS</TH>
+                             <th>DATECREATED</th>
+                           </tr>
+                        </thead>
+                        <tbody></tbody>
+                      </table>
+                    </div>
+
+                    <div id="approved_stockrequestlist" class="hidden">
+                      <!-- <h4 class="text-primary">Extruct</h4> -->
+                      <!-- <hr> -->
+                      <table class="table table-hover display nowrap tabtables approvedTBL" style="width: 100% !important;">
+                        <thead>
+                            <tr>
+                             <th></th>
+                             <th>BOOKING DATE</th>
+                             <th>MUNICIPALITY</th>
+                             <th>BARANGAY</th>
+                             <th>SALESMAN</th>
+                             <th>DAYS LAPSE</th>
+                             <th>REFERENCE</th>
+                             <th>CUSTOMER</th>
+                             <th>AMOUNT</th>
+                           </tr>
+                        </thead>
+                        <tbody></tbody>
+                      </table>
+                    </div>
+
+                  
+                 </div>
+               </div>
+         </div><!--main panel end-->
+
+          <div class="modal fade" id="updatecustomerModal" role="dialog" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title"> Dynamic Route Details</h4>
+                </div>
+                <div class="modal-body">
+                  <input type="hidden" id="transactionIDHolder">
+                  <input type="hidden" id="salesmanTypeHolder">
+                  
+                  <table class="table table-striped table-sm">
+                    <tr>
+                      <td>Plate no:</td>
+                      <td>
+                        <strong id="dist_plateno"></strong>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>Total Drops:</td>
+                      <td>
+                        <strong id="disp_ttransaction"></strong>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>Loading Capacity:</td>
+                      <td>
+                        <strong id="disp_loadingcap"></strong>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>Total Amount:</td>
+                      <td>
+                        <strong id="disp_totalamount"></strong>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>Balance:</td>
+                      <td>
+                        <strong id="disp_balance"></strong>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Action</td>
+                      <td>
+                        <button class="btn btn-info btn-sm" onclick="view_route_group_details()">View Route Group Details</button>
+                      </td>
+                    </tr>
+                  </table>
+                  <hr class="text-primary">
+
+                  <div class="alreadyconfirmed">
+                    <h5><i class="fa fa-circle text-primary"></i> Available Transaction for Dynamic Routing</h5>
+                    <table class="table table-hover display nowrap tabtables uptDynamicTBL" style="width: 100% !important;">
+                        <thead>
+                          <tr>
+                          <th></th>
+                          <th>BOOKING DATE</th>
+                          <th>MUNICIPALITY</th>
+                          <th>BARANGAY</th>
+                          <th>SALESMAN</th>
+                          <th>DAYS LAPSE</th>
+                          <th>REFERENCE</th>
+                          <th>CUSTOMER</th>
+                          <th>AMOUNT</th>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                  </div>
+
+                  <input type="hidden" id="cancelRouteIDRefHolder">
+                  <input type="hidden" id="platenoRouteHolder">
+                  <input type="hidden" id="unloadingDateRouteHolder">
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger alreadyconfirmed" style="float: left;" onclick="cancelroutelist()">Remove</button>
+                  <button type="button" class="btn btn-success alreadyconfirmed" style="float: left;" onclick="confirmroutelist()">Create SRS</button>
+                  <button type="button" class="btn btn-warning alreadyconfirmed" style="float: left;" onclick="printPickList()">Print Pick List</button>
+
+                  <button type="button" class="btn btn-warning printloadplanbtn" style="float: left;" onclick="reassignLoadPlan()">Re-assign Load Plan</button>
+                  <!-- <button type="button" class="btn btn-primary alreadyconfirmed" id='updateCustomertbtn' onclick="execute_update()">Update</button> -->
+                  <button type="button" class="btn btn-primary printloadplanbtn" onclick="printloadplan()"><i class="fa fa-print"></i> Print Load Plan</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal fade" id="duplicateUserModal" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">SESSION ENDED</h4>
+                </div>
+                <div class="modal-body">
+                  <p>Sorry, your session has been disconnected. Another user is currently using your account.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" onclick="cofirmationDupUser()">GOT IT</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal fade" id="filterTransModal" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Filter Data</h4>
+                </div>
+                <div class="modal-body">
+                 
+                    <table class="table table-striped">
+                        <tr>
+                            <td>Date</td>
+                            <td class="text-center">
+                                <div class="filterdate_extruct">
+                                    <span>Filter Date</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- <tr>
+                            <td>Province</td>
+                            <td>
+                                <select class="form-control" name="" id="provinceselect" class="form-control">
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="hideselectioncontents">
+                            <td>Municipality</td>
+                            <td>
+                                <select class="form-control" name="" id="municipalityselect" name="municipalityselect[]" multiple="multiple"></select>
+                            </td>
+                        </tr>
+                        <tr class="hideselectioncontents">
+                            <td>Barangay</td>
+                            <td>
+                                <select class="form-control" name="" id="barangayselect" name="municipalityselect[]" multiple="multiple"></select>
+                            </td>
+                        </tr>
+                        <tr class="hideselectioncontents">
+                            <td>Salesman</td>
+                            <td>
+                                <select class="form-control" name="" id="salesmanSelect" name="barangayselect[]" multiple="multiple"></select>
+                            </td>
+                        </tr> -->
+                    </table>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" onclick="filter_dynaroute_transaction()">Proceed</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="dynamicRoute_inside_details" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Dynamic Route - Transaction Details</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-hover display nowrap tabtables transactionDetails" style="width: 100% !important;">
+                        <thead>
+                          <tr>
+                          <th></th>
+                          <th>BOOKING DATE</th>
+                          <th>MUNICIPALITY</th>
+                          <th>BARANGAY</th>
+                          <th>SALESMAN</th>
+                          <th>DAYS LAPSE</th>
+                          <th>REFERENCE</th>
+                          <th>CUSTOMER</th>
+                          <th>AMOUNT</th>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal fade" id="reassign_dynamicrouteModal" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Re-assign Dynamic Route</h4>
+                </div>
+                <div class="modal-body">
+                 
+                    <table class="table table-striped">
+                        <tr>
+                            <td>Vehicle</td>
+                            <td>
+                                <select class="form-control" id="driverselect_ra">
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <input type="hidden" id="cIDreassignHolder">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" id="maincreationdrl" onclick="exec_dynaroute_reassign()">Proceed</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="updateDyanamicRouteModal" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Assign Dynamic Route</h4>
+                </div>
+                <div class="modal-body">
+                 
+                    <table class="table table-striped">
+                        <tr>
+                            <td>Vehicle</td>
+                            <td>
+                                <select class="form-control" id="driverselect">
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Loading Capacity</td>
+                            <td>
+                               <input type="text" id="loadingCapHolder" class="form-control" disabled> 
+                            </td>
+                        </tr>
+                        <tr>
+                          <td>Unloading Date</td>
+                          <td>
+                            <input type="date" class="form-control" id="unloadingDate">
+                          </td>
+                      </tr>
+                        <tr>
+                            <td>Total Drops</td>
+                            <td>
+                                <input type="text" id="totalTransactionHolder" class="form-control" disabled>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Total Amount</td>
+                            <td>
+                                <input type="text" id="totalAmountHolderDisplay" class="form-control" disabled>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <input type="hidden" id="totalAmountHolder">
+                    <input type="hidden" id="cIDhoLDERforUpdate">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" id="maincreationdrl" onclick="exec_dynaroute_transaction()">Proceed</button>
+                  <button type="button" class="btn btn-primary" id="updatedrl" onclick="exec_update_dynaroute_transaction()">Update</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+
+          <div class="modal fade" id="syncbtdtDriverModal" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Select BTDT Driver</h4>
+                </div>
+                <div class="modal-body">
+                  <table class="table table-striped">
+                    <!-- <tr>
+                      <td>BTDT Driver:</td>
+                      <td><select id="btdtdrvierList" name="btdtdrvierList[]"></select>
+                     </td>
+                    </tr> -->
+                    <tr>
+                      <td>Booking Date:</td>
+                      <td><span class="dssdatePicker" style="text-align: left; margin-left: 70px;"> &nbsp; 
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                        <span class="datestring"></span>
+                       </span>
+                     </td>
+                  </table>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="execSyncBtdt()">Execute</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+
+  <script src="/Commonusrs/DATATABLES/jquery.dataTables.min.js"></script>
+  <script src="/Commonusrs/DATATABLES/dataTables.buttons.min.js"></script>
+  <script src="/Commonusrs/DATATABLES/buttons.print.min.js"></script>
+  <script src="/Commonusrs/DATATABLES/buttons.html5.min.js"></script>
+  <script src="/Commonusrs/DATATABLES/jszip.min.js"></script>
+  <script src="/Commonusrs/DATATABLES/ellipsis.js"></script>
+  <script src="/Commonusrs/DATATABLES/dataTables.select.min.js"></script>
+  <script type="text/javascript" src="/Commonusrs/DATATABLES/dataTables.checkboxes.min.js"></script>
+
+  <script type="text/javascript" src="/web/web-commons.js"></script>
+  <script type="text/javascript" src="/bootbox/bootbox.min.js"></script>
+  
+  <script type="text/javascript" src="/js/multi/dist/js/bootstrap-multiselect.js"></script>
+  <script src="/HASH/md5.js"></script>
+  <script src="/HASH/aes.js"></script>
+  <script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+  <script src="js/dynamic_route_upt.js"></script>
+  <script src="js/dynamicroute_inside_details.js"></script>
+
+    <script type="text/javascript">
+      var user = localStorage.getItem("adminUserName");
+      var usernm = localStorage.getItem("adminUserName");
+      var usertype = localStorage.getItem("usertype");
+      
+      getcompname();
+      function getcompname(){
+      $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {"type":"GET_COMPANYNAME", "CONN":con_info},
+          dataType: "json",
+          crossDomain: true,
+          cache: false,            
+            success: function(r){ 
+            $('#titleHeading').html(r[0].company.toUpperCase() +' / Dynamic Route Planning');
+            }
+        });
+      } 
+
+      // determineUserType(usertype); 
+
+      datatableApp();
+      datatableApp2();
+      datatableApp3();
+
+      datepicker_adjustrouting();
+
+      $('#maincreationdrl').show();
+      $('#updatedrl').hide();
+
+      
+      datePicker_booking();
+      
+      //CALL LOADING CAP HEADER
+      stockRequestSourceData();
+      tableData.clear().rows.add(sourceDat).draw();
+      
+      var startPickDate_b, endPickDate_b, if1dayisSelected;
+      function datePicker_booking(){
+       var start = moment().subtract(0, 'days');
+        var end = moment();
+
+        startPickDate_b = start.format('MMMM D, YYYY');
+        endPickDate_b = end.format('MMMM D, YYYY');
+
+        $('.filterdate_booking').daterangepicker({
+            "alwaysShowCalendars": true,
+            "startDate": start,
+            "endDate": end,
+            "maxDate": end,
+            "applyClass": "btn-primary",
+            "autoApply": false,
+            ranges: {
+               'Today': [moment(), moment()],
+               'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+               'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+               'This Month': [moment().startOf('month'), moment().endOf('month')],
+               'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        }, function(start, end, label) {
+             //$('.filterdate_booking span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+             var d1 = moment(start);
+             var d2 = moment(end);
+             if1dayisSelected = d2.diff(d1);
+             startPickDate_b = start.format('MMMM D, YYYY');
+             endPickDate_b = end.format('MMMM D, YYYY');
+          });
+
+        $('.filterdate_booking').on('apply.daterangepicker', function(ev, picker) {
+          //$('#stockRequest_TAB').hide();
+         startPickDate_b = picker.startDate.format('YYYY-MM-DD');
+         endPickDate_b = picker.endDate.format('YYYY-MM-DD');
+          //salesmanDataObject(start, end);
+          //tableData.clear().rows.add(sourceData).draw();
+
+           stockRequestSourceData();
+           tableData.clear().rows.add(sourceDat).draw();
+
+          
+         // datefiltersearch_booking(start, end);
+        });
+      }
+
+
+      $('.hideselectioncontents').hide();
+
+      // getmunicipality();
+      // getBarangaySelect();
+
+      datePicker_extruct();
+      var startPickDate_e, endPickDate_e, if1dayisSelected;
+      function datePicker_extruct(){
+       var start = moment().subtract(0, 'days');
+        var end = moment();
+        $('.filterdate_extruct').daterangepicker({
+            "alwaysShowCalendars": true,
+            "startDate": start,
+            "endDate": end,
+            "maxDate": end,
+            "applyClass": "btn-primary",
+            "autoApply": false,
+            ranges: {
+               'Today': [moment(), moment()],
+               'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+               'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+               'This Month': [moment().startOf('month'), moment().endOf('month')],
+               'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        }, function(start, end, label) {
+             var d1 = moment(start);
+             var d2 = moment(end);
+             if1dayisSelected = d2.diff(d1);
+             startPickDate = start.format('MMMM D, YYYY');
+             endPickDate = end.format('MMMM D, YYYY');
+
+             $('.filterdate_extruct span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+           
+          });
+
+        $('.filterdate_extruct').on('apply.daterangepicker', function(ev, picker) {
+          //$('#stockRequest_TAB').hide();
+          startPickDate_e = picker.startDate.format('YYYY-MM-DD');
+          endPickDate_e = picker.endDate.format('YYYY-MM-DD');
+
+          $('.filterdate_extruct span').html(startPickDate_e + ' - ' + endPickDate_e);
+
+
+          $('.hideselectioncontents').show();
+
+          // getmunicipality(startPickDate_e, endPickDate_e);
+          // getBarangaySelect(startPickDate_e, endPickDate_e);
+          // getSalesmanselect(startPickDate_e, endPickDate_e);
+        //    stockRequestSourceData2();
+        //    tableData2.clear().rows.add(sourceDat2).draw();
+        });
+      }
+
+     
+      function filter_dynaroute_transaction(){
+        console.log(startPickDate_e +'\n'+ endPickDate_e);
+
+        if(startPickDate_e == undefined || startPickDate_e == null){
+            alert('Please select a date.');
+        }else{
+           stockRequestSourceData2();
+           tableData2.clear().rows.add(sourceDat2).draw();
+
+           $('#filterTransModal').modal('hide');
+           $('.hideselectioncontents').hide();
+        }
+        
+      }
+
+      datePicker_btdt();
+      var startPickDate_btdt, endPickDate_btdt, if1dayisSelected_btdt;
+      function datePicker_btdt(){
+       var start = moment().subtract(0, 'days');
+        var end = moment();
+        $('.filterdate_btdt').daterangepicker({
+            "alwaysShowCalendars": true,
+            "startDate": start,
+            "endDate": end,
+            "maxDate": end,
+            "applyClass": "btn-primary",
+            "autoApply": false,
+            ranges: {
+               'Today': [moment(), moment()],
+               'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+               'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+               'This Month': [moment().startOf('month'), moment().endOf('month')],
+               'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        }, function(start, end, label) {
+             $('.filterdate_btdt span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+             var d1 = moment(start);
+             var d2 = moment(end);
+             if1dayisSelected_btdt = d2.diff(d1);
+             startPickDate_btdt = start.format('MMMM D, YYYY');
+             endPickDate_btdt = end.format('MMMM D, YYYY');
+          });
+
+        $('.filterdate_btdt').on('apply.daterangepicker', function(ev, picker) {
+          //$('#stockRequest_TAB').hide();
+          startPickDate_btdt = picker.startDate.format('YYYY-MM-DD');
+          endPickDate_btdt = picker.endDate.format('YYYY-MM-DD');
+           
+           stockRequestSourceData3();
+           tableData3.clear().rows.add(sourceDat3).draw();
+        });
+      }
+
+      function datefiltersearch_booking(start, end){
+        $.fn.dataTable.ext.search.push(
+            function( settings, data, dataIndex ) {
+              var min = start;
+              var max = end;
+              var testdate = new Date(data[1]);
+              var startDate = moment(testdate).format('YYYY-MM-DD');
+
+              if (min == null && max == null) { return true; }
+              if (min == null && startDate <= max) { return true;}
+              if(max == null && startDate >= min) {return true;}
+              if (startDate <= max && startDate >= min) { return true; }
+              return false;
+            }
+        );
+
+          tableData.draw();
+      }
+
+      function datefiltersearch_extruct(start, end){
+        $.fn.dataTable.ext.search.push(
+            function( settings, data, dataIndex ) {
+              var min = start;
+              var max = end;
+              var testdate = new Date(data[1]);
+              var startDate = moment(testdate).format('YYYY-MM-DD');
+
+              if (min == null && max == null) { return true; }
+              if (min == null && startDate <= max) { return true;}
+              if(max == null && startDate >= min) {return true;}
+              if (startDate <= max && startDate >= min) { return true; }
+              return false;
+            }
+        );
+
+          tableData2.draw();
+      }
+
+      $('#approved_stockrequestlist').removeClass('hidden');
+      $('#approved_stockrequestlist').hide();
+
+      $('#btdt_stockrequestlist').removeClass('hidden');
+      $('#btdt_stockrequestlist').hide();
+      $('.btn1').click(function (){
+           
+           $('.btn1').removeClass('inactiveTab');
+           $('.btn1').addClass('activeTab');
+
+           $('.btn2').removeClass('activeTab');
+          //  $('.btn2').addClass('inactiveTab');
+
+           $('.btn3').removeClass('activeTab');
+          //  $('.btn3').addClass('inactiveTab');
+
+           $('#approved_stockrequestlist').hide();
+           $('#btdt_stockrequestlist').hide();
+           $('#pending_stockrequestlist').show();
+
+           //stockRequestSourceData();
+           //tableData.clear().rows.add(sourceDat).draw();
+      });
+
+      $('.btn2').click(function (){
+
+          //  $('.btn2').removeClass('inactiveTab');
+           $('.btn2').addClass('activeTab');
+
+           $('.btn1').removeClass('activeTab');
+          //  $('.btn1').addClass('inactiveTab');
+
+           $('.btn3').removeClass('activeTab');
+          //  $('.btn3').addClass('inactiveTab');
+
+           $('#pending_stockrequestlist').hide();
+           $('#btdt_stockrequestlist').hide();
+           $('#approved_stockrequestlist').show();
+
+            //stockRequestSourceData2();
+            //tableData2.clear().rows.add(sourceDat2).draw();
+         
+      });
+
+      $('.btn3').click(function (){
+
+        $('.btn2').removeClass('activeTab');
+        // $('.btn2').addClass('activeTab');
+
+        $('.btn1').removeClass('activeTab');
+        // $('.btn1').addClass('inactiveTab');
+
+        // $('.btn3').removeClass('activeTab');
+        $('.btn3').addClass('activeTab');
+
+        $('#pending_stockrequestlist').hide();
+        $('#approved_stockrequestlist').hide();
+        $('#btdt_stockrequestlist').show();
+
+        //stockRequestSourceData2();
+        //tableData2.clear().rows.add(sourceDat2).draw();
+
+      });
+
+
+      var sourceDat;
+      function stockRequestSourceData(){
+        var start = startPickDate_b;
+        var end = endPickDate_b;
+        var dialog = bootbox.dialog({
+              message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> please wait...</p>',
+              backdrop: true
+            });
+         $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {"type":"GET_DYNAMIC_ROUTE_HEADER", "start":start, "end":end, "CONN":con_info},
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(r){
+                sourceDat = r;
+                dialog.modal('hide');
+               },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                botboxMsg = '<b class="text-danger">Ops! Something went wrong!</b><br/>' + XMLHttpRequest.responseText + ' CONTACT SYSTEM ADMINISTRATOR!';
+                dialog.init(function(){
+                      setTimeout(function(){
+                        dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                    }, 1000);
+                });
+              }
+            });
+      }
+
+      var tableData;
+      function datatableApp(){
+          tableData = $('table.pendingTBL').DataTable({
+              "dom": 'Bfrtip',
+              "responsive": true,
+              "data": sourceDat,
+              "scrollX": true,
+              "ordering": true,
+              columns: [
+                  { data: "cID" },
+                  { data: "SALESMAN" },
+                  { data: "TOTALTRANSACTIONS" },
+                  { data: "LOADINGCAP"},
+                  { data: "BALANCEAMOUNT" },
+                  { data: "TOTALAMOUNT_f" },
+                  { data: "UNLOADINGdate" },
+                  { data: "STATUSDIF" },
+                  { data: "DATECREATED" },
+                ],
+                buttons: [
+                  
+                   {
+                    text: '<i class="fas fa-calendar-alt"></i> Filter Date',
+                    className: 'filterdate_booking',
+                    action: function(e, dt, node, config){
+                      /* var row = tableData.rows('.selected').data();
+                         if(row.length == 0){
+                          console.log('empty selection');
+                          alert('PLEASE SELECT A TRANSACTION TO UPDATED');
+                         }else{
+                           for(var x = 0; x < row.length; x++){
+                               console.log(row[x].refNo +' '+ row[x].stockCode +' '+ row[x].mdCode);
+                               updateStockReq(row[x].refNo, row[x].mdCode, row[x].stockCode);
+                           }
+                           stockRequestSourceData();
+                           tableData.clear().rows.add(sourceDat).draw();
+                         }*/
+                    }
+                  }
+                  
+                ],
+                columnDefs: [
+                  {
+                    targets: [3, 4 ,5],
+                    className: 'dt-body-right',
+                    // render: $.fn.dataTable.render.ellipsis(20)
+                  },
+                ]
+          });
+
+        $('table.pendingTBL tbody').on( 'click', 'tr', function () {
+            var tr = $(this).closest('tr');
+            var row = tableData.row(tr);
+            viewDetails_routelist(row.data());
+        });
+
+      }
+
+      function viewDetails_routelist(r){
+        $('#dist_plateno').html(r.SALESMAN);
+        $('#disp_ttransaction').html(r.TOTALTRANSACTIONS);
+        $('#disp_loadingcap').html(r.LOADINGCAP);
+        $('#disp_totalamount').html(r.TOTALAMOUNT_f);
+        $('#disp_balance').html(r.BALANCEAMOUNT);
+
+
+        $('#driverselect').val(r.PLATENO);
+        $('#cIDhoLDERforUpdate').val(r.cID);
+        $('#cancelRouteIDRefHolder').val(r.cID);
+
+
+        $('#unloadingDate').val(r.UNLOADINGdate);
+
+        $('#platenoRouteHolder').val(r.PLATENO);
+        $('#unloadingDateRouteHolder').val(r.UNLOADINGdate);
+
+        $('.printloadplanbtn').hide();
+        if(r.STATUS == '2'){
+          $('.alreadyconfirmed').hide();
+          $('.printloadplanbtn').show();
+        }else{
+          $('.alreadyconfirmed').show();
+        }
+
+        $('#updatecustomerModal').modal('show');
+      }
+
+       var sourceDat2;
+      function stockRequestSourceData2(){
+        var dialog = bootbox.dialog({
+              message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> please wait...</p>',
+              backdrop: true
+            });
+         $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {
+                      "type":"GET_ADNVANCE_ORDER_TABULAR",
+                      "CONN":con_info,
+                      "start":startPickDate_e,
+                      "end":endPickDate_e
+                    },
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(r){ 
+                sourceDat2 = r;
+                dialog.modal('hide');
+               },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                botboxMsg = '<b class="text-danger">Ops! Something went wrong!</b><br/>' + XMLHttpRequest.responseText + ' CONTACT SYSTEM ADMINISTRATOR!';
+                dialog.init(function(){
+                      setTimeout(function(){
+                        dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                    }, 1000);
+                });
+              }
+            });
+      }
+
+      function printPickList(){
+        var cIDHolder = $('#cIDhoLDERforUpdate').val();
+        var unloadingDate = $('#unloadingDateRouteHolder').val();
+        var plateno = $('#dist_plateno').text();
+
+        localStorage.setItem('LDNG_UNLOADINGDATE', unloadingDate)
+        localStorage.setItem('LDNG_CID', cIDHolder);
+        localStorage.setItem('LDNG_PLATENO', plateno);
+
+
+        window.open('print_picklist_dynamicroute', '_blank')
+      }
+
+      function printloadplan(){
+        var cIDHolder = $('#cIDhoLDERforUpdate').val();
+        var unloadingDate = $('#unloadingDateRouteHolder').val();
+
+        localStorage.setItem('LDNG_UNLOADINGDATE', unloadingDate)
+        localStorage.setItem('LDNG_CID', cIDHolder);
+
+        window.open('print_load_plan', '_blank')
+      }
+
+      function usemapdr(){
+        window.open('dynamic_routing_map_v', '_blank');
+      }
+
+      var tableData2;
+      var GBLSELECTEDITEMS;
+      function datatableApp2(){
+         tableData2 = $('table.approvedTBL').DataTable({
+              "dom": 'Bfrtip',
+              "responsive": true,
+              "data": sourceDat2,
+              "scrollX": true,
+              "ordering": true,
+              order: [[ 2, 'desc' ]],
+              language: {
+                        select: {
+                            rows: ""
+                        }
+                    },
+                    select: true,
+                    select: {
+                        style: 'multi',
+                        //selector: 'td:first-child'
+                    },
+              columns: [
+                    {   
+                    'data': null,
+                    'targets': 0,
+                    'checkboxes': {
+                        'selectRow': true
+                        }
+                    },
+                  { data: "deliveryDate" },
+                  { data: "MUNICIPALITY"},
+                  { data: "BARANGAY"},
+                  { data: "SALESMAN"},
+                  { data: "DAYS_LAPSE" },
+                  { data: "refno" },
+                  { data: "CUSTOMER" },
+                  { data: "totalAmountFormatted" }
+                ],
+                columnDefs: [
+                  {
+                    targets: [8],
+                    className: 'dt-body-right',
+                    // render: $.fn.dataTable.render.ellipsis(20)
+                  },
+                ],
+                buttons: [
+                    {
+                        text: 'Group Transaction',
+                        className: 'approveBtn_stocReq',
+                        action: function(e, dt, node, config){
+                            GBLSELECTEDITEMS = [];
+
+                            $('#maincreationdrl').show();
+                             $('#updatedrl').hide();
+                            var row = tableData2.rows('.selected').data();
+                                if(row.length == 0){
+                                    alert('NO DATA SELECTED!');
+                                }else{
+                                    var c = confirm('Are you sure you want to update these transaction?');
+                                    if(c){
+                                        // var dialog = bootbox.dialog({
+                                        //     message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> tagging unploaded sales please wait...</p>',
+                                        //     backdrop: true,
+                                        //     //closeButton: false
+                                        //     });
+                                        var totaltransaction = row.length;
+                                        var totalAmount = 0.0;
+                                        
+                                        GBLSELECTEDITEMS = row;
+
+                                        for(var x = 0; x < row.length; x++){
+                                            console.log(row[x].transactionID);
+                                            totalAmount += parseFloat(row[x].totalAmount);
+                                        }
+                                        
+                                        // salesmanDataObject_datatables(startPickDate, endPickDate);
+                                        // tableData.clear().rows.add(sourceData).draw();
+                                        // dialog.modal('hide');
+                                        // alert('Transaction successfull updated!');
+                                    
+                                    }
+
+                                    $('#totalTransactionHolder').val(totaltransaction);
+                                    $('#totalAmountHolderDisplay').val(totalAmount.toLocaleString());
+                                    $('#totalAmountHolder').val(totalAmount);
+                                    $('#loadingCapHolder').val('');
+                                    $('#driverselect').val('');
+                                    $('#updateDyanamicRouteModal').modal('show');  
+                                }
+                                
+                        }
+                    },
+                   {
+                    text: 'Filter',
+                    className: 'filter',
+                    action: function(e, dt, node, config){
+                        $('#filterTransModal').modal('show');
+                    }
+                  }
+                 
+                ],
+                "language": {
+                      "emptyTable": "No available records as of now."
+                },
+                "drawCallback": function( settings ) {
+                  $('[data-toggle="tooltip1"]').tooltip();
+                  $('[data-toggle="tooltip2"]').tooltip();
+                },
+                "aaSorting": [[ 0, "desc" ]],
+          });
+
+         $('table.approvedTBL tbody').on( 'dblclick', 'tr', function () {
+            $('.checker').html('');
+            var tr = $(this).closest('tr');
+            var row = tableData2.row(tr);
+            var transactionID = tr.find('td:eq(0)').text();
+            var mdCode = tr.find('td:eq(2)').text();
+            customerList(row.data());
+            $('#transactionIDHolder').val(transactionID);
+            $('.selected_trasactionID').html(transactionID);
+            $('#salesmanTypeHolder').val('extruct');
+            $('#updatecustomerModal').modal('toggle');
+          });
+      }
+
+      function exec_dynaroute_transaction(){
+        var loadingcap = $('#loadingCapHolder').val();
+        var totalAmountHolder = $('#totalAmountHolder').val();
+        var plateNo = $('#driverselect').val();
+        var totaltransaction = $('#totalTransactionHolder').val();
+        var unloadingDate = $('#unloadingDate').val();
+
+        if(plateNo == undefined){
+            alert('Please select a vehicle.');
+        }else if(unloadingDate == undefined || unloadingDate == ''){
+          alert('Please select unloading date.');
+        }else{
+            if(parseFloat(totalAmountHolder) > parseFloat(loadingcap)){
+                alert('Unable to Proceed: Loading cap must not exceed to ' + loadingcap);
+            }else{
+                 $.ajax ({
+                    url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+                        type: "GET",
+                        data: {
+                            "type":"INSERT_DYNAMIC_ROUTE_HEADER", 
+                            loadingcap:loadingcap,
+                            totalAmountHolder:totalAmountHolder,
+                            plateNo:plateNo,
+                            totaltransaction:totaltransaction,
+                            unloadingDate:unloadingDate,
+                            "CONN":con_info,
+                            },
+                        dataType: "json",
+                        crossDomain: true,
+                        cache: false,           
+                        async: false, 
+                        success: function(r){
+
+                          $('#maincreationdrl').html('<i class="fa fa-spin fa-spinner"></i> please wait..');
+                          $('#maincreationdrl').prop('disabled', true);
+
+                           var routingrefno = r;
+                           var y = GBLSELECTEDITEMS;
+                           for(var x = 0; x < y.length; x++){
+                            exec_tagged_dynamicroute_transactions(y[x].cID, routingrefno, plateNo, unloadingDate);
+                           }
+
+
+                           setTimeout(function() { 
+
+                           alert('Dynamic Route Successfully Created.');
+                           $('#updateDyanamicRouteModal').modal('hide');
+
+                           $('#updatecustomerModal').modal('hide');
+
+                           
+                            $('#maincreationdrl').html('Execute');
+                            $('#maincreationdrl').prop('disabled', false);
+
+                           }, 10000);
+                           stockRequestSourceData();
+                            tableData.clear().rows.add(sourceDat).draw();
+
+                           stockRequestSourceData2();
+                            tableData2.clear().rows.add(sourceDat2).draw();
+
+                        }//success
+                    });
+
+            }
+        }
+      }
+
+
+
+      function exec_update_dynaroute_transaction(){
+        var loadingcap = $('#loadingCapHolder').val();
+        var totalAmountHolder = $('#totalAmountHolder').val();
+        var plateNo = $('#driverselect').val();
+        var totaltransaction = $('#totalTransactionHolder').val();
+
+        var cID_for_update = $('#cIDhoLDERforUpdate').val();
+        var unloadingDate = $('#unloadingDate').val();
+
+        if(plateNo == undefined){
+            alert('Please select a vehicle.');
+        }else{
+            if(parseFloat(totalAmountHolder) > parseFloat(loadingcap)){
+                alert('Unable to Proceed: Loading cap must not exceed to ' + loadingcap);
+            }else{
+                 $.ajax ({
+                    url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+                        type: "GET",
+                        data: {
+                            "type":"UPDATE_DYNAMIC_ROUTE_HEADER", 
+                            loadingcap:loadingcap,
+                            totalAmountHolder:totalAmountHolder,
+                            plateNo:plateNo,
+                            totaltransaction:totaltransaction,
+                            cID_for_update:cID_for_update,
+                            unloadingDate:unloadingDate,
+                            "CONN":con_info,
+                            },
+                        dataType: "json",
+                        crossDomain: true,
+                        cache: false,           
+                        async: false, 
+                        success: function(r){
+
+                          $('#updatedrl').html('<i class="fa fa-spin fa-spinner"></i> please wait..');
+                          $('#updatedrl').prop('disabled', true);
+
+                           var routingrefno = r;
+                           var y = GBLSELECTEDITEMS;
+                           for(var x = 0; x < y.length; x++){
+                            exec_tagged_dynamicroute_transactions(y[x].cID, cID_for_update, plateNo, unloadingDate);
+                           }
+
+
+                           setTimeout(function() { 
+                            alert('Dynamic Route Successfully Updated.');
+                            $('#updateDyanamicRouteModal').modal('hide');
+                            $('#updatecustomerModal').modal('hide');
+
+                            $('#updatedrl').html('Execute');
+                            $('#updatedrl').prop('disabled', false);
+
+                               location.reload();
+                           }, 5000);
+
+                        
+
+                           stockRequestSourceData2();
+                            tableData3.clear().rows.add(sourceDat2).draw();
+                        }//success
+                    });
+
+            }
+        }
+      }
+      
+
+      function exec_tagged_dynamicroute_transactions(cID, routingrefno, plateNo, unloadingDate){
+        $.ajax ({
+        url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {
+                "type":"EXEC_UPDATE_DYNAROUTE_TRANS", 
+                cID:cID,
+                routingrefno:routingrefno,
+                plateNo:plateNo,
+                unloadingDate:unloadingDate,
+                "CONN":con_info,
+                },
+            dataType: "json",
+            crossDomain: true,
+            cache: false,           
+            async: true
+        });
+      }
+
+    
+
+      function cancelUnprocessed(){
+        var transactionID = $('#transactionIDHolder').val();
+        var f = confirm('Are you sure you want to cancel this transaction?');
+        if(f){
+          $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {
+                       "type":"CANCEL_UNPROCESSED_TRANS",
+                       "CONN":con_info,
+                       "transactionID":transactionID
+                     },
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(r){
+                  alert('Transaction was successfully cancelled.');
+               },
+               error: function(XMLHttpRequest, textStatus, errorThrown) {
+                 alert("ERROR OCCUR: " + XMLHttpRequest.responseText);
+               }
+              });
+        }
+
+      }
+
+
+      function confirmroutelist(){
+
+        var plateno = $('#platenoRouteHolder').val();
+        var unloadingdate = $('#unloadingDateRouteHolder').val();
+        var cID = $('#cancelRouteIDRefHolder').val();
+
+        var f = confirm('Are you sure you want to confirm this transaction?');
+        if(f){
+          $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {
+                       "type":"EXEC_CONFIRM_ROUTeLIST",
+                       unloadingdate:unloadingdate,
+                        plateno:plateno,
+                        cID:cID,
+                       "CONN":con_info
+                     },
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(r){
+                  alert('Transaction was successfully confirmed.');
+                  location.reload();
+               },
+               error: function(XMLHttpRequest, textStatus, errorThrown) {
+                 alert("ERROR OCCUR: " + XMLHttpRequest.responseText);
+               }
+              });
+        }
+      }
+
+      getprovince();
+      function getprovince(){
+        // $.ajax ({
+        //   url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+        //   type: "GET",
+        //   data: {
+        //             "type":"GET_DYNAROUTE_PROVINCE",
+        //             "start":startPickDate_e,
+        //             "end":endPickDate_e,
+        //             "CONN":con_info},
+        //   dataType: "json",
+        //   crossDomain: true,
+        //   cache: false,          
+        //   async: false,  
+        //     success: function(data){ 
+        //       for(var x = 0; x<data.length; x++){
+        //           $('#provinceselect').append('<option value="'+data[x].mdCode+'">'+data[x].Salesman+'</option>');
+        //        }
+
+               $('#provinceselect').multiselect({
+                  numberDisplayed: 1,
+                  enableCaseInsensitiveFiltering: true,
+                  includeSelectAllOption: true,
+                  selectAllNumber: true,
+                  buttonWidth: '100%',
+                  maxHeight: 300
+               });
+
+               
+        //      }
+        // });
+      }
+
+  
+    function getmunicipality(startPickDate_e, endPickDate_e){
+      $('#municipalityselect').multiselect('destroy');
+
+         $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {
+                    "type":"GET_DYNAROUTE_PLACES",
+                    "start":startPickDate_e,
+                    "end":endPickDate_e,
+                    "places":'municipality',
+                    "CONN":con_info
+                },
+          dataType: "json",
+          crossDomain: true,
+          cache: false,          
+          async: false,  
+            success: function(data){ 
+              for(var x = 0; x<data.length; x++){
+                  $('#municipalityselect').append('<option value="'+data[x].PLACES+'">'+data[x].PLACES+'</option>');
+               }
+
+              $('#municipalityselect').multiselect({
+                  numberDisplayed: 1,
+                  enableCaseInsensitiveFiltering: true,
+                  includeSelectAllOption: true,
+                  selectAllNumber: true,
+                  buttonWidth: '100%',
+                  maxHeight: 300
+              });
+
+              }
+        });
+    }
+
+
+    function getBarangaySelect(startPickDate_e, endPickDate_e){
+  $('#barangayselect').multiselect('destroy');
+      $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {
+                    "type":"GET_DYNAROUTE_PLACES",
+                    "start":startPickDate_e,
+                    "end":endPickDate_e,
+                    "places":'barangay',
+                    "CONN":con_info
+                },
+          dataType: "json",
+          crossDomain: true,
+          cache: false,          
+          async: false,  
+            success: function(data){ 
+              for(var x = 0; x<data.length; x++){
+                  $('#barangayselect').append('<option value="'+data[x].PLACES+'">'+data[x].PLACES+'</option>');
+               }
+
+              $('#barangayselect').multiselect({
+                  numberDisplayed: 1,
+                  enableCaseInsensitiveFiltering: true,
+                  includeSelectAllOption: true,
+                  selectAllNumber: true,
+                  buttonWidth: '100%',
+                  maxHeight: 300
+              });
+
+              }
+        });
+    }
+
+    function getSalesmanselect(startPickDate_e, endPickDate_e){
+      $('#salesmanSelect').multiselect('destroy');
+
+      $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {
+                    "type":"GET_DYNAROUTE_SALESMANLIST",
+                    "start":startPickDate_e,
+                    "end":endPickDate_e,
+                    "CONN":con_info
+                },
+          dataType: "json",
+          crossDomain: true,
+          cache: false,          
+          async: false,  
+            success: function(data){ 
+              for(var x = 0; x<data.length; x++){
+                  $('#salesmanSelect').append('<option value="'+data[x].mdCode+'">'+data[x].salesman+'</option>');
+               }
+
+              $('#salesmanSelect').multiselect({
+                  numberDisplayed: 1,
+                  enableCaseInsensitiveFiltering: true,
+                  includeSelectAllOption: true,
+                  selectAllNumber: true,
+                  buttonWidth: '100%',
+                  maxHeight: 300
+              });
+
+              }
+        });
+    }
+      
+
+
+    var GBLDRIVERLISTHOLDER;
+    get_btdt_driver();
+      function get_btdt_driver(){
+         $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {
+                  "type":"GET_BTDT_VEHICLE_LIST",
+                  "CONN":con_info,
+                 },
+              dataType: "json",
+              crossDomain: true,
+              cache: false,           
+              async: false, 
+              success: function(r){
+                GBLDRIVERLISTHOLDER = r;
+                var cont = `<option value="" selected disabled hidden>Choose here..</option>`;
+                for(var x = 0; x <r.length; x++){
+                   cont += '<option value="'+r[x].mdCode+'">'+r[x].Salesman+'</option>';
+                }
+
+                $('#driverselect').html(cont);
+                $('#driverselect_ra').html(cont);
+               }//success
+            });
+      }
+
+      $('#driverselect').on( "change", function() {
+        var val = this.value;
+        var r = GBLDRIVERLISTHOLDER;
+
+        for(var x = 0; x < r.length; x++){
+            if(val == r[x].mdCode){
+                $('#loadingCapHolder').val(r[x].loadingCap);
+            }
+        }
+        // alert(val);
+      });
+
+
+      dsspicker();
+    var dssdate;
+    function dsspicker(){
+      $('.datestring').html('Pick a date here..');
+      $('.dssdatePicker').daterangepicker({
+          "singleDatePicker": true,
+          "startDate": moment(),
+          "endDate": moment(),
+          "maxDate": moment(),
+      }, function(start, end, label) {
+        dssdate = start.format('YYYY-MM-DD');
+        var today = moment().format('YYYY-MM-DD');
+        $('.datestring').html(dssdate);
+      });
+
+      // $('#btdtspan').html('Pick a date here..');
+      // $('#btdtBookingDate').daterangepicker({
+      //     "singleDatePicker": true,
+      //     "startDate": moment(),
+      //     "endDate": moment(),
+      //     "maxDate": moment(),
+      // }, function(start, end, label) {
+      //   dssdate = start.format('YYYY-MM-DD');
+      //   var today = moment().format('YYYY-MM-DD');
+      //   $('#btdtspan').html(dssdate);
+      // });
+
+      
+    }
+    
+
+      function syncBTDTOrder(){
+        $('#syncbtdtDriverModal').modal('show');
+      }
+
+      function execSyncBtdt(){
+          var r = confirm('This could take time, please wait while we process your request.');
+          if(r){
+
+            var dialog = bootbox.dialog({
+                  message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Processing data please wait...</p>',
+                  backdrop: true
+                // closeButton: false
+                });
+            var message = 'Successfully Saved!';
+            var botboxMsg = '';
+            var ajaxTime= new Date().getTime();
+
+            var btdtdriver = $('#btdtdrvierList').val();
+            $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/POST_applicationAPI.php",
+              type: "POST",
+                data: {
+                        "type":"SYNC_BTDT_DATA",
+                        "btdtdrivermdCode":btdtdriver,
+                        "bookingDate":dssdate,
+                        "CONN":con_info
+                      }, 
+                dataType: 'json',     
+                crossDomain: true,
+                cache: false,   
+                success: function(response){   
+                if(response){
+                    botboxMsg = '<b style="color: green;">Success!</b><p>Sync BTDT was successfull. Thank You!</p>';
+                  }else{
+                    botboxMsg = '<b style="color: red;">Ops! Unable to Sync BTDT data!</b>' + response;
+                  }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  botboxMsg = '<b style="color: red;">Ops! Unable to Sync BTDT data!</b>' + XMLHttpRequest.responseText;
+                  var totalTime = new Date().getTime()-ajaxTime;
+                  dialog.init(function(){
+                        setTimeout(function(){
+                          dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                      }, 1000);
+                  });
+                }
+                }).done(function () {
+                        dialog.init(function(){
+                              setTimeout(function(){
+                                dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                            }, 1000);
+                      });
+                });
+          }
+        }
+        
+
+
+      function view_route_group_details(){
+
+        view_dynamic_route_data();
+        $('#dynamicRoute_inside_details').modal('show');
+      }
+
+
+      function reassignLoadPlan(){
+        $('#reassign_dynamicrouteModal').modal('show');
+      }
+
+      function exec_dynaroute_reassign(){
+        var f = confirm("Are you sure you want to transfer this load plan?");
+        if(f){
+
+          var mdCode = $('#driverselect_ra').val();
+          var cID = $('#cancelRouteIDRefHolder').val();
+
+          if(mdCode == undefined){
+            alert('Please select a driver first.');
+          }else{
+            $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+                data: {
+                        "type":"EXEC_REASSIGN_DYNAROUTE",
+                        "cID":cID,
+                        "mdCode":mdCode,
+                        "CONN":con_info
+                      }, 
+                dataType: 'json',     
+                crossDomain: true,
+                cache: false,   
+                success: function(r){   
+                  if(r){
+                    alert('Successfully re-assign load plan.');
+                    location.reload();
+                  }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  alert(XMLHttpRequest.responseText);
+                }
+            });
+          }//else close
+          
+        }
+      }
+      
+  
+       (function($) {
+          $.fn.clickToggle = function(func1, func2) {
+              var funcs = [func1, func2];
+              this.data('toggleclicked', 0);
+              this.click(function() {
+                  var data = $(this).data();
+                  var tc = data.toggleclicked;
+                  $.proxy(funcs[tc], this)();
+                  data.toggleclicked = (tc + 1) % 2;
+              });
+              return this;
+          };
+         }(jQuery));
+
+       
+          $("#navBtn").clickToggle(function() {   
+            openNav();
+          }, function() {
+              closeNav();
+          });
+
+          $(window).bind("load", function () {
+              $('#work-in-progress').fadeOut();
+          });
+        
+          function imgError2(image) {
+            image.onerror = "";
+            image.src = "../img/salesmanPic.jpg";
+            return true;
+          }  
+
+          function openNav() {
+              document.getElementById("mySidenav").style.width = "270px";
+              document.getElementById("main").style.marginLeft = "270px";
+          }
+
+          function closeNav() {
+              document.getElementById("mySidenav").style.width = "0";
+              document.getElementById("main").style.marginLeft= "0";
+          }
+    </script>
+</body>
+</html>

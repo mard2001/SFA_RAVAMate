@@ -1,0 +1,516 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Pending Request</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <link rel="stylesheet" href="/BOOTSTRAP3/css/bootstrap.min.css"/>
+
+    <script src="/BOOTSTRAP3/AJAX/jquery.min.js"></script>
+    <script src="/BOOTSTRAP3/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/css/mdDesign.css">
+
+    <link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+     
+   <!--=================================data reports import-=============================-->
+
+     <script type="text/javascript" src="/DATERANGEPICKER/moment.min.js"></script>
+    <script type="text/javascript" src="/DATERANGEPICKER/daterangepicker.js"></script>
+    <link rel="stylesheet" href="/DATERANGEPICKER/daterangepicker.css">
+    <link rel="stylesheet" href="/Commonusrs/DATATABLES/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="/Commonusrs/DATATABLES/editor.dataTables.min.css"/>
+    <link rel="stylesheet" href="/Commonusrs/DATATABLES/buttons.dataTables.min.css "/>
+
+    <style>
+      .newinpt{
+        height: 40px; font-weight: bold; font-size: 15px;
+      }
+    </style>
+</head>
+
+<body class="" id="page-top">
+    <div id="main">
+        <h4 class="display-4">
+          <span class='glyphicon glyphicon-file'></span> Pending Request
+              <span class="" style="float: right;">
+                <button class="btn btn-sm btn-danger" id="mainbtn">
+                  <i class="fa fa-arrow-left"></i> Main Menu
+                </button>
+              </span>
+          </h4>
+         <div class="panel" style='background-color:#2c8dd6; color: white; margin-top: 20px;'>
+
+                <div class="panel-heading">
+                  <span class='glyphicon glyphicon-list-alt'></span>
+                  <span id="titleHeading" class="display-4"></span>
+
+                  <!-- <div id="reportrange1" class="pull-right" style="background-color: transparent; cursor: pointer; color: white;">
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                        <span>Filter by Date</span> <b class="caret"></b>
+                    </div> -->
+                </div>
+                <div class="panel-body" style='background-color:#fff; color: black;'> 
+                  <!--<button class="btn btn-success btn-sm" id="appvBtn">APPROVE</button>-->
+                    <div class="loading-table">
+                         <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i> Rendering data ...
+                          <span class="sr-only">Loading...</span>
+                    </div>
+
+
+                    <div class="btn-group tabbt" style="margin-bottom: 20px;">
+                        <button type="button" class="btn tabbt btn1 activeTab">SO Transactions</button>
+                        <button type="button" class="btn tabbt btn2">CMF Transactions</button>
+                      </div> 
+                        <div id="pending_stockrequestlist">
+                          <!-- <h4 class="text-primary">Sales</h4>
+                          <hr> -->
+                            <table id="" class="table stockRequest_TAB display nowrap tabtables" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>TRANS TYPE</th>
+                                    <th>TRANS DATE</th>
+                                    <th>MDCODE</th>
+                                    <th>REFNO</th>
+                                    <th>SKU#</th>
+                                    <th>VOLUME QTY</th>
+                                    <th>AMOUNT</th>
+                                    <th>STATUS</th>
+                                    <th>REMARKS</th>
+                                    <th>LAST UPDATED</th>
+                                </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+    
+                        <div id="approved_stockrequestlist" class="hidden">
+                          <!-- <h4 class="text-primary">CMF</h4>
+                          <hr> -->
+                          <table id="" class="table cmf_Tab display nowrap tabtables" width='100%'>
+                            <thead>
+                                <tr>
+                                    <th>STATUS</th>
+                                    <!-- <th>CMFID</th> -->
+                                    <th class="">SALES PERSON</th>
+                                    <th>CUSTCODE</th>
+                                    <th class="">SOLD TO NAME</th>
+                                    <th>CONTACT PERSON</th>
+                                    <th>CUSTOMER CONTACT #</th>
+                                    <th>EMAIL</th>
+                                    <th>GEOAREA</th>
+                                    <th>CHAIN</th>
+                                    <TH>COVERAGE DAY</TH>
+                                    <TH>TIN</TH>
+                                    <TH>POSTALCODE</TH>
+                                    <th>MUNICIPALITY</th>
+                                    <th>BARANGAY</th>
+                                    <th>LONGITUDE</th>
+                                    <th>LATITUDE</th>
+                                    <th>OTHER INFO (SHIPTO)</th>
+                                    <th>OTHER INFO (SOLDTO)</th>
+                                    <TH>CUSTOMER CLASS</TH>
+                                    <th>FREQUENCY</th>
+                                    <th>REQUEST DATE</th>
+                               </tr>
+                            </thead>
+                            <tbody></tbody>
+                          </table>
+                        </div>
+                     </div>
+
+                 </div>
+               </div>
+         </div><!--main panel end-->
+
+    <div id="pendingReqmodal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-800">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title"><i class="fa fa-file"></i> Request Details</h4>
+          </div>
+          <div class="modal-body">
+              <table class="table table-hover table-condensed table-striped">
+                <tr>
+                  <td>Transaction Type.</td>
+                  <td id="upt_transtype" class=""></td>
+                </tr>
+                <tr>
+                  <td>Transaction Date</td>
+                  <td id="upt_transdate" class=""></td>
+                </tr>
+                <tr>
+                  <td>mdCode</td>
+                  <td id="upt_mdcode" class=""></td>
+                </tr>
+                <tr>
+                  <td>Refno</td>
+                  <td id="upt_refno" class=""></td>
+                </tr>
+                <tr>
+                  <td>SKU #</td>
+                  <td id="upt_sku" class=""></td>
+                </tr>
+                <tr>
+                  <td>Volume QTY</td>
+                  <td id="upt_vol" class=""></td>
+                </tr>
+                <tr>
+                  <td>Amount</td>
+                  <td id="upt_amt" class=""></td>
+                </tr>
+                <tr>
+                    <td>Remarks</td>
+                    <td id="upt_remarks" class="">----</td>
+                  </tr>
+                <tr>
+                  <td>Status</td>
+                  <td id="upt_status" class=""></td>
+                </tr>
+              </table>
+
+              <hr>
+              <h4>Transaction Details</h4>
+              <table id="transacitondetails_data" class="table table-condensed table-striped">
+
+              </table>
+
+              <input type="hidden" id="cIDHolder">
+              <input type="hidden" id="mdCodeHolder">
+              <input type="hidden" id="appvNumHolder">
+              <input type="hidden" id="otpHolder">
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger btnactions" data-dismiss="modal" onclick="denyreq()">Denied</button>
+            <button type="button" class="btn btn-primary btnactions" data-dismiss="modal" onclick="appvreq()">Approve</button>
+            <button type="button" class="btn btn-primary resendBtn" data-dismiss="modal" onclick="resendappvreq()">Re-send Approval</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="modal fade" id="actionModal" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Please indicate remarks:</h4>
+            </div>
+            <div class="modal-body">
+                <textarea name="" class="form-control" id="req_remarks" cols="30" rows="10"></textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" onclick="submitreq()">Submit</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="loginmodal" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title"><i class="fa fa-lock"></i> Approver Login <small>v.1.9</small></h4>
+            </div>
+            <div class="modal-body">
+              <div class="numbroup">
+                <label for="">Phonenumber</label>
+                <input type="text" id="phonenum" placeholder="09XXXXXXXXX" class="form-control numberOnly" maxlength="11" style="height: 40px; text-align: center; font-weight: bold; font-size: 15px;">
+              </div>
+              <div class="otpgroup">
+                <label for="">ONE-TIME PIN</label>
+                <input type="text" id="OTPholder" placeholder="XXXXXX" class="form-control numberOnly" maxlength="6" style="height: 40px; text-align: center; font-weight: bold; font-size: 15px;">
+                <small class="text-info">Note: We sent a ONE-TIME PIN to your mobile number, please check your sms inbox.</small>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary numbroup" onclick="appverlogin2()">Login</button>
+              <button type="button" class="btn btn-primary otpgroup" onclick="verifyOTP()">Verify</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="modal" id="servermodal" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"><i class="fa fa-cog"></i> SERVER SETTINGS</h4>
+          </div>
+          <div class="modal-body">
+            <small class="text-info">Note: Please set-up your site's server credentials in order to proceed.</small>
+            <br>
+           <input type="text" name="" id="stobeupdt" class="form-control newinpt" placeholder="SERVER" />
+           <br>
+           <input type="text" name="" id="dtobeupdt" class="form-control newinpt" placeholder="DATABASE" />
+           <br>
+           <input type="text" name="" id="utobeupdt" class="form-control newinpt" placeholder="USER" />
+           <br>
+           <input type="password" name="" id="ptobeupdt" class="form-control newinpt" placeholder="PASSWORD" />
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-primary" id="testBtn" onclick="
+            textCon()">Test Connection</button>
+            <button type="button" class="btn btn-primary" onclick="confirmUpdate()">Update</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="duplicateUserModal" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">SESSION ENDED</h4>
+              </div>
+              <div class="modal-body">
+                <p>Sorry, your session has been disconnected. Another user is currently using your account.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="cofirmationDupUser()">GOT IT</button>
+              </div>
+            </div>
+          </div>
+      </div>
+
+
+      <div class="modal fade" id="cmfmodaletails" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content" style="overflow:hidden;">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">CMF Details</h4>
+            </div>
+            <div class="modal-body overModal">
+                <table class="table table-hover">
+                    <tr>
+                        <td>CMFID:</td>
+                        <td class="font-weight-bold" id="vl_cmfID"></td>
+                    </tr>
+                    <tr>
+                        <td>CUSTCODE:</td>
+                        <td class="font-weight-bold" id="vl_custCode"></td>
+                    </tr>
+                    <tr>
+                        <td>SALES PERSON:</td>
+                        <td class="font-weight-bold" id="vl_salesperson"></td>
+                    </tr>
+                    <tr>
+                        <td>SOLD TO NAME:</td>
+                        <td class="font-weight-bold" id="">
+                          <input type="text" class="form-control" id="vl_soldname">
+                        </td>
+                    </tr>
+                  
+                    <tr>
+                      <td>CONTACT PERSON:</td>
+                      <td class="font-weight-bold" id="">
+                        <input type="text" class="form-control" id="vl_contactperson">
+                      </td>
+                  </tr>
+
+                    <tr>
+                        <td>CUSTOMER MOBILE #:</td>
+                        <td class="font-weight-bold" id="">
+                          <input type="text" class="form-control" id="vl_custnumber">
+                        </td>
+                    </tr>
+
+                    <tr>
+                      <tD>EMAIL</tD>
+                      <td class="font-weight-bold" id="">
+                        <input type="text" class="form-control" id="vl_email">
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>GEOAREA</td>
+                      <td class="font-weight-bold" id="">
+                        <input type="text" class="form-control" id="vl_geoarea">
+                      </td>
+                  </tr>
+
+                    <tr>
+                      <td>CHAIN</td>
+                      <td class="font-weight-bold" id="">
+                        <input type="text" class="form-control" id="vl_chain">
+                      </td>
+                  </tr>
+
+                  <tr>
+                    <td>COVERAGE DAY</td>
+                    <td class="font-weight-bold" id="">
+                      <input type="text" class="form-control" id="vl_coverageday">
+                    </td>
+                </tr>
+
+                    <tr>
+                      <td>TIN</td>
+                      <td class="font-weight-bold" id="">
+                        <input type="text" class="form-control" id="vl_tin">
+                      </td>
+                  </tr>
+
+                      <tr>
+                        <td>POSTAL CODE</td>
+                        <td class="font-weight-bold" id="">
+                          <input type="text" class="form-control" id="vl_postalcode">
+                        </td>
+                    </tr>
+
+                    <tr>
+                      <td>MUNICIPALITY</td>
+                      <td class="font-weight-bold" id="">
+                        <input type="text" class="form-control" id="vl_municipaplity">
+                      </td>
+                  </tr>
+
+                      <tr>
+                        <td>BARANGAY</td>
+                        <td class="font-weight-bold" id="">
+                          <input type="text" class="form-control" id="vl_barangay">
+                        </td>
+                    </tr>
+
+                    <tr>
+                      <td>OTHER INFO (SHIP TO)</td>
+                      <td class="font-weight-bold" id="">
+                        <input type="text" class="form-control" id="vl_othershipto">
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>OTHER INFO (SOLD TO)</td>
+                      <td class="font-weight-bold" id="">
+                        <input type="text" class="form-control" id="vl_othersoldto">
+                      </td>
+                  </tr>
+
+                  <tr>
+                    <td>CUSTOMER CLASS</td>
+                    <td class="font-weight-bold" id="">
+                      <input type="text" class="form-control" id="vl_custclass">
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>FREQUENCY</td>
+                    <td class="font-weight-bold" id="">
+                      <input type="text" class="form-control" id="vl_frequency">
+                    </td>
+                  </tr>
+
+                    <tr>
+                        <td>ADDRESS:</td>
+                        <td class="font-weight-bold" id="">
+                          <input type="text" class="form-control" id="vl_address">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>REQUEST DATE:</td>
+                        <td class="font-weight-bold" id="vl_reqdate">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>STATUS:</td>
+                        <td class="font-weight-bold" id="vl_stat">
+                        </td>
+                    </tr>
+                </table>
+                <input type="hidden" id="cmfstatdiff">
+                 <input type="hidden" name="" id="cmfIDHolder">
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-warning pull-left" onclick="updatecmf()">Update</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary" onclick="approveCMF(2)">Approve</button>
+              <button type="button" class="btn btn-danger" onclick="approveCMF(0)">Disapprove</button>
+            </div>
+          
+          </div>
+        </div>
+      </div>
+
+
+    
+    
+    <script src="/Commonusrs/DATATABLES/jquery.dataTables.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/dataTables.buttons.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/buttons.print.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/buttons.html5.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/jszip.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/ellipsis.js"></script>
+
+    <script type="text/javascript" src="/js/jasonday-printThis-c814846/printThis.js"></script>
+    <script src="/HASH/md5.js"></script>
+    <script src="/HASH/aes.js"></script>
+    <script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+    <script type="text/javascript" src="js/web-commonspendingreq.js"></script>
+    <script type="text/javascript" src="/js/bootbox.min.js"></script>
+    <script type="text/javascript" src="/js/scrolling.js"></script>
+    <script type="text/javascript" src="js/pendingReq_cmf.js"></script>
+
+    <script>
+
+      $('#approved_stockrequestlist').removeClass('hidden');
+      $('#approved_stockrequestlist').hide();
+
+      $('#btdt_stockrequestlist').removeClass('hidden');
+      $('#btdt_stockrequestlist').hide();
+      $('.btn1').click(function (){
+           
+           $('.btn1').removeClass('inactiveTab');
+           $('.btn1').addClass('activeTab');
+
+           $('.btn2').removeClass('activeTab');
+          //  $('.btn2').addClass('inactiveTab');
+
+           $('.btn3').removeClass('activeTab');
+          //  $('.btn3').addClass('inactiveTab');
+
+           $('#approved_stockrequestlist').hide();
+           $('#btdt_stockrequestlist').hide();
+           $('#pending_stockrequestlist').show();
+
+           //stockRequestSourceData();
+           //tableData.clear().rows.add(sourceDat).draw();
+      });
+
+      $('.btn2').click(function (){
+
+          //  $('.btn2').removeClass('inactiveTab');
+           $('.btn2').addClass('activeTab');
+
+           $('.btn1').removeClass('activeTab');
+          //  $('.btn1').addClass('inactiveTab');
+
+           $('.btn3').removeClass('activeTab');
+          //  $('.btn3').addClass('inactiveTab');
+
+           $('#pending_stockrequestlist').hide();
+           $('#btdt_stockrequestlist').hide();
+           $('#approved_stockrequestlist').show();
+
+            //stockRequestSourceData2();
+            //tableData2.clear().rows.add(sourceDat2).draw();
+         
+      });
+
+      
+
+    </script>
+</body>
+</html>

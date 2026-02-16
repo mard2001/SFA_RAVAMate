@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    Product
+  </title>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
+ <meta content="utf-8" http-equiv="encoding">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/js/bootstrap-multiselect-master/dist/css/bootstrap-multiselect.css" type="text/css"/>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+  <link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+  <link rel="stylesheet" href="/css/mdDesign.css"/>
+</head>
+ <!--<div id="work-in-progress">
+          <div style="margin: 0 auto;">
+            <img src="img/fast.png" style="height: 80px; width: 480px; z-index: 1;"></br>
+            <img src="img/orbit-400px.gif" style="position: block; height: 200px;">
+          </div>
+   </div>-->
+<body>
+
+ <div id="mySidenav" class="sidenav">
+  <div class='image'><img alt='mdbuddylogo' class='logoMd' src='/img/mdbuddylogo_jeff.png'/></div>
+    <a href="https://mybuddy-sfa.com/SFA/Dashboard"> <span class='glyphicon glyphicon-home'></span> Dashboard</a>
+    <a href="https://mybuddy-sfa.com/SFA/digitalMapping"> <span class='glyphicon glyphicon-map-marker'></span> Digital Mapping</a>
+    <a href="https://mybuddy-sfa.com/SFA/customerMapping"> <span class="fa fa-users" aria-hidden="true"></span> Customer Mapping</a>
+    <a href="territoryGeofencing"> <span class="fa fa-unlock" aria-hidden="true"></span> Territory Geofencing</a>
+   <a data-toggle="collapse" href="#collapse1" id='navDrop'> <span class='glyphicon glyphicon-duplicate' id='changeIcon'></span> Reports
+   <i class="glyphicon glyphicon-menu-down pull-right"></i> </a>
+      <div id="collapse1" class="panel-collapse collapse" style="margin-left: 17px; font-size: 9px !important">
+        <a href="salesReport"> Sales Report</a>
+        <a href="fastsosyotransaction"> Fastsosyo Transaction</a>
+        <a href="transactionLedger"> Transaction Ledger</a>
+        <a href="UnprocessedOrders"> Unprocessed Orders</a>
+        <a href="dsr"> DSR</a>
+        <a href="stockRequest"> Stock Request</a>
+        <a href="unuploaded"> Unuploaded</a>
+        <a href="BOReport"> BO</a>
+        <a href="Stocktake Report"> Stocktake</a>
+        <a href="inventory"> Inventory Valuation</a>
+        <a href="jobberMaintenance"> Jobber</a>
+        <a href="syncreport">Sync Report</a>
+        <a href="soaprvreport">SO Approval</a>
+      </div>
+   <a data-toggle="collapse" href="#collapse2" id='navDrop' class="maintenanceCont"> <span class="fa fa-cogs" aria-hidden="true" id='changeIcon'></span> Maintenance
+    <i class="glyphicon glyphicon-menu-down pull-right"></i> </a>
+      <div id="collapse2" class="panel-collapse collapse" style="margin-left: 17px; font-size: 9px !important">
+        <a href="dataMaintenance" > Data</a>
+        <a href="customer"> Customer</a>
+        <a href="cmf">CMF</a>
+        <a href="geoReset" > Georeset</a>
+        <a href="salesman" > Salesman</a>
+        <a href="product" class="activeYes"> Product</a>
+        <a href="productbtdt"> BTDT Product</a>
+        <a href="customerTagging"> Tagging</a>
+        <a href="bankmaintenance"> Bank</a>
+        <a href="mcpcalibration">MCP Calibration</a>
+      </div>
+  <!-- <a href="Alert"> <span class='glyphicon glyphicon-envelope'></span> Alert Messages</a> -->
+  <hr />
+  <a href="https://mybuddy-sfa.com/SFA/v2/dashboard">Switch to New Dashboard</a>
+</div>
+
+  <div id="main">
+          <h4 class="display-4 dispMargin">
+            <a href="#" id='navBtn' class="btn btn-primary"  style='margin-right: 15px;'>
+             <span class="glyphicon glyphicon-menu-hamburger"></span> 
+            </a>
+             Product
+               <span class="nav navbar-nav navbar-right">
+                  <li class="dropdown">
+                      <a style='float:right;' href="#" class="dropdown-toggle" data-toggle="dropdown" id='dropThisDown'>
+                          <span class="label label-pill label-danger count" style='border-radius: 10px; font-size: 10px;'></span>
+                          <span class="fa fa-bell"></span>
+                      </a>
+                      <ul class="dropdown-menu" style='padding: 0'>
+                        <div id='notif-body'>
+                           <div id='notifs-icon-div'></div>
+                        </div>
+                        <a type="button" class="btn btn-default btn-block" href='mdAlert_bohol.php' id='seeAll' >See all</a>
+                      </ul>
+                  </li>
+                   <li class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user-circle-o"></i>
+                      </a>
+                      <ul class="dropdown-menu dropdown-user">
+                          <li><a href="Profile.html"><i class="fa fa-user-circle-o"></i> My Account</a>
+                          </li>
+                          <li class="divider"></li>
+                          <li><a href="#" id="admin-logout-btn"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                          </li>
+                      </ul>
+                   </li>
+                
+              </span>
+         </h4>
+
+         <div class="panel cust-panel">
+               <div class="panel-heading">
+                    <i class='glyphicon glyphicon-cog'></i> <span id="titleHeading"></span>
+               </div>
+               <div class="panel-body" style='background-color:#fff; color: black;'> 
+                  <div class="table-responsive">
+                    <table class="table table-hover nowrap" id="productList" style="width:100%">
+                       <thead>
+                          <th>STATUS</th>
+                          <th>STOCK CODE</th>
+                          <th>SUPPLIER</th>
+                          <th>DESCRIPTION</th>
+                          <th>BRAND</th>
+                          <th>STOCK UOM</th>
+                          <th>ALTERNATE UOM</th>
+                          <th>CONFACTALT UOM</th>
+                          <th>PRICE WITH VAT</th>
+                          <th>PRICE WITH VAT M</th>
+                          <th>LAST UPDATED</th>
+                          <th>SHORTNAME</th>
+                          <th>TEMPLATE CODE</th>
+                          <th>MUSTHAVE</th>
+                          <th>SYNC STAT</th>
+                          <th>TEMPLATE NAME</th>
+                          <th>DATE STAMP</th>
+                          <th>TIME STAMP</th>
+                          <th>BUYING ACCOUNTS</th>
+                          <th>BARCODE PC</th>
+                          <th>BARCODE CS</th>
+                          <th>PRIOSKU</th>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
+               </div>
+         </div><!--main panel end-->
+
+           <!-- Modal -->
+          <div class="modal fade" id="productDetailsModal" data-backdrop="static" data-keyboard="false" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header headerMod">
+                  <button type="button" class="close btnClose" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title dynamicheader">Product #: <span id="productIDHolder"></span></h4>
+                </div>
+                <div class="modal-body">
+                  <table class="table">
+                    <!-- <tr>
+                      <td colspan="2"><div class="productImg"><img src="" id="productImageHolder" error="imgError(this)">
+
+                        <div class="changeImageBtn">
+                          <form id="fileForm" action="" method="post" enctype="multipart/form-data">
+                            <input type="file" class="hidden" name="fileToUpload" id="fileToUpload" accept=".jpg, .png"/>
+                            <input type="hidden" id="base64HolderHTML" name="base64HolderHTML"/>
+                            <input type="hidden" id="company_file" name="company_file"/>
+                            <input type="hidden" id="siteHolder_file" name="site_file"/>
+                            <input type="hidden" id="descriptionHolder_file" name="description_file"/>
+                            <input type="hidden" id="stockCodeHolder_file" name="stockCode_file"/>
+                            
+                            <input type="hidden" id="s" name="s"/>
+                            <input type="hidden" id="u" name="u"/>
+                            <input type="hidden" id="p" name="p"/>
+                            <input type="hidden" id="d" name="d"/>
+                            <input type="button" class="btn btn-primary btn-sm" value="BROWSE IMAGE" id="but_upload"><span class="btn btn-default btn-sm" id="uploadImg_BTN"><i class="fas fa-check"></i> SAVE</span><span class="btn btn-default btn-sm" id="cancelImg_BTN"><i class="fas fa-times"></i> CANCEL</span>
+                          </form>
+                          </div>
+
+                      </div></td>
+                    </tr> -->
+                    <TR>
+                      <td>STOCK CODE:</td>
+                      <td id="stockCodeHolder" class="text-left"></td>
+                    </TR>
+                    <TR>
+                      <td>DESCRIPTION:</td>
+                      <td id="discrptionHolder" class="text-left"></td>
+                    </TR>
+                    <tr>
+                      <td colspan="">PRIO SKU:</td>
+                      <td>
+                        <span class="text-indicator"></span>
+                        <label class="switch pull-right"><input type="checkbox" id="prioskuHolder">
+                          <span class="slider round"></span>
+                        </label>
+                      </td>
+                    </tr>
+                    <TR>
+                      <td>SKU STATUS:</td>
+                      <td id="skustatusHolder" class="text-left"></td>
+                    </TR>
+                    <TR>
+                      <td colspan="2">
+                        <em style="color: #808080;">*prio sku value is either ENABLED or DISABLED</em>
+                      </td>
+                    </TR>
+                  </table>
+                  <input type="hidden" name="" id="productIDHolderinpt">
+                  <input type="hidden" name="" id="discrptionHolderinpt">
+                  
+                  <div class="alert alert-danger emptyindicator">
+                    <strong>Unable to Proceed:</strong> Empty fields are not allowed!
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-warning" style="float: left !important;" id="holdSKUbtn" onclick="openHoldskumodal()"><span class="btn-text-cust">Hold SKU</span></button>
+                  <button class="btn btn-success" style="float: left !important;" id="activateSKUbtn" onclick="exec_activate_Sku()"><span class="btn-text-cust">Activate SKU</span></button>
+                  <button class="btn btn-primary" id="addCLBtn" onclick="exec_image_update()"><span class="btn-text-cust">Save Changes</span></button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="holdSKUMODAL" role="dialog">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Hold SKU</h4>
+                  </div>
+                  <div class="modal-body">
+                    <label for="">Product SKU</label>
+                    <input type="text" class="form-control" id="prodsku" disabled>
+                    <br>
+                    <label for="">Reason</label>
+                    <textarea name="" id="skuholdreason" cols="30" rows="10" class="form-control"></textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="exec_holdsku()">Proceed</button>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+          <div class="modal fade" id="duplicateUserModal" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">SESSION ENDED</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>Sorry, your session has been disconnected. Another user is currently using your account.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" onclick="cofirmationDupUser()">GOT IT</button>
+                    </div>
+                  </div>
+                </div>
+          </div>
+  </div><!--#main-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js "></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+  <!--<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>-->
+  
+  <script type="text/javascript" src="/web/web-commons.js"></script>
+  <script type="text/javascript" src="/js/bootbox.min.js"></script>
+  <!-- <script type="text/javascript" src="js/duplicate-user.js"></script> -->
+  <script src="/HASH/md5.js"></script>
+  <script src="/HASH/aes.js"></script>
+  <script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+  <script src="js/chatApi.js"></script>
+  <script type="text/javascript" language="javascript">
+
+var user = localStorage.getItem("adminUserName");
+var usernm = localStorage.getItem("adminUserName");
+
+getcompname();
+function getcompname(){
+$.ajax ({
+   url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+    type: "GET",
+    data: {"type":"GET_COMPANYNAME", "CONN":con_info},
+    dataType: "json",
+    crossDomain: true,
+    cache: false,            
+      success: function(r){ 
+      $('#titleHeading').html(r[0].company.toUpperCase() +' / Product List');
+      $('#company_file').val(r[0].company.toUpperCase());
+      console.log(r[0].company.toUpperCase());
+      }
+  });
+} 
+ 
+ $('#navDrop').click(function() {
+   $("i", this).toggleClass("glyphicon-menu-up glyphicon-menu-down");
+  });
+
+ $('.emptyindicator').hide();
+
+ $('#uploadImg_BTN').hide();
+ $('#cancelImg_BTN').hide();
+ 
+ $("#but_upload").click(function(){
+  $(".hidden").click();
+ });
+
+  $(".hidden").change(function(){
+    readURL(this);
+    $("#but_upload").show();
+    //$("#but_upload").hide();
+    //$("#uploadImg_BTN").show();
+    //$("#cancelImg_BTN").show();
+  });
+
+  function readImage(inputElement) {
+    var deferred = $.Deferred();
+
+    var files = inputElement.get(0).files;
+    if (files && files[0]) {
+        var fr= new FileReader();
+        fr.onload = function(e) {
+            deferred.resolve(e.target.result);
+        };
+        fr.readAsDataURL( files[0] );
+    } else {
+        deferred.resolve(undefined);
+    }
+
+    return deferred.promise();
+}
+
+  function exec_image_update(){
+    $('.emptyindicator').removeClass('shakeit');
+    $('.btn-text-cust').html('<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i> updating please wait..');
+       
+    var stockCode = $('#productIDHolderinpt').val();
+    var description = $('#discrptionHolderinpt').val();
+    var formData = new FormData();
+    var files = $('#fileToUpload')[0].files[0];
+    var files_dir = $('#fileToUpload')[0].files[1];
+    formData.append('fileToUpload', files);
+    formData.append('description', $('input[name=description_file]').val());
+    formData.append('company', $('input[name=company_file]').val());
+    formData.append('site', $('input[name=site_file]').val());
+    formData.append('s', $('input[name=s]').val());
+    formData.append('u', $('input[name=u]').val());
+    formData.append('p', $('input[name=p]').val());
+    formData.append('d', $('input[name=d]').val());
+    formData.append('stockCode', $('input[name=stockCode_file]').val());
+
+     $.ajax ({
+            url: '/upload/uploadProduct.php',
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            dataType: 'text',
+            async: false,
+            success: function(r){ 
+                if(r == 1){
+                  updateProduct_exec();
+                }else{
+                  alert('ERROR WHILE UPDATING: ' + r + '\n' + 'Please try again.');
+                }
+                $('.btn-text-cust').html('Save Changes');
+              }
+            });
+
+  }
+
+  function readURL(input) {
+      if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          
+          reader.onload = function (e) {
+              $('#productImageHolder').attr('src', e.target.result);
+          }
+          reader.readAsDataURL(input.files[0]);
+      }
+  }
+
+  salesmanDataObject();
+  var sourceData;
+  function salesmanDataObject(){
+      $.ajax ({
+           url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {"type":"PRODUCT_LIST", "CONN":con_info},
+            dataType: "json",
+            crossDomain: true,
+            cache: false,   
+            async: false,         
+              success: function(r){ 
+                var localObj = [];
+                for(var x = 0; x < r.length; x++){
+                  localObj.push({
+                      //thumbnail_stockCode: "<img src='data:image/jpeg;base64,"+r[x].thumbnail+"' style='width: 35px; height:35px;' onerror='imgError(this)'/>",
+                      holdskuchecker: holdchecker(r[x].HOLD_SKU_CHECKER),
+                      thumbnail_stockCode: "<img src='/upload/store-image/nestle_product_images/"+r[x].StockCode+".jpg' style='width: 40px; height:40px;' onerror='imgError(this)'>",
+                      thumbnail: r[x].thumbnail,
+                      stockCode: r[x].StockCode,
+                      supplier: r[x].Supplier,
+                      Description: r[x].Description,
+                      brand: r[x].Brand,
+                      stockuom: r[x].StockUom,
+                      alternateuom: r[x].AlternateUom,
+                      confactaltuom: parseInt(r[x].ConvFactOthUom),
+                      pricewithvat: Number(parseFloat(r[x].priceWithVat).toFixed(2)).toLocaleString(),
+                      pricewithvatm: Number(parseFloat(r[x].priceWithVatM).toFixed(2)).toLocaleString(),
+                      lastupdated: r[x].lastUpdated,
+                      shortname: r[x].shortName,
+                      templatecode: r[x].templateCode,
+                      musthave: r[x].mustHave,
+                      syncstat: r[x].syncstat,
+                      templatename: r[x].templateName,
+                      datetemp: r[x].dates_tamp,
+                      timestamp: r[x].time_stamp,
+                      buyingaccounts: r[x].buyingAccounts,
+                      barcodepc: r[x].barcodePC,
+                      barcodecs: r[x].barcodeCS,
+                      priosku: r[x].PrioSKU,
+                      productID: r[x].productID
+                      //<button class="cust-del-btn"><i class="fas fa-trash-alt"></i></buttons>
+                  });
+                }
+
+                sourceData = localObj;
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  alert("ERROR OCCUR: " + XMLHttpRequest.responseText);
+               }
+            });
+    }
+  
+  function holdchecker(stat){
+      if(stat == 1){
+        return 'HOLD';
+      }
+
+      return 'AVAILABLE';
+  }
+  function empt_input(){
+    $('#alerttype').val('');
+    $('#ptype').val('');
+    $('#description').val('');
+    $('#sequence').val('');
+    $('#remarks').val('');
+  }
+
+  function check_empty(){
+    var a= $('#alerttype').val();
+    var b= $('#ptype').val();
+    var c= $('#description').val();
+    var d= $('#sequence').val();
+    var e= $('textarea#remarks').val();
+    var res;
+    if(a == '' || b == '' || c == '' || d == '' || e == ''){
+      res = true;
+    }else{
+      res = false;
+    }
+
+    return res;
+  }
+
+  salesmanDataTable();
+  var tableData, prioskuindicator;
+    function salesmanDataTable(){
+       $('.loader-indicator h3').hide();
+        tableData =  $('#productList').DataTable({
+                    "dom": 'Bfrtip',
+                    "data": sourceData,
+                    "scrollX": true,
+                    "select": true,
+                    "ordering": false,
+                    "columns": [
+                        // {"data":'thumbnail_stockCode'},
+                        {'data':'holdskuchecker'},
+                        {'data':'stockCode'},
+                        {'data':'supplier'},
+                        {'data':'Description'},
+                        {'data':'brand'},
+                        {'data':'stockuom'},
+                        {'data':'alternateuom'},
+                        {'data':'confactaltuom'},
+                        {'data':'pricewithvat'},
+                        {'data':'pricewithvatm'},
+                        {'data':'lastupdated'},
+                        {'data':'shortname'},
+                        {'data':'templatecode'},
+                        {'data':'musthave'},
+                        {'data':'syncstat'},
+                        {'data':'templatename'},
+                        {'data':'datetemp'},
+                        {'data':'timestamp'},
+                        {'data':'buyingaccounts'},
+                        {'data':'barcodepc'},
+                        {'data':'barcodecs'},
+                        {'data':'priosku'}
+                    ],
+                     columnDefs: [
+                      {
+                          targets: [8, 9, 19],
+                          className: 'text-right'
+                      }
+                    ],
+                    "language": {
+                      "emptyTable": "No available records as of now."
+                    },
+                    "aaSorting": [[ 0, "desc" ]],
+                     /*buttons: [
+                        {
+                            text: 'Add Check List',
+                            action: function ( e, dt, node, config ) {
+                              empt_input();
+                              $('.dynamicheader').html('<i class="fas fa-clipboard-list"></i> New Check List');
+                              $('#savaChangesBtn').hide();
+                              $('#addCLBtn').show();
+                              $('#checkListDetailsModal').modal('show');
+                            }
+                        }
+                    ],*/
+                    rowCallback: function(row, data, index){
+                  } 
+           }).draw(true).columns.adjust();
+
+        $($.fn.dataTable.tables(true)).DataTable()
+           .columns.adjust()
+           .responsive.recalc();
+
+
+        $('#productList tbody').on('click', 'tr', function () {
+            var tr = $(this).closest('tr');
+            var row = tableData.row(tr);
+            updateProduct(row.data());
+        });
+
+        function updateProduct(r){
+          $('#productDetailsModal').modal('show');
+          $('#productIDHolder').html(r.stockCode);
+          $('#productIDHolderinpt').val(r.stockCode);
+          $('#discrptionHolderinpt').val(r.Description);
+          $('#stockCodeHolder').html(r.stockCode);
+          $('#discrptionHolder').html(r.Description);
+
+          $('#siteHolder_file').val(user);
+          $('#descriptionHolder_file').val(r.Description);
+          $('#stockCodeHolder_file').val(r.stockCode);
+          $('#s').val(s);
+          $('#d').val(d);
+          $('#u').val(u);
+          $('#p').val(p);
+
+          if(r.priosku == 1){
+            $('.text-indicator').html('<span class="oncheck">ENABLED</span>');
+            $('#prioskuHolder').prop("checked", true);
+          }else if(r.priosku == 0){
+            $('.text-indicator').html('<span class="onnotcheck">DISABLED</span>');
+            $('#prioskuHolder').prop("checked", false);
+          }
+
+          $('#prioskuHolder').click(function() {
+            if($('#prioskuHolder').prop("checked") == true){
+              $('.text-indicator').html('<span class="oncheck">ENABLED</span>');
+              prioskuindicator = 1;
+            }
+            else if($('#prioskuHolder').prop("checked") == false){
+                $('.text-indicator').html('<span class="onnotcheck">DISABLED</span>');
+              prioskuindicator = 0;
+            }
+          });
+
+
+          $('#holdSKUbtn').hide();
+          $('#activateSKUbtn').hide();
+
+          if(r.holdskuchecker == 'HOLD'){
+            $('#activateSKUbtn').show();
+            $('#skustatusHolder').html('<span class="onnotcheck">HOLD</span>');
+          }else{
+            $('#holdSKUbtn').show();
+            $('#skustatusHolder').html('<span class="oncheck">AVAILABLE</span>');
+          }
+
+         
+
+          // getproduct(r.stockCode);
+        }
+
+        function getproduct(img){
+          var id = $('#productIDHolderinpt').val();
+          $.ajax ({
+            url: "../admin/connection/applicationApi.php",
+            type: "GET",
+            data: {"type":"GET_PRODUCT_IMAGE", "CONN":con_info, "stockCode":img},
+            dataType: "json",
+            crossDomain: true,
+            cache: false,  
+            async: false,          
+            success: function(r){
+              if(r.length != 0){
+                $('#productImageHolder').attr("src", "data:image/jpeg;base64,"+r[0].thumbnail);
+              }else{
+                $('#productImageHolder').attr("src","../img/no-product-image.png");
+              }
+
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              alert('ERROR RETRIVING IMAGE: ' + JSON.stringify(XMLHttpRequest.responseText));
+            }
+          });
+        }
+    }
+
+    function updateProduct_exec(){
+      var productID = $('#productIDHolderinpt').val();
+     $.ajax ({
+           url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {"type":"UPDATE_PRODUCT_PRIOSKU", "CONN":con_info, "priosku":prioskuindicator, "stockCode":productID},
+            dataType: "json",
+            crossDomain: true,
+            cache: false,  
+            async: false,          
+            success: function(r){
+              if(r == 1){
+                salesmanDataObject();
+                tableData.clear().rows.add(sourceData).draw();
+                alert('Successfully Updated!');
+                $('#productDetailsModal').modal('hide');
+              }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              alert('ERROR UPDATING STATUS: ' + JSON.stringify(XMLHttpRequest.responseText));
+            }
+          });
+        $('.btn-text-cust').html('Save Changes');
+    }
+
+    function excecuteUpdate(){
+    var id = $('#cidHolder').val();
+    var a= $('#ptype').val();
+    var b= $('#sequence').val();
+    var c= $('textarea#remarks').val();
+      $.ajax ({
+     url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+      type: "GET",
+      data: {
+              "type":"UPDATE_CHECKLIST",
+              "CONN":con_info,
+              "ptype":a,
+              "seq":b,
+              "remarks":c,
+              "cID":id
+            },
+      dataType: "json",
+      crossDomain: true,
+      cache: false,  
+      async: false,          
+      success: function(r){
+        if(r == 1){
+          salesmanDataObject();
+          tableData.clear().rows.add(sourceData).draw();
+          alert('UPDATED SUCCESSFULLY');
+        }
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        alert('ERROR UPDATING: ' + JSON.stringify(XMLHttpRequest.responseText));
+      }
+    });
+  }
+
+  function openHoldskumodal(){
+    var stockCode = $('#productIDHolderinpt').val();
+    var holdReason = $('textarea#skuholdreason').val();
+
+    $('textarea#skuholdreason').val('');
+    $('#holdSKUMODAL').modal('show');
+    $('#prodsku').val(stockCode);
+  }
+
+
+  function exec_activate_Sku(){
+    var stockCode = $('#productIDHolderinpt').val();
+    var f = confirm('Are you sure you want to activate this sku?');
+    if(f){
+
+      $('#activateSKUbtn').html('<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i> updating please wait..');
+      $.ajax ({
+        url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+        type: "GET",
+        data: {
+                "type":"ACTIVATE_HOLD_SKU",
+                "stockCode":stockCode,
+                "CONN":con_info
+              },
+        dataType: "json",
+        crossDomain: true,
+        cache: false,  
+        async: true,          
+        success: function(r){
+          if(r == 1){
+            salesmanDataObject();
+            tableData.clear().rows.add(sourceData).draw();
+            $('#activateSKUbtn').html('Activate SKU');
+            alert(stockCode + ' successfully activated.');
+            
+            $('#productDetailsModal').modal('hide');
+             $('#holdSKUMODAL').modal('hide');
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          alert('ERROR UPDATING: ' + JSON.stringify(XMLHttpRequest.responseText));
+        }
+      });
+    }
+
+  }
+  function exec_holdsku(){
+    var stockCode = $('#productIDHolderinpt').val();
+    var holdReason = $('textarea#skuholdreason').val();
+
+    if($.trim(holdReason) == ''){
+      alert('Please indicate hold sku reason.');
+    }else{
+
+      $('#holdSKUbtn').html('<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i> updating please wait..');
+
+      var f = confirm('Are you sure you want to hold product ' +stockCode+'?');
+      $.ajax ({
+        url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+        type: "GET",
+        data: {
+                "type":"ADD_HOLD_SKU",
+                "stockCode":stockCode,
+                "holdReason":holdReason,
+                "CONN":con_info
+              },
+        dataType: "json",
+        crossDomain: true,
+        cache: false,  
+        async: false,          
+        success: function(r){
+          if(r == 1){
+            salesmanDataObject();
+            tableData.clear().rows.add(sourceData).draw();
+            $('#holdSKUbtn').html('Hold SKU');
+            alert(stockCode + ' successfully hold.');
+    
+             $('#holdSKUMODAL').modal('hide');
+             $('#productDetailsModal').modal('hide');
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          alert('ERROR UPDATING: ' + JSON.stringify(XMLHttpRequest.responseText));
+        }
+      });
+    }
+  }
+
+function imgError(image) {
+  image.onerror = "";
+  image.src = "../img/no-product-image.png";
+  return true;
+}  
+
+showNotif();
+
+$(document).on('click', '.dropdown-toggle', function(){
+$('.count').html('');
+ showNotif('yes');
+});
+
+setInterval(function(){
+//showNotif();
+}, 9000);
+
+  function showNotif(view=''){
+       $.ajax ({
+        url: "../geofencing/GeofencingAPI.php",
+        type: "GET",
+        data: {"type":"view_notifications_icon_"+user, "view":view},
+        dataType: "JSON",
+        crossDomain: true,
+        cache: false,            
+          success: function(response){ 
+         // console.log('Notification function has been refresh');                
+          $("#notifs-icon-div").html(response.notification);
+
+            if(response.unseen_notification > 0)
+            {
+             $('.count').html(response.unseen_notification);
+            }
+          
+          }
+      });
+  }
+
+
+  (function($) {
+    $.fn.clickToggle = function(func1, func2) {
+        var funcs = [func1, func2];
+        this.data('toggleclicked', 0);
+        this.click(function() {
+            var data = $(this).data();
+            var tc = data.toggleclicked;
+            $.proxy(funcs[tc], this)();
+            data.toggleclicked = (tc + 1) % 2;
+        });
+        return this;
+    };
+  }(jQuery));
+
+ $("#navBtn").clickToggle(function() {   
+   openNav();
+ }, function() {
+     closeNav();
+ });
+
+ function imgError2(image) {
+   image.onerror = "";
+   image.src = "../img/salesmanPic.jpg";
+   return true;
+ } 
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "270px";
+    document.getElementById("main").style.marginLeft = "270px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+</body>
+</html> 

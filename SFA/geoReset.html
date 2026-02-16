@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    MD BUDDY
+  </title>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
+ <meta content="utf-8" http-equiv="encoding">
+ <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <!-- Include the plugin's CSS and JS: -->
+ <link rel="stylesheet" href="/js/bootstrap-multiselect-master/dist/css/bootstrap-multiselect.css" type="text/css"/>
+ 
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 
+ <link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png"/>
+ <link rel="stylesheet" href="/css/mdDesign.css"/>
+ </head>
+ <!--<div id="work-in-progress">
+          <div style="margin: 0 auto;">
+            <img src="img/fast.png" style="height: 80px; width: 480px; z-index: 1;"></br>
+            <img src="img/orbit-400px.gif" style="position: block; height: 200px;">
+          </div>
+   </div>-->
+<body>
+
+ <div id="mySidenav" class="sidenav">
+  <div class='image'><img alt='mdbuddylogo' class='logoMd' src='/img/mdbuddylogo_jeff.png'/></div>
+    <a href="https://mybuddy-sfa.com/SFA/Dashboard"> <span class='glyphicon glyphicon-home'></span> Dashboard</a>
+    <a href="https://mybuddy-sfa.com/SFA/digitalMapping"> <span class='glyphicon glyphicon-map-marker'></span> Digital Mapping</a>
+    <a href="https://mybuddy-sfa.com/SFA/customerMapping"> <span class="fa fa-users" aria-hidden="true"></span> Customer Mapping</a>
+    <a href="territoryGeofencing"> <span class="fa fa-unlock" aria-hidden="true"></span> Territory Geofencing</a>
+   <a data-toggle="collapse" href="#collapse1" id='navDrop'> <span class='glyphicon glyphicon-duplicate' id='changeIcon'></span> Reports
+    <i class="glyphicon glyphicon-menu-down pull-right"></i> </a>
+      <div id="collapse1" class="panel-collapse collapse" style="margin-left: 17px; font-size: 9px !important">
+        <a href="salesReport"> Sales Report</a>
+        <a href="fastsosyotransaction"> Fastsosyo Transaction</a>
+        <a href="salesAudit"> Sales Audit</a>
+        <a href="transactionLedger"> Transaction Ledger</a>
+        <a href="UnprocessedOrders"> Unprocessed Orders</a>
+        <a href="dsr"> DSR</a>
+        <a href="dcr"> Daily Collection</a>
+        <a href="stockRequest"> Stock Request</a>
+        <a href="unuploaded"> Unuploaded</a>
+        <a href="BOReport"> BO</a>
+        <a href="inventory"> Inventory Valuation</a>
+        <a href="Stocktake Report"> Stocktake</a>
+        <a href="jobberMaintenance"> Jobber</a>
+        <a href="syncreport">Sync Report</a>
+        <a href="soaprvreport">SO Approval</a>
+      </div>
+   <a data-toggle="collapse" href="#collapse2" id='navDrop' class="maintenanceCont"> <span class="fa fa-cogs" aria-hidden="true" id='changeIcon'></span> Maintenance
+    <i class="glyphicon glyphicon-menu-down pull-right"></i> </a>
+      <div id="collapse2" class="panel-collapse collapse" style="margin-left: 17px; font-size: 9px !important">
+        <a href="dataMaintenance" > Data</a>
+        <a href="customer"> Customer</a>
+        <a href="cmf">CMF</a>
+        <a href="geoReset" class="activeYes"> Georeset</a>
+        <a href="salesman"> Salesman</a>
+        <a href="product"> Product</a>
+        <a href="productbtdt"> BTDT Product</a>
+        <a href="customerTagging"> Tagging</a>
+        <a href="bankmaintenance"> Bank</a>
+        <a href="mcpcalibration">MCP Calibration</a>
+      </div>
+  <!-- <a href="Alert"> <span class='glyphicon glyphicon-envelope'></span> Alert Messages</a> -->
+  <hr />
+  <a href="https://mybuddy-sfa.com/SFA/v2/dashboard">Switch to New Dashboard</a>
+</div>
+  <div id="main">
+        <h4 class="display-4 dispMargin">
+          <a href="#" id='navBtn' class="btn btn-primary"  style='margin-right: 15px;'>
+           <span class="glyphicon glyphicon-menu-hamburger"></span> 
+          </a>
+           Georeset
+             <span class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                    <a style='float:right;' href="#" class="dropdown-toggle" data-toggle="dropdown" id='dropThisDown'>
+                        <span class="label label-pill label-danger count" style='border-radius: 10px; font-size: 10px;'></span>
+                        <span class="fa fa-bell"></span>
+                    </a>
+                    
+                       <ul class="dropdown-menu" style='padding: 0'>
+                        <div id='notif-body'>
+                            <div id='notifs-icon-div'></div>
+                        </div>
+                        <a type="button" class="btn btn-default btn-block" href='mdAlert_bohol.php' id='seeAll' >See all</a>
+                       </ul>
+                </li>
+
+                 <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                      <i class="fa fa-user-circle-o"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="Profile.html"><i class="fa fa-user-circle-o"></i> My Account</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="#" id="admin-logout-btn"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                        </li>
+                    </ul>
+                 </li>
+              
+            </span>
+       </h4>
+
+         <div class="panel cust-panel">
+               <div class="panel-heading">
+                    <i class='glyphicon glyphicon-cog'></i> <span id="titleHeading"></span>
+               </div>
+                <div class="panel-body" style='background-color:#fff; color: black;'> 
+                  <ul class="nav nav-tabs">
+                    <!-- <li class="active"><a data-toggle="tab" href="#home">Salesman</a></li> -->
+                    <!-- <li><a data-toggle="tab" href="#menu1">Customer</a></li> -->
+
+                    <li class="active"><a data-toggle="tab" href="#menu1">Customer</a></li>
+                  </ul>
+
+                  <div class="tab-content">
+                    <!-- <div id="home" class="tab-pane fade in active">
+                      <h3>Georeset by salesman</h3>
+                        <div class="col-md-3" style="margin-right: 20px;">
+                             <select id="salesmanList" class="form-control col-md-4">
+                               <option value="" disabled selected hidden>Select salesman</option>
+                             </select> 
+                        </div>
+                        <div class="col-md-2">
+                             <select class="form-control" id='dayList'>
+                                <option value="" disabled selected hidden>Select mcpDay..</option>
+                                <option value="0">All Day</option>
+                                <option value="1">Monday</option>
+                                <option value="2">Tuesday</option>
+                                <option value="3">Wednesday</option>
+                                <option value="4">Thursday</option>
+                                <option value="5">Friday</option>
+                                <option value="6">Saturday</option>
+                              </select>
+                        </div>
+                         <button class="btn btn-primary" type="button" id='generateBtn_salesman' onclick="geoResetSalesman()">RESET</button>
+                    </div> -->
+                    <div id="menu1" class="tab-pane fade in active">
+                      <h3 style="margin-bottom: 20px !important;">Georeset by customer</h3>
+
+                       <div class="form-inline">
+                          <div class="form-group">
+                            <!--<select id="customerCode" class="form-control col-md-4">
+                               <option value="" disabled selected hidden>Select customer</option>
+                             </select>--> 
+                            <input type="text" id='customerCode' style="width: 200px !important;" class="form-control" placeholder="CUSTOMER CODE">
+                          </div>
+                          <button class="btn btn-primary" style='margin-left: 20px !important;' id='byCustomerBtn' onclick="geoResetCustomer()">RESET</button>
+                       </div> 
+
+                    </div>
+                  </div>
+
+               </div>
+         </div><!--main panel end-->
+
+         <div class="modal fade" id="duplicateUserModal" role="dialog">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">SESSION ENDED</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>Sorry, your session has been disconnected. Another user is currently using your account.</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="cofirmationDupUser()">GOT IT</button>
+                  </div>
+                </div>
+              </div>
+        </div>
+  </div><!--#main-->
+ 
+     <!-- Bootstrap core JavaScript-->
+ 
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt0Pxe9_3DTav3DmUQzHfgd07s_LcJo7I&libraries=drawing,geometry"></script>
+    <script type="text/javascript" src="/web/web-commons.js"></script>
+    <script type="text/javascript" src="/js/bootbox.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-multiselect-master/dist/js/bootstrap-multiselect.js"></script>
+    <!-- <script type="text/javascript" src="js/duplicate-user.js"></script> -->
+    <script src="/HASH/md5.js"></script>
+    <script src="/HASH/aes.js"></script>
+    <script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+    <script src="js/chatApi.js"></script>
+    <script type="text/javascript" language="javascript" >
+    var usernm = localStorage.getItem("adminUserName");
+    var user = localStorage.getItem("adminUserName");
+    
+    $('#userConnection').val(user);
+  
+    getcompname();
+      function getcompname(){
+      $.ajax ({
+          url: "https://fastdevs-api.com/BUDDYGBLAPI/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {"type":"GET_COMPANYNAME", "CONN":con_info},
+          dataType: "json",
+          crossDomain: true,
+          cache: false,            
+            success: function(r){ 
+            $('#titleHeading').html(r[0].company.toUpperCase() +' v2.1');
+            }
+        });
+      } 
+
+  	 $(document).ready(function(){
+        /*if(localStorage.getItem("admin-userName") == null){
+             alert('You are not allowed to visit this site without permission. Please log-in first!');
+             window.location = "index.html";
+          }*/
+       $('#navDrop').click(function() {
+         $("i", this).toggleClass("glyphicon-menu-up glyphicon-menu-down");
+        });
+
+
+         $('#find').on('keyup',function(){
+            var searchTerm = $(this).val().toLowerCase();
+            $('#notifs-div tr').each(function(){
+                var lineStr = $(this).text().toLowerCase();
+                if(lineStr.indexOf(searchTerm) === -1){
+                    $(this).hide();
+                }else{
+                    $(this).show();
+                }
+            });
+          });
+
+          // $.ajax ({
+          //   url: "/geofencing/GeofencingAPI.php",
+          //   type: "GET",
+          //   data: {"type":"view_notifications_"+user},
+          //   dataType: "html",
+          //   crossDomain: true,
+          //   cache: false,            
+          //     success: function(response){   
+          //       $("#notifs-div").html(response);
+          //     }
+          // });
+
+      
+       
+      });
+
+	
+
+  //   showNotif();
+
+  //   $(document).on('click', '.dropdown-toggle', function(){
+  //     $('.count').html('');
+  //      showNotif('yes');
+  //   });
+
+  //   setInterval(function(){
+  //    showNotif();
+  //  }, 9000);
+
+    $("#dayList").val($("#target option:first").val());
+
+        // function showNotif(view=''){
+        //      $.ajax ({
+        //       url: "../geofencing/GeofencingAPI.php",
+        //       type: "GET",
+        //       data: {"type":"view_notifications_icon_"+user, "view":view},
+        //       dataType: "JSON",
+        //       crossDomain: true,
+        //       cache: false,            
+        //         success: function(response){ 
+        //        // console.log('Notification function has been refresh');                
+        //         $("#notifs-icon-div").html(response.notification);
+
+        //           if(response.unseen_notification > 0)
+        //           {
+        //            $('.count').html(response.unseen_notification);
+        //           }
+                
+        //         }
+        //     });
+        // }
+
+        function geoResetSalesman(){
+          var mdCode = $('#salesmanList').val();
+          var mcpDay = $('#dayList').val();
+
+          var ajaxTime= new Date().getTime();
+          var totalTime= 0;
+
+          console.log(mdCode +' '+ mcpDay);
+
+          if(mdCode == null){
+             alert('Salesman is required!');
+          }else if(mcpDay == null){
+             alert('mcpDay is required!');
+          }else{
+            var r = confirm("Are you sure you want to reset all location of this salesman ?");
+            if (r == true) {
+
+              $('#generateBtn_salesman').html("<i class='fa fa-spin fa-spinner'></i> processing..");
+              $('#generateBtn_salesman').prop('disabled', true);
+                 $.ajax ({
+                 url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+                  type: "GET",
+                  data: {"type":"geoResetSalesman", "mdCode":mdCode, "mcpDay":mcpDay, "CONN":con_info},
+                  dataType: "JSON",
+                  crossDomain: true,
+                  cache: false,            
+                    success: function(response){ 
+                  if(response == 1){
+                    pushnotif(mcpDay, mdCode);
+                    alert('Salesman '+mdCode+' georeset was sucessfull!');
+                  }else{
+                    alert('ERROR: '+response+' Please contact HO IT for more assistance!');
+                  }
+                
+                }
+            }).done(function () {
+                    setTimeout(function(){
+                       $('#generateBtn_salesman').html("RESET");
+                       $('#generateBtn_salesman').prop('disabled', false);
+                    }, totalTime);
+                                 });
+            } else {
+                alert('Georeset was cancelled!');
+            } 
+          }//main else
+        }
+
+        function geoResetCustomer(){
+          var custCode = $('#customerCode').val();
+
+          var ajaxTime= new Date().getTime();
+          var totalTime= 0;
+
+          if(custCode != ''){
+             var r = confirm("Are you sure you want to reset customer "+custCode+" ?");
+            if (r == true) {
+               $('#byCustomerBtn').html("<i class='fa fa-spin fa-spinner'></i> processing..");
+               $('#byCustomerBtn').prop('disabled', true);
+                $.ajax ({
+                    url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+                    type: "GET",
+                    data: {"type":"geoResetCustomer", "custCode":custCode, "CONN":con_info},
+                    dataType: "text",
+                    crossDomain: true,
+                    cache: false,           
+                  success: function(response){ 
+                    console.log(response);
+                    if(response != 0 && response != 1){
+                      alert('ERROR OCCUR: ' + response + ' please contact FDC IT for this matter.');
+                    }else{
+                      if(response == 0){
+                        pushnotif_customer(custCode);
+                        alert('Customer '+custCode+' georeset was sucessfull!');
+                      }else if(response == 1){
+                        alert('Invalid Customer code please try again!');
+                      }
+                    }
+                }
+            }).done(function () {
+                    setTimeout(function(){
+                       $('#byCustomerBtn').html("RESET");
+                       $('#byCustomerBtn').prop('disabled', false);
+                    }, totalTime);
+                                 });
+            } else {
+                alert('Georeset was cancelled!');
+            } 
+          }else{
+            alert('Customer code is required!');
+          }
+         
+
+        }
+
+        function pushnotif(day, mdCode){
+            var token = getToken(mdCode);
+            var message = '', header = '';
+            if(day == 0){
+              header = 'Georeset All!';
+              message = 'Georeset was successfull, all MCP days was affected.';
+            }else{
+              header = 'Georeset Day '+day;
+              message = 'Georeset was successfull for day: ' + day;
+            }
+
+
+            // Notification payload
+            const notificationPayload = {
+              message: {
+                token: token,  // The FCM device token of the target device
+                notification: {
+                  title: header,
+                  body: message,
+                },
+                data: {
+                  title: header,
+                  body: message
+                }
+              }
+            };
+
+            //activity
+            // redirect: "activity",
+            // transactionID: "7420241011132248"
+
+            // Make the AJAX POST request to FCM v1 API
+            fetch(`https://fcm.googleapis.com/v1/projects/my-buddy-275708/messages:send`, {
+              method: 'POST',
+              headers: {
+                'Authorization': 'Bearer ' + ACCESS_TOKEN,  // OAuth 2.0 Bearer token
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(notificationPayload),  // The notification payload
+            })
+            .then(response => response.json())
+            .then(data => {
+              console.log('Notification sent successfully:', data);
+              // update_notif_status(cID);
+            })
+            .catch((error) => {
+              console.error('Error sending notification:', error);
+            });
+
+            //  $.ajax({        
+            //     type : 'POST',
+            //     url : "https://fcm.googleapis.com/fcm/send",
+            //     headers : {
+            //         Authorization : 'key=' + 
+            //         'AAAA4OmJn2o:APA91bGBe9aHcLoJxAkkJbwN9ozac6St2BimIOVtWtb7dv-GV50v2S5-vIQzS_bZfxgl9385wyBeW4qA2GOR-BfnBV63mOHFDKMEfgZn9PNM-EAbvBtKFPEYszCLZ0OxZZPPvjyfqQMD'
+            //         //sir roy api 'AAAA6gFzY08:APA91bGhXSORj4yKI5GDwvYIsIRCqJJn2UwO7dz_l5ZFjGmUsMj2-zpOu9R1RA7QSh0ECQ_zRibaoDLv1Z5fzk3LXqqUuaKlKJ_18ba822I4iHpgVtjSdMGdLaB37IPoGt2zFmx9Kmfy'
+            //     },
+            //     contentType : 'application/json',
+            //     dataType: 'json',
+            //     data: JSON.stringify({"to": token,
+            //       "data": {
+            //               "title": header,
+            //               "body": message
+            //             }
+            //         }),
+            //     //change "to" parameter located in tblUser column TOKEN
+            //     success : function(response) {
+            //         console.log(response);
+            //     },
+            //     error : function(xhr, status, error) {
+            //         console.log(xhr.error);                   
+            //     }
+            // });
+          }
+
+          function pushnotif_customer(custCode){
+            var mdCode = getMdCode(custCode);
+            var token = getToken(mdCode);
+
+
+            // Notification payload
+            const notificationPayload = {
+              message: {
+                token: token,  // The FCM device token of the target device
+                notification: {
+                  title: "Georeset Store " + custCode,
+                  body: "Georeset was successfull on store "+ custCode,
+                },
+                data: {
+                  title: "Georeset Store " + custCode,
+                  body: "Georeset was successfull on store "+ custCode
+                }
+              }
+            };
+
+            //activity
+            // redirect: "activity",
+            // transactionID: "7420241011132248"
+
+            // Make the AJAX POST request to FCM v1 API
+            fetch(`https://fcm.googleapis.com/v1/projects/my-buddy-275708/messages:send`, {
+              method: 'POST',
+              headers: {
+                'Authorization': 'Bearer ' + ACCESS_TOKEN,  // OAuth 2.0 Bearer token
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(notificationPayload),  // The notification payload
+            })
+            .then(response => response.json())
+            .then(data => {
+              console.log('Notification sent successfully:', data);
+              // update_notif_status(cID);
+            })
+            .catch((error) => {
+              console.error('Error sending notification:', error);
+            });
+
+
+            //  $.ajax({        
+            //     type : 'POST',
+            //     url : "https://fcm.googleapis.com/fcm/send",
+            //     headers : {
+            //         Authorization : 'key=' + 'AAAA4OmJn2o:APA91bGBe9aHcLoJxAkkJbwN9ozac6St2BimIOVtWtb7dv-GV50v2S5-vIQzS_bZfxgl9385wyBeW4qA2GOR-BfnBV63mOHFDKMEfgZn9PNM-EAbvBtKFPEYszCLZ0OxZZPPvjyfqQMD'
+            //     },
+            //     contentType : 'application/json',
+            //     dataType: 'json',
+            //     data: JSON.stringify({"to": token,
+            //       "data": {
+            //               "title":"Georeset Store " + custCode,
+            //               "body":"Georeset was successfull on store "+ custCode
+            //             }
+            //         }),
+            //     //change "to" parameter located in tblUser column TOKEN
+            //     success : function(response) {
+            //         console.log(response);
+            //     },
+            //     error : function(xhr, status, error) {
+            //         console.log(xhr.error);                   
+            //     }
+            // });
+          }
+
+        function getToken(mdCode){
+            var token = '';
+            $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {
+                      "type":"GET_USER_TOKEN",
+                      "CONN":con_info,
+                      "mdCode":mdCode
+                    },
+              dataType: "json",
+              crossDomain: true,
+              cache: false,
+              async: false,         
+              success: function(r){
+                token = r;
+              }
+            });
+            return token;
+          }
+
+
+        function getMdCode(custCode){
+          var mdCode = '';
+            $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {
+                      "type":"GET_USER_MDCODE",
+                      "CONN":con_info,
+                      "custCode":custCode
+                    },
+              dataType: "json",
+              crossDomain: true,
+              cache: false,
+              async: false,         
+              success: function(r){
+                mdCode = r;
+              }
+            });
+            return mdCode;
+        }
+        allSalesman();
+        function allSalesman(){
+          $.ajax ({
+                url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php", 
+                type: "GET",
+                data: {"type":"get_all_salesman_georeset", "CONN":con_info},
+                dataType: "html",
+                crossDomain: true,
+                cache: false,            
+                success: function(response){                  
+                 var data = JSON.parse(response);
+                  for(var x = 0; x<data.length; x++){
+                   $('#salesmanList').append('<option value="'+data[x].mdCode+'">'+data[x].mdSalesmancode+' '+data[x].Salesman+'</option>');
+                  }
+                   $('#salesmanList').multiselect({
+                      numberDisplayed: 1,
+                      enableCaseInsensitiveFiltering: true,
+                      includeSelectAllOption: true,
+                      selectAllNumber: true,
+                      buttonWidth: '300px',
+                      maxHeight: 300
+
+                   });
+                }//success here;
+            })
+       }
+
+       //allCustomer();
+        function allCustomer(){
+          $.ajax ({
+                url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php", 
+                type: "GET",
+                data: {"type":"CUSTOMER_LIST_GEORESET", "CONN":con_info},
+                dataType: "html",
+                crossDomain: true,
+                cache: false,            
+                success: function(response){                  
+                 var data = JSON.parse(response);
+                  for(var x = 0; x<data.length; x++){
+                   $('#customerCode').append('<option value="'+data[x].custCode+'">'+data[x].custCode+' '+data[x].custName+'</option>');
+                  }
+                   $('#customerCode').multiselect({
+                      numberDisplayed: 1,
+                      enableCaseInsensitiveFiltering: true,
+                      includeSelectAllOption: true,
+                      selectAllNumber: true,
+                      buttonWidth: '300px',
+                      maxHeight: 300
+
+                   });
+                }//success here;
+            })
+       }
+        
+</script>
+<script>
+
+  (function($) {
+    $.fn.clickToggle = function(func1, func2) {
+        var funcs = [func1, func2];
+        this.data('toggleclicked', 0);
+        this.click(function() {
+            var data = $(this).data();
+            var tc = data.toggleclicked;
+            $.proxy(funcs[tc], this)();
+            data.toggleclicked = (tc + 1) % 2;
+        });
+        return this;
+    };
+   }(jQuery));
+
+ 
+    $("#navBtn").clickToggle(function() {   
+      openNav();
+    }, function() {
+        closeNav();
+    });
+
+    $(window).bind("load", function () {
+        $('#work-in-progress').fadeOut();
+    });
+  
+    function imgError2(image) {
+      image.onerror = "";
+      image.src = "../img/salesmanPic.jpg";
+      return true;
+    }  
+
+
+
+</script>
+   
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "270px";
+    document.getElementById("main").style.marginLeft = "270px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+</body>
+</html> 

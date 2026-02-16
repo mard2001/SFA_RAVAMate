@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACCOUNT SETTINGS</title>
+    <link rel="icon" class="pageIconLink" href="" />
+
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+
+    <!-- GOOGLE MATERIAL ICON -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <!-- PICTOGRAMMERS ICON -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.3.67/css/materialdesignicons.min.css" />
+    
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- CSS STYLESHEETS -->
+    <link rel="stylesheet" href="constant/dynamicColor_stylesheet.css">
+    <link rel="stylesheet" href="css/offcanvas_stylesheet.css">
+    <link rel="stylesheet" href="css/profileAccount_stylesheet.css">
+    <!-- <link rel="stylesheet" href="css/latestDatatable_stylesheet.css"> -->
+
+    <!-- DATE PICKER -->
+    <link rel="stylesheet" href="DATERANGEPICKER/daterangepicker.css">
+
+    <!--DATA TABLES CSS LATEST VERSION-->
+    <link rel="stylesheet" href="Commonusrs/DataTables/datatables.css"/>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
+</head>
+<body>
+    <div class="mainDiv container-fluid">
+        <div class="headerDiv d-flex justify-content-between align-items-center py-3" style="color: #FFF;">
+            <div class="leftHeader d-flex align-items-center mx-3">
+                <button class="btn menubtn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasExample" style="color: #FFF;">
+                    <span class="material-symbols-outlined">
+                        menu
+                    </span>
+                </button>
+                <div id="navbarCompanyDetails" class="d-flex">
+                </div>
+            </div>
+            <h1 class="text-center">Account Settings</h1>
+            <div class="rightHeader d-flex justify-content-end align-items-center mx-3" id="defaultrightHeader" style="width: 260px;">
+                <div class="navbarDropdowns"></div>
+            </div>
+        </div>
+
+        <div class="contentDiv">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-sm-12 col-md-12 col-lg-6">
+                        <div class="card mainCardCont custCont">
+                            <div class="cardheader">
+                                <div class="leftHeader d-flex align-items-center">
+                                    <div class="headerIcon">
+                                        <i class="fa-solid fa-user-gear"></i>
+                                    </div>
+                                    <h6>User Configuration</h6>
+                                </div>
+                                <div class="rightHeader">
+                                    <!-- <button class="modalBtn" id="" onclick="userSettings()"><i class="fa-solid fa-gear"></i> Configure</button> -->
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <table class="table">
+                                    <tr>
+                                        <td class="text-body-tertiary" style="font-size: 11px; vertical-align: middle;">FULLNAME</td>
+                                        <td id="ufname" style="height: 41px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-body-tertiary" style="font-size: 11px; vertical-align: middle;">CONTACT NO.</td>
+                                        <td id="ucontno" style="height: 41px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-body-tertiary" style="font-size: 11px; vertical-align: middle;">EMAIL</td>
+                                        <td id="uemail" style="height: 41px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-body-tertiary" style="font-size: 11px; vertical-align: middle;">ACCOUNT</td>
+                                        <td id="uacctype" style="height: 41px;"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-12 col-lg-6">
+                        <div class="card mainCardCont custCont">
+                            <div class="cardheader">
+                                <div class="leftHeader  d-flex align-items-center">
+                                    <div class="headerIcon">
+                                        <i class="fa-solid fa-server"></i>
+                                    </div>
+                                    <h6>Server Configuration</h6>
+                                </div>
+                                <div class="rightHeader">
+                                    <!-- <button class="modalBtn" id="btnupdate"><i class="fa-solid fa-gear"></i> Configure</button> -->
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <table class="table">
+                                    <tr>
+                                        <td class="text-body-tertiary" style="font-size: 11px; vertical-align: middle;">COMPANY</td>
+                                        <td id="ucompany" class="ucompany" style="height: 41px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-body-tertiary" style="font-size: 11px; vertical-align: middle;">SERVER IP</td>
+                                        <td style="height: 41px;">
+                                            <input type="password" id="server" style="border: none; display:none;" disabled>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-body-tertiary" style="font-size: 11px; vertical-align: middle;">DATABASE</td>
+                                        <td style="height: 41px;">
+                                            <input type="password" id="db" style="border: none;" disabled>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-body-tertiary" style="font-size: 11px; vertical-align: middle;">USERNAME</td>
+                                        <td style="height: 41px;">
+                                            <input type="password" id="username" style="border: none;" disabled>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-body-tertiary" style="font-size: 11px; vertical-align: middle;">PASSWORD</td>
+                                        <td style="height: 41px;">
+                                            <input type="password" id="pass" style="border: none;" disabled>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="card mainCardCont">
+                            <div class="cardheader">
+                                <div class="leftHeader  d-flex align-items-center">
+                                    <div class="headerIcon">
+                                        <i class="fa-solid fa-info" style="padding: 20px 25px;"></i>
+                                    </div>
+                                    <h6>Patch List</h6>
+                                </div>
+                                <div class="rightHeader">
+                                    <button class="modalBtn" onclick="getpatchlist()"></i>Reload</button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <table class="table ">
+                                    <thead>
+                                        <tr>
+                                            <th>PATCH NO.</th>
+                                            <th>NOTE</th>
+                                            <th>DATE</th>
+                                            <!--<th>STATUS</th>-->
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="patchTbody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+            <div class="offcanvas-header d-flex justify-content-between">
+                <button type="button" class="btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                    <span class="material-symbols-outlined">
+                        menu
+                    </span>
+                </button>
+                <div class="rightHeader d-flex justify-content-around align-items-center mx-3" id="smallScreenrightHeader">
+                    <div class="navbarDropdowns"></div>
+                </div>
+            </div>
+            <div class="offcanvas_headTitleDiv">
+            </div>
+            <div class="offcanvas-body px-0">
+                <div class="list-group">
+                    <div id="sidebarTabItems">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="updateUserModal" tabindex="-1" aria-labelledby="updateUserModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">USER CONFIGURATION</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating mb-1">
+                        <input type="text" class="form-control px-4" id="fullnameupdt" placeholder="Fullname">
+                        <label class="" for="fullnameupdt">Fullname</label>
+                    </div>
+                    <div class="form-floating mb-1">
+                        <input type="text" class="form-control px-4" id="contactnoupdt" placeholder="Contact Number">
+                        <label class="" for="contactnoupdt">Contact No.</label>
+                    </div>
+                    <div class="form-floating mb-1">
+                        <input type="email" class="form-control px-4" id="emailupdt" placeholder="Email">
+                        <label class="" for="emailupdt">Email</label>
+                    </div>
+                    <div class="form-floating mb-1">
+                        <input disabled type="text" class="form-control px-4" id="accountTypeupdt" placeholder="Account Type">
+                        <label class="" for="accountTypeupdt">Account Type</label>
+                        <small id="emailHelp" class="form-text text-muted">To change your account type contact system administrator.</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="updateUser()">Update</button>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="updateServerMOdal" tabindex="-1" aria-labelledby="updateServerMOdal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">SERVER CONFIGURATION</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating mb-1">
+                        <input type="text" class="form-control px-4" id="stobeupdt" placeholder="Server">
+                        <label class="" for="stobeupdt">Server</label>
+                    </div>
+                    <div class="form-floating mb-1">
+                        <input type="text" class="form-control px-4" id="dtobeupdt" placeholder="Database">
+                        <label class="" for="dtobeupdt">Database</label>
+                    </div>
+                    <div class="form-floating mb-1">
+                        <input type="text" class="form-control px-4" id="utobeupdt" placeholder="User">
+                        <label class="" for="utobeupdt">User</label>
+                    </div>
+                    <div class="form-floating mb-1">
+                        <input type="password" class="form-control px-4" id="ptobeupdt" placeholder="Password">
+                        <label class="" for="ptobeupdt">Password</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" id="testBtn" onclick="textCon()">Test Connection</button>
+                    <button type="button" class="btn btn-primary" onclick="confirmUpdate()">Update</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type="text/javascript" src="js/jasonday-printThis-c814846/printThis.js"></script>
+    <script type="text/javascript" src="js/mainjs.js"></script>
+
+    <!-- DATA TABLES JS LATEST VERSION -->
+    <script src="Commonusrs/DataTables/datatables.min.js"></script>
+
+    <!-- DATE PICKER -->
+    <script type="text/javascript" src="DATERANGEPICKER/moment.min.js"></script>
+    <script type="text/javascript" src="DATERANGEPICKER/daterangepicker.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <script src="HASH/md5.js"></script>
+    <script src="HASH/aes.js"></script>
+    <script src="nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+    <!-- <script type="text/javascript" src="web/web-commons.js"></script> -->
+    <script type="text/javascript" src="js/bootbox.min.js"></script>
+    <script type="text/javascript" src="js/scrolling.js"></script>
+    <script type="text/javascript" src="constant/dynamicScript.js"></script>
+    <script type="text/javascript" src="js/profileAccount.js"></script>
+
+</body>
+</html>

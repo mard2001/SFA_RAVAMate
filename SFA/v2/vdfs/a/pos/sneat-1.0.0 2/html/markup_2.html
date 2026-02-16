@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculate RETAIL and TOTAL using jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#calculate").click(function(){
+                var P_COST = parseFloat($("#P_COST").val());
+                var sTDisc = parseFloat($("#sTDisc").val());
+                var INIT_NET_PRICE = P_COST - (P_COST * (sTDisc * 0.01));
+                var secondDisc = parseFloat($("#secondDisc").val());
+                var NET_PRICE = INIT_NET_PRICE - (INIT_NET_PRICE * (secondDisc * 0.01));
+                var RETAIL_PRICE = parseFloat($("#RETAIL_PRICE").val());
+                var MARKUP = ((RETAIL_PRICE - NET_PRICE) / NET_PRICE) * 100;
+                var QTY = parseFloat($("#QTY").val());
+                var TOTAL = QTY * NET_PRICE;
+               
+                $("#result_total").text("TOTAL is: " + TOTAL.toFixed(2));
+                 $("#result_markup").text("MARKUP is: " + MARKUP.toFixed(2) + "%");
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>Calculate RETAIL and TOTAL using jQuery</h2>
+    <label for="P_COST">Enter P_COST:</label>
+    <input type="text" id="P_COST" name="P_COST"><br>
+    <label for="sTDisc">Enter sTDisc (%):</label>
+    <input type="text" id="sTDisc" name="sTDisc"><br>
+    <label for="secondDisc">Enter 2nd discount (%):</label>
+    <input type="text" id="secondDisc" name="secondDisc"><br>
+    <label for="RETAIL_PRICE">Enter RETAIL_PRICE:</label>
+    <input type="text" id="RETAIL_PRICE" name="RETAIL_PRICE"><br>
+    <label for="QTY">Enter QTY:</label>
+    <input type="text" id="QTY" name="QTY"><br>
+    <button id="calculate">Calculate</button>
+    <div id="result_total"></div>
+    <div id="result_markup"></div>
+</body>
+</html>

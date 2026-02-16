@@ -1,0 +1,133 @@
+/* DataTable Latest 07-07-25 */
+.dataTableMainDiv .dt-scroll{
+    margin-top: 10px;
+    padding: 0 10px 15px 10px;
+}
+
+.dataTableTopPagination{
+    padding: 0 10px;
+    margin: auto;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    border-radius: 10px;
+    background-color: var(--cust-white);
+    height: 30px;
+    box-shadow: 2px 2px 5px var(--cust-grey);
+}
+
+.dataTableTopPagination .pagination .dt-paging-button .page-link{
+    color: var(--cust-primary9) !important;
+    border: none;
+    border-radius: 5px;
+    font-size: 10px;
+}
+
+.dataTableTopPagination .pagination .dt-paging-button.active .page-link{
+    background-color: var(--cust-primary9) !important;
+    color: var(--cust-white) !important; 
+    border: none;
+}
+
+.dataTableTopPagination .pagination .dt-paging-button.disabled .page-link{
+    background: var(--cust-white) !important;
+    color: var(--cust-primary9) !important; 
+    border: none;
+}
+
+.dt-info{
+    margin: 5px 5px 0 0;
+    font-size: 12px;
+}
+
+
+#stockRequest_TAB_info{
+    font-size: 12px;
+    margin: 5px 5px 0 0;
+}
+
+.dataTable thead{
+    border-bottom: 2px solid #000;
+}
+
+.dataTable thead tr td{
+    border-right: 0.1px solid #f9f7f7;
+    border-left: 0.1px solid #f9f7f7;
+}
+
+.dataTable thead .dt-column-header .dt-column-title{
+    text-align: center !important;
+    font-weight: bold;
+    text-wrap: nowrap;
+}
+
+.dataTable thead .dt-column-header:hover{
+    cursor: pointer;
+}
+
+.dataTable .sorting_1{
+    background-color: var(--cust-neutralWhite7) !important;
+}
+
+.dataTable tbody tr td{
+    align-items: center;
+}
+
+.dt-button.buttons-collection {
+    position: relative;
+    padding: 5px 15px;
+    margin-right: 8px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    background: var(--cust-grey4);
+    color: #000;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow:
+        3px 3px 6px rgba(0, 0, 0, 0.08),
+        -3px -3px 6px rgba(255, 255, 255, 0.5),
+        inset 1px 1px 1px rgba(255,255,255,0.3),
+        inset -1px -1px 1px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    z-index: 0;
+}
+
+/* Shine glass animation */
+.dt-button.buttons-collection::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75px;
+    width: 50px;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-20deg);
+    transition: left 0.5s ease;
+    z-index: 1;
+}
+
+.dt-button.buttons-collection:hover::before {
+    left: 120%;
+}
+
+.dt-button.buttons-collection:hover {
+    transform: scale(1.03);
+    box-shadow: inset 2px 2px 6px rgba(0,0,0,0.1),
+                inset -2px -2px 6px rgba(255,255,255,0.3),
+                0 8px 16px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.dt-button.buttons-collection:active {
+    transform: scale(0.97);
+    box-shadow: inset 4px 4px 10px rgba(0,0,0,0.15),
+                inset -4px -4px 10px rgba(255,255,255,0.3);
+}

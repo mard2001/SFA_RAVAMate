@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Account Settings</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+  <style type="text/css">
+  @import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
+  	body{ 
+	  font-family: 'Questrial', sans-serif;
+	  background: #fafafa !important;
+	}
+  	.logoimg{
+  		height: 30px;
+  		width: 30px;
+  	}
+
+  	.logoTxt{
+  		letter-spacing: 8px;
+			color: white !important;
+  	}
+
+  	.cartinfo{
+  		margin-top: 30px;
+  	}
+
+  	.form-control{
+  		margin-bottom: 12px;
+  	}
+
+		#pass, #userpass {
+			border: none;
+			outline: none;
+			background-color: inherit;
+			pointer-events:none;
+		 }
+
+		.frst-box{
+			/*margin-top: 100px !important;*/
+		}
+
+  </style>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-secondary bg-secondary">
+  <a class="navbar-brand logoTxt" href="Dashboard"><img src="/img/mdlogo_web.png" class="logoimg"> RAVAmate</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      <li class="nav-item ative">
+        <a class="nav-link" href="../SFA/v2/dashboard"><button class="btn btn-default btn-sm text-light"><i class="far fa-arrow-alt-circle-left"></i> DASHBOARD</button></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+		<div class="card cartinfo frst-box">
+				<div class="card-header bg-dark text-light">
+				 <i class="fas fa-user-cog"></i> USER
+				 <a href="#" class="btn btn-secondary float-right btn-sm" onclick="userSettings()"><i class="fas fa-cog"></i> SETUP</a>
+				</div>
+				<div class="card-body">
+					<table class="table table-striped">
+						<tr>
+							<td class="">FULLNAME</td>
+							<td id="ufname"></td>
+						</tr>
+						<tr>
+							<td class="">CONTACT NO.</td>
+							<td id="ucontno"></td>
+						</tr>
+						<tr>
+								<td class="">EMAIL</td>
+								<td id="uemail"></td>
+						</tr>
+						<tr>
+								<td class="">ACCOUNT</td>
+								<td id="uacctype"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+	<!-- <div class="card cartinfo">
+	  <div class="card-header bg-dark text-light">
+		 <i class="fas fa-server"></i> SERVER
+		 <a href="#" class="btn btn-secondary float-right btn-sm" id="btnupdate"><i class="fas fa-cog"></i> SETUP</a>
+	  </div>
+	  <div class="card-body">
+	  	<table class="table table-striped">
+				<tr>
+						<td class="">COMPANY</td>
+						<td class="ucompany"></td>
+				</tr>
+				<tr>
+	  			<td class="">SERVER IP</td>
+	  			<td id="server"></td>
+	  		</tr>
+	  		<tr>
+	  			<td class="">DATABASE</td>
+	  			<td id="db"></td>
+	  		</tr>
+	  		<tr>
+	  			<td class="">USERNAME</td>
+	  			<td id="username"></td>
+	  		</tr>
+	  		<tr>
+	  			<td class="">PASSWORD</td>
+	  			<td>
+						<input type="password" id="pass">
+					</td>
+	  		</tr>
+	  	</table>
+	  </div>
+	</div> -->
+
+	<div class="card cartinfo patchHolder">
+			<div class="card-header bg-dark text-light">
+			 <i class="fas fa-info-circle"></i> PATCH LIST
+			 <button class="btn btn-secondary float-right btn-sm" onclick="getpatchlist()">RELOAD</button>
+			</div>
+			<div class="card-body">
+				<table class="table table-striped table-sm">
+					<thead>
+						<tr>
+							<th>PATCH NO.</th>
+							<th>NOTE</th>
+							<th>DATE</th>
+							<!--<th>STATUS</th>-->
+							<th></th>
+						</tr>
+					</thead>
+					<tbody id="patchTbody"></tbody>
+				</table>
+			</div>
+		</div>
+</div>
+<!-- The Modal -->
+<div class="modal" id="updateUserModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title"><i class="fas fa-cog"></i> USER SETTINGS</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+				 <div class="form-group">
+						<input type="text" name="" id="fullnameupdt" class="form-control" placeholder="FULLNAME" />
+					</div>
+					<div class="form-group">
+						<input type="text" name="" id="contactnoupdt" class="form-control" placeholder="CONTACT NO." />
+						<small id="phoneHelp" class="form-text text-danger texthelp">Contact number already exist!</small>
+					</div>
+					<div class="form-group">
+						<input type="text" name="" id="emailupdt" class="form-control" placeholder="EMAIL" />
+						<small id="emailHelp" class="form-text text-danger texthelp">Email already exist!</small>
+					</div>
+					<div class="form-group">
+							<input disabled type="text" name="" id="accountTypeupdt" class="form-control" placeholder="ACCOUNT TYPE" />
+							<small id="emailHelp" class="form-text text-muted">To change your account type contact system administrator.</small>
+						</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="updateUser()">Update</button>
+          <button type="button" class="btn btn-secondary" id="" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+	</div>
+	
+<!-- The Modal -->
+<div class="modal" id="updateServerMOdal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title"><i class="fas fa-cog"></i> SERVER SETTINGS</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+         <input type="text" name="" id="stobeupdt" class="form-control" placeholder="SERVER" />
+         <input type="text" name="" id="dtobeupdt" class="form-control" placeholder="DATABASE" />
+         <input type="text" name="" id="utobeupdt" class="form-control" placeholder="USER" />
+         <input type="password" name="" id="ptobeupdt" class="form-control" placeholder="PASSWORD" />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-primary" id="testBtn" onclick="
+          textCon()">Test Connection</button>
+          <button type="button" class="btn btn-primary" onclick="confirmUpdate()">Update</button>
+        </div>
+      </div>
+    </div>
+	</div>
+
+<script type="text/javascript" src="js/dynamic-cmmns.js"></script>
+<script src="/HASH/md5.js"></script>
+<script src="/HASH/aes.js"></script>
+<script type="text/javascript">
+	  var userType = localStorage.getItem("usertype");
+	  var checker = localStorage.getItem("srvr");
+
+	  if(checker == null || checker == 'null'){
+		console.log('wsd');
+	  }else{
+		var s = (CryptoJS.AES.decrypt(localStorage.getItem("srvr"),"/")).toString(CryptoJS.enc.Utf8);
+		var u = (CryptoJS.AES.decrypt(localStorage.getItem("usrnm"),"/")).toString(CryptoJS.enc.Utf8);
+		var p = (CryptoJS.AES.decrypt(localStorage.getItem("psswrd"),"/")).toString(CryptoJS.enc.Utf8);
+		var d = (CryptoJS.AES.decrypt(localStorage.getItem("dtbse"),"/")).toString(CryptoJS.enc.Utf8);
+	  }
+	  var con_info = [s, p, u, d];
+		
+		/*if(s == 'undefined' || s == '' || s == undefined || s == null){
+			localStorage.removeItem('adminUserName');
+			localStorage.removeItem("username"); 
+			localStorage.removeItem("usertype"); 
+			localStorage.removeItem("latitude");
+			localStorage.removeItem("longitude"); 
+			localStorage.removeItem("mapzoom"); 
+			localStorage.removeItem("newlycreated");
+			window.location.href = 'https://mybuddy.dynns.com';
+		}*/
+
+		if(userType == 'WEB_GUEST'){
+			$('.patchHolder').hide();
+		}
+
+		$('.texthelp').hide();
+
+		$('#server').html(s);
+		$('#db').html(d);
+		$('#username').html(u);
+		$('#pass').val(p);
+
+	  	$('#btnupdate').click(function (){
+	  	$('#updateServerMOdal').modal('show');
+	  	$('#stobeupdt').val(s);
+	    $('#dtobeupdt').val(d);
+	    $('#utobeupdt').val(u);
+	    $('#ptobeupdt').val(p);
+		});
+		
+		function userSettings(){
+			$('#updateUserModal').modal('show');
+		}
+
+		function updateUser(){
+			var userID = localStorage.getItem("user_id");
+			var c = confirm('Are you sure you want to updated your information?');
+			if(c){
+				var fullname = $('#fullnameupdt').val();
+				var contno = $('#contactnoupdt').val();
+				var email = $('#emailupdt').val();
+				$.ajax ({
+					url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+					type: "GET",
+					data: {
+						"type":"UPDATE_USER_INFO",
+						"fullname":fullname,
+						"contno":contno,
+						"email":email,
+						"id":userID
+				  },
+					dataType: "json",
+					crossDomain: true,
+					cache: false,            
+						success: function(r){ 
+							if(r){
+								userInfo();
+								alert('User successfully updated!');
+							}
+						}
+				});
+			}
+		}
+
+		function getcompname(){
+			$.ajax ({
+				url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+				type: "GET",
+				data: {"type":"GET_COMPANYNAME", "CONN":con_info},
+				dataType: "json",
+				crossDomain: true,
+				cache: false,            
+				success: function(r){ 
+					$('.ucompany').html(r[0].company.toUpperCase());
+				}
+			});
+		}  
+	
+		userInfo();
+		function userInfo(){
+		var userID = localStorage.getItem("user_id");
+		$.ajax ({
+				url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+				type: "GET",
+				data: {"type":"GET_USER_INFO_BY_ID", "userID": userID},
+				dataType: "json",
+				crossDomain: true,
+				cache: false,            
+					success: function(r){
+						var accHolder = '';
+						if(r[0].AUSERTYPE == 'WEB'){
+							accHolder = 'ADMIN';
+						}else 
+							accHolder = 'GUEST';
+
+						$('#ufname').html(r[0].AFULLNAME);
+						$('#ucontno').html(r[0].ACONTACTNO);
+						$('#uemail').html(r[0].AEMAIL);
+						$('#uacctype').html(accHolder);
+
+						$('#fullnameupdt').val(r[0].AFULLNAME);
+						$('#contactnoupdt').val(r[0].ACONTACTNO);
+						$('#emailupdt').val(r[0].AEMAIL);
+						$('#accountTypeupdt').val(accHolder);
+						//$('#userpass').val(r[0].APASSWORD);
+					}
+			});
+		} 
+
+
+	  getcompname();
+	  function confirmUpdate(){
+	  	$.confirm({
+		    title: 'Confirm Action',
+		    theme: 'modern',
+		    icon: 'fas fa-question',
+		    content: 'You will be logout after this action, would you like to continue?',
+		    type: 'blue',
+	        typeAnimated: true,
+	        columnClass: 'medium',
+		    buttons: {
+		        confirm: {
+		        	text: 'Proceed',
+	                btnClass: 'btn-primary',
+	                action: function () {
+		            var s = $('#stobeupdt').val();
+				    var d = $('#dtobeupdt').val();
+				    var u = $('#utobeupdt').val();
+				    var p = $('#ptobeupdt').val();
+			  		 $.ajax ({
+				          url: GLOBALLINKAPI+"/nestle/testconnection.php",
+				          type: "GET",
+				          data: {
+				                  "server":s,
+				                  "username": u,
+				                  "password": p,
+				                  "database": d
+				                },
+				          dataType: "json",
+				          crossDomain: true,
+				          cache: false,            
+				            success: function(r){
+				              if(r.outcome){
+				              	localStorage.removeItem("srvr");
+								localStorage.removeItem("usrnm");
+								localStorage.removeItem("psswrd");
+								localStorage.removeItem("dtbse");
+
+								localStorage.removeItem('adminUserName');
+								localStorage.removeItem("username"); 
+								localStorage.removeItem("usertype"); 
+								localStorage.removeItem("latitude");
+								localStorage.removeItem("longitude"); 
+								localStorage.removeItem("mapzoom"); 
+								localStorage.removeItem("newlycreated");
+
+								var encryptedS =  CryptoJS.AES.encrypt(s,"/");
+								var encryptedU =  CryptoJS.AES.encrypt(u,"/");
+								var encryptedP =  CryptoJS.AES.encrypt(p,"/");
+								var encryptedD =  CryptoJS.AES.encrypt(d,"/");
+
+								localStorage.setItem("srvr", encryptedS);
+							    localStorage.setItem("usrnm", encryptedU);
+							    localStorage.setItem("psswrd", encryptedP);
+								localStorage.setItem("dtbse", encryptedD);
+							
+							    
+							    $.alert({
+							        title: 'SUCCESS!',
+							        theme: 'material',
+							        content: 'Server settings successfully updated.',
+							        icon: 'fas fa-thumbs-up',
+ 									type: 'green'
+								});
+								updateOfflineStat();
+				               }else{
+				               	 $.alert({
+							        title: 'UNABLE TO UPDATE!',
+							        theme: 'material',
+							        content: 'You are trying to connect to a server that did not establish a connection properly.',
+							        icon: 'fas fa-thumbs-down',
+ 									type: 'red'
+							    });
+				              }
+				            }
+				        });
+		       		 }
+		        },
+		        cancel: function () {
+		        	$('#updateServerMOdal').modal('hide');
+		        },
+		    }
+		});
+		}
+	
+	function updateOfflineStat(){
+	var userID = localStorage.getItem("user_id"); 
+	// $.ajax({
+	// 	url: "https://mybuddy-sfa.com/web/databaseApi.php",
+	// 	type: "GET",
+	// 	data: {
+	// 			"type":"updateOfflineStat",
+	// 			"username": userID
+	// 		},
+	// 	dataType: "json",
+	// 	crossDomain: true,
+	// 	cache: false,            
+	// 	async: false,
+	// 	success: function(r){ 
+			window.location.href = "/SFA/v2/dashboard";
+		// }
+		// });
+	}
+
+	getpatchlist();
+	var firstElemt;
+	function getpatchlist(){
+		$('#patchTbody').html('<i class="fa fa-spin fa-spinner"></i> reloading...');
+		$.ajax ({
+			url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+			type: "GET",
+			data: {"type":"PATCHLIST", "CONN": con_info},
+			dataType: "json",
+			crossDomain: true,
+			cache: false,            
+				success: function(r){ 
+					var cont = '';
+					if(r.length == 0){
+						cont = '<tr><td colspan="4" class="text-info">NO PATCH TO INSTALL AS OF NOW.</td></tr>';
+					}else{
+						firstElemt = r[0].patchLevel;
+						for(var x = 0; x < r.length; x++){
+						cont += '<tr>'+
+											'<td>'+r[x].patchLevel+'</td>'+
+											'<td>'+r[x].PLNotes+'</td>'+
+											'<td>'+r[x].PLDate+'</td>'+
+											//'<td><i class="fas fa-times text-danger"></i> not installed</td>'+
+											'<td><button class="btn btn-primary btn-sm" id='+r[x].patchLevel+' onclick="installPL(\''+r[x].patchLevel+'\')">INSTALL</button></td>'+
+											// '<td><button class="btn btn-danger btn-sm"  onclick="overrideins(\''+r[x].patchLevel+'\')">OVERRIDE</button></td>'+
+										'</tr>';
+						}
+					}
+					$('#patchTbody').html(cont);
+				},
+				error: function(XMLHttpRequest, textStatus, errorThrown) {
+					$('#patchTbody').html('<tr><td colspan="4" class="text-info">NO PATCH TO INSTALL AS OF NOW.</td></tr>');
+				}
+			});
+		} 
+	
+	function installPL(patchID){
+		var plDelimeter = patchID.substring(7, 9);
+		//console.log(plDelimeter);
+		if(firstElemt == patchID){
+			var c = confirm('Are you sure you want to install this patch?');
+			if(c){
+				var btn = '#'+patchID;
+				$(btn).html('<i class="fa fa-spin fa-spinner"></i> installing...');
+				$(btn).attr("disabled", true);
+				$.ajax ({
+					url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+					type: "GET",
+					data: {"type":"INSTALL_PATCH", "CONN":con_info, "patchID":patchID},
+					dataType: "json",
+					crossDomain: true,
+					cache: false,            
+						success: function(r){
+							alert('Patch was successfully installed!'); 
+							getpatchlist();
+						},
+						error: function(XMLHttpRequest, textStatus, errorThrown) {
+							alert('UNABLE TO INSTALL PATCH \n REASON: ' + XMLHttpRequest.responseText);
+							$(btn).html('INSTALL');
+							$(btn).attr("disabled", false);
+						}
+				}).done(function () {
+						$(btn).html('INSTALL');
+						$(btn).attr("disabled", false); 
+				});
+			}
+		}else{
+			alert('SERVER WARNING:\n\nPlease install patch '+firstElemt+' in order to proceed and to prevent server errors.');
+		}
+		
+	}
+
+	function overrideins(patchID){
+		$.ajax ({
+					url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+					type: "GET",
+					data: {"type":"OVERRIDE_PATCH", "CONN":con_info, "patchID":patchID},
+					dataType: "json",
+					crossDomain: true,
+					cache: false,            
+						success: function(r){
+							alert('Patch was successfully override installed!'); 
+							location.reload();
+						}
+				});
+	}
+</script>
+</body>
+
+</html>

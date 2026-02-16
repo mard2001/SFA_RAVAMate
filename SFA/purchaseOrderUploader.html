@@ -1,0 +1,1832 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Purchase Order</title>
+   
+  <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/BOOTSTRAP3/css/bootstrap.min.css"/>
+  <script src="/BOOTSTRAP3/AJAX/jquery.min.js"></script>
+  <script src="/BOOTSTRAP3/js/bootstrap.min.js"></script>
+  
+  <link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+  <link rel="stylesheet" href="/css/mdDesign.css"/>
+  
+  <script type="text/javascript" src="/DATERANGEPICKER/moment.min.js"></script>
+  <script type="text/javascript" src="/DATERANGEPICKER/daterangepicker.js"></script>
+  <link rel="stylesheet" href="/DATERANGEPICKER/daterangepicker.css">
+  
+  <link rel="stylesheet" href="/Commonusrs/DATATABLES/jquery.dataTables.min.css"/>
+  <link rel="stylesheet" href="/Commonusrs/DATATABLES/editor.dataTables.min.css"/>
+  <link rel="stylesheet" href="/Commonusrs/DATATABLES/select.dataTables.min.css"/>
+  <link rel="stylesheet" href="/Commonusrs/DATATABLES/buttons.dataTables.min.css "/>
+  <link rel="stylesheet" href="/js/multi/dist/css/bootstrap-multiselect.css" type="text/css"/>
+
+    <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <STYLE>
+      .checker{
+        margin-top: 20px;
+      }
+
+      .tabtables tbody tr{
+        cursor: pointer;
+      }
+    </STYLE>
+</head>
+
+<body class="" id="page-top">
+ 
+    <div id="main">
+        <h4 class="display-4 dispMargin">
+         <!--  <a href="#" id='navBtn' class="btn btn-primary"  style='margin-right: 15px;'>
+             <span class="glyphicon glyphicon-menu-hamburger"></span> 
+           </a> -->
+          <span class='glyphicon glyphicon-file'></span> Purchase Order
+          <span class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                    <a style='float:right;' href="#" class="dropdown-toggle" data-toggle="dropdown" id='dropThisDown'>
+                        <span class="label label-pill label-danger count" style='border-radius: 10px; font-size: 10px;'></span>
+                        <span class="fa fa-bell"></span>
+                    </a>
+                    
+                       <ul class="dropdown-menu" style='padding: 0'>
+                        <div id='notif-body'>
+                            <div id='notifs-icon-div'></div>
+                        </div>
+                        <a type="button" class="btn btn-default btn-block" href='mdAlert_bohol.php' id='seeAll' >See all</a>
+                       </ul>
+                </li>
+
+                  <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                      <i class="fa fa-user"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="Profile.html"><i class="fa fa-user-circle-o"></i> My Account</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="#" id="admin-logout-btn"><i class="fa fa-sign-out-alt"></i> Logout</a>
+                        </li>
+                    </ul>
+                 </li>
+            </span>
+          </h4>
+         <div class="panel cust-panel">
+                <div class="panel-heading">
+                  <span class='glyphicon glyphicon-list-alt'></span>
+                  <span id="titleHeading" class="display-4"></span>
+
+                  <span class="pull-right">
+                    
+                    <!-- <button class="btn btn-warning btn-sm" onclick="rpiNameCorrector()"><i class="fa fa-file"></i> RPI NAME CORRECTOR</button> -->
+                    <button class="btn btn-danger btn-sm" onclick="uploadpolink()"><i class="fa fa-upload"></i> UPLOAD PO</button>
+                    <button class="btn btn-primary btn-sm" onclick="skumappinglink()"><i class="fas fa-cart"></i> SKU MAPPING</button>
+                  </span>
+                </div>
+                <div class="panel-body" style='background-color:#fff; color: black;'> 
+                  <div class="btn-group tabbt" style="margin-bottom: 20px;">
+                    <button type="button" class="btn tabbt btn1 activeTab">UNCONFIRMED</button>
+                    <button type="button" class="btn tabbt btn2">CONFIRMED</button>
+                  </div> 
+                    <div id="pending_stockrequestlist">
+                      <!-- <h4 class="text-primary">Booking</h4> -->
+                      <!-- <hr> -->
+                      <table id="" class="table table-hovered unprocessedTBL display nowrap tabtables" width='100%'>
+                        <thead style="width: 100% !important">
+                           <tr>
+                            <th></th>
+                             <th>CHAIN</th>
+                             <th>PO NUMBER</th>
+                             <th>PO DATE</th>
+                             <th>RDD</th>
+                             <th>SHIP TO</th>
+                             <th>#SKU</th>
+                             <th>Order Amount</th>
+                          <th>Remarks</th>
+                          <th>Cancellation Date</th>
+                          <th>File Name</th>
+
+                           </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="6" style="text-align:right"></th>
+								                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+								
+                            </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+
+                    <div id="approved_stockrequestlist" class="hidden">
+                      <!-- <h4 class="text-primary">Extruct</h4> -->
+                      <!-- <hr> -->
+                      <table id="" class="table table-hovered processedTBL display nowrap tabtables" width='100%'>
+                        <thead style="width: 100% !important">
+                            <tr>
+                                <th>CHAIN</th>
+                                <th>PO NUMBER</th>
+                                <th>PO DATE</th>
+                                <th>RDD</th>
+                                <th>CANCELLATION DATE</th>
+                                <th>SHIP TO</th>
+                                <th>#SKU</th>
+                                <th>Order Amount</th>
+                              </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="7" style="text-align:right">Total Amount:</th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+
+                 </div>
+               </div>
+         </div><!--main panel end-->
+
+         <div id="salesDmodal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title"><i class="fas fa-list"></i> PO Details</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-hover table-condensed table-striped">
+                      <tr>
+                        <td>Customer</td>
+                        <td id="customerH" class=""></td>
+                      </tr>
+                      <tr>
+                        <td>PO Number</td>
+                        <td id="ponoH" class=""></td>
+                      </tr>
+                      <tr>
+                        <td>PO Date</td>
+                        <td id="podateH" class=""></td>
+                      </tr>
+                      <tr>
+                        <td>Ship To</td>
+                        <td id="shipToH" class=""></td>
+                      </tr>
+                      <tr>
+                        <td>#SKU</td>
+                        <td id="skuH" class=""></td>
+                      </tr>
+                      <tr>
+                        <td>Amount</td>
+                        <td id="amountH" class=""></td>
+                      </tr>
+                      <tr>
+                        <td>Remarks</td>
+                        <td id="remarksH" class="text-danger"></td>
+                      </tr>
+                    </table>
+                    <table class="table table-hover table-striped fixed_header">
+                      <thead>
+                        <tr>
+                          <th>STOCKCODE</th>
+                          <th>ITEMCODE</th>
+                          <th style="text-align: left !important;">ITEM NAME</th>
+                          <th style="text-align: center !important;">QUANTITY</th>
+                          <th style="text-align: right !important;">AMOUNT</th>
+                          <th style="text-align: center !important;">IS VALID</th>
+                        </tr>
+                      </thead>
+                      <tbody id="salesDetailsBody"></tbody>
+                    </table>
+<!--       
+                    <input type="hidden" id="salesman">
+                    <input type="hidden" id="transaction">
+                    <input type="hidden" id="custCode">
+                    <input type="hidden" id="custName">
+                    <input type="hidden" id="sku">
+                    <input type="hidden" id="amount">
+                    <input type="hidden" id="address">
+                    <input type="hidden" id="contactPerson">
+                    <input type="hidden" id="deldate">
+                    <input type="hidden" id="refNo">
+                    <input type="hidden" id="salesmanCode"> -->
+
+                    <input type="hidden" id="poHolderConfirmation">
+
+                    <small id="rpicustomernote" class="text-danger"><b>Note:</b> Please maintain this customer to syspro in order to proceed.</small>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-info" id="confirmPOBtn" data-dismiss="modal" onclick="exec_confirmPO()">Confrim PO</button>
+                  <button type="button" class="btn btn-info" id="remapCustomerBtn" data-dismiss="modal" onclick="exec_remap_customer()">Tag Customer</button>
+                </div>
+              </div>
+      
+            </div>
+          </div>
+
+
+          <div class="modal fade" id="duplicateUserModal" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">SESSION ENDED</h4>
+                </div>
+                <div class="modal-body">
+                  <p>Sorry, your session has been disconnected. Another user is currently using your account.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" onclick="cofirmationDupUser()">GOT IT</button>
+                </div>
+              </div>
+            </div>
+          </div>
+	
+	
+	   <div class="modal fade" id="uploadChainModal" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Select Customer</h4>
+                </div>
+                <div class="modal-body">
+					<div>
+						<select class="form-control form-control-xl" id="chainSelect" style="font-size: 20px; font-weight: bold; padding: 10px; height: 50px;">
+							<option selected disabled hidden value="">Choose here..</option>
+							<option value="RPI">RPI - ROSE PHARMACY INCORPORATED</option>
+							<option value="TSP">TSP - THREE SIXTY PHARMACY</option>
+						</select>
+					</div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" onclick="confirnChainSelect()">Proceed</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal fade" id="skumappingModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">SKU Mapping List</h4>
+                </div>
+                <div class="modal-body">
+                <div>
+                  <table>
+                    <table class="table table-hovered skumappingTable display nowrap" width='100%'>
+                      <thead style="width: 100% !important">
+                        <tr>
+                          <th>CHAIN</th>
+                          <th>ITEM CODE</th>
+                          <th>ITEM DESCRIPTION</th>
+                          <th>NPI CODE</th>
+                          <TH>NPI DESCRIPTION</TH>
+                        </tr>
+                      </thead>
+                    <tbody>
+                    </tbody>
+                    </table>
+                  </table>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="updateRPISkuModal" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Update Prdouct Mapping: <span id="rpiitemcodeheader"></span></h4>
+                </div>
+                <div class="modal-body">
+                  <table>
+                    <!-- <tr>
+                      <td>Product List:</td>
+                    </tr> -->
+                    <tr>
+                        <td><select id="productList_updaterpiprod" name="productList[]"></select></td>
+                    </tr>
+                  </table>
+                  <input type="text" id="itemCodeRemapHolder2" hidden>
+                  <input type="text" id="itemNameRemapHolder2" hidden>
+                  <input type="text" id="itemChainHolder" hidden>
+				          <input type="text" id="itemCIDTSP2" hidden>
+                  <input type="text" id="itemCID_TSP" hidden>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger pull-left" data-dismiss="modal" onclick="delete_remap_sku()">Remove</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="update_rpi_remap_sku()">Replace</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal fade" id="remappingModal" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">NPI Product Re-mapping: <span class="rpiitemcode"></span></h4>
+                </div>
+                <div class="modal-body">
+                  <table>
+                    <!-- <tr>
+                      <td>Product List:</td>
+                    </tr> -->
+                    <tr>
+                        <td><select id="productList" name="productList[]"></select></td>
+                    </tr>
+                  </table>
+                  <input type="text" id="itemCodeRemapHolder" hidden>
+                  <input type="text" id="itemNameRemapHolder" hidden>
+                  <input type="text" id="stockCodeHolder" hidden>
+                  <input type="text" id="itemCIDTSP" hidden>
+                  <input type="text" id="chainHolder" hidden>
+                </div>
+                <div class="modal-footer">
+					  <button type="button" class="btn btn-danger pull-left" onclick="exec_removeTPSproduct()">Remove</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="exec_remap_per_chain()">Replace</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal fade" id="addskuremapModal" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Add New SKU</h4>
+                </div>
+                <div class="modal-body">
+                  <table class="table">
+                    <tr>
+                      <td>CHAIN</td>
+                      <td>
+                       <select name="" id="nw_chain" class="form-control">
+                          <option value="" selected disabled hidden>Choose here..</option>
+                          <option value="RPI">RPI</option>
+                          <option value="TSP">TSP</option>
+                       </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>ITEM CODE</td>
+                      <td>
+                        <input type="text" class="form-control" id="nw_rpiCode">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>ITEM DESCRIPTION</td>
+                      <td>
+                        <input type="text" class="form-control" id="nw_description">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>NPI CODE</td>
+                        <td><select id="productList_newsku" name="productList_newsku[]"></select></td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="exec_add_rpi_sku()">Add SKU</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+
+          <div class="modal fade" id="customerRemappingModal" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Customer Re-mapping: <span class="customerName"></span></h4>
+                </div>
+                <div class="modal-body">
+                  <table class="table table-hover">
+                    <tr>
+                      <td>Ship To</td>
+                      <td>
+                        <input type="text" class="form-control" id="upt_shipto" disabled>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Branch Code</td>
+                      <td>
+                        <input type="text" class="form-control" id="upt_branchCode">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>NPI Customer Code</td>
+                      <td><select id="defaultcustomerList" name="defaultcustomerList[]"></select></td>
+                    </tr>
+                  </table>
+                  <input type="text" id="itemCodeRemapHolder" hidden>
+				 <input type="text" id="itemCIDTSP" hidden>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="update_remap_customer()">Update</button>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+    <script src="/Commonusrs/DATATABLES/jquery.dataTables.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/dataTables.buttons.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/buttons.print.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/buttons.html5.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/jszip.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/ellipsis.js"></script>
+    <script src="/Commonusrs/DATATABLES/dataTables.select.min.js"></script>
+    <script type="text/javascript" src="/Commonusrs/DATATABLES/dataTables.checkboxes.min.js"></script>
+  
+    <script type="text/javascript" src="/web/web-commons.js"></script>
+    <script type="text/javascript" src="/bootbox/bootbox.min.js"></script>
+    
+    <script type="text/javascript" src="/js/multi/dist/js/bootstrap-multiselect.js"></script>
+    <script src="/HASH/md5.js"></script>
+    <script src="/HASH/aes.js"></script>
+    <script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+    <!-- <script src="js/chatApi.js"></script> -->
+    <script type="text/javascript">
+      var user = localStorage.getItem("adminUserName");
+      var usernm = localStorage.getItem("adminUserName");
+      var usertype = localStorage.getItem("usertype");
+      
+      getcompname();
+      function getcompname(){
+      $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {"type":"GET_COMPANYNAME", "CONN":con_info},
+          dataType: "json",
+          crossDomain: true,
+          cache: false,            
+            success: function(r){ 
+            $('#titleHeading').html(r[0].company.toUpperCase() +' / Purchase Order v3.9');
+            }
+        });
+      } 
+
+      determineUserType(usertype); 
+
+      datatableApp();
+      datatableApp2();
+      
+      datePicker_booking();
+      var startPickDate_b, endPickDate_b, if1dayisSelected;
+      function datePicker_booking(){
+       var start = moment().subtract(0, 'days');
+        var end = moment();
+        $('.filterdate_booking').daterangepicker({
+            "alwaysShowCalendars": true,
+            "startDate": start,
+            "endDate": end,
+            "maxDate": end,
+            "applyClass": "btn-primary",
+            "autoApply": false,
+            ranges: {
+               'Today': [moment(), moment()],
+               'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+               'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+               'This Month': [moment().startOf('month'), moment().endOf('month')],
+               'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        }, function(start, end, label) {
+             //$('.filterdate_booking span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+             var d1 = moment(start);
+             var d2 = moment(end);
+             if1dayisSelected = d2.diff(d1);
+             startPickDate = start.format('MMMM D, YYYY');
+             endPickDate = end.format('MMMM D, YYYY');
+          });
+
+        $('.filterdate_booking').on('apply.daterangepicker', function(ev, picker) {
+          //$('#stockRequest_TAB').hide();
+         startPickDate_b = picker.startDate.format('YYYY-MM-DD');
+         endPickDate_b = picker.endDate.format('YYYY-MM-DD');
+          //salesmanDataObject(start, end);
+          //tableData.clear().rows.add(sourceData).draw();
+           stockRequestSourceData();
+           tableData.clear().rows.add(sourceDat).draw();
+         // datefiltersearch_booking(start, end);
+        });
+      }
+
+      datePicker_extruct();
+      var startPickDate_e, endPickDate_e, if1dayisSelected;
+      function datePicker_extruct(){
+       var start = moment().subtract(0, 'days');
+        var end = moment();
+        $('.filterdate_extruct').daterangepicker({
+            "alwaysShowCalendars": true,
+            "startDate": start,
+            "endDate": end,
+            "maxDate": end,
+            "applyClass": "btn-primary",
+            "autoApply": false,
+            ranges: {
+               'Today': [moment(), moment()],
+               'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+               'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+               'This Month': [moment().startOf('month'), moment().endOf('month')],
+               'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        }, function(start, end, label) {
+             $('.filterdate_extruct span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+             var d1 = moment(start);
+             var d2 = moment(end);
+             if1dayisSelected = d2.diff(d1);
+             startPickDate = start.format('MMMM D, YYYY');
+             endPickDate = end.format('MMMM D, YYYY');
+          });
+
+        $('.filterdate_extruct').on('apply.daterangepicker', function(ev, picker) {
+          //$('#stockRequest_TAB').hide();
+          startPickDate_e = picker.startDate.format('YYYY-MM-DD');
+          endPickDate_e = picker.endDate.format('YYYY-MM-DD');
+           
+           stockRequestSourceData2();
+           tableData2.clear().rows.add(sourceDat2).draw();
+        });
+      }
+
+      
+    function exec_remap_customer(){
+      $('#customerRemappingModal').modal('show');
+    }
+
+    function update_remap_customer(){
+      var shipto = $('#upt_shipto').val();
+      var branchCode = $('#upt_branchCode').val();
+      var custCode = $('#defaultcustomerList').val();
+
+      $.ajax ({
+        url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+        type: "GET",
+        data: {
+                "type":"EXEC_TSP_CUSTOMER_MAPPING",
+                'custCode':custCode,
+                'shipto':shipto,
+                'branchCode':branchCode,
+                "CONN":con_info
+              },
+        dataType: "json",
+        crossDomain: true,
+        cache: false,  
+        async: false,          
+        success: function(r){
+            if(r){
+              alert('Customer successfully tagged.');
+              location.reload();
+            }
+          
+          }//success
+          ,error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert('Unable to Proceed: ' + XMLHttpRequest.responseText);
+          }
+      });
+
+
+    }
+
+      function datefiltersearch_booking(start, end){
+        $.fn.dataTable.ext.search.push(
+            function( settings, data, dataIndex ) {
+              var min = start;
+              var max = end;
+              var testdate = new Date(data[1]);
+              var startDate = moment(testdate).format('YYYY-MM-DD');
+
+              if (min == null && max == null) { return true; }
+              if (min == null && startDate <= max) { return true;}
+              if(max == null && startDate >= min) {return true;}
+              if (startDate <= max && startDate >= min) { return true; }
+              return false;
+            }
+        );
+
+          tableData.draw();
+      }
+
+      function datefiltersearch_extruct(start, end){
+        $.fn.dataTable.ext.search.push(
+            function( settings, data, dataIndex ) {
+              var min = start;
+              var max = end;
+              var testdate = new Date(data[1]);
+              var startDate = moment(testdate).format('YYYY-MM-DD');
+
+              if (min == null && max == null) { return true; }
+              if (min == null && startDate <= max) { return true;}
+              if(max == null && startDate >= min) {return true;}
+              if (startDate <= max && startDate >= min) { return true; }
+              return false;
+            }
+        );
+
+          tableData2.draw();
+      }
+
+      $('#approved_stockrequestlist').removeClass('hidden');
+      $('#approved_stockrequestlist').hide();
+
+      $('#btdt_stockrequestlist').removeClass('hidden');
+      $('#btdt_stockrequestlist').hide();
+      $('.btn1').click(function (){
+           
+           $('.btn1').removeClass('inactiveTab');
+           $('.btn1').addClass('activeTab');
+
+           $('.btn2').removeClass('activeTab');
+          //  $('.btn2').addClass('inactiveTab');
+
+           $('.btn3').removeClass('activeTab');
+          //  $('.btn3').addClass('inactiveTab');
+
+           $('#approved_stockrequestlist').hide();
+           $('#btdt_stockrequestlist').hide();
+           $('#pending_stockrequestlist').show();
+
+           //stockRequestSourceData();
+           //tableData.clear().rows.add(sourceDat).draw();
+      });
+
+      $('.btn2').click(function (){
+
+          //  $('.btn2').removeClass('inactiveTab');
+           $('.btn2').addClass('activeTab');
+
+           $('.btn1').removeClass('activeTab');
+          //  $('.btn1').addClass('inactiveTab');
+
+           $('.btn3').removeClass('activeTab');
+          //  $('.btn3').addClass('inactiveTab');
+
+           $('#pending_stockrequestlist').hide();
+           $('#btdt_stockrequestlist').hide();
+           $('#approved_stockrequestlist').show();
+
+            //stockRequestSourceData2();
+            //tableData2.clear().rows.add(sourceDat2).draw();
+         
+      });
+
+
+
+      function customerList(r){
+        var mdCode = r.SLSMAN_CD;
+        // console.log(mdCode);
+
+        //$('select #customerList').multiselect('refresh');
+        $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {"type":"CUSTOMER_LIST_UNPROCESSED", "CONN":con_info, "mdCode":mdCode},
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(data){
+                $('#customerList').html('');
+                $('#customerList').append('<option value="" disabled selected hidden>Choose here..</option>'); 
+            
+                for(var x = 0; x<data.length; x++){
+                   $('#customerList').append('<option value="'+data[x].custCode+'">'+data[x].custCode+' '+data[x].custName+'</option>');
+                }
+
+                $('#customerList').multiselect('destroy');
+                $('#customerList').multiselect({
+                    numberDisplayed: 1,
+                    enableCaseInsensitiveFiltering: true,
+                    includeSelectAllOption: true,
+                    selectAllNumber: true,
+                    buttonWidth: '300px',
+                    maxHeight: 300
+                 });
+
+
+                /*$('#customerList option:selected').each(function() {
+                  $(this).prop('selected', false);
+                })
+                
+                $('#customerList').multiselect('refresh');*/
+               }//success
+              });
+      }
+
+      var sourceDat;
+      function stockRequestSourceData(){
+        var start = startPickDate_b;
+        var end = endPickDate_b;
+        var dialog = bootbox.dialog({
+              message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> please wait...</p>',
+              backdrop: true
+            });
+         $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {"type":"UPLOADED_RX_PO", "start":start, "end":end, "CONN":con_info},
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(r){
+                sourceDat = r;
+                dialog.modal('hide');
+               },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                botboxMsg = '<b class="text-danger">Ops! Something went wrong!</b><br/>' + XMLHttpRequest.responseText + ' CONTACT SYSTEM ADMINISTRATOR!';
+                dialog.init(function(){
+                      setTimeout(function(){
+                        dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                    }, 1000);
+                });
+              }
+            });
+      }
+
+      function remappingsku(stockCode, itemCode, itemName, itemCID){
+	
+            $('#itemCodeRemapHolder').val(itemCode);
+            $('#itemNameRemapHolder').val(itemName);
+            $('.rpiitemcode').html(itemCode);
+		        $('#itemCIDTSP').val(itemCID);
+            $('#stockCodeHolder').val(stockCode);
+            
+            $('#remappingModal').modal('show');
+      }
+
+      function delete_remap_sku(){
+
+        var rpiCode = $('#itemCIDTSP2').val(); 
+        var chain = $('#itemChainHolder').val();
+        var cID = $('#itemCID_TSP').val();
+        
+
+        var f = confirm('Are you sure you want to remove this sku ?');
+        if(f){
+          $.ajax ({
+                  url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+                  type: "GET",
+                  data: {
+                            "type":"EXEC_REMOVE_MAPPINGSKU",
+                            'rpiCode':rpiCode,
+                            'chain':chain,
+                            'cID':cID,
+                            "CONN":con_info
+                        },
+                  dataType: "json",
+                  crossDomain: true,
+                  cache: false,  
+                  async: false,          
+                  success: function(r){
+                        alert('Itemcode: ' +rpiCode+ ' successfully removed.');
+                        location.reload();
+                  },
+                  error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert('Unable to Proceed:\n'+XMLHttpRequest.responseText);
+                  }
+                });
+        }
+      }
+
+      function update_rpi_remap_sku(){
+
+        var f = confirm('Are you sure you want to update this rpi product?');
+          if(f){
+            var rpiCode = $('#itemCIDTSP2').val(); 
+            var npiCode = $('#productList_updaterpiprod').val();
+            var npiDesc = $('#productList_updaterpiprod option:selected').text();
+            var grammage = '';
+                $.ajax ({
+                  url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+                  type: "GET",
+                  data: {
+                            "type":"EXEC_UPDATE_RPI_MAPPING",
+                            'rpiCode':rpiCode,
+                            'npiCode':npiCode,
+                            'npiDesc':npiDesc,
+                            "CONN":con_info
+                        },
+                  dataType: "json",
+                  crossDomain: true,
+                  cache: false,  
+                  async: false,          
+                  success: function(r){
+                        alert('Itemcode: ' +rpiCode+ ' successfully updated.');
+                        location.reload();
+                  },
+                  error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert('Unable to Proceed:\n'+XMLHttpRequest.responseText);
+                  }
+                });
+            
+          }  
+        }
+
+
+      function exec_remap_per_chain(){
+        var chainChecker = $('#chainHolder').val();
+        var stockCode = $('#stockCodeHolder').val();
+
+        if(chainChecker == 'RPI'){
+          execremap_sku_rpi();
+        }else{
+          execremap_sku_tsp();
+        }
+      }
+      function execremap_sku_rpi(){
+
+        var rpiCode = $('#itemCodeRemapHolder').val(); 
+        var npiCode = $('#productList').val();
+        var rpiDesc = $('#itemNameRemapHolder').val();
+        var npiDesc = $('#productList option:selected').text();
+        var grammage = '';
+
+        var f = confirm('Are you sure you want to proceed?');
+        if(f){
+            $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/POST_applicationApi.php",
+              type: "POST",
+              data: {
+                        "type":"INSERT_RPI_MAPPING",
+                        'rpiCode':rpiCode,
+                        'npiCode':npiCode,
+                        'rpiDesc':rpiDesc,
+                        'npiDesc':npiDesc,
+                        'grammage':grammage,
+                        "CONN":con_info
+                    },
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(r){
+                    alert('Itemcode: ' +rpiCode+ ' successfully remapped.');
+                    location.reload();
+               },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                botboxMsg = '<b class="text-danger">Ops! Something went wrong!</b><br/>' + XMLHttpRequest.responseText + ' CONTACT SYSTEM ADMINISTRATOR!';
+                dialog.init(function(){
+                      setTimeout(function(){
+                        dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                    }, 1000);
+                });
+              }
+            });
+        }
+        
+      }
+
+
+      function execremap_sku_tsp(){
+
+        var cID = $('#itemCIDTSP').val();
+        var stockCode = $('#stockCode').val();
+
+        var f = confirm('Are you sure you want to proceed?');
+        if(f){
+            $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {
+                        "type":"EXEC_UPDAED_SPI_SKU",
+                        'stockCode':stockCode,
+                        'cID':cID,
+                        "CONN":con_info
+                    },
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(r){
+                    alert('TSP Itemcode: ' +stockCode+ ' successfully updated.');
+                    location.reload();
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                botboxMsg = '<b class="text-danger">Ops! Something went wrong!</b><br/>' + XMLHttpRequest.responseText + ' CONTACT SYSTEM ADMINISTRATOR!';
+                dialog.init(function(){
+                      setTimeout(function(){
+                        dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                    }, 1000);
+                });
+              }
+            });
+        }
+
+      }
+
+
+      function exec_confirmPO_multiple(poNumber){
+            $.ajax ({
+            url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {
+                        "type":"EXEC_CONFIRMED_PO",
+                        'poNumber':poNumber,
+                        "CONN":con_info
+                    },
+            dataType: "json",
+            crossDomain: true,
+            cache: false,  
+            async: true,          
+            });
+        }
+		
+	 function exec_removeTPSproduct(){
+	    var itemCID = $('#itemCIDTSP').val();
+
+		 
+		 var f = confirm('Are you sure youn want to remove this SKU?');
+		 if(f){
+		 	 $.ajax ({
+            url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {
+                        "type":"EXEC_REMOVE_SKU_TSP",
+                        'cID':itemCID,
+                        "CONN":con_info
+                    },
+            dataType: "json",
+            crossDomain: true,
+            cache: false,  
+            async: false,  
+				  success: function(r){
+                    alert('SKU successfully removed from this PO.');
+                    location.reload();
+            }
+            });
+		 }
+	 }
+
+      function exec_confirmPO(){
+
+        var poNumber = $('#poHolderConfirmation').val(); 
+        var f = confirm('Are you sure you want to proceed?');
+        if(f){
+            $.ajax ({
+            url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {
+                        "type":"EXEC_CONFIRMED_PO",
+                        'poNumber':poNumber,
+                        "CONN":con_info
+                    },
+            dataType: "json",
+            crossDomain: true,
+            cache: false,  
+            async: false,          
+            success: function(r){
+                    alert('PO successfully confirmed.');
+                    location.reload();
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                botboxMsg = '<b class="text-danger">Ops! Something went wrong!</b><br/>' + XMLHttpRequest.responseText + ' CONTACT SYSTEM ADMINISTRATOR!';
+                dialog.init(function(){
+                    setTimeout(function(){
+                        dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                    }, 1000);
+                });
+            }
+            });
+        }
+
+     }
+
+      var tableData;
+      var dialogmain;
+      function datatableApp(){
+          tableData = $('table.unprocessedTBL').DataTable({
+              "dom": 'Bfrtip',
+              "responsive": true,
+              "data": sourceDat,
+              "scrollX": true,
+              "ordering": true,
+              language: {
+                        select: {
+                            rows: ""
+                        }
+                    },
+                    select: true,
+                    select: {
+                        style: 'multi',
+                        //selector: 'td:first-child'
+                    },
+                  columns: [
+                        // {"data":'thumbnail_stockCode'},
+                        // {'data':'holdskuchecker'},
+                    {   
+                          'data': null,
+                          'targets': 0,
+                          'checkboxes': {
+                              'selectRow': true
+                              }
+                          },
+                    { data: "Chain" },
+                    { data: "PONumber" },
+                    { data: "PODate"},
+                    { data: "RequestedDeliveryDate" },
+                    { data: "ShipTo" },
+                    { data: "#SKU" },
+                    { data: "OrderAmount" },
+                    { data: "Remarks" },
+                    { data: "CancellationDate" },
+                    { data: "FileName" },
+                  ],
+                columnDefs: [
+    					{
+                            targets: 7,
+                            className: 'dt-body-right',
+                            render: $.fn.dataTable.render.ellipsis(20)
+                        },
+             
+  				  ],
+                buttons: [
+                   {
+                    text: '<i class="fas fa-calendar-alt"></i> Filter Date',
+                    className: 'filterdate_booking',
+                    action: function(e, dt, node, config){
+                    }
+                  },
+                  {
+                    text: 'CONFIRM',
+                    action: function ( e, dt, node, config ) {
+                        var row = tableData.rows('.selected').data();
+                    
+                        if(row.length == 0){
+                            alert('NO DATA SELECTED!');
+                        }else{
+                            var c = confirm('Are you sure you want to comfirm this PO?');
+                            if(c){
+
+                                dialogmain = bootbox.dialog({
+                                message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> confirming purchase order please wait...</p>',
+                                backdrop: true,
+                                //closeButton: false
+                                });
+                             
+                                for(var x = 0; x < row.length; x++){
+                                    var poNumber = row[x].PONumber;
+                                    // exec_isexport_datatables(row[x].transactionID);
+                                    exec_confirmPO_multiple(poNumber);
+                                }
+                                
+                                // dialogmain.modal('hide');
+
+                                // alert('SKUs successfull confirmed!');
+                                // location.reload();
+
+                                botboxMsg = '<b class="text-success"><i class="fa fa-check-circle"></i> Success</b><br/><span>PO Successfully confirmed!</span>';
+                                dialogmain.init(function(){
+                                      setTimeout(function(){
+                                        dialogmain.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                                        location.reload();
+                                    }, 2000);
+                                });
+
+                               
+                            }
+                        }
+                    }
+                  },
+                  'excel'
+                ],
+                "footerCallback": function ( row, data, start, end, display ) {
+                    var api = this.api(), data;
+
+                    var intVal = function ( i ) {
+                        return typeof i === 'string' ?
+                            i.replace(/[\$,]/g, '')*1 :
+                            typeof i === 'number' ?
+                                i : 0;
+                    };
+
+                    total = api
+                        .column( 7 )
+                        .data()
+                        .reduce( function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0 );
+        
+                    pageTotal = api
+                        .column( 7, { page: 'current'} )
+                        .data()
+                        .reduce( function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0 );
+        
+                    $( api.column( 7 ).footer() ).html(
+                        'Total Amount: &#8369; '+pageTotal.toLocaleString() +' ('+ total.toLocaleString() +')'
+                    );
+                }
+                
+          });
+
+        $('table.unprocessedTBL tbody').on( 'dblclick', 'tr', function () {
+              $('.checker').html('');
+            var tr = $(this).closest('tr');
+            var row = tableData.row(tr);
+
+            viewDetails(row.data());
+
+            $('#salesDmodal').modal('show');
+        });
+
+        
+        function viewDetails(r){
+            $('#customerH').html(r.Chain);
+            $('#ponoH').html(r.PONumber);
+            $('#podateH').html(r.PODate);
+            $('#shipToH').html(r.ShipTo);
+            $('#upt_shipto').val(r.ShipTo);
+            $('#skuH').html(r.SKUCOUNT);
+            $('#amountH').html(r.OrderAmount);
+            $('#remarksH').html(r.Remarks);
+
+
+            $('#chainHolder').val(r.Chain);
+            $('#poHolderConfirmation').val(r.PONumber);
+            $('#confirmPOBtn').show();
+            $('#remapCustomerBtn').hide();
+            $('#rpicustomernote').hide();
+        
+                $.ajax ({
+                  url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+                  type: "GET",
+                  data: {"type":"UPLOADED_RX_PO_DETAILS", "poNumber":r.PONumber, "CONN":con_info},
+                  dataType: "json",
+                  crossDomain: true,
+                  cache: false,  
+                  async: false,          
+                  success: function(r){
+                    var cont = '';
+                    for(var x = 0; x < r.length; x++){
+                        var isvalidChecker = validskuchecker(r[x].isValid);
+                        var nullChecker = nullchecker(r[x].StockCode);
+                        var isRemovedChecker = isRemovedSKUChecker(r[x].isRemoved);
+                        console.log(isRemovedChecker['intval']);
+                        if(isRemovedChecker['intval'] == '1'){
+                            cont += '<tr style="background-color: #851b1b; color: white !important; text-decoration: line-through;">'+
+                                '<td>'+nullChecker+'</td>'+
+                                '<td>'+r[x].ItemCode+'</td>'+
+                                '<td style="text-align: left !important;">'+r[x].ItemName+'</td>'+
+                                '<td style="text-align: center !important;">'+r[x].Quantity+'</td>'+
+                                '<td style="text-align: right !important;">'+r[x].Amount+'</td>'+
+                                '<td style="text-align: center !important;">Excluded</td>'+
+                                '</tr>';
+                        }else{
+                          if(isvalidChecker['intval'] == 0){
+                              // $('#rpiitemcode').html(r[x].ItemCode);
+                              cont += '<tr style="background-color: #851b1b; color: white !important; cursor: pointer;" onclick="remappingsku(\''+r[x].StockCode+'\', \''+r[x].ItemCode+'\', \''+r[x].ItemName+'\', \''+r[x].cID+'\')">'+
+                                '<td>'+nullChecker+'</td>'+
+                                '<td>'+r[x].ItemCode+'</td>'+
+                                '<td style="text-align: left !important;">'+r[x].ItemName+'</td>'+
+                                '<td style="text-align: center !important;">'+r[x].Quantity+'</td>'+
+                                '<td style="text-align: right !important;">'+r[x].Amount+'</td>'+
+                                '<td style="text-align: center !important;">'+isvalidChecker['htmlval']+'</td>'+
+                                '</tr>';
+                            }else{
+                              cont += '<tr>'+
+                                '<td>'+nullChecker+'</td>'+
+                                '<td>'+r[x].ItemCode+'</td>'+
+                                '<td style="text-align: left !important;">'+r[x].ItemName+'</td>'+
+                                '<td style="text-align: center !important;">'+r[x].Quantity+'</td>'+
+                                '<td style="text-align: right !important;">'+r[x].Amount+'</td>'+
+                                '<td style="text-align: center !important;">'+isvalidChecker['htmlval']+'</td>'+
+                                '</tr>';
+                            }
+                        }
+                        
+                    
+                    }
+                    
+                    $('#salesDetailsBody').html(cont);
+                  }
+              });
+
+              if(r.Chain == 'TSP' && r.Remarks == 'Customer not found.'){
+                $('#confirmPOBtn').hide();
+                $('#remapCustomerBtn').show();
+                $('#rpicustomernote').hide();
+              }else if(r.Chain == 'RPI' && r.Remarks == 'Customer not found.' ){
+                $('#confirmPOBtn').hide();
+                $('#remapCustomerBtn').hide();
+                $('#rpicustomernote').show();
+              }
+          }
+
+      }
+	
+		
+	  function isRemovedSKUChecker(isremoveval){
+	  	if(isremoveval == 'Y'){
+			   return {"htmlval":"EXCLUDED", "intval":"1"};
+		}else{
+				return {"htmlval":"INCLUDED", "intval":"0"};
+		}
+	  }
+		
+      function nullchecker(checker){
+        if(checker == null || checker == 'null' || checker == '')
+        return '<span style="color: red; font-weight: bold;">---</span>';
+
+        return checker;
+      }
+
+      function validskuchecker(checker){
+        if(checker == null || checker == 'null' || checker == ''){
+            return {"htmlval":'<span style="color: green; font-weight: bold;">Valid</span>', "intval":'1'};
+        }else{
+            return {"htmlval":'<span style="color: red; font-weight: bold;">Invalid</span>', "intval":'0'};
+        }
+        // return '<span style="color: green; font-weight: bold;">Valid</span>';
+
+        // return '<span style="color: red; font-weight: bold;">Invalid</span>';
+      }
+
+       var sourceDat2;
+      function stockRequestSourceData2(){
+        var dialog = bootbox.dialog({
+              message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> please wait...</p>',
+              backdrop: true
+            });
+         $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {
+                      "type":"UNUPLOADED_RX_PO", "CONN":con_info,
+                      "start":startPickDate_e,
+                      "end":endPickDate_e
+                    },
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(r){ 
+                sourceDat2 = r;
+                tableData.clear().rows.add(r).draw();
+                dialog.modal('hide');
+               },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                botboxMsg = '<b class="text-danger">Ops! Something went wrong!</b><br/>' + XMLHttpRequest.responseText + ' CONTACT SYSTEM ADMINISTRATOR!';
+                dialog.init(function(){
+                      setTimeout(function(){
+                        dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                    }, 1000);
+                });
+              }
+            });
+      }
+
+
+      function rpiNameCorrector(){
+        var dialog = bootbox.dialog({
+              message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> please wait...</p>',
+              backdrop: true
+            });
+         $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {
+                      "type":"EXEC_RPI_NAME_CORRECTOR", "CONN":con_info
+                    },
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(r){ 
+                alert('Success: RPI company name successfully corrected.');
+                dialog.modal('hide');
+               },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                botboxMsg = '<b class="text-danger">Ops! Something went wrong!</b><br/>' + XMLHttpRequest.responseText + ' CONTACT SYSTEM ADMINISTRATOR!';
+                dialog.init(function(){
+                      setTimeout(function(){
+                        dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                    }, 1000);
+                });
+              }
+            });
+      }
+
+      
+    
+      var tableData2;
+      function datatableApp2(){
+         tableData2 = $('table.processedTBL').DataTable({
+              "dom": 'Bfrtip',
+              "responsive": true,
+              "data": sourceDat2,
+              "scrollX": true,
+              "ordering": true,
+              order: [[ 1, 'asc' ]],
+              columns: [
+                  { data: "Chain" },
+                  { data: "PONumber" },
+                  { data: "PODate"},
+                  { data: "RequestedDeliveryDate" },
+                  { data: "CancellationDate" },
+                  { data: "ShipTo" },
+                  { data: "#SKU" },
+                  { data: "OrderAmount" },
+                ],
+                columnDefs: [
+    					{
+                            targets: 7,
+                            className: 'dt-body-right',
+                            render: $.fn.dataTable.render.ellipsis(20)
+                        },
+             
+  				  ],
+                buttons: [
+                   {
+                    text: '<i class="fas fa-calendar-alt"></i> Filter Date',
+                    className: 'filterdate_extruct',
+                    action: function(e, dt, node, config){
+
+                    }
+                  },
+                  'excel'
+                ],
+                "footerCallback": function ( row, data, start, end, display ) {
+                    var api = this.api(), data;
+
+                    var intVal = function ( i ) {
+                        return typeof i === 'string' ?
+                            i.replace(/[\$,]/g, '')*1 :
+                            typeof i === 'number' ?
+                                i : 0;
+                    };
+
+                    total = api
+                        .column( 7 )
+                        .data()
+                        .reduce( function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0 );
+        
+                    pageTotal = api
+                        .column( 7, { page: 'current'} )
+                        .data()
+                        .reduce( function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0 );
+        
+                    $( api.column( 7 ).footer() ).html(
+                        '&#8369; '+pageTotal.toLocaleString() +' ('+ total.toLocaleString() +')'
+                    );
+                }
+          });
+
+         $('table.processedTBL tbody').on( 'dblclick', 'tr', function () {
+            $('.checker').html('');
+            var tr = $(this).closest('tr');
+            var row = tableData2.row(tr);
+            var transactionID = tr.find('td:eq(0)').text();
+            var mdCode = tr.find('td:eq(2)').text();
+            customerList(row.data());
+            $('#transactionIDHolder').val(transactionID);
+            $('.selected_trasactionID').html(transactionID);
+            $('#salesmanTypeHolder').val('extruct');
+            $('#updatecustomerModal').modal('toggle');
+          });
+      }
+
+      function cancelUnprocessed(){
+        var transactionID = $('#transactionIDHolder').val();
+        var f = confirm('Are you sure you want to cancel this transaction?');
+        if(f){
+          $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {
+                       "type":"CANCEL_UNPROCESSED_TRANS",
+                       "CONN":con_info,
+                       "transactionID":transactionID
+                     },
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(r){
+                  alert('Transaction was successfully cancelled.');
+               },
+               error: function(XMLHttpRequest, textStatus, errorThrown) {
+                 alert("ERROR OCCUR: " + XMLHttpRequest.responseText);
+               }
+              });
+        }
+
+      }
+
+      function execute_update(){
+        var stype = $('#salesmanTypeHolder').val();
+        var custcode = $('#customerList').val();
+        var transactionID = $('#transactionIDHolder').val();
+        console.log(custcode + ' ' + transactionID);
+        if(custcode == null){
+          $('.checker').html('<p class="text-danger"><i class="fas fa-exclamation-circle"></i> Please select a customer first.</p>');
+        }else{
+          $('.checker').html('');
+          if(confirm('Are you sure you want to update all transaction with trasacntionID: ?')){
+            
+            $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {
+                       "type":"UPDATE_CUSTOMER_NAME_UNPROCESSED", "CONN":con_info,
+                       "newCustCode":custcode,
+                       "transactionID":transactionID,
+                       "salesmanType":stype
+                     },
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(r){
+                  if(r){
+                    if(stype == 'booking'){
+                      stockRequestSourceData();
+                      tableData.clear().rows.add(sourceDat).draw();
+                      $('#updatecustomerModal').modal('hide');
+                      alert('Transaction updated successfully!');
+                    }else if(stype == 'extruct'){
+                      stockRequestSourceData2();
+                      tableData2.clear().rows.add(sourceDat2).draw();
+                      $('#updatecustomerModal').modal('hide');
+                      alert('Transaction updated successfully!');
+                    }else if(stype == 'btdt'){
+                      stockRequestSourceData3();
+                      tableData3.clear().rows.add(sourceDat3).draw();
+                      $('#updatecustomerModal').modal('hide');
+                      alert('Transaction updated successfully!');
+                    }
+                  }
+               },
+               error: function(XMLHttpRequest, textStatus, errorThrown) {
+                 alert("ERROR OCCUR: " + XMLHttpRequest.responseText);
+               }
+              });
+          } 
+        }
+      }
+
+      
+
+
+      generateskumappingDataTable();
+      getskumapingSourceData();
+      var sourceSKUData;
+      function getskumapingSourceData(){
+      
+         $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {
+                      "type":"GET_RPISKU_MAPPING_DATA", 
+                      "CONN":con_info
+                    },
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(r){ 
+
+                sourceSKUData = r;
+                skumappingDataTable.clear().rows.add(sourceSKUData).draw().columns.adjust();
+              
+               }
+            });
+      }
+
+      
+      var skumappingDataTable;
+      function generateskumappingDataTable(){
+
+
+          skumappingDataTable = $('table.skumappingTable').DataTable({
+              "dom": 'Bfrtip',
+              "responsive": true,
+              "data": sourceSKUData,
+              "scrollX": true,
+              "ordering": true,
+              order: [[ 2, 'asc' ]],
+              columns: [
+                  { data: "chain" },
+                  { data: "RPICODE" },
+                  { data: "RPIDESCRIPTION" },
+                  { data: "NPICODE"},
+                  { data: "NPIDESCRIPTION" },
+                ],
+                buttons: [
+                {
+                    text: 'ADD SKU',
+                    action: function ( e, dt, node, config ) {
+                      $('#nw_chain').val('');
+                      $('#nw_rpiCode').val('');
+                      $('#nw_description').val('');
+                      $('#productList_newsku').val('');
+                      $('#addskuremapModal').modal('show');
+                    }
+                  },
+                ]
+          });
+
+         $('table.skumappingTable tbody').on( 'dblclick', 'tr', function () {
+
+            var tr = $(this).closest('tr');
+            var row = skumappingDataTable.row(tr);
+          
+            updateskumapping_dt(row.data());
+
+
+            // $('#updateRPISkuModal').modal('show');
+           
+          });
+      }
+
+      $('table.skumappingTable').DataTable().columns.adjust();   
+
+      function updateskumapping_dt(r){
+        $('#itemCodeRemapHolder2').val(r.NPICODE);
+        $('#itemNameRemapHolder2').val(r.NPIDESCRIPTION);
+        $('#itemCIDTSP2').val(r.RPICODE);
+        $('#rpiitemcodeheader').html(r.RPICODE);
+        $('#itemChainHolder').val(r.chain);
+        $('#itemCID_TSP').val(r.cID);
+
+        
+        $('#updateRPISkuModal').modal('show');
+      }
+
+
+   
+      function exec_add_rpi_sku(){
+        var chain = $('#nw_chain').val();
+        var rpiCode = $('#nw_rpiCode').val();
+        var rpiDesc = $('#nw_description').val();
+        var npiCode = $('#productList_newsku').val();
+        var npiDesc = $('#productList_newsku option:selected').text();
+
+
+        if(chain == undefined || rpiCode == '' || rpiDesc == '' || npiCode == undefined){
+          alert('Please fill all fields.');
+        }else{
+          var f = confirm('Are you sure you want to proceed?');
+            if(f){
+              $.ajax ({
+                  url: GLOBALLINKAPI+"/nestle/connectionString/POST_applicationApi.php",
+                  type: "POST",
+                  data: {
+                    "type":"INSERT_RPI_MAPPING",
+                    'chain':chain,
+                    'rpiCode':rpiCode,
+                    'rpiDesc':rpiDesc,
+                    'npiCode':npiCode,
+                    'npiDesc':npiDesc,
+                    'grammage':'',
+                    "CONN":con_info
+                  },
+                  dataType: "json",
+                  crossDomain: true,
+                  cache: false,          
+                  async: false,  
+                    success: function(r){ 
+                      if(r){
+                        alert('Product successfully inserted.');
+                        location.reload();
+                      }
+                    },error: function(XMLHttpRequest, textStatus, errorThrown) {
+						alert('Unable to proceed: ' + XMLHttpRequest.responseText);
+					 }
+                });
+            }
+        }
+
+     
+      }
+
+      getDefaultCustomerList();
+      function getDefaultCustomerList(){
+        $.ajax ({
+            url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {"type":"GET_CUSTOMERLIST_TSP_TAGGING", "CONN":con_info},
+            dataType: "json",
+            crossDomain: true,
+            cache: false,          
+            async: false,  
+                success: function(data){ 
+                for(var x = 0; x<data.length; x++){
+                    $('#defaultcustomerList').append('<option value="'+data[x].custCode+'">'+data[x].custCode+' - '+data[x].custName+'</option>');                    
+                }
+
+                $('#defaultcustomerList').multiselect({
+                    numberDisplayed: 1,
+                    enableCaseInsensitiveFiltering: true,
+                    includeSelectAllOption: true,
+                    selectAllNumber: true,
+                    buttonWidth: '100%',
+                    maxHeight: 300
+                });
+
+                
+                }
+            });
+
+      }
+
+      getProductList();
+      function getProductList(){
+        $.ajax ({
+            url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {"type":"GET_PRODUCT_FOR_MAPPING", "CONN":con_info},
+            dataType: "json",
+            crossDomain: true,
+            cache: false,          
+            async: false,  
+                success: function(data){ 
+                for(var x = 0; x<data.length; x++){
+                    $('#productList').append('<option value="'+data[x].STOCKCODE+'">'+data[x].STOCKCODE+' - '+data[x].DESCRIPTION+'</option>');  
+                    $('#productList_updaterpiprod').append('<option value="'+data[x].STOCKCODE+'">'+data[x].STOCKCODE+' - '+data[x].DESCRIPTION+'</option>');                
+                }
+
+                $('#productList').multiselect({
+                    numberDisplayed: 1,
+                    enableCaseInsensitiveFiltering: true,
+                    includeSelectAllOption: true,
+                    selectAllNumber: true,
+                    buttonWidth: '100%',
+                    maxHeight: 300
+                });
+
+                $('#productList_updaterpiprod').multiselect({
+                    numberDisplayed: 1,
+                    enableCaseInsensitiveFiltering: true,
+                    includeSelectAllOption: true,
+                    selectAllNumber: true,
+                    buttonWidth: '100%',
+                    maxHeight: 300
+                });
+
+               
+                
+                }
+            });
+        }
+
+
+        getProductList_forInsertion();
+        function getProductList_forInsertion(){
+        $.ajax ({
+            url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {"type":"GET_PRODUCT_FOR_INSERTION", "CONN":con_info},
+            dataType: "json",
+            crossDomain: true,
+            cache: false,          
+            async: false,  
+                success: function(data){ 
+                  $('#productList_newsku').append('<option selected disabled hidden value="">Choose here..</option>');
+                  for(var x = 0; x<data.length; x++){ 
+                      $('#productList_newsku').append('<option value="'+data[x].STOCKCODE+'">'+data[x].STOCKCODE+' - '+data[x].DESCRIPTION+'</option>');                   
+                  }
+                  
+                  $('#productList_newsku').multiselect({
+                      numberDisplayed: 1,
+                      enableCaseInsensitiveFiltering: true,
+                      includeSelectAllOption: true,
+                      selectAllNumber: true,
+                      buttonWidth: '100%',
+                      maxHeight: 300
+                  });
+                
+                }
+            });
+        }
+
+	  function confirnChainSelect(){
+		  var chain = $('#chainSelect').val();
+		  
+		  if(chain == undefined || chain == ''){
+		  	alert('Please select a customer.');
+		  }else{
+			  if(chain == 'RPI'){
+				  var win = window.open('https://mybuddy-sfa.com/RX/RPI/rpiinv_uplodr', '_blank');
+					if (win) {
+						//Browser has allowed it to be opened
+						win.focus();
+					} else {
+						//Browser has blocked it
+						alert('Please allow popups for this website');
+					}
+			  }else{
+				 var win = window.open('https://mybuddy-sfa.com/RX/TSP/TSP/uploadTSP', '_blank');
+					if (win) {
+						//Browser has allowed it to be opened
+						win.focus();
+					} else {
+						//Browser has blocked it
+						alert('Please allow popups for this website');
+					}
+			  }
+		  }
+		  
+	   }
+      function uploadpolink(){
+		    // $('#uploadChainModal').modal('show');
+            var win = window.open('https://mybuddy-sfa.com/POUPLOADER/v2/index.html', '_blank');
+            if (win) {
+                //Browser has allowed it to be opened
+                win.focus();
+            } else {
+                //Browser has blocked it
+                alert('Please allow popups for this website');
+            }
+      }
+
+      function skumappinglink(){
+        $('#skumappingModal').modal('show');
+      }
+
+
+      $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function(e){
+            $($.fn.dataTable.tables(true)).DataTable()
+            .columns.adjust();
+        });
+
+
+   
+       (function($) {
+          $.fn.clickToggle = function(func1, func2) {
+              var funcs = [func1, func2];
+              this.data('toggleclicked', 0);
+              this.click(function() {
+                  var data = $(this).data();
+                  var tc = data.toggleclicked;
+                  $.proxy(funcs[tc], this)();
+                  data.toggleclicked = (tc + 1) % 2;
+              });
+              return this;
+          };
+         }(jQuery));
+
+       
+          $("#navBtn").clickToggle(function() {   
+            openNav();
+          }, function() {
+              closeNav();
+          });
+
+          $(window).bind("load", function () {
+              $('#work-in-progress').fadeOut();
+          });
+        
+          function imgError2(image) {
+            image.onerror = "";
+            image.src = "../img/salesmanPic.jpg";
+            return true;
+          }  
+
+          function openNav() {
+              document.getElementById("mySidenav").style.width = "270px";
+              document.getElementById("main").style.marginLeft = "270px";
+          }
+
+          function closeNav() {
+              document.getElementById("mySidenav").style.width = "0";
+              document.getElementById("main").style.marginLeft= "0";
+          }
+    </script>
+</body>
+</html>

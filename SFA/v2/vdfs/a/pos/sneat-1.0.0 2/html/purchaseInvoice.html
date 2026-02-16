@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  class="light-style layout-menu-fixed"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../assets/"
+  data-template="vertical-menu-template-free"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+
+    <title>POS - Purchase Invoice</title>
+
+    <meta name="description" content="Fastsosyo" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/sosyo.png" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../assets/css/demo.css" />
+    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+    <!-- datatables -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"> -->
+
+    <link rel="stylesheet" href="../multiselect/bootstrap-multiselect.css" type="text/css"/>
+    
+    <!-- bs 5 bttoms -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"/> -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.bootstrap5.min.css">
+
+
+    <!-- https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css
+    https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css
+    https://cdn.datatables.net/buttons/2.2.3/css/buttons.bootstrap5.min.css -->
+
+
+    <script src="../assets/vendor/js/helpers.js"></script>
+    <script src="../assets/js/config.js"></script>
+
+    <style>
+        .changeImageBtn{
+            width: 400px;
+            margin: 0 auto;
+        }
+
+        .changeImageBtn:hover{
+            cursor: pointer;
+        }
+
+        .productImg{
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .productImg img{
+            width: 270px;
+            height: 300px;
+        }
+
+        /* #updateProductBundle.in{
+            z-index: 999999;
+        } */
+
+        .tableholder{
+            height: 350px;
+            width: 100%;
+            overflow-y: auto;
+            margin-top: 10px;
+        }
+
+        .headertab {
+            position: sticky;
+            top:0;
+            color: white !important;
+            
+        }
+    </style>
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+          <div class="app-brand demo">
+            <a href="index.html" class="app-brand-link">
+              <span class="app-brand-logo demo">
+                <!-- <svg
+                  width="25"
+                  viewBox="0 0 25 42"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                > -->
+                <!-- <img src="../assets/img/favicon/sosyo.png" style="height: 60px; width:60px;" alt="sosyo icon"> -->
+                  <defs>
+                    <path
+                      d="M13.7918663,0.358365126 L3.39788168,7.44174259 C0.566865006,9.69408886 -0.379795268,12.4788597 0.557900856,15.7960551 C0.68998853,16.2305145 1.09562888,17.7872135 3.12357076,19.2293357 C3.8146334,19.7207684 5.32369333,20.3834223 7.65075054,21.2172976 L7.59773219,21.2525164 L2.63468769,24.5493413 C0.445452254,26.3002124 0.0884951797,28.5083815 1.56381646,31.1738486 C2.83770406,32.8170431 5.20850219,33.2640127 7.09180128,32.5391577 C8.347334,32.0559211 11.4559176,30.0011079 16.4175519,26.3747182 C18.0338572,24.4997857 18.6973423,22.4544883 18.4080071,20.2388261 C17.963753,17.5346866 16.1776345,15.5799961 13.0496516,14.3747546 L10.9194936,13.4715819 L18.6192054,7.984237 L13.7918663,0.358365126 Z"
+                      id="path-1"
+                    ></path>
+                    <path
+                      d="M5.47320593,6.00457225 C4.05321814,8.216144 4.36334763,10.0722806 6.40359441,11.5729822 C8.61520715,12.571656 10.0999176,13.2171421 10.8577257,13.5094407 L15.5088241,14.433041 L18.6192054,7.984237 C15.5364148,3.11535317 13.9273018,0.573395879 13.7918663,0.358365126 C13.5790555,0.511491653 10.8061687,2.3935607 5.47320593,6.00457225 Z"
+                      id="path-3"
+                    ></path>
+                    <path
+                      d="M7.50063644,21.2294429 L12.3234468,23.3159332 C14.1688022,24.7579751 14.397098,26.4880487 13.008334,28.506154 C11.6195701,30.5242593 10.3099883,31.790241 9.07958868,32.3040991 C5.78142938,33.4346997 4.13234973,34 4.13234973,34 C4.13234973,34 2.75489982,33.0538207 2.37032616e-14,31.1614621 C-0.55822714,27.8186216 -0.55822714,26.0572515 -4.05231404e-15,25.8773518 C0.83734071,25.6075023 2.77988457,22.8248993 3.3049379,22.52991 C3.65497346,22.3332504 5.05353963,21.8997614 7.50063644,21.2294429 Z"
+                      id="path-4"
+                    ></path>
+                    <path
+                      d="M20.6,7.13333333 L25.6,13.8 C26.2627417,14.6836556 26.0836556,15.9372583 25.2,16.6 C24.8538077,16.8596443 24.4327404,17 24,17 L14,17 C12.8954305,17 12,16.1045695 12,15 C12,14.5672596 12.1403557,14.1461923 12.4,13.8 L17.4,7.13333333 C18.0627417,6.24967773 19.3163444,6.07059163 20.2,6.73333333 C20.3516113,6.84704183 20.4862915,6.981722 20.6,7.13333333 Z"
+                      id="path-5"
+                    ></path>
+                  </defs>
+                  <g id="g-app-brand" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="Brand-Logo" transform="translate(-27.000000, -15.000000)">
+                      <g id="Icon" transform="translate(27.000000, 15.000000)">
+                        <g id="Mask" transform="translate(0.000000, 8.000000)">
+                          <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                          </mask>
+                          <use fill="#696cff" xlink:href="#path-1"></use>
+                          <g id="Path-3" mask="url(#mask-2)">
+                            <use fill="#696cff" xlink:href="#path-3"></use>
+                            <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-3"></use>
+                          </g>
+                          <g id="Path-4" mask="url(#mask-2)">
+                            <use fill="#696cff" xlink:href="#path-4"></use>
+                            <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-4"></use>
+                          </g>
+                        </g>
+                        <g
+                          id="Triangle"
+                          transform="translate(19.000000, 11.000000) rotate(-300.000000) translate(-19.000000, -11.000000) "
+                        >
+                          <use fill="#696cff" xlink:href="#path-5"></use>
+                          <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-5"></use>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+              </span>
+              <span class="app-brand-text demo menu-text fw-bolder ms-2">POS SYSTEM</span>
+            </a>
+
+            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+              <i class="bx bx-chevron-left bx-sm align-middle"></i>
+            </a>
+          </div>
+
+          <div class="menu-inner-shadow"></div>
+
+          <ul class="menu-inner py-1">
+            <!-- Dashboard -->
+            <li class="menu-item">
+              <a href="index.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Dashboard</div>
+              </a>
+            </li>
+
+          
+            <!-- Components -->
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Reports</span></li>
+            <!-- Cards -->
+           
+            <li class="menu-item">
+              <a href="salesReport.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Sales</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="returns.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Returns</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="stockAlert.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Stock Alert</div>
+              </a>
+            </li>
+            <li class="menu-item active">
+              <a href="javascript:void(0)" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-box"></i>
+                <div data-i18n="User interface">Purchase</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item active">
+                  <a href="purchaseInvoice.html" class="menu-link">
+                    <div data-i18n="Accordion">Invoice</div>
+                  </a>
+                </li>
+                <!-- <li class="menu-item">
+                  <a href="purchaseReport.html" class="menu-link">
+                    <div data-i18n="Accordion">Report</div>
+                  </a>
+                </li>
+                -->
+              </ul>
+            </li>
+
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Maintenance</span></li>
+            <!-- Cards -->
+            <li class="menu-item">
+                <a href="supplier.html" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-collection"></i>
+                    <div data-i18n="Basic">Supplier</div>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a href="customer.html" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-collection"></i>
+                    <div data-i18n="Basic">Customer</div>
+                </a>
+            </li>
+            
+            <li class="menu-item">
+              <a href="products.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Products</div>
+              </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="branch.html" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-collection"></i>
+                  <div data-i18n="Basic">Branch</div>
+                </a>
+              </li>
+
+                
+            <li class="menu-item">
+                <a href="branchAdmin.html" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-collection"></i>
+                    <div data-i18n="Basic">Users</div>
+                </a>
+            </li>
+            
+            
+               
+              </ul>
+            </li>
+          </ul>
+        </aside>
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+
+          <nav
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            id="layout-navbar"
+          >
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="bx bx-menu bx-sm"></i>
+              </a>
+            </div>
+
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+              <!-- Search -->
+              <div class="navbar-nav align-items-center">
+                <div class="nav-item d-flex align-items-center">
+                  <b id="siteNameHolder"></b>
+                </div>
+              </div>
+              <!-- /Search -->
+
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <!-- Place this tag where you want the button to render. -->
+                <li class="nav-item lh-1 me-3">
+                  <!-- <a
+                    class="github-button"
+                    href="https://github.com/themeselection/sneat-html-admin-template-free"
+                    data-icon="octicon-star"
+                    data-size="large"
+                    data-show-count="true"
+                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
+                    >Star</a
+                  > -->
+                  <span id="admNameHolder">---</span>
+                </li>
+
+                <!-- User -->
+                <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                  <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                    <div class="avatar avatar-online">
+                      <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                    </div>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                      <a class="dropdown-item" href="#">
+                        <div class="d-flex">
+                          <div class="flex-shrink-0 me-3">
+                            <div class="avatar avatar-online">
+                              <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                            </div>
+                          </div>
+                          <div class="flex-grow-1">
+                            <span class="fw-semibold d-block" id="admNameHolder2"></span>
+                            <small class="text-muted">Admin</small>
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <div class="dropdown-divider"></div>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#" onclick="logoutsosyoadm()">
+                        <i class="bx bx-power-off me-2"></i>
+                        <span class="align-middle" id="logoutbtn">Log Out</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <!--/ User -->
+              </ul>
+            </div>
+          </nav>
+
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Reports /</span> Purchase Invoice</h4>
+
+              <div class="row">
+                <div class="col-xl-12">
+                  <div class="nav-align-top mb-4">
+                      <!-- <div class="tab-pane fade show active" id="navs-top-home" role="tabpanel"> -->
+                           <div class="card">
+                              <div class="card-body">
+                                <div class="table-responsive text-nowrap">
+                                    <table class="table npicustomerBody_active" id="" style="width: 100%;">
+                                      <thead>
+                                        <tr>
+                                          <th>INVOICE #</th>
+                                          <th>INVOICE DATE</th>
+                                          <th>SUPPLIER</th>
+                                          <TH>INVOICE AMOUNT</TH>
+                                          <th>TERMS</th>
+                                          <th>DUE DATE</th>
+                                          <TH>TOTAL AMOUNT DUE</TH>
+                                          <th>STATUS</th>
+                                          <th>BRANCH</th>
+                                          <TH>APRROVER</TH>
+                                          <th>DATECREATED</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                              </div>
+                          </div>
+                      <!-- </div> -->
+              
+                  </div>
+                </div>
+              </div>
+              <!--/ Basic Bootstrap Table -->
+
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+
+
+    
+
+    <div class="modal fade" id="addNewBranchModal">
+      <div class="modal-dialog modal-xl" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel2">Add New Purchase Invoice</h5>
+              <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+              ></button>
+              </div>
+              <div class="modal-body">
+                    <div class="mb-3">
+                      <label for="formFile" class="form-label">Invoice #</label>
+                        <input id="i_invoiceno" class="form-control" type="text">
+                    </div>
+                    <div class="mb-3">
+                      <label for="formFile" class="form-label">Invoice Date</label>
+                      <input class="form-control" type="date" id="i_invoicedate" />
+                    </div>
+                    <div class="mb-3">
+                      <label for="formFile" class="form-label">Supplier</label>
+                      <select class="form-control" id="i_supplier"></select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Branch</label>
+                        <select class="form-control" id="i_branch"></select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="formFile" class="form-label">Terms</label>
+                        <input class="form-control" type="text" id="i_terms" />
+                      </div>
+                      <div class="mb-3">
+                        <label for="formFile" class="form-label">FWT</label>
+                        <input class="form-control" type="text" id="i_fwt" />
+                      </div>
+                      <div class="mb-3">
+                        <label for="formFile" class="form-label">F/H</label>
+                        <input class="form-control" type="text" id="i_fhandling" />
+                      </div>
+                      <!-- <div class="mb-3">
+                        <label for="formFile" class="form-label">Due Date</label>
+                        <input class="form-control" type="text" id="s_contactno" />
+                      </div> -->
+                      
+                      <hr>
+                      <h6>PRODUCT DETAILS <span style="float: right;"><button class="btn btn-info btn-sm" onclick="openpiproductPI()">Add Product</button></span></h6>
+                      <table class="table table-condensed table-sm" style="font-size: 10dp">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Unit</th>
+                                <th>Quantity</th>
+                                <TH>Price</TH>
+                                <TH>Cost</TH>
+                                <th>Discount</th>
+                                <th>Net Unit Price</th>
+                                <th>Total</th>
+                                <th>Markup</th>
+                            </tr>
+                        </thead>
+                        <tbody id="instpoheader_proddetails">
+                            <tr>
+                                <td colspan="8" style="text-align: center;">No data to show.</td>
+                            </tr>
+                        </tbody>
+                      </table>
+               </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" id="uploadv1Btn" onclick="exec_add_purchaseInvoice()">Proceed</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+
+  <div class="modal fade" id="productDetailspomodal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel2">Purchase Product Details</h5>
+            <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+            ></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Product</label>
+                    <select class="form-control" type="text" id="po_d_productlist"></select>
+                </div>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Unit</label>
+                    <input class="form-control" type="text" id="po_d_unit" disabled />
+                </div>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Unit Price</label>
+                    <input class="form-control" type="text" id="po_d_unitprice"/>
+                </div>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Unit Cost</label>
+                    <input class="form-control" type="text" id="po_d_unitcost"/>
+                </div>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Quantity</label>
+                    <input class="form-control" type="text" id="po_d_quant" />
+                </div>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Discount</label>
+                    <input class="form-control" type="text" id="po_d_discount" value="0"/>
+                </div>
+                <div class="mb-3">
+                  <label for="formFile" class="form-label">Discount 2</label>
+                  <input class="form-control" type="text" id="po_d_discount2" value="0" />
+                </div>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Net Unit Price</label>
+                    <input class="form-control" type="text" id="po_d_netunit" disabled />
+                </div>
+             
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Total</label>
+                    <input class="form-control" type="text" id="po_d_total" disabled />
+                </div>
+
+                <div class="mb-3">
+                  <label for="formFile" class="form-label">Mark-up</label>
+                  <input class="form-control" type="text" id="po_d_markup" disabled />
+                </div>
+               
+              
+             </div>
+            <div class="modal-footer">
+              <div class="me-auto">
+                <button type="button" class="btn btn-info me-auto" onclick="calculateprod()">Calculate</button>
+              </div>
+                <button type="button" class="btn btn-primary" id="uploadv1Btn" onclick="add_product_po_details()">Add</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <div class="modal fade" id="UpdateBranchModal">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel2">Purchase Invoice Details</h5>
+            <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+            ></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <table class="table table-responsive table-hover">
+                        <tbody>
+                            <tr>
+                                <td>Invoice No</td>
+                                <td id="">
+                                  <input type="text" id="disp_invNo" class="form-control" disabled>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Invoice Date</td>
+                                <td id="">
+                                  <input type="date" id="disp_invDate" class="form-control">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Supplier</td>
+                                <td id="">
+                                  <!-- <input type="text" id="disp_invSupplier" class="form-control"> -->
+                                  <select name="" id="disp_invSupplier" class="form-control"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Branch</td>
+                                <td id="">
+                                  <!-- <input type="text" id="disp_invBranch" class="form-control"> -->
+                                  <select name="" id="disp_invBranch" class="form-control"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Terms</td>
+                                <td id="">
+                                  <input type="text" id="disp_invTerms" class="form-control">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Due Date</td>
+                                <td id="">
+                                  <input type="text" id="disp_invDueDate" class="form-control" disabled>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Paid Status</td>
+                                <td>
+                                    <select name="" id="upt_paidStatus" class="form-control">
+                                        <option value="1">Unpaid</option>
+                                        <option value="2">Paid</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="showpadcont">
+                              <td colspan="2">
+                                  <h6 class="text-primary font-weight-bold" style="text-align: center;">**** PAYMENT DETAILS ****</h6>
+                              </td>
+                          </tr>
+                            <tr class="showpadcont">
+                              <td>Payment Method</td>
+                              <td>
+                                 <input type="text" class="form-control" id="upt_paymentmethod">
+                              </td>
+                          </tr>
+                          <tr class="showpadcont">
+                            <td>Payment Amount</td>
+                            <td>
+                               <input type="text" class="form-control" id="upt_paymentamount">
+                            </td>
+                          </tr>
+                          <tr class="showpadcont">
+                               <td>Reference No.</td>
+                              <td>
+                                 <input type="text" class="form-control" id="upt_paymentrefno">
+                              </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <hr>
+                    <h6>PRODUCT DETAILS <span style="float: right;"></span></h6>
+                    <table class="table table-condensed table-sm" style="font-size: 10dp">
+                      <thead>
+                          <tr>
+                              <th>Product</th>
+                              <th>Unit</th>
+                              <th>Quantity</th>
+                              <TH>Price</TH>
+                              <TH>Cost</TH>
+                              <th>Discount</th>
+                              <th>Net Unit Price</th>
+                              <th>Total</th>
+                              <th>Markup</th>
+                          </tr>
+                      </thead>
+                      <tbody id="tb_proddetails">
+                          <tr>
+                              <td colspan="7" style="text-align: center;">No data to show.</td>
+                          </tr>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td colspan="">Invoice Amount</td>
+                          <td id="inv_amount"></td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td colspan="" style="font-weight: bolder;">EWT</td>
+                          <td id="inv_ftw"></td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td colspan="" style="font-weight: bolder;">F/H</td>
+                          <td id="inv_fhand"></td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td colspan="" style="font-weight: bolder;">Total Amount Due</td>
+                          <td id="inv_amountdue"></td>
+                        </tr>
+                      </tfoot>
+                      
+                    </table>
+                </div>
+                   
+                    <input type="hidden" id="GBLPICID">
+              
+             </div>
+            <div class="modal-footer">
+              <div class="me-auto">
+                <button type="button" class="btn btn-warning me-auto" onclick="remove_purchaseinvoice()">Remove</button>
+              </div>
+                <button type="button" class="btn btn-primary" id="uploadv1Btn" onclick="update_supplier()">Update</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+  
+    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../assets/vendor/js/bootstrap.js"></script>
+    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+    <script src="../assets/vendor/js/menu.js"></script>
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+
+    <!-- Main JS -->
+    <script src="../assets/js/main.js"></script>
+
+    <!-- Page JS -->
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    <script src="../js/inhs.js"></script>
+
+    <!-- bs 5 script -->
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+
+
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+    <!-- <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js"></script> -->
+
+
+    <script type="text/javascript" src="../multiselect/bootstrap-multiselect.js"></script>
+
+    <script>
+
+    salesmanDataObject();
+    var sourceData;
+    function salesmanDataObject(){
+        var partnerID = localStorage.getItem('S_PARTNERID');
+      $.ajax ({
+            url: GLOBALURL  + "/dist/API/applicationAPI.php",
+            type: "GET",
+            data: {
+                    "type":"GET_PURCHASE_INVOICE",
+                    // "userType":'3'
+                  },
+            dataType: "json",
+            crossDomain: true,
+            cache: false,   
+            async: false,         
+              success: function(r){ 
+                sourceData = r;
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  alert("ERROR OCCUR: " + XMLHttpRequest.responseText);
+               }
+            });
+    }
+
+	salesmanDataTable();
+    var tableData, prioskuindicator;
+    function salesmanDataTable(){
+      var partnerID = localStorage.getItem('S_PARTNERID');
+
+      
+        $('.loader-indicator h3').hide();
+        tableData =  $('table.npicustomerBody_active').DataTable({
+                    "dom": 'Bfrtip',
+                    "data": sourceData,
+                    "scrollX": true,
+                    "select": true,
+                    "ordering": true,
+                    "columns": [
+                        {'data':'INVOICENO'},
+                        {"data":'INVOICEDATE'},
+                        {"data":'SUPPLIERNAME'},
+                        {"data":'TOTALINVOICEAMOUNT'},
+                        {"data":'TERMS'},
+                        {"data":'DUEDATE'},
+                        {"data":'TOTALAMOUNTDUE'},
+                        {'data':'PAIDSTATUS_VAL'},
+                        {"data":'BRANCHNAME'},
+                        {"data":'APPROVER'},
+                        {'data':'DATECREATED'},
+                    ],
+                    //  columnDefs: [
+                    //   {
+                    //       targets: [8, 9, 19],
+                    //       className: 'text-right'
+                    //   }
+                    // ],
+                    "language": {
+                      "emptyTable": "No available records as of now."
+                    },
+                    "aaSorting": [[ 0, "desc" ]],
+                    buttons: [
+                      // {
+                      //       extend: 'collection',
+                      //       text: 'Sync Product',
+                      //       autoClose: true,
+                      //       buttons: [
+                      //         {
+                      //             text: 'NAI Products',
+                      //             action: function ( e, dt, node, config ) {
+                      //                 sync_partnerProd('NAI');
+                      //             }
+                      //         },
+                            
+                      //     ]
+                      //  },
+                    //    {
+                    //       extend: 'collection',
+                    //       text: 'Add Product',
+                    //       class:'collectionprod',
+                    //       buttons: [
+                    //         {
+                    //           text: 'Batch Upload',
+                    //           action: function ( e, dt, node, config ) {
+                    //             new bootstrap.Modal($('#addNewBranchModal')).show();
+                    //             //console.log(e+'\n'+dt+'\n'+node+'\n'+config);
+                    //             //dt.column( -2 ).visible( ! dt.column( -2 ).visible() );
+                    //           }
+                    //         },
+                    //         {
+                    //           text: 'Single Upload',
+                    //           action: function ( e, dt, node, config ) {
+                    //             new bootstrap.Modal($('#uploadSingleProductModal')).show();
+                    //           }
+                    //         }
+                    //   ]
+                    // },
+                    {
+                        text: 'Add Purchase Invoice',
+                        action: function ( e, dt, node, config ) {
+                            $('#i_invoiceno').val('');
+                            $('#i_invoicedate').val('');
+                            $('#i_supplier').val('');
+                            $('#i_branch').val('');
+
+                            $('#i_terms').val('');
+                            $('#i_fwt').val('');
+                            $('#i_fhandling').val('');
+
+                            localArry_inv = [];
+                            $('#instpoheader_proddetails').html(`
+                            <tr>
+                                <td colspan="8" style="text-align: center;">No data to show.</td>
+                            </tr>`);
+
+                        new bootstrap.Modal($('#addNewBranchModal')).show();
+                        //console.log(e+'\n'+dt+'\n'+node+'\n'+config);
+                        //dt.column( -2 ).visible( ! dt.column( -2 ).visible() );
+                        }
+                    },
+                    {
+                          extend: 'collection',
+                          text: 'Export',
+                          class:'collectionprod',
+                          buttons: [
+                            'csv', 'excel', 'print'
+                      ]
+                    }
+                ],
+                rowCallback: function(row, data, index){
+                  // var stat = data.ISLIVE.toString();
+                  //if(stat == '1'){
+                    // $(row).find('td:eq(0)').css({'color': 'green', 'font-size':'10px;', 'letter-spacing': '0.5em'});
+                   // $(row).find('td:eq(0)').html('ACTIVE').css({'color': 'green', 'font-weight':'bold;'})
+                  //}else{
+                    //$(row).find('td:eq(0)').html('DISABLED').css({'color': 'red', 'font-weight':'bold;'});
+                  // }
+              } 
+        });
+      
+      
+      $('table.npicustomerBody_active tbody').on('click', 'tr', function () {
+            var tr = $(this).closest('tr');
+            var row = tableData.row(tr);
+            viewproddetails(row.data());
+        });
+        
+    }
+
+    function viewproddetails(r){
+ 
+        $('#disp_invNo').val(r.INVOICENO);
+        $('#disp_invDate').val(r.INVOICEDATE);
+        $('#disp_invSupplier').val(r.SUPPLIERID);
+        $('#disp_invBranch').val(r.BRANCHID);
+        $('#disp_invTerms').val(r.TERMS);
+        $('#disp_invDueDate').val(r.DUEDATE);
+        $('#upt_paidStatus').val(r.PAID_STATUS);
+
+        $('#inv_amount').html(r.TOTALINVOICEAMOUNT);
+        $('#inv_fhand').html(r.FHANDLING);
+        $('#inv_amountdue').html(r.TOTALAMOUNTDUE);
+
+
+        if(r.PAID_STATUS == '2'){
+          $('#upt_paymentmethod').val(r.PAYMENTMETHOD);
+          $('#upt_paymentamount').val(r.PAYMENTAMOUNT);
+          $('#upt_paymentrefno').val(r.PAYMENTREFNO);
+          $('.showpadcont').show();
+        }else{
+          $('.showpadcont').hide();
+        }
+       
+
+        $('#inv_ftw').html(r.FWT);
+       
+        $('#GBLPICID').val(r.cID);
+
+        var cont = ``;
+        var res = r.PI_DETAILS
+
+        for(var x = 0; x < res.length; x++){
+        cont += `<tr>
+                   <td>`+res[x].PRODUCTNAME+`</td>
+                   <td>`+res[x].UNIT+`</td>
+                   <td>`+res[x].QUANTITY+`</td>
+                   <td>`+res[x].PRICE+`</td>
+                   <td>`+res[x].COST+`</td>
+                   <td>`+res[x].DISCOUNT+`% | `+res[x].DISCOUNT2+`%</td>
+                   <td>`+res[x].NETUNITPRICE+`</td>
+                   <td>`+res[x].TOTAL+`</td>
+                   <td>`+res[x].MARKUP+`%</td>
+                </tr>`;
+              }
+
+        $('#tb_proddetails').html(cont);
+
+      new bootstrap.Modal($('#UpdateBranchModal')).show();
+    }
+
+    
+
+  function exec_add_purchaseInvoice(){
+    
+
+    var i_invoiceno = $('#i_invoiceno').val();
+    var i_invoicedate = $('#i_invoicedate').val();
+    var i_supplier = $('#i_supplier').val();
+    var i_branch = $('#i_branch').val();
+
+    var i_terms = $('#i_terms').val();
+    var i_fwt = $('#i_fwt').val();
+    var i_fhandling = $('#i_fhandling').val();
+
+    var checker = localArry_inv.length;
+    var adm = localStorage.getItem('S_ADMNAME');
+    var admID = localStorage.getItem('S_ADMNAME');
+
+    if(checker == 0){
+      alert('Unable to proceed: Please add product details first.');
+    }else{
+      if( i_invoiceno == '' ||
+          i_invoicedate == '' ||
+          i_supplier == '' ||
+          i_branch == ''){
+          alert('Unable to proceed: Please fill all fields.');
+      }else{
+          $.ajax ({
+            url: GLOBALURL  + "/dist/API/applicationAPI.php",
+            type: "POST",
+            data: {
+                      "type":"INSERT_PURCHASE_INVOICE_HEADER",
+                      invoicedate:i_invoicedate,
+                      invoiceNo:i_invoiceno,
+                      supplierID:i_supplier,
+                      branchID:i_branch,
+                      terms:i_terms,
+                      i_fwt:i_fwt,
+                      i_fhandling:i_fhandling,
+                      adm:adm,
+                      duedate:'30 DAYS',
+                      paidStatus:'1',
+                },
+              dataType: "json",
+              crossDomain: true,
+              cache: false,   
+              async: false,     
+            success: function(r){ 
+              if(r == 1){ 
+                var r2 = localArry_inv;
+                for(var x = 0; x < r2.length; x++){
+                  insert_po_productDetails(i_branch,
+                                      i_invoiceno,
+                                      r2[x].po_d_productlist,
+                                      r2[x].po_d_unitprice,
+                                      r2[x].po_d_unitcost,
+                                      r2[x].po_d_discount,
+                                      r2[x].po_d_discount2,
+                                      r2[x].po_d_quant,
+                                      r2[x].po_d_netunit,
+                                      r2[x].po_d_total,
+                                      r2[x].po_d_markup);
+                }
+                  alert('Purchase Invoice was successfully created.');
+
+                  salesmanDataObject();
+                tableData.clear().rows.add(sourceData).draw();
+
+                $('#addNewBranchModal').modal('hide');
+
+
+                  localArry_inv = [];
+
+              }else{
+                alert('Invoice '+i_invoiceno+' already exist.');
+              }
+
+                
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("SERVER ERROR:\n" + XMLHttpRequest.responseText +'\nPlease try again.');
+              }
+          });
+      }// else close
+    }
+
+   
+  }
+
+
+  function insert_po_productDetails(branchID, 
+                                    invoiceNo,
+                                    productID,
+                                    price,
+                                    cost,
+                                    discount,
+                                    discount2,
+                                    quantity,
+                                    netunitprice,
+                                    total,
+                                    po_d_markup){
+    $.ajax ({
+          url: GLOBALURL  + "/dist/API/applicationAPI.php",
+          type: "POST",
+          data: {
+                    "type":"INSERT_PURCHASE_INVOICE_DETAILS",
+                    branchID:branchID,
+                    invoiceNo:invoiceNo,
+                    productID:productID,
+                    price:price,
+                    cost:cost,
+                    discount:discount,
+                    discount2:discount2,
+                    quantity:quantity,
+                    netunitprice:netunitprice,
+                    total:total,
+                    markup:po_d_markup
+              },
+            dataType: "json",
+            crossDomain: true,
+            cache: false,   
+            async: false,     
+          success: function(r){ 
+            console.log(r);
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+              alert("SERVER ERROR:\n" + XMLHttpRequest.responseText +'\nPlease try again.');
+            }
+        });
+  }
+
+  $('.showpadcont').hide();
+  $("#upt_paidStatus").on('change', function(){ 
+      var val = this.value;
+      if(val == 2){
+        $('.showpadcont').show();
+      }else{
+        $('#upt_paymentmethod').val('');
+        $('#upt_paymentamount').val('');
+        $('#upt_paymentrefno').val('');
+        $('.showpadcont').hide();
+      }
+  });
+
+  function update_supplier(){
+    var paid_stat = $('#upt_paidStatus').val();
+    var GBLPICID = $('#GBLPICID').val();
+
+    var disp_invDate = $('#disp_invDate').val();
+    var disp_invSupplier = $('#disp_invSupplier').val();
+    var disp_invBranch = $('#disp_invBranch').val();
+    var disp_invTerms = $('#disp_invTerms').val();
+
+    var upt_paymentmethod = $('#upt_paymentmethod').val();
+    var upt_paymentamount = $('#upt_paymentamount').val();
+    var upt_paymentrefno = $('#upt_paymentrefno').val();
+
+      var f = confirm('Are you sure you want to update this purchase invoice?');
+        if(f){
+
+          if(paid_stat == '2'){
+            if(upt_paymentmethod == '' ||
+              upt_paymentamount == '' ||
+              upt_paymentrefno == ''){
+                alert('Please specify payment details.');
+            }else{
+              // exec_update_supp_details(paid_stat,
+              //                       disp_invDate,
+              //                       disp_invSupplier,
+              //                       disp_invBranch,
+              //                       disp_invTerms,
+              //                       upt_paymentmethod,
+              //                       upt_paymentamount,
+              //                       upt_paymentrefno);
+
+              $.ajax ({
+              url: GLOBALURL  + "/dist/API/applicationAPI.php",
+              type: "POST",
+              data: {
+                        "type":"UPDATE_PAID_STAT_PURCHASE_INVOICE_HEADER",
+                            cID:GBLPICID,
+                            status:paid_stat,
+                            disp_invDate:disp_invDate,
+                            disp_invSupplier:disp_invSupplier,
+                            disp_invBranch:disp_invBranch,
+                            disp_invTerms:disp_invTerms,
+                            upt_paymentmethod:upt_paymentmethod,
+                            upt_paymentamount:upt_paymentamount,
+                            upt_paymentrefno:upt_paymentrefno
+                      
+                  },
+                dataType: "json",
+                crossDomain: true,
+                cache: false,   
+                async: false,     
+              success: function(r){ 
+                if(r){
+
+                    alert('Purchase Invoice was successfully updated.');
+
+                    salesmanDataObject();
+                  tableData.clear().rows.add(sourceData).draw();
+
+                  $('#UpdateBranchModal').modal('hide');
+
+                }
+                  
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  alert("SERVER ERROR:\n" + XMLHttpRequest.responseText +'\nPlease try again.');
+                }
+            });
+            }// else cloase
+          }else{
+            // exec_update_supp_details(paid_stat,
+            //                         disp_invDate,
+            //                         disp_invSupplier,
+            //                         disp_invBranch,
+            //                         disp_invTerms,
+            //                         upt_paymentmethod,
+            //                         upt_paymentamount,
+            //                         upt_paymentrefno);
+
+            $.ajax ({
+              url: GLOBALURL  + "/dist/API/applicationAPI.php",
+              type: "POST",
+              data: {
+                        "type":"UPDATE_PAID_STAT_PURCHASE_INVOICE_HEADER",
+                            cID:GBLPICID,
+                            status:paid_stat,
+                            disp_invDate:disp_invDate,
+                            disp_invSupplier:disp_invSupplier,
+                            disp_invBranch:disp_invBranch,
+                            disp_invTerms:disp_invTerms,
+                            upt_paymentmethod:upt_paymentmethod,
+                            upt_paymentamount:upt_paymentamount,
+                            upt_paymentrefno:upt_paymentrefno
+                      
+                  },
+                dataType: "json",
+                crossDomain: true,
+                cache: false,   
+                async: false,     
+              success: function(r){ 
+                if(r){
+
+                    alert('Purchase Invoice was successfully updated.');
+
+                    salesmanDataObject();
+                  tableData.clear().rows.add(sourceData).draw();
+
+                  $('#UpdateBranchModal').modal('hide');
+
+                }
+                  
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  alert("SERVER ERROR:\n" + XMLHttpRequest.responseText +'\nPlease try again.');
+                }
+            });
+          }//else close
+
+          $('.showpadcont').hide();
+          
+        }
+  }
+
+  function exec_update_supp_details(paid_stat,
+                                    disp_invDate,
+                                    disp_invSupplier,
+                                    disp_invBranch,
+                                    disp_invTerms,
+                                    upt_paymentmethod,
+                                    upt_paymentamount,
+                                    upt_paymentrefno){
+    $.ajax ({
+              url: GLOBALURL  + "/dist/API/applicationAPI.php",
+              type: "POST",
+              data: {
+                        "type":"UPDATE_PAID_STAT_PURCHASE_INVOICE_HEADER",
+                            cID:GBLPICID,
+                            status:paid_stat,
+                            disp_invDate:disp_invDate,
+                            disp_invSupplier:disp_invSupplier,
+                            disp_invBranch:disp_invBranch,
+                            disp_invTerms:disp_invTerms,
+                            upt_paymentmethod:upt_paymentmethod,
+                            upt_paymentamount:upt_paymentamount,
+                            upt_paymentrefno:upt_paymentrefno
+                      
+                  },
+                dataType: "json",
+                crossDomain: true,
+                cache: false,   
+                async: false,     
+              success: function(r){ 
+                if(r){
+
+                    alert('Purchase Invoice was successfully updated.');
+
+                    salesmanDataObject();
+                  tableData.clear().rows.add(sourceData).draw();
+
+                  $('#UpdateBranchModal').modal('hide');
+
+                }
+                  
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  alert("SERVER ERROR:\n" + XMLHttpRequest.responseText +'\nPlease try again.');
+                }
+            });
+  }
+
+  function remove_purchaseinvoice(){
+
+    var GBLPICID = $('#GBLPICID').val();
+
+    var f = confirm('Are you sure you want to remove this purchase invoice?');
+    if(f){
+      $.ajax ({
+          url: GLOBALURL  + "/dist/API/applicationAPI.php",
+          type: "POST",
+          data: {
+                    "type":"DELETE_PURCHASE_INVOICE_HEADER",
+                    cID:parseInt(GBLPICID)
+                  
+              },
+            dataType: "json",
+            crossDomain: true,
+            cache: false,   
+            async: false,     
+          success: function(r){ 
+            if(r){
+
+                alert('Purchase Invoice was successfully removed.');
+
+                salesmanDataObject();
+               tableData.clear().rows.add(sourceData).draw();
+
+               $('#UpdateBranchModal').modal('hide');
+
+            }
+               
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+              alert("SERVER ERROR:\n" + XMLHttpRequest.responseText +'\nPlease try again.');
+            }
+        });
+    }
+  }
+
+
+  GET_BRANCH_LIST();
+  function GET_BRANCH_LIST(){
+    $.ajax ({
+        url: GLOBALURL  + "/dist/API/applicationAPI.php",
+        type: "GET",
+        data: {
+                    "type":"GET_BRANCH_LIST",
+            },
+            dataType: "json",
+            crossDomain: true,
+            cache: false,   
+            async: false,     
+        success: function(r){ 
+            var cont = `<option selected disabled hidden>Choose here..</option>`;
+            for(var x = 0; x < r.length; x++){
+                cont += `<option value=`+r[x].BRANCHID+`>`+r[x].STORENAME+`</option>`;
+            }
+            $('#i_branch').html(cont);
+            $('#disp_invBranch').html(cont);
+
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert("SERVER ERROR:\n" + XMLHttpRequest.responseText +'\nPlease try again.');
+            }
+        });
+        
+    }
+
+
+    GET_SUPPLIER_LIST();
+  function GET_SUPPLIER_LIST(){
+    $.ajax ({
+        url: GLOBALURL  + "/dist/API/applicationAPI.php",
+        type: "GET",
+        data: {
+                    "type":"GET_ALL_SUPPLIER",
+            },
+            dataType: "json",
+            crossDomain: true,
+            cache: false,   
+            async: false,     
+        success: function(r){ 
+            var cont = `<option selected disabled hidden>Choose here..</option>`;
+            for(var x = 0; x < r.length; x++){
+                cont += `<option value=`+r[x].SUPPID+`>`+r[x].SUPPNAME+`</option>`;
+            }
+            $('#i_supplier').html(cont);
+            $('#disp_invSupplier').html(cont);
+
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert("SERVER ERROR:\n" + XMLHttpRequest.responseText +'\nPlease try again.');
+            }
+        });
+        
+    }
+
+  var GBLPRODUCTLIST;
+  GET_PRODUCT_LIST();
+  function GET_PRODUCT_LIST(){
+    $.ajax ({
+        url: GLOBALURL  + "/dist/API/applicationAPI.php",
+        type: "GET",
+        data: {
+                    "type":"GET_PRODUCT_MASTERLIST",
+            },
+            dataType: "json",
+            crossDomain: true,
+            cache: false,   
+            async: false,     
+        success: function(r){ 
+          GBLPRODUCTLIST = r;
+            var cont = `<option selected disabled hidden>Choose here..</option>`;
+            for(var x = 0; x < r.length; x++){
+                cont += `<option value=`+r[x].PRODUCTID+`>`+r[x].PRODUCTNAME+`</option>`;
+            }
+            $('#po_d_productlist').html(cont);
+
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert("SERVER ERROR:\n" + XMLHttpRequest.responseText +'\nPlease try again.');
+            }
+        });
+        
+    }
+
+    function openpiproductPI(){
+
+      $('#po_d_productlist').val('');
+      $('#po_d_unit').val('');
+      $('#po_d_quant').val('');
+      $('#po_d_unitprice').val('');
+      $('#po_d_unitcost').val('');
+      // $('#po_d_discount').val('');
+      // $('#po_d_discount2').val('');
+      
+      $('#po_d_netunit').val('');
+      $('#po_d_total').val('');
+      $('#po_d_markup').val('');
+
+        new bootstrap.Modal($('#productDetailspomodal')).show();
+    }
+
+    $('#po_d_productlist').on('change', function() {
+        var val = this.value;
+        // console.log(val);
+        // console.log(GBLPRODUCTLIST);
+        var r = GBLPRODUCTLIST;
+        for(var x = 0; x < r.length; x++){
+          if(parseInt(r[x].PRODUCTID) == parseInt(val)){
+            $('#po_d_unit').val(r[x].UNIT);
+            $('#po_d_unitprice').val(r[x].PRICE);
+            $('#po_d_unitcost').val(r[x].COST);
+          }
+        }
+    });
+
+    var localArry_inv = [];
+
+    function add_product_po_details(){
+      var po_d_productlist = $('#po_d_productlist').val();
+      var prodname = $('#po_d_productlist option:selected').text();
+      var po_d_unit = $('#po_d_unit').val();
+      var po_d_quant = $('#po_d_quant').val();
+      var po_d_unitprice = $('#po_d_unitprice').val();
+      var po_d_unitcost = $('#po_d_unitcost').val();
+      var po_d_discount = $('#po_d_discount').val();
+      var po_d_discount2 = $('#po_d_discount2').val();
+      var po_d_netunit = $('#po_d_netunit').val();
+      var po_d_total = $('#po_d_total').val();
+      var po_d_markup = $('#po_d_markup').val();
+
+      if(po_d_productlist == undefined ||
+          po_d_unit == '' ||
+          po_d_quant == '' ||
+          po_d_unitprice == '' ||
+          po_d_unitcost == '' ||
+          // po_d_discount == '' ||
+          // po_d_discount2 == '' ||
+          po_d_netunit == '' ||
+          po_d_total == '' ||
+          po_d_markup == ''){
+            alert('Unable to proceed: Please be fill all fields.');
+      }else{
+        var localMultiple = [];
+
+        localMultiple = {
+          prodname:prodname,
+          po_d_productlist:po_d_productlist,
+          po_d_unit:po_d_unit,
+          po_d_quant:po_d_quant,
+          po_d_unitprice:po_d_unitprice,
+          po_d_unitcost:po_d_unitcost,
+          po_d_discount:po_d_discount,
+          po_d_discount2:po_d_discount2,
+          po_d_netunit:po_d_netunit,
+          po_d_total:po_d_total,
+          po_d_markup:po_d_markup
+        };
+
+        localArry_inv.push(localMultiple);
+
+        var cont = ``;
+        var r = localArry_inv;
+        for(var x = 0; x < r.length; x++){
+          cont += `<tr>
+                    <td>`+r[x].prodname+`</td>
+                    <td>`+r[x].po_d_unit+`</td>
+                    <td>`+r[x].po_d_quant+`</td>
+                    <td>`+r[x].po_d_unitprice+`</td>
+                    <td>`+r[x].po_d_unitcost+`</td>
+                    <td>`+r[x].po_d_discount+`% | `+r[x].po_d_discount2+`%</td>
+                    <td>`+r[x].po_d_netunit+`</td>
+                    <td>`+r[x].po_d_total+`</td>
+                    <td>`+r[x].po_d_markup+`%</td>
+                  </tr>
+              `;
+        }
+
+        console.log(cont);
+
+        $('#instpoheader_proddetails').html(cont);
+        $('#productDetailspomodal').modal('hide');
+      }
+
+     
+      
+    }
+
+    //computaions
+    // mark up = RETAILPIRCE-NET_PRICE)/NET_PRICE)x100;
+    // net unit price = UNIT_PRICE (1stDISC% / 100)*UNIT_PRICE;
+    // total = QTY * NET_PRICE
+
+    function calculateprod(){
+
+      var po_d_unitprice = $('#po_d_unitprice').val();
+      var po_d_unitcost = $('#po_d_unitcost').val();
+      var po_d_quant = $('#po_d_quant').val();
+      var po_d_discount = $('#po_d_discount').val();
+      var po_d_discount2 = $('#po_d_discount2').val();
+      // var po_d_total = $('#po_d_total').val();
+      // var po_d_markup = $('#po_d_markup').val();
+
+      if(po_d_quant == ''){
+            alert('Unable to calculate: Please fill quantity field.');
+      }else{
+
+        if(po_d_discount == 0 && po_d_discount2 == 0){
+          var netunit = po_d_unitprice;
+          $('#po_d_netunit').val(netunit);
+        }else{
+          var comp1 = po_d_unitcost - (po_d_unitcost * (po_d_discount * 0.01));
+          var comp2 = comp1 - (comp1 * (po_d_discount2 * 0.01))
+
+          // var netunit = comp1 - comp2;
+          $('#po_d_netunit').val(comp2);
+        }
+
+
+        var po_d_netunit = $('#po_d_netunit').val();
+        var total = po_d_quant * po_d_netunit;
+
+        $('#po_d_total').val(total);
+
+
+        var markup = ((po_d_unitprice - po_d_netunit) / po_d_netunit) * 100;
+        $('#po_d_markup').val(parseFloat(markup).toFixed(2));
+
+
+      }
+
+    }
+    // $('input.myTextInput').on('input',function(e){
+    //   alert('Changed!')
+    // });
+
+
+
+
+
+
+
+ 
+
+    </script>
+  </body>
+</html>

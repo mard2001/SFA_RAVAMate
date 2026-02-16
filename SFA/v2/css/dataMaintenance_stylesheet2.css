@@ -1,0 +1,487 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--main-font-family);
+    font-optical-sizing: var(--main-font-optical-sizing);
+    font-weight: var(--main-font-weight);
+    font-style: var(--main-font-style);
+}
+
+html, body{
+    background-image: var(--main-background);
+    background-color: var(--main-backgroundColor);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    min-height: 100%;
+}
+
+.headerDiv{
+    height: 10vh;
+    color: var(--cust-white);
+}
+
+.logoTextDiv{
+    margin-left: 10px;
+}
+
+.textHeader{
+    margin-bottom: 0;
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: -5px;
+}
+
+.textHeaderRed{
+    color: var(--cust-red);
+}
+
+.logoTextDiv .textSubHeader{
+    font-size: 12px;
+}
+
+.headerDiv .rightHeader button{
+    font-size: 1.6rem;
+    color: var(--cust-white);
+}
+
+.headerDiv .rightHeader  button:hover{
+    color: var(--cust-white);
+}
+
+.headerDiv .rightHeader .exportBtn{
+    box-shadow: 2px 2px 10px #a3a2a2;
+}
+
+/* CARD */
+
+.mainRowColDiv .col{
+    position: relative;
+}
+
+.mainCards{
+    border: 0;
+    border-radius: 35px;
+}
+
+.mainCards .card-header{
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
+    background-color: var(--cust-primary);
+    color: var(--cust-white);
+    border: 0;
+    height: 60px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95em;
+}
+
+.innerCenterDiv{
+    padding-top: 35px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 100px;
+    cursor: pointer;
+}
+
+.innerCenterDiv .mdi{
+    color: #C1C1C1;
+}
+
+/* datatable */
+.dataTable{
+    font-size: 10px;
+}
+
+.dataTable thead{
+    border-bottom: 2px solid #000;
+}
+
+.dataTable thead tr td{
+    border-right: 0.1px solid #f9f7f7;
+    border-left: 0.1px solid #f9f7f7;
+}
+
+.dataTable thead .dt-column-header .dt-column-title{
+    text-align: center !important;
+    font-weight: bold;
+}
+
+.dt-button.buttons-collection {
+    background-image: linear-gradient(to bottom, #f9f9f9 0%, #e0e0e0 100%);
+    border-radius: 5px;
+    padding: 5px 20px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #999;
+    font-size: 12px;
+    color: #000;
+}
+
+.dt-button.buttons-collection:hover {
+    background-image: linear-gradient(to bottom, #ffffff59 0%, #e0e0e0 100%);
+    border: 1px solid #ffffff80;
+    border: 1px solid #00000026;
+    box-shadow: 0 4px 5px rgba(144, 144, 144, 0.149);
+    transform: translateY(-2px);
+    cursor: pointer;
+}
+
+.dataTableBottomPagination{
+    padding: 0 10px;
+    margin-top: 15px;
+    border-radius: 10px;
+    background-color: var(--cust-white);
+    height: 35px;
+    box-shadow: 2px 2px 10px var(--cust-grey);
+}
+
+.dataTableBottomPagination .pagination .dt-paging-button .page-link{
+    color: var(--cust-primary9) !important;
+    border: none;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+.dataTableBottomPagination .pagination .dt-paging-button.active .page-link{
+    background-color: var(--cust-primary9) !important;
+    color: var(--cust-white) !important; 
+    border: none;
+}
+
+.dataTableBottomPagination .pagination .dt-paging-button.disabled .page-link{
+    background: var(--cust-white) !important;
+    color: var(--cust-primary9) !important; 
+    border: none;
+}
+
+.execBtn {
+    margin-top: auto;
+    align-self: flex-end;
+    bottom: 0;
+    background-color: var(--cust-primary);
+    color: var(--cust-white);
+    z-index: 10;
+    position: relative;
+    overflow: hidden; 
+    font-size: 12px;
+}
+
+/* Shine pseudo-element */
+.execBtn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75px;
+    width: 50px;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        rgba(198, 196, 208, 0) 0%,
+        rgba(13, 11, 90, 0.4) 50%,
+        rgba(198, 196, 208, 0) 100%
+    );
+    transform: skewX(-20deg);
+}
+
+/* Trigger shine on hover */
+.execBtn:hover::before {
+    animation: shineExec 0.8s ease forwards;
+}
+
+/* Hover color behavior */
+.mainRowColDiv .col:hover .execBtn,
+.card-body-overlay:hover .execBtn,
+.execBtn:hover {
+    background-color: var(--cust-white);
+    color: var(--cust-primary);
+}
+
+.mainRowColDiv .col .card-header{
+    opacity: 1;
+    display: block;
+    transition: .5s ease;
+    backface-visibility: hidden;
+} 
+
+.mainCards .card-body{
+    height: 300px;
+    background-image: url("../img/dataMaintenanceCardBG.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    border-radius: 35px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.card-body-overlay{
+    background-color: rgba(4, 11, 47, 0.9);
+    height: 84.5%;
+    width: 100.5%; 
+    border-bottom-left-radius: 32px;
+    border-bottom-right-radius: 32px;
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 58%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.overlay-innerDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.mainRowColDiv .col:hover .mainRowColDiv .col .card-header{
+    opacity: 0.3;
+}
+
+.mainRowColDiv .col:hover .card-body-overlay{
+    opacity: 1;
+}
+
+.bootbox-close-button.close{
+    border: none;
+    background: transparent;
+    float: right;
+}
+
+
+/*swtich toogle*/
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 20px;
+} 
+  
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+  
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #FF3C3C;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 2px;
+    background-color: var(--cust-white);
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+input:checked + .slider {
+    background-color: #2BA600;
+}
+  
+input:focus + .slider {
+    box-shadow: 0 0 1px #2BA600;
+}
+  
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+  
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+  
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.syncSOBtn i{
+    font-size: 3rem;
+}
+
+.syncSOBtn span{
+    margin-top: 20px;
+    font-size: 1rem;
+    line-height: 18px;
+}
+
+.syncSOBtn {
+    align-self: flex-end;
+    bottom: 0;
+    background-color: var(--cust-primary);
+    z-index: 10;
+    position: relative;
+    overflow: hidden; 
+    font-size: 12px;
+    margin: auto;
+    margin-bottom: 30px;
+    padding: 20px;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    border-radius: 20px;
+}
+
+.syncSOBtn .fa-file{
+    color: #277e93;
+}
+
+.syncSOBtn .fa-user{
+    color: #8f2793;
+}
+
+.syncSOBtn .fa-file,
+.syncSOBtn .fa-user {
+    transform: scale(1);
+    animation: none;
+}
+
+.syncSOBtn:hover .fa-file,
+.syncSOBtn:hover .fa-user {
+    animation: scaleUpDown 1s ease forwards;
+    color: var(--cust-white);
+}
+
+.syncSOBtn:hover {
+    background: linear-gradient( var(--cust-primary10), var(--cust-primary) );
+    color: var(--cust-white) !important;
+}
+
+/* Shine pseudo-element */
+.syncSOBtn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75px;
+    width: 50px;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        rgba(241, 241, 241, 0.3) 0%,
+        rgba(215, 214, 231, 0.5) 50%,
+        rgba(241, 241, 241, 0.3) 100%
+    );
+    transform: skewX(-20deg);
+}
+
+/* Trigger shine on hover */
+.syncSOBtn:hover::before {
+    animation: shineExec 0.8s ease forwards;
+}
+
+.topRightBtn {
+    position: relative;
+    color: #FFF;
+    border: 1px solid #FFF;
+    background-color: transparent;
+    border-radius: 10px;
+    padding: 5px 20px;
+    overflow: hidden;
+    z-index: 1;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.topRightBtn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75px;
+    width: 50px;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-25deg);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.topRightBtn:hover {
+    background: linear-gradient(var(--cust-primary10),var(--cust-primary-hover4));
+    box-shadow:
+        4px 4px 10px rgba(0, 0, 0, 0.1),
+        -4px -4px 10px rgba(255, 255, 255, 0.1),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.2),
+        inset -1px -1px 2px rgba(0, 0, 0, 0.05);
+    border: 1px solid transparent;
+    color: var(--cust-white);
+}
+
+.topRightBtn:hover::before {
+    animation: shineExec 0.6s ease;
+}
+
+
+@media only screen and (max-width: 1200px) and (min-width: 992px) {
+    .mainCards .card-header p{
+        font-size: 12px;
+    }
+}
+
+/* Shine animation */
+@keyframes shineExec {
+    0% {
+        left: -75px;
+    }
+    100% {
+        left: 120%;
+    }
+}
+
+/* Shine animation */
+@keyframes shineExec {
+    0% {
+        left: -75px;
+    }
+    100% {
+        left: 120%;
+    }
+}
+
+@keyframes scaleUpDown {
+    0% {
+        transform: scale(1);
+    }
+    30% {
+        transform: scale(1.3);
+    }
+    100% {
+        transform: scale(1);
+    }
+}

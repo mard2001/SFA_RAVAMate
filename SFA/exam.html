@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Admin</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="design/setUp.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
+  <link rel="shortcut icon" href="../img/mdlogo_web.png" type="image/png">
+  <style>
+      .display{
+          margin-top: 10px;
+      }
+
+      body{
+          padding: 20px;
+      }
+
+      .display{
+          padding: 20px;
+      }
+
+      .display span{
+          padding: 10px;
+      }
+
+      .cust_button_map{
+          margin-top: 15px;
+          padding: 5px;
+          border-radius: 10px;
+          width: 200px;
+      }
+
+      .display span{
+          margin-top: 10px;
+      }
+  </style>
+</head>
+<body>
+
+    <input type="text" name="" id="inputData" class="cust_map_inpt" placeholder="site location"><br/>
+    <button class="cust_button_map" onclick="exec()">EXECUTE</button>
+    
+    <div class="display">
+        <span>Palimdrome: <strong id="palindrome"></strong></span><br/>
+        <span>Vowels: <strong id="vowels"></strong> <strong id="countV"></strong></span><br/>
+        <span>Consonants: <strong id="consonants"></strong> <strong id="countC"></strong></span>
+    </div>
+  </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script> 
+<!-- <script type="text/javascript" src="js/notfunction.js"></script> -->
+<script type="text/javascript" src="/js/scrolling.js"></script>
+<script type="text/javascript">
+    function exec(){
+        var givenStr = $('#inputData').val();
+        var palimDlmtr = 'NO';
+        var vowels = getVowels(givenStr);
+        var consonants = getContsonants(givenStr, vowels);
+        if(palindrome(givenStr)){
+            palimDlmtr = 'YES';
+        }
+
+        $('#palindrome').html(palimDlmtr);
+        $('#vowels').html(vowels);
+        $('#consonants').html(consonants);
+        $('#countV').html(getEvenOrOdd(vowels));
+        $('#countC').html(getEvenOrOdd2(consonants));
+        console.log(getEvenOrOdd2(consonants));
+    }
+
+    function palindrome(str) {
+
+        var len = str.length;
+        var mid = Math.floor(len/2);
+
+        for ( var i = 0; i < mid; i++ ) {
+            if (str[i] !== str[len - 1 - i]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    function getVowels(str) {
+        var m = str.match(/[aeiou]/gi);
+        return m === null ? 0 : m.length;
+    }
+
+    function getContsonants(str, vowels) {
+        var stringL = str.length;
+        var consonants = stringL-vowels;
+        return consonants;
+    }
+
+    function getEvenOrOdd(num){
+        if(num % 2 == 0){
+            return 'even';
+        }
+
+        return 'odd';
+    }
+
+    function getEvenOrOdd2(num){
+        if(num % 2 == 0){
+            return 'even';
+        }
+
+        return 'odd';
+    }
+
+</script>
+</html>

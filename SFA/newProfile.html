@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Profile</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+  <style>
+  body{
+    /*background: -webkit-linear-gradient(left, #3931af, #00c6ff);*/
+}
+.emp-profile{
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border-radius: 0.5rem;
+    background: #fff;
+}
+.profile-img{
+    text-align: center;
+}
+.profile-img img{
+    width: 70%;
+    height: 70%;
+}
+.profile-img .file {
+    position: relative;
+    overflow: hidden;
+    margin-top: -20%;
+    width: 70%;
+    border: none;
+    border-radius: 0;
+    font-size: 15px;
+    background: #212529b8;
+}
+.profile-img .file input {
+    position: absolute;
+    opacity: 0;
+    right: 0;
+    top: 0;
+}
+.profile-head h5{
+    color: #333;
+}
+.profile-head h6{
+    color: #0062cc;
+}
+.profile-edit-btn{
+    border: none;
+    border-radius: 1.5rem;
+    width: 70%;
+    padding: 2%;
+    font-weight: 600;
+    color: #6c757d;
+    cursor: pointer;
+}
+.proile-rating{
+    font-size: 12px;
+    color: #818182;
+    margin-top: 5%;
+}
+.proile-rating span{
+    color: #495057;
+    font-size: 15px;
+    font-weight: 600;
+}
+.profile-head .nav-tabs{
+    margin-bottom:5%;
+}
+.profile-head .nav-tabs .nav-link{
+    font-weight:600;
+    border: none;
+}
+.profile-head .nav-tabs .nav-link.active{
+    border: none;
+    border-bottom:2px solid #0062cc;
+}
+.profile-work{
+    padding: 14%;
+    margin-top: -15%;
+}
+.profile-work p{
+    font-size: 12px;
+    color: #818182;
+    font-weight: 600;
+    margin-top: 10%;
+}
+.profile-work a{
+    text-decoration: none;
+    color: #495057;
+    font-weight: 600;
+    font-size: 14px;
+}
+.profile-work ul{
+    list-style: none;
+}
+.profile-tab label{
+    font-weight: 600;
+}
+.profile-tab p{
+    font-weight: 600;
+    color: #0062cc;
+}
+
+.cartinfo{
+    margin-top: 20px;
+}
+
+#pass {
+    border: none;
+    outline: none;
+    background-color: inherit;
+    pointer-events:none;
+}
+
+.form-control{
+    margin-bottom: 12px;
+}
+  </style>
+</head>
+<body>
+    <div class="container emp-profile">
+        <form method="post">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-img">
+                        <img src="img/jhunski.jpg" alt="" style="width: 190px; height: 170px;"/>
+                        <div class="file btn btn-lg btn-primary">
+                            Change Photo
+                            <input type="file" name="file"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="profile-head">
+                        <h5 id="prof-fullname">
+                            Jhun Woogie Arrabis
+                        </h5>
+                        <h6 id="prof-company">
+                            Fast Distribution Corporation
+                        </h6>
+                        <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Server Info</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <a href='dashboard' class="btn btn-info btn-sm"><i class="far fa-arrow-alt-circle-left"></i> DASHBOARD</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                        <!--<div class="profile-work">
+                        <p>WORK LINK</p>
+                        <a href="">Website Link</a><br/>
+                        <a href="">Bootsnipp Profile</a><br/>
+                        <a href="">Bootply Profile</a>
+                        <p>SKILLS</p>
+                        <a href="">Web Designer</a><br/>
+                        <a href="">Web Developer</a><br/>
+                        <a href="">WordPress</a><br/>
+                        <a href="">WooCommerce</a><br/>
+                        <a href="">PHP, .Net</a><br/>
+                    </div>-->
+                </div>
+                <div class="col-md-8">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>User Id</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>Kshiti123</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Name</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>Jhunski Kun</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Email</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>jhunwoogiearrabis@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Phone</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>123 456 7890</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Company</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>FAST DISTRIBUTION</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Experience</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Expert</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Hourly Rate</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>10$/hr</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Total Projects</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>230</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>English Level</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Expert</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Availability</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>6 months</p>
+                                    </div>
+                                </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>Your Bio</label><br/>
+                                    <p>Your detail description</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>        
+        
+        <div class="card cartinfo" style="margin-top: 100px;">
+            <div class="card-header">
+                <i class="fas fa-cog"></i> SERVER SETTINGS
+            </div>
+            <div class="card-body">
+                <table class="table table-hover table-striped">
+                    <tr>
+                        <td>SERVER IP</td>
+                        <td id="server"></td>
+                    </tr>
+                    <tr>
+                        <td>DATABASE</td>
+                        <td id="db"></td>
+                    </tr>
+                    <tr>
+                        <td>USERNAME</td>
+                        <td id="username"></td>
+                    </tr>
+                    <tr>
+                        <td>PASSWORD</td>
+                        <td>
+                            <input type="password" id="pass">
+                        </td>
+                    </tr>
+                </table>
+                <a href="#" class="btn btn-primary" id="btnupdate">SET-UP SETTINGS</a>
+            </div>
+        </div>
+
+        <div class="card cartinfo">
+            <div class="card-header">
+                <i class="fas fa-cog"></i> PATCH LIST
+                <button class="btn btn-default text-dark btn-sm float-right" onclick="getpatchlist()"><i class="fas fa-redo"></i> Reload List</button>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th>PATCH NO.</th>
+                            <th>NOTE</th>
+                            <th>DATE</th>
+                            <th>STATUS</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="patchTbody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+            <div class="modal" id="updateMOdal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title"><i class="fas fa-cog"></i> SERVER SETTINGS</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" name="" id="stobeupdt" class="form-control" placeholder="SERVER" />
+                            <input type="text" name="" id="dtobeupdt" class="form-control" placeholder="DATABASE" />
+                            <input type="text" name="" id="utobeupdt" class="form-control" placeholder="USER" />
+                            <input type="password" name="" id="ptobeupdt" class="form-control" placeholder="PASSWORD" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary" id="testBtn" onclick="
+                            textCon()">Test Connection</button>
+                            <button type="button" class="btn btn-primary" onclick="confirmUpdate()">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Modal -->
+            <div class="modal" id="updateMOdal">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h4 class="modal-title"><i class="fas fa-cog"></i> SERVER SETTINGS</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                    <input type="text" name="" id="stobeupdt" class="form-control" placeholder="SERVER" />
+                    <input type="text" name="" id="dtobeupdt" class="form-control" placeholder="DATABASE" />
+                    <input type="text" name="" id="utobeupdt" class="form-control" placeholder="USER" />
+                    <input type="password" name="" id="ptobeupdt" class="form-control" placeholder="PASSWORD" />
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" id="testBtn" onclick="
+                    textCon()">Test Connection</button>
+                    <button type="button" class="btn btn-primary" onclick="confirmUpdate()">Update</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="js/dynamic-cmmns.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+            var readURL = function(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('.avatar').attr('src', e.target.result);
+                    }
+            
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            
+
+            $(".file-upload").on('change', function(){
+                readURL(this);
+            });
+        });
+
+    var s = localStorage.getItem("srvr");
+	var u = localStorage.getItem("usrnm");
+	var p = localStorage.getItem("psswrd");
+	var d = localStorage.getItem("dtbse");
+	var con_info = [s, p, u, d];
+    
+    $('#server').html(s);
+	  $('#db').html(d);
+	  $('#username').html(u);
+	  $('#pass').val(p);
+
+	  $('#btnupdate').click(function (){
+	  	$('#updateMOdal').modal('show');
+	  	$('#stobeupdt').val(s);
+	    $('#dtobeupdt').val(d);
+	    $('#utobeupdt').val(u);
+	    $('#ptobeupdt').val(p);
+	  });
+
+	  function confirmUpdate(){
+            $.confirm({
+                title: 'Confirm Action',
+                theme: 'modern',
+                icon: 'fas fa-question',
+                content: 'You will be logout after this action, would you like to continue?',
+                type: 'blue',
+                typeAnimated: true,
+                columnClass: 'medium',
+                buttons: {
+                    confirm: {
+                        text: 'Proceed',
+                        btnClass: 'btn-primary',
+                        action: function () {
+                        var s = $('#stobeupdt').val();
+                        var d = $('#dtobeupdt').val();
+                        var u = $('#utobeupdt').val();
+                        var p = $('#ptobeupdt').val();
+                        $.ajax ({
+                            url: "/nestle/testconnection.php",
+                            type: "GET",
+                            data: {
+                                    "server":s,
+                                    "username": u,
+                                    "password": p,
+                                    "database": d
+                                    },
+                            dataType: "json",
+                            crossDomain: true,
+                            cache: false,            
+                                success: function(r){
+                                if(r.outcome){
+                                    localStorage.removeItem("srvr");
+                                    localStorage.removeItem("usrnm");
+                                    localStorage.removeItem("psswrd");
+                                    localStorage.removeItem("dtbse");
+
+                                    localStorage.removeItem('adminUserName');
+                                    localStorage.removeItem("username"); 
+                                    localStorage.removeItem("usertype"); 
+                                    localStorage.removeItem("latitude");
+                                    localStorage.removeItem("longitude"); 
+                                    localStorage.removeItem("mapzoom"); 
+                                    localStorage.removeItem("newlycreated");
+
+                                    localStorage.setItem("srvr", s);
+                                    localStorage.setItem("usrnm", u);
+                                    localStorage.setItem("psswrd", p);
+                                    localStorage.setItem("dtbse", d);
+                                    
+                                    $.alert({
+                                        title: 'SUCCESS!',
+                                        theme: 'material',
+                                        content: 'Server settings successfully updated.',
+                                        icon: 'fas fa-thumbs-up',
+                                        type: 'green'
+                                    });
+                                    window.location.href = "https://mybuddy.dynns.com";
+                                }else{
+                                    $.alert({
+                                        title: 'UNABLE TO UPDATE!',
+                                        theme: 'material',
+                                        content: 'You are trying to connect to a server that did not establish a connection properly.',
+                                        icon: 'fas fa-thumbs-down',
+                                        type: 'red'
+                                    });
+                                }
+                                }
+                            });
+                        }
+                    },
+                    cancel: function () {
+                        $('#updateMOdal').modal('hide');
+                    },
+                }
+		    });
+        }
+        
+    getpatchlist();
+    function getpatchlist(){
+	$('#patchTbody').html('<i class="fa fa-spin fa-spinner"></i> reloading...');
+    $.ajax ({
+      url: "/nestle/connectionString/applicationipAPI.php",
+      type: "GET",
+      data: {"type":"PATCHLIST", "CONN": con_info},
+      dataType: "json",
+      crossDomain: true,
+      cache: false,            
+        success: function(r){ 
+					var cont = '';
+					if(r.length == 0){
+						cont = '<tr><td colspan="4" class="text-info">NO PATCH TO INSTALL AS OF NOW.</td></tr>';
+					}else{
+						for(var x = 0; x < r.length; x++){
+						cont += '<tr>'+
+											'<td>'+r[x].patchLevel+'</td>'+
+											'<td>'+r[x].PLNotes+'</td>'+
+											'<td>'+r[x].lastUpdated+'</td>'+
+											'<td><i class="fas fa-times text-danger"></i> not installed</td>'+
+											'<td><button class="btn btn-info btn-sm" id='+r[x].patchLevel+' onclick="installPL(\''+r[x].patchLevel+'\')">INSTALL</button></td>'+
+										'</tr>';
+						}
+					}
+					$('#patchTbody').html(cont);
+        }
+    });
+	} 
+	
+	function installPL(patchID){
+		var btn = '#'+patchID;
+		$(btn).html('<i class="fa fa-spin fa-spinner"></i> installing...');
+		$(btn).attr("disabled", true);
+		$.ajax ({
+			url: "/nestle/connectionString/applicationipAPI.php",
+			type: "GET",
+			data: {"type":"INSTALL_PATCH", "CONN":con_info, "patchID":patchID},
+			dataType: "json",
+			crossDomain: true,
+			cache: false,            
+				success: function(r){
+					alert('Patch was successfully installed!'); 
+					getpatchlist();
+				},
+				error: function(XMLHttpRequest, textStatus, errorThrown) {
+					alert('UNABLE TO INSTALL PATCH \n REASON: ' + XMLHttpRequest.responseText);
+					$(btn).html('INSTALL');
+					$(btn).attr("disabled", false);
+				}
+		}).done(function () {
+				$(btn).html('INSTALL');
+				$(btn).attr("disabled", false); 
+		});
+
+	}
+  </script>
+</body>
+</html>

@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  class="light-style layout-menu-fixed"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../assets/"
+  data-template="vertical-menu-template-free"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+ 
+    <title>POS - Product</title>
+
+    <meta name="description" content="Fastsosyo" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/sosyo.png" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../assets/css/demo.css" />
+    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+    <!-- datatables -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"> -->
+
+    <link rel="stylesheet" href="../multiselect/bootstrap-multiselect.css" type="text/css"/>
+    
+    <!-- bs 5 bttoms -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"/> -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.bootstrap5.min.css">
+
+
+    <!-- https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css
+    https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css
+    https://cdn.datatables.net/buttons/2.2.3/css/buttons.bootstrap5.min.css -->
+
+
+    <script src="../assets/vendor/js/helpers.js"></script>
+    <script src="../assets/js/config.js"></script>
+
+    <style>
+        .changeImageBtn{
+            width: 400px;
+            margin: 0 auto;
+        }
+
+        .changeImageBtn:hover{
+            cursor: pointer;
+        }
+
+        .productImg{
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .productImg img{
+            width: 270px;
+            height: 300px;
+        }
+
+        /* #updateProductBundle.in{
+            z-index: 999999;
+        } */
+
+        .tableholder{
+            height: 350px;
+            width: 100%;
+            overflow-y: auto;
+            margin-top: 10px;
+        }
+
+        .headertab {
+            position: sticky;
+            top:0;
+            color: white !important;
+            
+        }
+    </style>
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+          <div class="app-brand demo">
+            <a href="index.html" class="app-brand-link">
+              <span class="app-brand-logo demo">
+                <!-- <svg
+                  width="25"
+                  viewBox="0 0 25 42"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                > -->
+                <!-- <img src="../assets/img/favicon/sosyo.png" style="height: 60px; width:60px;" alt="sosyo icon"> -->
+                  <defs>
+                    <path
+                      d="M13.7918663,0.358365126 L3.39788168,7.44174259 C0.566865006,9.69408886 -0.379795268,12.4788597 0.557900856,15.7960551 C0.68998853,16.2305145 1.09562888,17.7872135 3.12357076,19.2293357 C3.8146334,19.7207684 5.32369333,20.3834223 7.65075054,21.2172976 L7.59773219,21.2525164 L2.63468769,24.5493413 C0.445452254,26.3002124 0.0884951797,28.5083815 1.56381646,31.1738486 C2.83770406,32.8170431 5.20850219,33.2640127 7.09180128,32.5391577 C8.347334,32.0559211 11.4559176,30.0011079 16.4175519,26.3747182 C18.0338572,24.4997857 18.6973423,22.4544883 18.4080071,20.2388261 C17.963753,17.5346866 16.1776345,15.5799961 13.0496516,14.3747546 L10.9194936,13.4715819 L18.6192054,7.984237 L13.7918663,0.358365126 Z"
+                      id="path-1"
+                    ></path>
+                    <path
+                      d="M5.47320593,6.00457225 C4.05321814,8.216144 4.36334763,10.0722806 6.40359441,11.5729822 C8.61520715,12.571656 10.0999176,13.2171421 10.8577257,13.5094407 L15.5088241,14.433041 L18.6192054,7.984237 C15.5364148,3.11535317 13.9273018,0.573395879 13.7918663,0.358365126 C13.5790555,0.511491653 10.8061687,2.3935607 5.47320593,6.00457225 Z"
+                      id="path-3"
+                    ></path>
+                    <path
+                      d="M7.50063644,21.2294429 L12.3234468,23.3159332 C14.1688022,24.7579751 14.397098,26.4880487 13.008334,28.506154 C11.6195701,30.5242593 10.3099883,31.790241 9.07958868,32.3040991 C5.78142938,33.4346997 4.13234973,34 4.13234973,34 C4.13234973,34 2.75489982,33.0538207 2.37032616e-14,31.1614621 C-0.55822714,27.8186216 -0.55822714,26.0572515 -4.05231404e-15,25.8773518 C0.83734071,25.6075023 2.77988457,22.8248993 3.3049379,22.52991 C3.65497346,22.3332504 5.05353963,21.8997614 7.50063644,21.2294429 Z"
+                      id="path-4"
+                    ></path>
+                    <path
+                      d="M20.6,7.13333333 L25.6,13.8 C26.2627417,14.6836556 26.0836556,15.9372583 25.2,16.6 C24.8538077,16.8596443 24.4327404,17 24,17 L14,17 C12.8954305,17 12,16.1045695 12,15 C12,14.5672596 12.1403557,14.1461923 12.4,13.8 L17.4,7.13333333 C18.0627417,6.24967773 19.3163444,6.07059163 20.2,6.73333333 C20.3516113,6.84704183 20.4862915,6.981722 20.6,7.13333333 Z"
+                      id="path-5"
+                    ></path>
+                  </defs>
+                  <g id="g-app-brand" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="Brand-Logo" transform="translate(-27.000000, -15.000000)">
+                      <g id="Icon" transform="translate(27.000000, 15.000000)">
+                        <g id="Mask" transform="translate(0.000000, 8.000000)">
+                          <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                          </mask>
+                          <use fill="#696cff" xlink:href="#path-1"></use>
+                          <g id="Path-3" mask="url(#mask-2)">
+                            <use fill="#696cff" xlink:href="#path-3"></use>
+                            <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-3"></use>
+                          </g>
+                          <g id="Path-4" mask="url(#mask-2)">
+                            <use fill="#696cff" xlink:href="#path-4"></use>
+                            <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-4"></use>
+                          </g>
+                        </g>
+                        <g
+                          id="Triangle"
+                          transform="translate(19.000000, 11.000000) rotate(-300.000000) translate(-19.000000, -11.000000) "
+                        >
+                          <use fill="#696cff" xlink:href="#path-5"></use>
+                          <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-5"></use>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+              </span>
+              <span class="app-brand-text demo menu-text fw-bolder ms-2">POS SYSTEM</span>
+            </a>
+
+            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+              <i class="bx bx-chevron-left bx-sm align-middle"></i>
+            </a>
+          </div>
+
+          <div class="menu-inner-shadow"></div>
+
+          <ul class="menu-inner py-1">
+            <!-- Dashboard -->
+            <li class="menu-item">
+              <a href="index.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Dashboard</div>
+              </a>
+            </li>
+
+          
+            <!-- Components -->
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Reports</span></li>
+            <!-- Cards -->
+          
+            <li class="menu-item">
+              <a href="salesReport.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Sales</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="returns.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Returns</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="stockAlert.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Stock Alert</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="javascript:void(0)" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-box"></i>
+                <div data-i18n="User interface">Purchase</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="purchaseInvoice.html" class="menu-link">
+                    <div data-i18n="Accordion">Invoice</div>
+                  </a>
+                </li>
+                <!-- <li class="menu-item">
+                  <a href="purchaseReport.html" class="menu-link">
+                    <div data-i18n="Accordion">Report</div>
+                  </a>
+                </li> -->
+               
+              </ul>
+            </li>
+
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Maintenance</span></li>
+            <!-- Cards -->
+
+            <li class="menu-item">
+              <a href="supplier.html" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-collection"></i>
+                  <div data-i18n="Basic">Supplier</div>
+              </a>
+          </li>
+
+          <li class="menu-item">
+              <a href="customer.html" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-collection"></i>
+                  <div data-i18n="Basic">Customer</div>
+              </a>
+          </li>
+          
+            <li class="menu-item active">
+              <a href="products.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Products</div>
+              </a>
+            </li>
+
+            <li class="menu-item">
+              <a href="branch.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Branch</div>
+              </a>
+            </li>
+            
+            <li class="menu-item">
+              <a href="branchAdmin.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Users</div>
+              </a>
+            </li>
+
+          </ul>
+        </aside>
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+
+          <nav
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            id="layout-navbar"
+          >
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="bx bx-menu bx-sm"></i>
+              </a>
+            </div>
+
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+              <!-- Search -->
+              <div class="navbar-nav align-items-center">
+                <div class="nav-item d-flex align-items-center">
+                  <b id="siteNameHolder"></b>
+                </div>
+              </div>
+              <!-- /Search -->
+
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <!-- Place this tag where you want the button to render. -->
+                <li class="nav-item lh-1 me-3">
+                  <!-- <a
+                    class="github-button"
+                    href="https://github.com/themeselection/sneat-html-admin-template-free"
+                    data-icon="octicon-star"
+                    data-size="large"
+                    data-show-count="true"
+                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
+                    >Star</a
+                  > -->
+                  <span id="admNameHolder">---</span>
+                </li>
+
+                <!-- User -->
+                <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                  <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                    <div class="avatar avatar-online">
+                      <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                    </div>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                      <a class="dropdown-item" href="#">
+                        <div class="d-flex">
+                          <div class="flex-shrink-0 me-3">
+                            <div class="avatar avatar-online">
+                              <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                            </div>
+                          </div>
+                          <div class="flex-grow-1">
+                            <span class="fw-semibold d-block" id="admNameHolder2"></span>
+                            <small class="text-muted">Admin</small>
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <div class="dropdown-divider"></div>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#" onclick="logoutsosyoadm()">
+                        <i class="bx bx-power-off me-2"></i>
+                        <span class="align-middle" id="logoutbtn">Log Out</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <!--/ User -->
+              </ul>
+            </div>
+          </nav>
+
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Maintenance /</span> Products</h4>
+
+              <div class="row">
+                <div class="col-xl-12">
+                  <div class="nav-align-top mb-4">
+                    <ul class="nav nav-tabs" role="tablist">
+                      <li class="nav-item">
+                        <button
+                          type="button"
+                          class="nav-link active"
+                          role="tab"
+                          data-bs-toggle="tab"
+                          data-bs-target="#navs-top-home"
+                          aria-controls="navs-top-home"
+                          aria-selected="true"
+                        >
+                          MASTER LIST
+                        </button>
+                      </li>
+                      <li class="nav-item">
+                        <button
+                          type="button"
+                          class="nav-link"
+                          role="tab"
+                          data-bs-toggle="tab"
+                          data-bs-target="#navs-top-profile"
+                          aria-controls="navs-top-profile"
+                          aria-selected="false"
+                        >
+                          PER BRANCH
+                        </button>
+                      </li>
+                    </ul>
+                    <div class="tab-content">
+                      <div class="tab-pane fade show active" id="navs-top-home" role="tabpanel">
+                           <div class="card">
+                              <div class="card-body">
+                                <div class="table-responsive text-nowrap">
+                                    <table class="table npicustomerBody_active" id="" style="width: 100%;">
+                                      <thead>
+                                        <tr>
+                                          <th>IMAGE</th>
+                                          <th>PRODUCTID</th>
+                                          <th>PRDOUCT NAME</th>
+                                          <th>PRODUCT CODE</th>
+                                          <th>CATEGORY</th>
+                                          <th>BRAND</th>
+                                          <th>UNIT</th>
+                                          <th>STOCKALERT</th>
+                                          <th>BARCODE</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="tab-pane fade" id="navs-top-profile" role="tabpanel">
+                          <div class="table-responsive text-nowrap">
+                            <table class="table npicustomerBody_disable" id="" style="width: 100%;">
+                              <thead>
+                                <tr>
+                                  <th>IMAGE</th>
+                                  <th>BRANCH</th>
+                                  <th>PRODUCTID</th>
+                                  <th>PRDOUCT NAME</th>
+                                  <th>PRODUCT CODE</th>
+                                  <th>CATEGORY</th>
+                                  <th>BRAND</th>
+                                  <th>COST</th>
+                                  <th>PRICE</th>
+                                  <th>UNIT</th>
+                                  <th>INVENTORY</th>
+                                  <th>STOCKALERT</th>
+                                  <TH>BARCODE</TH>
+                                  <TH>DATECREATED</TH>
+                                  <!-- <th>LASTUPDATED</th> -->
+                                </tr>
+                              </thead>
+                              <tbody>
+                              </tbody>
+                            </table>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--/ Basic Bootstrap Table -->
+
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+
+
+    <div class="modal fade" id="productDetailsModal">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel2">Product Details - Branch</h5>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+                </div>
+                <div class="modal-body">
+                  <table class="table table-hovered">
+
+                    <tr>
+                        <td colspan="2">
+                          <div class="productImg"><img src="" id="productImageHolder_view">
+                          </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="text-primary">Product ID</th>
+                        <td id="upt_prodid"></td>
+                    </tr>
+                    <tr>
+                        <th class="text-primary">Branch</th>
+                        <td id="upt_branch"></td>
+                    </tr>
+                    <tr>
+                        <th class="text-primary">Product Name</th>
+                        <td id="">
+                          <input type="text" class="form-control" id="upt_prodname" disabled>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="text-primary">Product Code</th>
+                        <td id="">
+                          <input type="text" class="form-control" id="upt_prodcode" disabled>
+                        </td>
+                    </tr>
+                    <tr>
+                      <th class="text-primary">Category</th>
+                      <td id="">
+                        <input type="text" class="form-control" id="upt_category" disabled>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="text-primary">Brand</th>
+                      <td id="">
+                        <input type="text" class="form-control" id="upt_brand" disabled>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="text-primary">Cost</th>
+                      <td id="">
+                        <input type="text" class="form-control" id="upt_cost" disabled>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="text-primary">Price</th>
+                      <td id="">
+                        <input type="text" class="form-control" id="upt_price" disabled>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="text-primary">Unit</th>
+                      <td id="">
+                        <input type="text" class="form-control" id="upt_unit" disabled>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="text-primary">Inventory</th>
+                      <td id="">
+                        <input type="text" class="form-control" id="upt_inventory" disabled>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="text-primary">Stockalert</th>
+                      <td id="">
+                        <input type="text" class="form-control" id="upt_stockalert" disabled>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="text-primary">Barcode</th>
+                      <td id="">
+                        <input type="text" class="form-control" id="upt_barcode" disabled>
+                      </td>
+                    </tr>
+                   
+                </table>
+
+                <hr>
+                <h6>Product Last Touch</h6>
+                <table class="table table-sm">
+                  <thead>
+                    <tr>
+                      <th>PRODUCT CODE</th>
+                      <TH>CASHIER</TH>
+                      <TH>STAFF</TH>
+                      <TH>SALES</TH>
+                      <TH>LAST TOUCH</TH>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody_lasttouch"></tbody>
+                </table>
+
+                <input type="hidden" id="stockCodeHolder">
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-danger me-auto" onclick="exec_isLive('3')">Delete</button>
+                    <button type="button" class="btn btn-primary" onclick="exec_image_update()">Update</button>
+                    <button type="button" class="btn btn-warning" id="disableSKUBtn" onclick="exec_isLive('0')">Disable</button>
+                    <button type="button" class="btn btn-success" id="enableSKUBtn" onclick="exec_isLive('1')">Enable</button> -->
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="productDetailsModal_master">
+      <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel2">Product Details - Master List</h5>
+              <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+              ></button>
+              </div>
+              <div class="modal-body">
+                <table class="table table-hovered">
+
+                  <tr>
+                      <td colspan="2">
+                        <div class="productImg"><img src="" id="productImageHolder">
+                          <div class="changeImageBtn">
+                            <form id="fileForm" action="" method="post" enctype="multipart/form-data">
+                              <input type="file" style="display: none;" class="hidden" name="fileToUpload" id="fileToUpload" accept=".jpg, .png"/>
+                              <input type="hidden" id="stockCodeHolder_file" name="stockCode_file"/>
+                              <input type="button" style="font-size: 12px; margin-top: 10px;" class="btn btn-secondary btn-sm" value="Browse Image" id="but_upload">
+                            </form>
+                          </div>
+                        </div>
+                      </td>
+                  </tr>
+                  <tr>
+                      <th class="text-primary">Product ID</th>
+                      <td id="mstr_prodid"></td>
+                  </tr>
+                  
+                  <tr>
+                      <th class="text-primary">Product Name</th>
+                      <td id="">
+                        <input type="text" class="form-control" id="mstr_prodname">
+                      </td>
+                  </tr>
+                  <tr>
+                      <th class="text-primary">Product Code</th>
+                      <td id="">
+                        <input type="text" class="form-control" id="mstr_prodcode">
+                      </td>
+                  </tr>
+                  <tr>
+                    <th class="text-primary">Category</th>
+                    <td id="">
+                      <input type="text" class="form-control" id="mstr_category">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class="text-primary">Brand</th>
+                    <td id="">
+                      <input type="text" class="form-control" id="mstr_brand">
+                    </td>
+                  </tr>
+                 
+                  <tr>
+                    <th class="text-primary">Unit</th>
+                    <td id="">
+                      <input type="text" class="form-control" id="mstr_unit">
+                    </td>
+                  </tr>
+                 
+                  <tr>
+                    <th class="text-primary">Stockalert</th>
+                    <td id="">
+                      <input type="text" class="form-control" id="mstr_stockalert">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class="text-primary">Barcode</th>
+                    <td id="">
+                      <input type="text" class="form-control" id="mstr_barcode">
+                    </td>
+                  </tr>
+                 
+              </table>
+
+              <input type="hidden" id="stockCodeHolder_master">
+              </div>
+              <div class="modal-footer">
+                  <!-- <button type="button" class="btn btn-danger me-auto" onclick="exec_isLive('3')">Delete</button> -->
+                  <button type="button" class="btn btn-primary" id="uploadbtn_master" onclick="upload_prouct_image()">Update</button>
+                  <button type="button" class="btn btn-warning" id="disableSKUBtn" onclick="exec_isLive('3')">Disable</button>
+                  <!-- <button type="button" class="btn btn-success" id="enableSKUBtn" onclick="exec_isLive('1')">Enable</button> -->
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+    <div class="modal fade" id="uploadProductModal">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel2">Upload Product Masterlist</h5>
+              <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+              ></button>
+              </div>
+              <div class="modal-body">
+                <form method="post" enctype='multipart/form-data'>
+                    <div class="mb-3">
+                      <label for="formFile" class="form-label">Select File</label>
+                      <input class="form-control" type="file" name="product_file" id="product_file" />
+                    </div>
+                </form>
+                
+                <small class="text-info">Note: <a href="template/pos_upload_product_template.csv" style="font-weight: bolder;">Click here to download sample template.</a></small>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" id="uploadv1Btn" onclick="exec_upload_products()">Upload</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="modal fade" id="uploadSingleProductModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel2">Upload Single Product</h5>
+            <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+            ></button>
+            </div>
+            <div class="modal-body">
+                  <div class="mb-3">
+                    <!-- <form method="post" enctype='multipart/form-data'> -->
+                      <div class="productImg"><img src="" id="productImageHolder_ad">
+                        <div class="changeImageBtn">
+                          <form id="fileForm_ad" action="" method="post" enctype="multipart/form-data">
+                            <input type="file" style="display: none;" class="hidden_ad" name="fileToUpload_ad" id="fileToUpload_ad" accept=".jpg, .png"/>
+                            <!-- <input type="hidden" id="stockCodeHolder_file_ad" name="stockCode_file_ad"/> -->
+                            <input type="button" style="font-size: 12px; margin-top: 10px;" class="btn btn-secondary btn-sm" value="Browse Image" id="but_upload_ad">
+                          </form>
+                        </div>
+                      </div>
+                    <!-- </form> -->
+                  </div>
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label">PRODUCT NAME</label>
+                    <input class="form-control" type="text"  id="ad_prodname" />
+                  </div>
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label">PRODUCT CODE</label>
+                    <input class="form-control" type="text"  id="ad_code" />
+                  </div>
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label">CATEGORY</label>
+                    <input class="form-control" type="text"  id="ad_category" />
+                  </div>
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label">BRAND</label>
+                    <input class="form-control" type="text"  id="ad_brand" />
+                  </div>
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label">UNIT</label>
+                    <input class="form-control" type="text"  id="ad_unit" />
+                  </div>
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label">STOCKALERT</label>
+                    <input class="form-control" type="text"  id="ad_stockalert" />
+                  </div>
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label">BARCODE</label>
+                    <input class="form-control" type="text"  id="ad_barcode" />
+                  </div>
+                
+              </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="insrt_uploadv1Btn" onclick="exec_upload_products_single()">Upload</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+  
+    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../assets/vendor/js/bootstrap.js"></script>
+    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+    <script src="../assets/vendor/js/menu.js"></script>
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+
+    <!-- Main JS -->
+    <script src="../assets/js/main.js"></script>
+
+    <!-- Page JS -->
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    <script src="../js/inhs.js"></script>
+
+    <!-- bs 5 script -->
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+
+
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+    <!-- <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js"></script> -->
+
+
+    <script type="text/javascript" src="../multiselect/bootstrap-multiselect.js"></script>
+
+    <script>
+
+
+    //checkUserAccount();
+
+    salesmanDataObject();
+	  salesmanDataTable_branch();
+    salesmanDataObject_masterlist();
+
+    var sourceData;
+    var sourceData_dis;
+    function salesmanDataObject(){
+        var partnerID = localStorage.getItem('S_PARTNERID');
+      $.ajax ({
+            url: GLOBALURL  + "/dist/API/applicationAPI.php",
+            type: "GET",
+            data: {
+                    "type":"GET_PRODUCT_MASTERLIST",
+                    "stat":"ALL"
+                  },
+            dataType: "json",
+            crossDomain: true,
+            cache: false,   
+            async: false,         
+              success: function(r){ 
+                var localObj = [];
+                var qs = (new Date).getTime();
+                for(var x = 0; x < r.length; x++){
+                  localObj.push({
+                    thumbnail_stockCode: "<img src='https://adoring-sammet.207-148-112-51.plesk.page/vdfs/a/pos/sneat-1.0.0 2/html/upload/product_image/"+r[x].PRODUCTID+".jpg?"+qs+"' style='width: 40px; height:40px;' onerror='imgError(this)'>",
+                        PRODUCTID: r[x].PRODUCTID,
+                        PRODUCTCODE: r[x].PRODUCTCODE,
+                        PRODUCTNAME: r[x].PRODUCTNAME,
+                        CATEGORY: r[x].CATEGORY,
+                        BRAND: r[x].BRAND,
+                        UNIT: r[x].UNIT,
+                        BARCODE: r[x].BARCODE,
+                        STOCKALERT: r[x].STOCKALERT,
+                        DATECREATED: r[x].DATECREATED,
+                        LASTUPDATED: r[x].DATEUPDATED,
+                        STATUS: r[x].STATUS,
+                    });
+                }
+
+                sourceData = localObj;
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  alert("ERROR OCCUR: " + XMLHttpRequest.responseText);
+               }
+            });
+    }
+
+    function salesmanDataObject_masterlist(){
+        var partnerID = localStorage.getItem('S_PARTNERID');
+        $.ajax ({
+            url: GLOBALURL  + "/dist/API/applicationAPI.php",
+            type: "GET",
+            data: {
+                    "type":"GET_PRODUCT",
+                    "stat":"BRANCH"
+                  },
+            dataType: "json",
+            crossDomain: true,
+            cache: false,   
+            async: false,         
+              success: function(r){ 
+                
+                var localObj_dis = [];
+                var qs = (new Date).getTime();
+                for(var x = 0; x < r.length; x++){
+
+
+                    localObj_dis.push({
+                        //thumbnail_stockCode: "<img src='data:image/jpeg;base64,"+r[x].thumbnail+"' style='width: 35px; height:35px;' onerror='imgError(this)'/>",
+                        thumbnail_stockCode: "<img src='https://adoring-sammet.207-148-112-51.plesk.page/vdfs/a/pos/sneat-1.0.0 2/html/upload/product_image/"+r[x].PRODUCTID+".jpg?"+qs+"' style='width: 40px; height:40px;' onerror='imgError(this)'>",
+                        PRODUCTID: r[x].PRODUCTID,
+                        PRODUCTCODE: r[x].PRODUCTCODE,
+                        PRODUCTNAME: r[x].PRODUCTNAME,
+                        CATEGORY: r[x].CATEGORY,
+                        BRAND: r[x].BRAND,
+                        COST: r[x].COST,
+                        PRICE: r[x].PRICE,
+                        UNIT: r[x].UNIT,
+                        INVENTORY: r[x].INVENTORY,
+                        STOCKALERT: r[x].STOCKALERT,
+                        BARCODE: r[x].BARCODE,
+                        DATECREATED: r[x].DATECREATED,
+                        LASTUPDATED: r[x].DATEUPDATED,
+                        STATUS: r[x].STATUS,
+                        BRANCH: r[x].BRANCH,
+                        LASTTOUCHDETAILS: r[x].LASTTOUCHDETAILS
+                    });
+
+                  }
+                sourceData_dis = localObj_dis;
+              }
+            });
+      }
+
+    disablednpitable();
+    var tableData, prioskuindicator;
+    function salesmanDataTable_branch(){
+      var partnerID = localStorage.getItem('S_PARTNERID');
+
+      
+        $('.loader-indicator h3').hide();
+        tableData =  $('table.npicustomerBody_active').DataTable({
+                    "dom": 'Bfrtip',
+                    "data": sourceData,
+                    "scrollX": true,
+                    "select": true,
+                    "ordering": true,
+                    "columns": [
+                        {"data":'thumbnail_stockCode'},
+                        {'data':'PRODUCTID'},
+                        {'data':'PRODUCTNAME'},
+                        {'data':'PRODUCTCODE'},
+                        {'data':'CATEGORY'},
+                        {'data':'BRAND'},
+                        // {'data':'COST'},
+                        // {'data':'PRICE'},
+                        {'data':'UNIT'},
+                        // {'data':'INVENTORY'},
+                        {'data':'STOCKALERT'},
+                        {'data':'BARCODE'},
+                        // {'data':'DATECREATED'},
+                        // {'data':'LASTUPDATED'}
+                        // {'data':'timestamp'},
+                        // {'data':'barcodepc'},
+                        // {'data':'barcodecs'},
+                        // {'data':'priosku'}
+                    ],
+                    //  columnDefs: [
+                    //   {
+                    //       targets: [8, 9, 19],
+                    //       className: 'text-right'
+                    //   }
+                    // ],
+                    "language": {
+                      "emptyTable": "No available records as of now."
+                    },
+                    "aaSorting": [[ 0, "desc" ]],
+                    buttons: [
+                      // {
+                      //       extend: 'collection',
+                      //       text: 'Sync Product',
+                      //       autoClose: true,
+                      //       buttons: [
+                      //         {
+                      //             text: 'NAI Products',
+                      //             action: function ( e, dt, node, config ) {
+                      //                 sync_partnerProd('NAI');
+                      //             }
+                      //         },
+                            
+                      //     ]
+                      //  },
+                      {
+                          text: 'Refresh',
+                          action: function ( e, dt, node, config ) {
+                            salesmanDataObject();
+                              tableData.clear().rows.add(sourceData).draw();
+                          }
+                      },
+                       {
+                          extend: 'collection',
+                          text: 'Add Product',
+                          class:'collectionprod',
+                          buttons: [
+                            {
+                              text: 'Batch Upload',
+                              action: function ( e, dt, node, config ) {
+                                new bootstrap.Modal($('#uploadProductModal')).show();
+                                //console.log(e+'\n'+dt+'\n'+node+'\n'+config);
+                                //dt.column( -2 ).visible( ! dt.column( -2 ).visible() );
+                              }
+                            },
+                            {
+                              text: 'Single Upload',
+                              action: function ( e, dt, node, config ) {
+                                new bootstrap.Modal($('#uploadSingleProductModal')).show();
+                              }
+                            }
+                      ]
+                    },
+                    {
+                          extend: 'collection',
+                          text: 'Export',
+                          class:'collectionprod',
+                          buttons: [
+                            'csv', 'excel', 'print'
+                      ]
+                    }
+                ],
+                rowCallback: function(row, data, index){
+                  // var stat = data.ISLIVE.toString();
+                  // if(stat == '1'){
+                  //   // $(row).find('td:eq(0)').css({'color': 'green', 'font-size':'10px;', 'letter-spacing': '0.5em'});
+                  //   $(row).find('td:eq(0)').html('ACTIVE').css({'color': 'green', 'font-weight':'bold;'})
+                  // }else{
+                  //   $(row).find('td:eq(0)').html('DISABLED').css({'color': 'red', 'font-weight':'bold;'});
+                  // }
+              } 
+        });
+      
+      
+      $('table.npicustomerBody_active tbody').on('click', 'tr', function () {
+            var tr = $(this).closest('tr');
+            var row = tableData.row(tr);
+            viewproddetails_masterlist(row.data());
+        });
+        
+    }
+
+    function viewproddetails_masterlist(r){
+
+      $('#mstr_prodid').html(r.PRODUCTID);
+      $('#mstr_prodname').val(r.PRODUCTNAME);
+      $('#mstr_prodcode').val(r.PRODUCTCODE);
+      $('#mstr_category').val(r.CATEGORY);
+      $('#mstr_brand').val(r.BRAND);
+      $('#mstr_unit').val(r.UNIT);
+      $('#mstr_stockalert').val(r.STOCKALERT);
+      $('#mstr_barcode').val(r.BARCODE);
+
+      $('#stockCodeHolder_master').val(r.PRODUCTID);
+
+      if(r.ISLIVE == 0){
+        $('#disableSKUBtn').hide();
+        $('#enableSKUBtn').show();
+      }else{
+        $('#disableSKUBtn').show();
+        $('#enableSKUBtn').hide();
+      }
+
+
+      getproduct(r.PRODUCTID);
+
+     
+      // $('#productDetailsModal').modal('show');
+      new bootstrap.Modal($('#productDetailsModal_master')).show();
+    }
+
+
+    function viewproddetails(r){
+
+      $('#upt_prodid').html(r.PRODUCTID);
+      $('#upt_branch').html(r.BRANCH);
+      $('#upt_prodname').val(r.PRODUCTNAME);
+      $('#upt_prodcode').val(r.PRODUCTCODE);
+      $('#upt_category').val(r.CATEGORY);
+      $('#upt_brand').val(r.BRAND);
+      $('#upt_cost').val(r.COST);
+      $('#upt_price').val(r.PRICE);
+      $('#upt_unit').val(r.UNIT);
+      $('#upt_inventory').val(r.INVENTORY);
+      $('#upt_stockalert').val(r.STOCKALERT);
+      $('#upt_barcode').val(r.BARCODE);
+
+      $('#upt_shortname').val(r.shortname);
+      $('#stockCodeHolder').val(r.PRODUCTID);
+
+      if(r.ISLIVE == 0){
+        $('#disableSKUBtn').hide();
+        $('#enableSKUBtn').show();
+      }else{
+        $('#disableSKUBtn').show();
+        $('#enableSKUBtn').hide();
+      }
+
+
+      var res = r.LASTTOUCHDETAILS;
+      var cont = ``;
+      for(var x = 0; x < res.length; x++){
+        cont += `<tr>
+                  <td>`+res[x].PRODUCTCODE+`</td>
+                  <td>`+res[x].CASHIERNAME+`</td>
+                  <td>`+res[x].STAFFNAME+`</td>
+                  <td>`+res[x].TOTALAMOUNT+`</td>
+                  <td>`+res[x].DATECREATED+`</td>
+                </tr>`;
+      }
+      $('#tbody_lasttouch').html(cont);
+
+      getproduct(r.PRODUCTID);
+      // $('#productDetailsModal').modal('show');
+      new bootstrap.Modal($('#productDetailsModal')).show();
+      }
+    var tableData_dis, prioskuindicator_dis;
+    function disablednpitable(){
+       $('.loader-indicator h3').hide();
+       tableData_dis =  $('table.npicustomerBody_disable').DataTable({
+                    "dom": 'Bfrtip',
+                    "data": sourceData_dis,
+                    "scrollX": true,
+                    "select": true,
+                    "ordering": true,
+                    "columns": [
+                        {"data":'thumbnail_stockCode'},
+                        {'data':'BRANCH'},
+                        {'data':'PRODUCTID'},
+                        {'data':'PRODUCTNAME'},
+                        {'data':'PRODUCTCODE'},
+                        {'data':'CATEGORY'},
+                        {'data':'BRAND'},
+                        {'data':'COST'},
+                        {'data':'PRICE'},
+                        {'data':'UNIT'},
+                        {'data':'INVENTORY'},
+                        {'data':'STOCKALERT'},
+                        {'data':'BARCODE'},
+                        {'data':'DATECREATED'}
+                        // {'data':'LASTUPDATED'}
+                    ],
+                    //  columnDefs: [
+                    //   {
+                    //       targets: [8, 9, 19],
+                    //       className: 'text-right'
+                    //   }
+                    // ],
+                    "language": {
+                      "emptyTable": "No available records as of now."
+                    },
+                    "aaSorting": [[ 0, "desc" ]],
+                    buttons: [
+                    {
+                        text: 'Refresh',
+                        action: function ( e, dt, node, config ) {
+                          salesmanDataObject_masterlist();
+                          tableData_dis.clear().rows.add(sourceData_dis).draw();
+                        }
+                    },
+                    {
+                          extend: 'collection',
+                          text: 'Export',
+                          class:'collectionprod',
+                          buttons: [
+                            'csv', 'excel', 'print'
+                      ]
+                    }
+                      
+                ],
+                rowCallback: function(row, data, index){
+                  var stat = data.INVENTORY.toString();
+                  if(stat == '0'){
+                    // $(row).find('td:eq(0)').css({'color': 'green', 'font-size':'10px;', 'letter-spacing': '0.5em'});
+                    $(row).find('td:eq(10)').css({'color': 'red', 'font-size':'15px;', 'letter-spacing': '0.5em', 'font-weight': 'bold'});
+                  }
+              } 
+        });
+
+        $('table.npicustomerBody_disable tbody').on('click', 'tr', function () {
+            var tr = $(this).closest('tr');
+            var row = tableData_dis.row(tr);
+            viewproddetails(row.data());
+        });
+    }
+
+    $(document).on("click", "div.dt-button-collection > div > button", function() {
+        if ($(this).hasClass("active")) {
+            $(this).attr('title', 'toggle column off');
+            console.log("false");
+        } else {
+            $(this).attr('title', 'toggle column on');
+            console.log("true");
+        }
+    });
+
+    function getproduct(img){
+        var qs = (new Date).getTime();
+        $('#productImageHolder').attr("src", "https://adoring-sammet.207-148-112-51.plesk.page/vdfs/a/pos/sneat-1.0.0 2/html/upload/product_image/"+img+".jpg?" + qs);
+        $('#productImageHolder_view').attr("src", "https://adoring-sammet.207-148-112-51.plesk.page/vdfs/a/pos/sneat-1.0.0 2/html/upload/product_image/"+img+".jpg?" + qs);
+
+    }
+
+    function sync_partnerProd(supplier){
+
+        $.ajax ({
+            url: GLOBALURL  + "/dist/API/applicationAPI.php",
+            type: "POST",
+            data: {
+                    "type":"SYNC_PARTNER_PROD",
+                    "supplierID":supplier
+                },
+            dataType: "json",
+            crossDomain: true,
+            cache: false,   
+            async: false,         
+            success: function(r){
+                if(r){
+                    alert(supplier+' product Successfully Sync.');
+                }
+
+                salesmanDataObject();
+                tableData.clear().rows.add(sourceData).draw();
+                $('#productDetailsModal').modal('hide');
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert('Ops! Something went wrong!\n'+XMLHttpRequest.responseText + 'PLEASE CONTACT SYSTEM ADMINISTRATOR!');
+            }
+        });
+    }
+
+
+    //disable product
+    function exec_disable(){
+        var stockCodeHolder = $('#stockCodeHolder').val();
+        var f = confirm('Are you sure you want to delete this product?');
+        if(f){
+          $.ajax ({
+              url: GLOBALURL  + "/dist/API/applicationAPI.php",
+              type: "POST",
+              data: {
+                      "type":"UPDATE_PROD_STATUS",
+                      "stockCodeHolder":stockCodeHolder
+                  },
+              dataType: "json",
+              crossDomain: true,
+              cache: false,   
+              async: false,         
+              success: function(r){
+                  if(r){
+                      alert('Product Successfully Disabled.');
+                  }
+
+                  salesmanDataObject();
+                  tableData.clear().rows.add(sourceData).draw();
+                  $('#productDetailsModal').modal('hide');
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  alert('Ops! Something went wrong!\n'+XMLHttpRequest.responseText + 'PLEASE CONTACT SYSTEM ADMINISTRATOR!');
+              }
+          });
+        }
+       
+    }
+
+    function exec_isLive(stat){
+        var stockCodeHolder = $('#stockCodeHolder').val();
+
+        $.ajax ({
+            url: GLOBALURL  + "/dist/API/applicationAPI.php",
+            type: "POST",
+            data: {
+                    "type":"UPDATE_PRODUCT_STATUS",
+                    "productID":stockCodeHolder,
+                    'stat':stat
+                },
+            dataType: "json",
+            crossDomain: true,
+            cache: false,   
+            async: false,         
+            success: function(r){
+                if(r){
+                  if(stat == 1){
+                    alert('Product Successfully Enabled.');
+                  }else{
+                    alert('Product Successfully Disabled.');
+                  }
+                    
+                }
+
+                salesmanDataObject();
+                tableData.clear().rows.add(sourceData).draw();
+                $('#productDetailsModal').modal('hide');
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert('Ops! Something went wrong!\n'+XMLHttpRequest.responseText + 'PLEASE CONTACT SYSTEM ADMINISTRATOR!');
+            }
+        });
+    }
+
+    function execupdateProduct(){
+        var upt_shortname = $('#upt_shortname').val();
+        var stockUom = $('#upt_stockuom').val();
+        var confactalt = $('#upt_altuom').val();
+        var contuom = $('#upt_confuom').val();
+        var priceCode = $('#upt_pricecode').val();
+        var unitPrice = $('#upt_unitprice').val();
+
+        var stockCodeHolder = $('#stockCodeHolder').val();
+
+        $.ajax ({
+            url: GLOBALURL  + "/dist/API/applicationAPI.php",
+            type: "POST",
+            data: {
+                    "type":"UPDATE_UPDATE_SHORTNAME",
+                    "shortname":upt_shortname,
+                    "stockCodeHolder":stockCodeHolder
+                },
+            dataType: "json",
+            crossDomain: true,
+            cache: false,   
+            async: false,         
+              success: function(r){
+                  if(r){
+                    alert('Product Successfully Updated.');
+                  }
+
+                  salesmanDataObject();
+                  tableData.clear().rows.add(sourceData).draw();
+                  $('#productDetailsModal').modal('hide');
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  alert('Ops! Something went wrong!\n'+XMLHttpRequest.responseText + 'PLEASE CONTACT SYSTEM ADMINISTRATOR!');
+              }
+        });
+    }
+
+    function exec_image_update_single(stockCode){
+      var checker = $('#fileToUpload_ad').val();
+      if(checker == undefined || checker == 'undefined' ||
+      checker == '' || checker == null){
+          alert('Please select a image for this product.');
+      }else{
+      // $('.btn-text-cust').html('<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i> updating please wait..');
+        
+        // var stockCode = $('#stockCodeHolder_ad').val();
+        var formData = new FormData();
+        var files = $('#fileToUpload_ad')[0].files[0];
+        var files_dir = $('#fileToUpload_ad')[0].files[1];
+        formData.append('fileToUpload', files);
+        formData.append('stockCode', stockCode);
+
+        $.ajax ({
+            url: 'https://adoring-sammet.207-148-112-51.plesk.page/vdfs/a/pos/sneat-1.0.0 2/html/upload/upload_prod_image.php',
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            dataType: 'text',
+            async: false,
+            success: function(r){ 
+                if(parseInt(r) == 1){
+                  alert('Product successfully added.');
+                }else{
+                  alert("ERROR WHILE UPDATING:\n" + r +'\nPlease try again.');
+                }
+                $('.btn-text-cust').html('Save Changes');
+
+               
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  alert("ERROR WHILE UPDATING:\n" + XMLHttpRequest.responseText +'\nPlease try again.');
+
+                  // $('.btn-text-cust').html('Save Changes');
+                }
+            });
+        }
+    }
+
+    function exec_image_update(){
+
+     var mstr_prodname = $('#mstr_prodname').val();
+     var mstr_prodcode = $('#mstr_prodcode').val();
+     var mstr_category = $('#mstr_category').val();
+     var mstr_brand = $('#mstr_brand').val();
+     var mstr_unit = $('#mstr_unit').val();
+     var mstr_stockalert = $('#mstr_stockalert').val();
+     var mstr_barcode = $('#mstr_barcode').val();
+     var stockCodeHolder_master = $('#stockCodeHolder_master').val();
+
+      // upload_prouct_image();
+
+      $.ajax ({
+            url: GLOBALURL  + "/dist/API/applicationAPI.php",
+            type: "POST",
+            data: {
+                    "type":"UPDATE_PRODUCT_MAIN",
+                    productID:stockCodeHolder_master,
+                    prodname:mstr_prodname,
+                    prodcode:mstr_prodcode,
+                    category:mstr_category,
+                    brand:mstr_brand,
+                    unit:mstr_unit,
+                    stockalert:mstr_stockalert,
+                    barcode:mstr_barcode
+                },
+            dataType: "json",
+            crossDomain: true,
+            cache: false,   
+            async: false,         
+              success: function(r){
+                  if(r){
+                    alert('Product Successfully Updated.');
+                  }
+
+                  salesmanDataObject();
+                  tableData.clear().rows.add(sourceData).draw();
+                  $('#productDetailsModal_master').modal('hide');
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  alert('Ops! Something went wrong!\n'+XMLHttpRequest.responseText + 'PLEASE CONTACT SYSTEM ADMINISTRATOR!');
+              }
+        });
+
+
+
+    }
+    
+
+    function upload_prouct_image(){
+
+      var checker = $('#fileToUpload').val();
+      if(checker == undefined || checker == 'undefined' ||
+      checker == '' || checker == null){
+          alert('Please select a image for this product.');
+      }else{
+      $('#uploadbtn_master').html('<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i> updating please wait..');
+        
+        var stockCode = $('#stockCodeHolder_master').val();
+
+        console.log(stockCode);
+        var formData = new FormData();
+        var files = $('#fileToUpload')[0].files[0];
+        var files_dir = $('#fileToUpload')[0].files[1];
+        formData.append('fileToUpload', files);
+        formData.append('stockCode', stockCode);
+
+        $.ajax ({
+            url: 'https://adoring-sammet.207-148-112-51.plesk.page/vdfs/a/pos/sneat-1.0.0 2/html/upload/upload_prod_image.php',
+            type: "POST",
+            data: formData,
+            contentType: false, 
+            processData: false,
+            dataType: 'text',
+            async: false,
+            success: function(r){ 
+                if(parseInt(r) == 1){
+                  exec_image_update();
+                }else{
+                  alert("ERROR WHILE UPDATING:\n" + r +'\nPlease try again.');
+                }
+                $('#uploadbtn_master').html('Update');
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  alert("ERROR WHILE UPDATING:\n" + XMLHttpRequest.responseText +'\nPlease try again.');
+
+                  $('#uploadbtn_master').html('Update');
+                }
+            });
+        }
+    }
+
+    function imgError(image) {
+      image.onerror = "";
+      image.src = "img/noimage.png";
+      return true;
+    }  
+
+
+    $("#but_upload").click(function(){
+    $(".hidden").click();
+    });
+ 
+
+  $(".hidden").change(function(){
+    readURL(this);
+    $("#but_upload").show();
+    //$("#but_upload").hide();
+    //$("#uploadImg_BTN").show();
+    //$("#cancelImg_BTN").show();
+  });
+
+  function readURL(input) {
+      if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          
+          reader.onload = function (e) {
+              $('#productImageHolder').attr('src', e.target.result);
+          }
+          reader.readAsDataURL(input.files[0]);
+      }
+  }
+
+
+  $("#but_upload_ad").click(function(){
+    $(".hidden_ad").click();
+    });
+ 
+
+  $(".hidden_ad").change(function(){
+    readURL_ad(this);
+    $("#but_upload_ad").show();
+    //$("#but_upload").hide();
+    //$("#uploadImg_BTN").show();
+    //$("#cancelImg_BTN").show();
+  });
+
+  function readURL_ad(input) {
+      if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          
+          reader.onload = function (e) {
+              $('#productImageHolder_ad').attr('src', e.target.result);
+          }
+          reader.readAsDataURL(input.files[0]);
+      }
+  }
+
+  function exec_upload_products_single(){
+
+    var ad_prodname = $('#ad_prodname').val();
+    var ad_code = $('#ad_code').val();
+    var ad_category = $('#ad_category').val();
+    var ad_brand = $('#ad_brand').val();
+    var ad_unit = $('#ad_unit').val();
+    var ad_stockalert = $('#ad_stockalert').val();
+    var ad_barcode = $('#ad_barcode').val();
+
+    if($.trim(ad_prodname) == '' ||
+       $.trim(ad_code) == '' ||
+       $.trim(ad_category) == '' ||
+       $.trim(ad_brand) == '' ||
+       $.trim(ad_unit) == '' ||
+       $.trim(ad_stockalert) == '' ||
+       $.trim(ad_barcode) == ''){
+
+        alert('Please input all fields.');
+    
+      }else{
+        $.ajax ({
+          url: GLOBALURL  + "/dist/API/applicationAPI.php",
+          type: "POST",
+          data: {
+                  "type":"INSERT_PRODUCT_MASTERLIST",
+                  prodname:ad_prodname,
+                  prodcode:ad_code,
+                  category:ad_category,
+                  brand:ad_brand,
+                  unit:ad_unit,
+                  stockalert:ad_stockalert,
+                  barcode:ad_barcode
+              },
+            dataType: "json",
+            crossDomain: true,
+            cache: false,   
+            async: false,     
+          success: function(r){ 
+            if(r == '2'){
+              alert('COULD NOT INSERT PRODUCT:\nProduct Code: '+ad_code+' already exist, please check the product list and try again.');
+            }else{
+
+              exec_image_update_single(r);
+
+              salesmanDataObject();
+              tableData.clear().rows.add(sourceData).draw();
+              alert('Product successfully added.');
+              $('#uploadSingleProductModal').modal('hide');
+            }
+            // $('.btn-text-cust').html('Upload');
+               
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+              alert("ERROR WHILE UPDATING:\n" + XMLHttpRequest.responseText +'\nPlease try again.');
+            }
+        });
+    }
+
+  }
+
+  function exec_upload_products(){
+    
+    var product_file = $('#product_file').val();
+    
+    if(product_file == ''){
+      alert('Please select a csv file to upload.');
+    }else{
+      $('.temp1').hide();
+      $('#uploadv1Btn').html('<i class="icon-copy fa fa-spinner fa-spin" aria-hidden="true"></i> Uploading please wait..');
+      $("#uploadv1Btn").prop("disabled", true);
+
+
+      var UPLOADERHOLDER = localStorage.getItem('S_ADMID');
+      var formData = new FormData();
+      var files = $('#product_file')[0].files[0];
+      formData.append('product_file', files);
+      formData.append('GLOBALUPLOADERHOLDER',UPLOADERHOLDER);
+      $.ajax ({
+        url: GLOBALURL + '/dist/API/uploadProduct.php',
+        // url: 'https://bakuna-ph.com/upload/16sandbox.php',
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        dataType: 'text',
+        async: false,
+        success: function(r){ 
+          if(r == 1){
+            // sourceData();
+            // datatables.clear().rows.add(sourceDat).draw();
+            
+            $('.temp1').show();
+            $('#uploadv1Btn').html('Upload');
+            $("#uploadv1Btn").prop("disabled", false);
+
+            alert('Data Successfully Uploaded');
+            location.reload();
+            // textTOHr('09399139785');
+            $('#template1Modal').modal('hide');
+
+            
+          }else{
+            alert('ERROR WHILE UPDATING: ' + r + '\n' + 'Please try again.');
+            $('#uploadv1Btn').html('Upload');
+            $("#uploadv1Btn").prop("disabled", false);
+            $('#template1Modal').modal('hide');
+          }
+        },
+        error: function (request, status, error) {
+          // alert('Please Try Again:\n'+request.responseText);
+          alert('Server takes to long to respond, please try again.');
+          $('#uploadv1Btn').html('Upload');
+          $("#uploadv1Btn").prop("disabled", false);
+          $('#template1Modal').modal('hide');
+        }
+      });
+    }
+  }
+    </script>
+  </body>
+</html>

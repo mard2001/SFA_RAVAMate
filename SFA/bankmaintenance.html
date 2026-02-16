@@ -1,0 +1,539 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Bank Maintenance</title>
+    <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/BOOTSTRAP3/css/bootstrap.min.css"/>
+    <script src="/BOOTSTRAP3/AJAX/jquery.min.js"></script>
+    <script src="/BOOTSTRAP3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/mdDesign.css">
+    <link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+    <script type="text/javascript" src="/DATERANGEPICKER/moment.min.js"></script>
+    <script type="text/javascript" src="/DATERANGEPICKER/daterangepicker.js"></script>
+    <link rel="stylesheet" href="/Commonusrs/DATERANGEPICKER/daterangepicker.css">
+    <link rel="stylesheet" href="/Commonusrs/DATATABLES/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="/Commonusrs/DATATABLES/editor.dataTables.min.css"/>
+    <link rel="stylesheet" href="/Commonusrs/DATATABLES/buttons.dataTables.min.css "/>
+
+    <link rel="stylesheet" href="/js/multi/dist/css/bootstrap-multiselect.css" type="text/css"/>
+</head>
+
+<body class="" id="page-top">
+    <div id="mySidenav" class="sidenav">
+        <div class='image'><img alt='mdbuddylogo' class='logoMd' src='/img/mdbuddylogo_jeff.png'/></div>
+          <a href="https://mybuddy-sfa.com/SFA/Dashboard"> <span class='glyphicon glyphicon-home'></span> Dashboard</a>
+          <a href="https://mybuddy-sfa.com/SFA/digitalMapping"> <span class='glyphicon glyphicon-map-marker'></span> Digital Mapping</a>
+          <a href="https://mybuddy-sfa.com/SFA/customerMapping"> <span class="fa fa-users" aria-hidden="true"></span> Customer Mapping</a>
+          <a href="territoryGeofencing"> <span class="fa fa-unlock" aria-hidden="true"></span> Territory Geofencing</a>
+         <a data-toggle="collapse" href="#collapse1" id='navDrop'> <span class='glyphicon glyphicon-duplicate' id='changeIcon'></span> Reports
+         <i class="glyphicon glyphicon-menu-down pull-right"></i> </a>
+            <div id="collapse1" class="panel-collapse collapse" style="margin-left: 17px; font-size: 9px !important">
+              <a href="salesReport"> Sales Report</a>
+              <a href="fastsosyotransaction"> Fastsosyo Transaction</a>
+              <a href="salesAudit"> Sales Audit</a>
+              <a href="transactionLedger"> Transaction Ledger</a>
+              <a href="UnprocessedOrders"> Unprocessed Orders</a>
+              <a href="dsr"> DSR</a>
+              <a href="stockRequest"> Stock Request</a>
+              <a href="unuploaded"> Unuploaded</a>
+              <a href="BOReport"> BO</a>
+              <a href="Stocktake Report"> Stocktake</a>
+              <a href="inventory"> Inventory Valuation</a>
+              <a href="jobberMaintenance"> Jobber</a>
+              <a href="syncreport">Sync Report</a>
+              <a href="soaprvreport">SO Approval</a>
+            </div>
+         <a data-toggle="collapse" href="#collapse2" id='navDrop' class="maintenanceCont"> <span class="fa fa-cogs" aria-hidden="true" id='changeIcon'></span> Maintenance
+          <i class="glyphicon glyphicon-menu-down pull-right"></i> </a>
+            <div id="collapse2" class="panel-collapse collapse" style="margin-left: 17px; font-size: 9px !important">
+              <a href="dataMaintenance" > Data</a>
+              <a href="customer"> Customer</a>
+              <a href="geoReset" > Georeset</a>
+              <a href="salesman" > Salesman</a>
+              <a href="product"> Product</a>
+              <a href="productbtdt"> BTDT Product</a>
+              <a href="customerTagging"> Tagging</a>
+              <a href="bankmaintenance" class="activeYes"> Bank</a>
+              <a href="mcpcalibration">MCP Calibration</a>
+            </div>
+        <!-- <a href="Alert"> <span class='glyphicon glyphicon-envelope'></span> Alert Messages</a> -->
+        <hr />
+        <a href="https://mybuddy-sfa.com/SFA/v2/dashboard">Switch to New Dashboard</a>
+      </div>
+
+    <div id="main">
+        <h4 class="display-4">
+           <a href="#" id='navBtn' class="btn btn-primary"  style='margin-right: 15px;'>
+             <span class="glyphicon glyphicon-menu-hamburger"></span> 
+           </a>
+          <span class='glyphicon glyphicon-file'></span> Bank Maintenance
+          <span class="nav navbar-nav navbar-right">
+                  <li class="dropdown">
+                      <a style='float:right;' href="#" class="dropdown-toggle" data-toggle="dropdown" id='dropThisDown'>
+                          <span class="label label-pill label-danger count" style='border-radius: 10px; font-size: 10px;'></span>
+                          <span class="glyphicon glyphicon-bell"></span>
+                      </a>
+                      <ul class="dropdown-menu" style='padding: 0'>
+                        <div id='notif-body'>
+                           <div id='notifs-icon-div'></div>
+                        </div>
+                        <a type="button" class="btn btn-default btn-block" href='mdAlert_bohol.php' id='seeAll' >See all</a>
+                      </ul>
+                  </li>
+                   <li class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="glyphicon glyphicon-user"></i>
+                      </a>
+                      <ul class="dropdown-menu dropdown-user">
+                          <li><a href="Profile.html"><i class="glyphicon glyphicon-user"></i> My Account</a>
+                          </li>
+                          <li class="divider"></li>
+                          <li><a href="#" id="common-logout-btn"><i class="glyphicon glyphicon-lock"></i> Logout</a>
+                          </li>
+                      </ul>
+                   </li>
+                
+              </span>
+          </h4>
+         <div class="panel" style='background-color:#2c8dd6; color: white; margin-top: 20px;'>
+
+                <div class="panel-heading">
+                  <span class='glyphicon glyphicon-list-alt'></span>
+                  <span id="titleHeading" class="display-4"></span>
+
+                  <span class="pull-right">
+                      <button class="btn btn-xs btn-primary" onclick="addBank()">Add Bank</button>
+                  </span>
+                </div>
+                <div class="panel-body" style='background-color:#fff; color: black;'> 
+                  <!--<button class="btn btn-success btn-sm" id="appvBtn">APPROVE</button>-->
+                    <div class="loading-table">
+                         <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i> Rendering data ...
+                          <span class="sr-only">Loading...</span>
+                    </div>
+                    <table id="stockRequest_TAB" class="display nowrap" width="100%">
+                      <thead>
+                         <tr>
+                           <th>BANKCODE</th>
+                           <th>BANK NAME</th>
+                           <th>LASTUPDATED</th>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                 </div>
+               </div>
+         </div><!--main panel end-->
+
+    <div id="updateLocationModal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-large">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title"><i class="fa fa-list"></i> Sales Details</h4>
+          </div>
+          <div class="modal-body">
+             <div id="map"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="modal fade" id="addBankModal" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Add Bank </h4>
+            </div>
+            <div class="modal-body">
+              <table class="table table-hover" style="text-align:left;">
+                <tr>
+                  <td>Bank Code:</td>
+                  <td>
+                      <input type="text" class="form-control bk_inpt" id="bankCode">
+                  </td>
+                </tr>
+                <tr>
+                  <td>Bank Name:</td>
+                  <td>
+                      <input type="text" class="form-control bk_inpt" id="bankName">
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" onclick="exec_Addbank()">Add</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    <script src="/Commonusrs//DATATABLES/jquery.dataTables.min.js"></script>
+    <script src="/Commonusrs//DATATABLES/dataTables.buttons.min.js"></script>
+    <script src="/Commonusrs//DATATABLES/buttons.print.min.js"></script>
+    <script src="/Commonusrs//DATATABLES/buttons.html5.min.js"></script>
+    <script src="/Commonusrs//DATATABLES/jszip.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/ellipsis.js"></script>
+    <script type="text/javascript" src="/js/jasonday-printThis-c814846/printThis.js"></script>
+    <script type="text/javascript" src="/web/web-commons.js"></script>
+    <script type="text/javascript" src="/js/bootbox.min.js"></script>
+    <script type="text/javascript" src="/js/scrolling.js"></script>
+    <script type="text/javascript" src="/js/multi/dist/js/bootstrap-multiselect.js"></script>
+    <script src="/HASH/md5.js"></script>
+    <script src="/HASH/aes.js"></script>
+    <script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+    <script src="js/chatApi.js"></script>
+    <script type="text/javascript">
+      var usertype = localStorage.getItem("usertype");
+
+      determineUserType(usertype); 
+      getcompname();
+      //loadSalesman();
+
+      function addBank(){
+        $('#addBankModal').modal('show');
+      }
+
+      function showSalesmanModal(){
+        $('#dssmodal').modal('show');
+      }
+
+        function loadSalesman(){
+            $.ajax ({
+            url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {"type":"dsr_salesmanLoad", "CONN":con_info},
+            dataType: "json",
+            crossDomain: true,
+            cache: false,            
+                success: function(data){ 
+                    for(var x = 0; x<data.length; x++){
+                        $('#salesmanList').append('<option value="'+data[x].mdCode+'">'+data[x].Salesman+'</option>');
+                    }
+
+                    $('#salesmanList').multiselect({
+                        numberDisplayed: 1,
+                        enableCaseInsensitiveFiltering: true,
+                        includeSelectAllOption: true,
+                        selectAllNumber: true,
+                        buttonWidth: '300px',
+                        maxHeight: 300
+                    });
+                }
+            });
+        }
+
+      $('#bankCode').val('');
+      $('#bankName').val('');
+      function exec_Addbank(){
+        var bankCode = $('#bankCode').val();
+        var bankName = $('#bankName').val();
+        var f = confirm('Are you sure you want to add this bank?'); 
+        if(f){
+            $.ajax ({
+                url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+                type: "GET",
+                data: {
+                        "type":"EXEC_NW_BANK_INSRT",
+                        "bankname":bankName,
+                        "bankcode":bankCode,
+                        "CONN":con_info
+                    },
+                dataType: "json",
+                crossDomain: true,
+                cache: false,            
+                success: function(r){ 
+                    if(r){
+                        alert(bankName + ' successfully added.');
+                        location.reload();
+                    }
+                }
+            });
+        }
+        
+      }
+
+      function getcompname(){
+      $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {"type":"GET_COMPANYNAME", "CONN":con_info},
+          dataType: "json",
+          crossDomain: true,
+          cache: false,            
+            success: function(r){ 
+              $('#titleHeading').html(r[0].company.toUpperCase() +' / Bank Maintenance');
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              $('#titleHeading').html('<i class="fa fa-circle blinking"></i> <b style="color:red;">ERROR:</b> Unable to establish a connection from your server. Please check your server settings.');
+            }
+        });
+      } 
+      
+      var sourceDat;
+      $('.loading-table').hide();
+      function customerTaggingData(){
+      $('#stockRequest_TAB').hide();
+      $('.loading-table').show();
+       var dialog = bootbox.dialog({
+              message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> please wait...</p>',
+              backdrop: true
+            });
+        var botboxMsg = '';
+         $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {"type":"GET_BANK_LIST", "CONN":con_info},
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(r){ 
+                if(r.lenght != 0){ 
+                  sourceDat = r;
+                  $('#stockRequest_TAB').show();
+                  $('.loading-table').hide();
+                }else{
+                  alert('NO DATA FOUND IN YOUR SELECTED DATE: ' + start +' to '+ end);
+                }
+
+                dialog.modal('hide');
+               },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+              botboxMsg = '<b class="text-danger">Ops! Something went wrong!</b><br/>' + XMLHttpRequest.responseText + ' CONTACT SYSTEM ADMINISTRATOR!';
+              dialog.init(function(){
+                    setTimeout(function(){
+                      dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                  }, 1000);
+              });
+             }
+            }).done(function () {
+                    dialog.init(function(){
+                          setTimeout(function(){
+                            dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                        }, 1000);
+                  });
+            });
+      }
+
+      
+      datatableApp();
+      customerTaggingData();
+      tableData.clear().rows.add(sourceDat).draw();
+
+      var tableData;
+      function datatableApp(){
+        $('[data-toggle="tooltip"]').tooltip();
+           tableData = $('#stockRequest_TAB').DataTable({
+              "dom": 'Bfrtip',
+              "responsive": true,
+              "data": sourceDat,
+              "scrollX": true,
+              columns: [
+                  { data: "bankCode" },
+                  { data: "bankName" },
+                  { data: "lastUpdated" }
+                ],
+              drawCallback: function (settings) {
+                $('[data-toggle="tooltip"]').tooltip();
+              },
+            rowCallback: function(row, data, index){
+                // var link = data.Link.toString();
+                // var isTag = $(row).find('td:eq(6)').text().toString();
+                // var custCode = data.custCode.toString();
+            },
+            buttons: [ {
+                  extend: 'copyHtml5',
+                  exportOptions: {
+                      columns: [0, 1, 2]
+                  }
+              },
+              {
+                  extend: 'excelHtml5',
+                  exportOptions: {
+                      columns: [0, 1, 2]
+                  }
+              },
+              {
+                  extend: 'print',
+                  exportOptions: {
+                      columns: [0, 1, 2]
+                  }
+              }
+            ]
+        });
+      }
+
+    tableData.on( 'draw', function () {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    var markers = [];
+    function removeMarker(){
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(null);
+        }
+        markers = [];
+    }
+
+    //var marker;
+    function locationModal(custCode, lat, lng){
+      $('#updateLocationModal').modal('show');
+      removeMarker();
+      var myLatlng = {lat: parseFloat(lat), lng: parseFloat(lng)};
+        var marker = new google.maps.Marker({
+          position: myLatlng,
+          map: map,
+          draggable: true,
+          title: 'Hello World!' + custCode
+        });
+
+      map.addListener(marker, 'dragend', function() {
+        console.log('You move me' + this.position);
+      });
+
+      map.setCenter(myLatlng);
+      map.setZoom(16);
+      markers.push(marker);
+    }
+
+    (function($) {
+      $.fn.clickToggle = function(func1, func2) {
+          var funcs = [func1, func2];
+          this.data('toggleclicked', 0);
+          this.click(function() {
+              var data = $(this).data();
+              var tc = data.toggleclicked;
+              $.proxy(funcs[tc], this)();
+              data.toggleclicked = (tc + 1) % 2;
+          });
+          return this;
+      };
+      }(jQuery));
+
+    
+      $("#navBtn").clickToggle(function() {   
+        openNav();
+      }, function() {
+          closeNav();
+      });
+
+      $(window).bind("load", function () {
+          $('#work-in-progress').fadeOut();
+      });
+    
+      function imgError2(image) {
+        image.onerror = "";
+        image.src = "../img/salesmanPic.jpg";
+        return true;
+      }  
+
+      function openNav() {
+          document.getElementById("mySidenav").style.width = "270px";
+          document.getElementById("main").style.marginLeft = "270px";
+      }
+
+      function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+          document.getElementById("main").style.marginLeft= "0";
+      }
+
+var map, destmarker = [];
+function initMap() {
+
+var directionsService = new google.maps.DirectionsService; 
+var directionsDisplay = new google.maps.DirectionsRenderer;
+var zm = 9;
+var lt = '-25.363';
+var lg = '131.044';
+
+  // lt = sitelat;
+  // lg = sitelng;
+  // zm = sitezoom;
+
+    mapOptions = {
+      zoom: parseInt(zm), 
+      center: {lat: parseFloat(lt), lng: parseFloat(lg)},
+      mapTypeId: 'roadmap',
+      controlSize: 25,
+      zoomControl: false,
+      scaleControl: false,
+      streetViewControl: true,
+      fullscreenControl: true,
+      mapTypeControl: false
+    }
+      
+  map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+  //new formcreation(map);
+
+  // map.addListener('zoom_changed', function() {
+  //   getZoomLevel();
+  // });
+
+  // var marker = new google.maps.Marker({
+  //   position: new google.maps.LatLng(lt, lg),
+  //   draggable: true,
+  //   animation: google.maps.Animation.DROP,
+  //   title:"Site Current Position"
+  // });
+
+  // marker.setMap(map);
+
+  //sitelocation();
+  
+  function getZoomLevel(){
+    var zoomInDelimeter = map.getZoom();
+    $('#zoomLevel').val('Zoom Level: '+ zoomInDelimeter);
+    $('.zoom-value').html( zoomInDelimeter);
+    globalZoom = zoomInDelimeter;
+  }
+
+  function sitelocation(){
+    var options = {componentRestrictions: {country: "ph"}};
+    var originAutocomplete = new google.maps.places.Autocomplete(document.getElementById('sitepinpoint'), options);
+    google.maps.event.addListener(originAutocomplete, 'place_changed', function () {
+            var place = originAutocomplete.getPlace();
+             var lat = place.geometry.location.lat();
+             var lng = place.geometry.location.lng();
+
+            remvmarker();
+            destmarker = new google.maps.Marker({
+	          position: {lat: lat, lng: lng},
+	          draggable:true,
+	          map: map,
+	          title: 'Map Center POV!'
+	        });
+
+            collectormarkers.push(destmarker);
+	        map.setCenter(destmarker.getPosition());
+	        map.setZoom(10);
+        });
+  }
+}
+
+function formcreation(map){
+    this.map = map;
+    var dispDeviation = document.getElementById("site_creation_form");
+    this.map.controls[google.maps.ControlPosition.LEFT].push(dispDeviation);
+}
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=places&sensor=false&key=AIzaSyAt0Pxe9_3DTav3DmUQzHfgd07s_LcJo7I&libraries=places&callback=initMap"
+    async defer></script>
+
+</body>
+</html>

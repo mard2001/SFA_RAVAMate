@@ -1,0 +1,358 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SOSYO SUPPORT</title>
+    <link rel="icon" class="pageIconLink" href="" />
+    <!-- <link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png"> -->
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet"> 
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>   
+
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+
+    <!-- MULTISELECT -->
+    <link rel="stylesheet" href="/js/bootstrap-multiselect-master/dist/css/bootstrap-multiselect.css" type="text/css"/>
+    <script type="text/javascript" src="/js/bootstrap-multiselect-master/dist/js/bootstrap-multiselect.js"></script>   
+
+    <!-- DATE PICKER -->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css">
+
+    <!-- GOOGLE MATERIAL ICON -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <!-- PICTOGRAMMERS ICON -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.3.67/css/materialdesignicons.min.css" />
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <!-- CSS STYLESHEETS -->
+    <link rel="stylesheet" href="constant/dynamicColor_stylesheet.css">
+    <link rel="stylesheet" href="css/offcanvas_stylesheet.css">
+    <!-- <link rel="stylesheet" href="/css/mdDesign.css"> -->
+    <link rel="stylesheet" href="css/supportToolSosyo.css">
+
+    <!-- datatables -->
+    <!-- <link href="https://cdn.datatables.net/v/bs5/dt-2.1.0/datatables.min.css" rel="stylesheet"> -->
+
+    <!-- DATATABLES -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.min.css">
+
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <!-- PICTOGRAMMERS ICON -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.3.67/css/materialdesignicons.min.css" />
+    
+
+    <style>
+      #map{
+        border: 1px solid #1c9ec5;
+      }
+
+      .storemarkerImage{
+        height: 150px;
+        width: 150px;
+        /* border-radius: 90%; */
+      }
+
+      .container_salesman{
+        border-radius: 5px;
+      }
+
+      .container_salesman.step_1{
+        padding: 10px;
+      }
+
+      .page-link{
+        background-color: #1c9ec5;
+        border: 2px solid #1c9ec5;
+        margin: 0 1px;
+      }
+
+      .useBtn{
+        padding: 3px 10px;
+      }
+
+      .arrow-side-icon{
+        margin-top: 225px;
+      }
+
+      #vehicleListData tr:hover{
+        cursor: pointer;
+        background-color: #6a8cb8;
+      }
+    </style>
+
+</head>
+
+<body class="" id="page-top" onload="init()">
+    <div class="mainDiv container-fluid">
+        <div class="headerDiv d-flex justify-content-between align-items-center py-3" style="color: #FFF;">
+            <div class="leftHeader d-flex align-items-center mx-3">
+                <button class="btn menubtn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasExample" style="color: #FFF;">
+                    <span class="material-symbols-outlined">
+                        menu
+                    </span>
+                </button>
+                <div id="navbarCompanyDetails" class="d-flex">
+                </div>
+            </div>
+            <h1 class="text-center">Support Tool Sosyo</h1>
+            <div class="rightHeader d-flex justify-content-end align-items-center mx-3" id="defaultrightHeader" style="width: 260px;">
+                <div class="navbarDropdowns"></div>
+            </div>
+        </div>
+
+        <div id="main">
+            <div class="panel cust-panel mt-4 mb-1">
+                <div class="panel-heading p-2" style="color: #FFF;">
+                    <i class='fa fa-map-o'></i> <span id="headingTitle"></span>
+                </div>
+
+                <div id="map" style="height: 100vh;"></div>
+
+                <button class='btn btn-default btn-xs sideBtn' style="width: 35px; height: 35px; margin-top: 20px; padding-top: 5px;" data-toggle="tooltip" data-placement="left" title="restore map view" id='restorBtn' onclick='restoreLoc()'><span class="mdi mdi-target"></span></button>
+
+                <div class="outerContMain d-flex" id='outerContainer_id' style="width: 500px !important;"> 
+                    <div id="dataTab_salesmanCategory_MainCont" style="color: #FFF; margin-left: 10px;">
+                        <table class="" id="driverTable">
+                            <thead>
+                                <tr>
+                                <th style="color: white;">Customer</th>
+                                <th style="color: white;">Salesman</th>
+                                <th style="color: white;">MCP</th>
+                                <th style="color: white;">Price Code</th>
+                                <th style="color: white;">Warehouse</th>
+                                <th style="color: white;">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="vehicleListData">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="arrow-side slideInMapBtn"><i onclick="flip2()" class="arrow-side-icon fa fa-angle-left " aria-hidden="true"></i></div>
+                </div>
+            </div>    
+        </div><!--main panel end-->
+
+        <div class="" id="sideClyders" >
+        <div>
+            <h5 class="text-center mx-auto">Map Controls</h5>
+        </div>
+        <hr class="mt-3 pb-2" />
+        <div class="card-body sideClydersBody">
+            <div class="form-check form-switch mb-3">
+                <input class="form-check-input mapControl" type="checkbox" id="clusteringchk"
+                    checked>
+                <label class="form-check-label" for="clusteringchk">Cluster</label>
+            </div>
+            <div class="form-check form-switch mb-3">
+                <input class="form-check-input mapControl" type="checkbox" id="heatmapchk">
+                <label class="form-check-label" for="heatmapchk">Heatmap</label>
+            </div>
+            <div class="form-check form-switch mb-3">
+                <input class="form-check-input mapControl" type="checkbox" id="showmarkerschk">
+                <label class="form-check-label" for="showmarkerschk">Show Markers</label>
+            </div>
+            <div class="form-check form-switch ">
+            <input class="form-check-input mapControl" type="checkbox" id="showfenceschk">
+            <label class="form-check-label" for="showfenceschk">Show Fence</label>
+            </div>
+        </div>
+    </div>
+
+        <div class="modal fade" id="dispModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header modal-header-info">
+                        <h2>Territory Information</h2>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-striped">
+                            <tr>
+                                <td><label>Territory Name:</label></td>
+                                <td><p id="name-lbl"></p></td>
+                            </tr>
+
+                            <tr>
+                                <td><label>Salesman:</label></td>
+                                <td><p id="disp-salesman"></p></td>
+                            </tr>
+
+                            <tr>
+                                <td><label>Date Created:</label></td>
+                                <td><p id="date-created"></p></td>
+                            </tr>
+
+                            <tr>
+                                <td><label>Color:</label></td>
+                                <td><p id="terrcolor"></p></td>
+                            </tr>
+                            
+                            <input type="hidden" name="mpa-id" id="mpa-id">
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteMPA()">Delete</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <div class="modal fade" id="duplicateUserModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">SESSION ENDED</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Sorry, your session has been disconnected. Another user is currently using your account.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="cofirmationDupUser()">GOT IT</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="updateFenceModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Fence Info</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="fenceContent"></div>    
+                        <input type="hidden" id="fenceIDHolder">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info btn-sm" style="float: left;" data-bs-dismiss="modal" onclick="viewmarkers_inside_fence()">View Markers</button>
+                        <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger ml-1" onclick="removeFence()">Removed</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="supportdetailsmodal">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content" style="width: 100%;">
+                    <div class="modal-header">
+                        <h5 class="modal-title dynamictitle"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <!-- <span class="pull-right">
+                            Search: <input type="text" id="inputsearch_rvw_price">
+                            <input type="text" id="inputsearch_rvw_warehouse">
+                        </span> -->
+                    </div>
+                    <div class="modal-body">
+                        <div style="height: 100%; width: 100%;">
+                            <table class="table table-hover table-sm" id="pricecodetable">
+                                <!-- <thead>
+                                    <thead>
+                                        <tr>
+                                            <th>STOCKCODE</th>
+                                            <th>DESCRIPTION</th>
+                                            <th>PRICECODE</th>
+                                            <th>UNITPRICE</th>
+                                        </tr>
+                                    </thead>
+                                </thead> -->
+                                <tbody id="pricecodetable_Details"></tbody>
+                            </table>
+        
+                            <table class="table table-hover table-sm" id="warehousetable">
+                                <!-- <thead>
+                                    <tr>
+                                        <th>STOCKCODE</th>
+                                        <th>DESCRIPTION</th>
+                                        <th>WAREHOUSE</th>
+                                        <th>QTY</th>
+                                        <th>STOCKUOM</th>
+                                        <th>ALTERNATE UOM</th>
+                                        <th>OTHER UOM</th>
+                                        <th>CONVFACTALTUOM</th>
+                                        <th>CONVFACTOTHUOM</th>
+                                    </tr>
+                                </thead> -->
+                                <tbody id="warehousetable_Details"></tbody>
+                            </table>
+                        </div>
+                    
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+            <div class="offcanvas-header d-flex justify-content-between">
+                <button type="button" class="btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                    <span class="material-symbols-outlined">
+                        menu
+                    </span>
+                </button>
+                <div class="rightHeader d-flex justify-content-around align-items-center mx-3" id="smallScreenrightHeader">
+                    <div class="navbarDropdowns"></div>
+                </div>
+            </div>
+            <div class="offcanvas_headTitleDiv">
+            </div>
+            <div class="offcanvas-body px-0">
+                <div class="list-group">
+                    <div id="sidebarTabItems">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=weekly&key=AIzaSyAt0Pxe9_3DTav3DmUQzHfgd07s_LcJo7I&libraries=places,drawing,geometry,visualization"></script>
+    <script src="HASH/md5.js"></script>
+    <script src="HASH/aes.js"></script>
+    <script src="nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+    <script type="text/javascript" src="web/web-commons.js"></script>
+    <script type="text/javascript" src="js/bootbox.min.js"></script>
+    <script type="text/javascript" src="js/scrolling.js"></script>
+    <!-- <script src="https://cdn.datatables.net/v/bs5/dt-2.1.0/datatables.min.js"></script> -->
+    <!-- <script type="text/javascript" src="js/customerMapping.js"></script> -->
+
+    <!-- DATATABLES -->
+    <script type="text/javascript" src="https://cdn.datatables.net/2.0.2/js/dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.0/jszip.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="constant/dynamicScript.js"></script>
+    <script src="js/supportToolSosyo.js"></script>
+
+</body>
+</html>

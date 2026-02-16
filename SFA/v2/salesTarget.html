@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Target </title>
+    <link rel="icon" href="img/mybuddyLogo.jpg" />
+
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+
+    <!-- GOOGLE MATERIAL ICON -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <!-- PICTOGRAMMERS ICON -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.3.67/css/materialdesignicons.min.css" />
+    
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- CSS STYLESHEETS -->
+    <link rel="stylesheet" href="constant/dynamicColor_stylesheet.css">
+    <link rel="stylesheet" href="css/offcanvas_stylesheet.css">
+    <link rel="stylesheet" href="css/stockCheck_stylesheet.css">
+    <link rel="stylesheet" href="css/latestDatatable_stylesheet.css">
+
+    <link rel="stylesheet" type="text/css" href="MaterialDateTimePicker/css/materialDateTimePicker.css"> 
+
+    <!-- DATE PICKER -->
+    <link rel="stylesheet" href="DATERANGEPICKER/daterangepicker.css">
+
+    <!--DATA TABLES CSS LATEST VERSION-->
+    <link rel="stylesheet" href="Commonusrs/DataTables/datatables.css"/>
+
+    <!--=================================time picker-=============================-->   
+    <link rel="stylesheet" type="text/css" href="MaterialDateTimePicker/css/materialDateTimePicker.css"> 
+
+    <!--=================================virtual select import-=============================-->
+    <link rel="stylesheet" href="css/virtual-select/virtual-select.min.css"  type="text/css"/>
+    <script src="js/virtual-select/virtual-select.min.js"></script>
+
+    <!-- SWAL SWEET ALERT 2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <style>
+        #mcp_weekvisited, #mcp_daysval {
+            width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="mainDiv container-fluid">
+        <div class="headerDiv d-flex justify-content-between align-items-center py-3" style="color: #FFF;">
+            <div class="leftHeader d-flex align-items-center mx-3">
+                <button class="btn menubtn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasExample" style="color: #FFF;">
+                    <span class="material-symbols-outlined">
+                        menu
+                    </span>
+                </button>
+                <div id="navbarCompanyDetails" class="d-flex">
+                </div>
+            </div>
+            <h1 class="text-center">Sales Target</h1>
+            <div class="rightHeader d-flex justify-content-end align-items-center mx-3" id="defaultrightHeader" style="width: 260px;">
+                <div class="navbarDropdowns"></div>
+            </div>
+        </div>
+
+        <div class="contentDiv ">
+            <div class="salesRepDivHeader d-flex justify-content-between px-3 py-3">
+                <div class="leftsideHeader">
+                    <span class="mdi mdi-web" style="font-size: 20px;"></span>
+                    <span id="titleHeading"></span>
+                </div>
+                <div class="righsideHeader pull-right" style="background-color: transparent; cursor: pointer; color: white;">
+                    <!-- <span>Filter by Date</span> 
+                    <i class="mdi mdi-calendar-month-outline" style="font-size: 20px;"></i>    
+                    <i class="fa-solid fa-caret-down"></i> -->
+                    <button type="button" class="btn filterBtn" data-bs-toggle="modal" data-bs-target="#filterReport">
+                        Filter
+                    </button>
+                </div>
+            </div>
+            <div class="lowerHeaderDiv d-flex justify-content-between px-3">
+                <div id="dt-body-right" class="buttonsDiv order-2 order-md-1">
+                    <button class="buttondiv" id="excelBtn" aria-controls="stockRequest_TAB">
+                        <span class="mdi mdi-microsoft-excel"></span>
+                        <span>Excel</span>
+                    </button>
+                    <button class="buttondiv" id="printBtn" aria-controls="stockRequest_TAB">
+                        <span class="mdi mdi-printer-outline"></span>
+                        <span>Print</span>
+                    </button>
+                    <!-- <button class="buttondiv" id="uploadbtn" aria-controls="stockRequest_TAB">
+                        <span class="mdi mdi-download-outline"></span>
+                        <span>Upload</span>
+                    </button> -->
+                </div>
+                <div class="searchDiv order-1 order-md-2">
+                    <div class="searchbar" id="stockRequest_TAB_filterSearchBar" class="dataTables_filter">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input type="text" class="search-input" name="search" id="stockRequest_TAB_filterSearchBarInputField" placeholder="Search" aria-controls="stockRequest_TAB">
+                    </div>
+                </div>
+            </div>
+
+            <div class="contentTableDiv px-3 mx-1" >
+                <table id="stockRequest_TAB" class="display table table-striped table-hover " style="width: 100%; font-size: 10px;"></table>
+            </div>
+        </div>
+
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+            <div class="offcanvas-header d-flex justify-content-between">
+                <button type="button" class="btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                    <span class="material-symbols-outlined">
+                        menu
+                    </span>
+                </button>
+                <div class="rightHeader d-flex justify-content-around align-items-center mx-3" id="smallScreenrightHeader">
+                    <div class="navbarDropdowns"></div>
+                </div>
+            </div>
+            <div class="offcanvas_headTitleDiv">
+            </div>
+            <div class="offcanvas-body px-0">
+                <div class="list-group">
+                    <div id="sidebarTabItems">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Modal -->
+    <div class="modal fade" id="filterReport" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Filter</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3 salesmanFilterDiv">
+                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Salesman</label>
+                    <div class="col-sm-10">
+                        <select id="salesmanSelectList" name="salesmanSelectList" placeholder="Select Salesman" data-search="true"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" id="filterReportBtn" class="btn btn-primary">Generate</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div id="mcpmoduleModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Sales Target</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">  
+
+                    <table class="table table-hover">
+                        <tr>
+                            <td>Salesman</td>
+                            <td id="dispsalesman">
+                            </td>
+                        </tr>
+
+                        <tr class="">
+                            <td>Year</td>
+                            <td id="dispyear">
+                            </td>
+                        </tr>
+
+                          <tr class="">
+                            <td>Month</td>
+                            <td id="dispmonth">
+                            </td>
+                        </tr>
+
+                        <tr id="">
+                            <td>Sales Target</td>
+                            <td>
+                                 <input type="text" class="form-control" id="salestarget">
+                            </td>
+                        </tr>
+
+                         <tr id="">
+                            <td>Markup (%)</td>
+                            <td>
+                                 <input type="text" class="form-control" id="markupperc">
+                            </td>
+                        </tr>
+                       
+                    </table>
+                    <input type="hidden" id="cidiholder">
+                    <input type="hidden" id="mdCodeHolder">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="dcrbtn" onclick="exec_update_salestarget()">Update</button>
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="uploadmcplayouttemplateModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Filter</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3 salesmanFilterDiv">
+                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Salesman</label>
+                    <div class="col-sm-10">
+                        <input type="file" name="product_file" id="product_file">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary"  id="uploadv1Btn" onclick="exec_upload_products()">Upload</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type="text/javascript" src="MaterialDateTimePicker/js/materialDateTimePicker.js"></script>
+    
+    <!-- DATA TABLES JS LATEST VERSION -->
+    <script src="Commonusrs/DataTables/datatables.min.js"></script>
+
+    <!-- DATE PICKER -->
+    <script type="text/javascript" src="DATERANGEPICKER/moment.min.js"></script>
+    <script type="text/javascript" src="DATERANGEPICKER/daterangepicker.js"></script>
+
+    <!-- <script type="text/javascript" src="/js/multi/dist/js/bootstrap-multiselect.js"></script> -->
+    <script type="text/javascript" src="js/jasonday-printThis-c814846/printThis.js"></script>
+    <script type="text/javascript" src="js/mainjs.js"></script>
+
+    <!-- SWEET ALERT -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="HASH/md5.js"></script>
+    <script src="HASH/aes.js"></script>
+    <script src="nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+    <script type="text/javascript" src="MaterialDateTimePicker/js/materialDateTimePicker.js"></script>
+    <script type="text/javascript" src="web/web-commons.js"></script>
+    <script type="text/javascript" src="js/bootbox.min.js"></script>
+    <script type="text/javascript" src="js/scrolling.js"></script>
+    <script type="text/javascript" src="constant/dynamicScript.js"></script>
+    <script type="text/javascript" src="js/salesTarget.js"></script>
+
+    <script>
+
+
+function exec_upload_products(){
+    
+    var product_file = $('#product_file').val();
+
+    // if(supplierSelect == '' || supplierSelect == undefined){
+    //   alert('Please select a principal.');
+    // }else
+     if(product_file == ''){
+      alert('Please select a csv file to upload.');
+    }else{
+      $('.temp1').hide();
+      $('#uploadv1Btn').html('<i class="icon-copy fa fa-spinner fa-spin" aria-hidden="true"></i> Uploading please wait..');
+      $("#uploadv1Btn").prop("disabled", true);
+
+
+      var UPLOADERHOLDER = localStorage.getItem('S_ADMID');
+      var formData = new FormData();
+      var files = $('#product_file')[0].files[0];
+      formData.append('product_file', files);
+      formData.append('GLOBALSUPPLIERHOLDER', supplierSelect);
+      formData.append('GLOBALUPLOADERHOLDER',UPLOADERHOLDER);
+      $.ajax ({
+        url: 'https://fastdevs-api.com/FASTSOSYO/dist/API/uploadProduct.php',
+        // url: 'https://bakuna-ph.com/upload/16sandbox.php',
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        dataType: 'text',
+        async: false,
+        success: function(r){ 
+          if(r == 1){
+            // sourceData();
+            // datatables.clear().rows.add(sourceDat).draw();
+            
+            $('.temp1').show();
+            $('#uploadv1Btn').html('Upload');
+            $("#uploadv1Btn").prop("disabled", false);
+
+            alert('Data Successfully Uploaded');
+            location.reload();
+            // textTOHr('09399139785');
+            $('#template1Modal').modal('hide');
+
+            
+          }else{
+            alert('ERROR WHILE UPDATING: ' + r + '\n' + 'Please try again.');
+            $('#uploadv1Btn').html('Upload');
+            $("#uploadv1Btn").prop("disabled", false);
+            $('#template1Modal').modal('hide');
+          }
+        },
+        error: function (request, status, error) {
+          // alert('Please Try Again:\n'+request.responseText);
+          alert('Server takes to long to respond, please try again.');
+          $('#uploadv1Btn').html('Upload');
+          $("#uploadv1Btn").prop("disabled", false);
+          $('#template1Modal').modal('hide');
+        }
+      });
+    }
+  }
+
+    </script>
+</body>
+</html>

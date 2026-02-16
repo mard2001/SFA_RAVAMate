@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta http-equiv="Content-Security-Policy" content="connect-src 'self' https://fastdevs-api.com;"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DYNAMIC ROUTING </title>
+    <link rel="icon" class="pageIconLink" href="" />
+
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+
+    <!-- GOOGLE MATERIAL ICON -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <!-- PICTOGRAMMERS ICON -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.3.67/css/materialdesignicons.min.css" />
+    
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- CSS STYLESHEETS -->
+    <link rel="stylesheet" href="constant/dynamicColor_stylesheet.css">
+    <link rel="stylesheet" href="css/offcanvas_stylesheet.css">
+    <link rel="stylesheet" href="css/routing_stylesheet.css">
+    <!-- <link rel="stylesheet" href="css/latestDatatable_stylesheet.css"> -->
+
+    <!-- SLIDER -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+
+    <!-- SWAL SWEET ALERT 2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+
+    <!-- DATE PICKER -->
+    <link rel="stylesheet" href="DATERANGEPICKER/daterangepicker.css">
+
+    <!--DATA TABLES CSS LATEST VERSION-->
+    <link rel="stylesheet" href="Commonusrs/DataTables/datatables.css"/>
+
+
+    <!--=================================virtual select import-=============================-->
+    <link rel="stylesheet" href="css/virtual-select/virtual-select.min.css"  type="text/css"/>
+    <script src="js/virtual-select/virtual-select.min.js"></script>
+
+</head>
+<body>
+    <div class="mainDiv container-fluid">
+        <div class="headerDiv d-flex justify-content-between align-items-center py-3" style="color: #FFF;">
+            <div class="leftHeader d-flex align-items-center mx-3">
+                <button class="btn menubtn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasExample" style="color: #FFF;">
+                    <span class="material-symbols-outlined">
+                        menu
+                    </span>
+                </button>
+                <div id="navbarCompanyDetails" class="d-flex">
+                </div>
+            </div>
+            <h1 class="text-center">Dynamic Routing</h1>
+            <div class="rightHeader d-flex justify-content-end align-items-center mx-3" id="defaultrightHeader" style="width: 260px;">
+                <div class="navbarDropdowns"></div>
+            </div>
+        </div>
+
+        <div class="contentDiv ">
+            <div class="salesRepDivHeader d-flex justify-content-between px-3 py-3">
+                <div class="leftsideHeader">
+                    <span class="mdi mdi-web" style="font-size: 20px;"></span>
+                    <span id="titleHeading"></span>
+                </div>
+                <div class="rightSideHeader">
+                    <button class="exportBtn" onclick="exportFence()">Route List</button>
+                </div>
+            </div>
+            <div class="contentDiv p-2" >
+                
+                <div id="map"></div>
+
+                <div class="outerContMain" id='outerContainer_id' style="margin: 10px 0 0 10px;"> 
+                    <div id='salesmanCategory'>
+                        <div class="arrow-side"><i onclick="flip1()" class="fa fa-angle-left arrow-side-icon"></i></div> 
+                        <div class='container_salesman step_2 px-2'>
+                        <div style="padding: 10px;">
+                            <h5>Vehicle: <span id="vehicleinuse"></span>
+                            <span style="float: right;" class="filterAmtBtn" onclick="filtermtfunc()">
+                                Filter Amount
+                            </span>
+                            </h5>
+                        </div>
+                        <table class='fixedHead'>
+                            <thead>
+                            <tr>
+                                <th width='45%'>SALESMAN</th>
+                                <!--<th width=''>Target Calls</th>-->
+                                <th width=''>CUSTOMER</th>
+                                <th width=''>SALES</th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <div class="scroll" data-simplebar>
+                            <table class='table tabl-condensed' id='floatTab'>
+                            <tbody id='dashboardDisplay'>
+                            </tbody>
+                            </table> 
+                        </div>
+                        <div id='overAllTotal'>
+                            <span class="pull-left">
+                                <button class="btn btn-xs btn-success" onclick="createterremodal()">SAVE</button>
+                                <button class="btn btn-xs btn-danger" onclick="refreshTerr()">REFRESH</button>
+                            </span>
+                            <span class='pull-right'><span id="totalCustomer">0</span> | <span id="totalSales">0</span></span>
+                        </div>  
+                        </div>
+                                    
+                        <div style="border: none !important;" class="container_salesman step_1">
+                            <table class="table table-condensed" id="driverTable">
+                                <thead>
+                                    <tr>
+                                        <th style="color: white;">Plate #</th>
+                                        <th style="color: white;">Loading Capacity</th>
+                                        <th style="color: white; text-align: right;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="vehicleListData">
+                                    <tr>
+                                        <td colspan="3" style="text-align: center;">No data as of now.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="sideBtn" data-toggle="tooltip" data-placement="left" title="Use Hand Tool" id="handTool"><i class="fa-solid fa-hand"></i></button>
+                <button class="sideBtn" data-toggle="tooltip" data-placement="left" title="Draw a Polygon" id="penTool"><i class="fa-solid fa-pencil"></i></button>
+                <button style=" margin-top: 30px;" class="sideBtn" data-toggle="tooltip" data-placement="left" title="Fullscreen Map" id="fullScreenMap"><i class="fa-solid fa-expand"></i></button>
+                <button class="sideBtn" data-toggle="tooltip" data-placement="left" title="Toggle Salesman Transactions" id="generateBaseMarker"><i class="fa fa-users" aria-hidden="true"></i></button>
+                <button class='sideBtn' data-toggle="tooltip" data-placement="left" title="Restore Map View" id='restorBtn' onclick='restoreLoc()'><i class="fa fa-map-pin" aria-hidden="true"></i></button>
+                <button class="sideBtn" data-toggle="tooltip" data-placement="left" title="Erase Polygon You Draw" id="eraseBtn"><i class="fa fa-eraser" aria-hidden="true"></i></button>
+
+            </div>
+        </div>
+
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+            <div class="offcanvas-header d-flex justify-content-between">
+                <button type="button" class="btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                    <span class="material-symbols-outlined">
+                        menu
+                    </span>
+                </button>
+                <div class="rightHeader d-flex justify-content-around align-items-center mx-3" id="smallScreenrightHeader">
+                    <div class="navbarDropdowns"></div>
+                </div>
+            </div>
+            <div class="offcanvas_headTitleDiv">
+            </div>
+            <div class="offcanvas-body px-0">
+                <div class="list-group">
+                    <div id="sidebarTabItems">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="filterAmountModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Filter Amount</h5>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <label for="amount">Amount range:</label>
+                        <input type="text" id="amount" readonly="" style="border:0; color:#f6931f; font-weight:bold;">
+                    </p>
+                    
+                    <div id="slider-range"></div>
+
+                    <input type="hidden" id="minval">
+                    <input type="hidden" id="maxval">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="checkvalueminmax()">Filter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="createTerrModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create Route</h5>
+                </div>
+                <div class="modal-body">
+                    <table class="table" style="width: 100%; text-align: center;">
+                        <tr>
+                            <td>Vehicle:</td>
+                            <td>
+                                <input type="text" class="form-control" id="vehicleName">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Loading Capacity:</td>
+                            <td>
+                                <input type="text" class="form-control" id="loadingCap">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Unloading Date</td>
+                            <td>
+                                <input type="date" class="form-control" id="unloadingDate">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Total Drops:</td>
+                            <td>
+                                <input disabled type="text" class="form-control" id="sysproStores">
+                            </td>
+                        </tr>
+                    
+                        <tr>
+                            <td>Total Amount:</td>
+                            <td>
+                                <input disabled type="text" class="form-control" id="totalSalesSelected">
+                            </td>
+                        </tr>
+                    </table>
+
+                    <input type="hidden" id="totalAmountHolder">
+                    <input type="hidden" id="plateNumberHolder">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="createTerritoryBtn" onclick="saveMPA()">CREATE</button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="filterDetailsModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <hh class="modal-title">Filter Details</hh>
+                </div>
+                <div class="modal-body">
+                    <table class="table" style="width: 100%; text-align: center;">
+                        <tr>
+                            <td>WAREHOUSE:</td>
+                            <td>
+                                <select id="fencesalesmanList" name="fencesalesmanList[]" class="">
+                                  <option value="">Main Warehouse - Tagbilaran</option>
+                                  <option value="">Secondary Warehouse - Ubay</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>DATE:</td>
+                            <td>
+                                <div id="reportrange1" style="background-color: transparent; cursor: pointer; color: black;">
+                                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                                    <span>Filter by Date</span> <b class="caret"></b>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="proceedFilter()">PROCEED</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- DATA TABLES JS LATEST VERSION -->
+    <script src="Commonusrs/DataTables/datatables.min.js"></script>
+
+    <!-- GOOGLE MAP -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=weekly&key=AIzaSyAt0Pxe9_3DTav3DmUQzHfgd07s_LcJo7I&libraries=places,drawing,geometry"></script>
+
+    <!-- SLIDER -->
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+
+    <!-- SWEET ALERT -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script type="text/javascript" src="js/jasonday-printThis-c814846/printThis.js"></script>
+    <script type="text/javascript" src="js/mainjs.js"></script>
+
+    <!-- DATE PICKER -->
+    <script type="text/javascript" src="DATERANGEPICKER/moment.min.js"></script>
+    <script type="text/javascript" src="DATERANGEPICKER/daterangepicker.js"></script>
+    
+    <script src="HASH/md5.js"></script>
+    <script src="HASH/aes.js"></script>
+    <script src="nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+    <script type="text/javascript" src="web/web-commons.js"></script>
+    <script type="text/javascript" src="js/bootbox.min.js"></script>
+    <script type="text/javascript" src="js/scrolling.js"></script>
+    <script type="text/javascript" src="constant/dynamicScript.js"></script>
+    <script type="text/javascript" src="js/routing.js"></script>
+</body>
+</html>

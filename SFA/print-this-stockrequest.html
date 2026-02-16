@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+	<title>Print-StockRequest</title>
+	<link rel="shortcut icon" href="img/mdlogo_web.png" type="image/png">
+
+	<style type="text/css">
+		@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+		body {
+			margin: 0 auto;
+		    font-family: 'Poppins', sans-serif;
+		    background: #fafafa;
+		    font-size: 13px;
+		    width: 1200px;
+		}
+
+		table {
+		  border-collapse: collapse;
+		  text-align: center;
+		   width: 1200px;
+		}
+
+		th, thead, td {
+		  border: 1px solid black;
+		}
+
+		td:nth-child(1){
+			border-left: none !important;
+		}
+
+		td:nth-child(9){
+			border-right: none !important;
+		}
+
+		tfoot, .hdr{
+			font-weight: bold;
+		}
+
+		.blank_row
+		{
+		    height: 25px !important; /* overwrites any other rules */
+		    background-color: #FFFFFF;
+		}
+
+		tbody{
+			border-left: none !important;
+			border-right: none !important;
+		}
+
+		h3{
+			font-size: 17px;
+		}
+
+		hr { 
+		    display: block;
+		    margin-before: 0.5em;
+		    margin-after: 0.5em;
+		    margin-start: auto;
+		    margin-end: auto;
+		    overflow: hidden;
+		    width: 300px;
+		    border-style: inset;
+		    border-width: 1px;
+		}
+
+		.text-right{
+			text-align: right;
+			padding-right: 10px;
+		}
+
+		.text-left{
+			text-align: left;
+			padding-left: 10px;
+		}
+	</style>
+</head>
+<body>
+	<h3>STOCK REQUEST</h3>
+	<div style="float: left;">
+		<span>SALESMAN CODE: <span class="salesmancode hdr">---</span></span><br/>
+		<span>NAME: <span class="supname hdr">---</span></span>
+	</div>
+	<div style="float: right;">
+		<span>DATE REQUESTED: <span class="daterequested hdr">---</span></span><br/>
+		<span>REFERENCE #: <span class="referenceno hdr">---</span></span>
+	</div>
+	<br/>
+	<table>
+		<thead>
+			<tr>
+				<th rowspan="2" style="width: 30px;">No.</th>
+				<th rowspan="2">STOCKCODE</th>
+				<th rowspan="2">DESCRIPTION</th>
+				<th colspan="3" style="text-align:center">REQUESTED QUANTITY</th>
+				<th rowspan="2">AMOUNT</th>
+				<th rowspan="2">APPROVED QUANTITY</th>
+				<th rowspan="2">REMARKS</th>
+			</tr>
+			<tr>
+				<th>CASE</th>
+				<th>IB</th>
+				<th>PC</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+		<tfoot>
+			<th colspan="2" id="stock"></th>
+			<th id="desc"></th>
+			<th id="cases"></th>
+			<th id="ib"></th>
+			<th id="tpcs"></th>
+			<th id="amount" class="text-right"></th>
+			<th id="approvedQuant"></th>
+			<th id="remarks"></th>
+		</tfoot>
+	</table>
+
+	<div style="width: 400px; margin-top: 40px; float: left; text-align: center;">
+		<span><hr/></span>
+		<span class="hdr">Verified By</span>
+	</div>
+
+	<div style="width: 400px; margin-top: 40px; float: right; text-align: center;">
+		<span><hr/></span>
+		<span class="hdr">Approved By</span>
+	</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="/HASH/md5.js"></script>
+<script src="/HASH/aes.js"></script>
+<script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+<script type="text/javascript">
+	
+	var site = localStorage.getItem('fillteredSite_stockrequest');
+
+	stockRequestSourceData();
+	function stockRequestSourceData(){
+		var salesman = localStorage.getItem('fillteredSalesman_stockrequest');
+		var refno = localStorage.getItem('fillteredRefno_stockrequest');
+
+		headerdetails(salesman, refno);
+		$.ajax ({
+			url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+			type: "GET",
+			data: {"type":"stockRequest_filter", "mdCode":salesman, "refNo":refno, "CONN":con_info},
+			dataType: "json",
+			crossDomain: true,
+			cache: false,       
+			success: function(r){ 
+				var remarks = '';
+				if(r.tbody.length != 0){
+					var data = '', counter = 0;
+					footerdetails(r.footer);
+					for(var x = 0; x < r.tbody.length; x++){
+						counter++;
+						if(remarks == ''){
+							remarks = '';
+						}else{
+							remarks = r.tbody[x].remarks;
+						}
+						var amount = parseFloat(r.tbody[x].Amount).toLocaleString();//parseFloat(r.tbody[x].Amount).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '1,');
+						data += '<TR>'+
+									'<td>'+(x+1)+'</td>'+
+									'<td>'+r.tbody[x].stockCode+'</td>'+
+									'<td class="text-left">'+r.tbody[x].Description+'</td>'+
+									'<td>'+r.tbody[x].Cases+'</td>'+
+									'<td>'+r.tbody[x].IB+'</td>'+
+									'<td>'+parseInt(parseFloat(r.tbody[x].PCS))+'</td>'+
+									'<td class="text-right">'+amount+'</td>'+
+									'<td></td>'+
+									'<td>'+remarks+'</td>'+
+								'</TR>';
+					}
+
+					var max = 60;
+					var counter2 = max - r.tbody.length;
+
+					for(var x = 0; x < counter2; x++){
+					var newCount = (counter + 1) + x;
+						data += '<TR>'+
+									'<td>'+newCount+'</td>'+
+									'<td></td>'+
+									'<td></td>'+
+									'<td></td>'+
+									'<td></td>'+
+									'<td></td>'+
+									'<td></td>'+
+									'<td></td>'+
+									'<td></td>'+
+								'</TR>';
+					}
+
+					$('tbody').append(data);
+					window.print();
+					window.top.close();
+				}else{
+					$('tbody').append('<tr><td colspan="7" style="text-align: center;">NO DATA AVAILABLE</td></tr>');
+				}
+			}//success
+		});
+	}
+
+	function headerdetails(mdCode, refno){
+      	$.ajax ({
+			url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+			type: "GET",
+			data: {"type":"stockRequest_filter_header", "mdCode":mdCode, "refNo":refno, "CONN":con_info},
+			dataType: "json",
+			crossDomain: true,
+			cache: false,       
+			success: function(r){
+				$(".salesmancode").html(r[0].mdSalesmancode);
+				$(".supname").html(r[0].mdName);
+				$(".daterequested").html(r[0].requestedDate);
+				$(".referenceno").html(r[0].refNo);
+			}
+	  	});
+	}
+
+      function footerdetails(data){
+      	var stock = data[0].tstockcode;
+      	var desc = data[0].tdesc;
+      	var cases = data[0].tcases;
+      	var ib = data[0].tib;
+      	var tpcs = data[0].tpcs;
+      	var amount = data[0].tamount;
+
+      	// $('#stock').html(stock);
+		// $('#desc').html(desc);
+		$('#cases').html(cases);
+		$('#ib').html(ib);
+		$('#tpcs').html(parseFloat(parseInt(tpcs)));
+		$('#amount').html(parseFloat(amount).toLocaleString());
+      }
+
+</script>
+</html>

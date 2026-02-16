@@ -1,0 +1,228 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--main-font-family);
+    font-optical-sizing: var(--main-font-optical-sizing);
+    font-weight: var(--main-font-weight);
+    font-style: var(--main-font-style);
+}
+
+html, body{
+    background-image: var(--main-background);
+    background-color: var(--main-backgroundColor);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    min-height: 100%;
+}
+
+/* NAVIGATION */
+
+.headerDiv{
+    height: 10vh;
+    color: var(--cust-white);
+}
+
+.logoTextDiv{
+    margin-left: 10px;
+}
+
+.textHeader{
+    margin-bottom: 0;
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: -5px;
+}
+
+.textHeaderRed{
+    color: var(--cust-red);
+}
+
+.logoTextDiv .textSubHeader{
+    font-size: 12px;
+}
+
+.headerDiv .rightHeader button{
+    font-size: 1.4rem;
+    color: var(--cust-white);
+}
+
+.headerDiv .rightHeader  button:hover{
+    color: var(--cust-white);
+}
+
+.headerDiv .rightHeader .exportBtn{
+    box-shadow: 2px 2px 10px #a3a2a2;
+}
+
+/* HEADER */
+
+.salesRepDivHeader{
+    background-image: linear-gradient(var(--cust-primary), var(--cust-primary10));
+    color: var(--cust-white);
+}
+
+.rightsideBtnDiv a{
+    padding: 10px 25px;
+    border: none;
+    border-radius: 20px;
+    background-image: linear-gradient(rgba(0, 87, 255,1), rgba(0, 87, 255,0.1));
+    text-decoration: none;
+    color: var(--cust-white);
+    font-size: 14px;
+}
+
+.rightsideBtnDiv a:hover{
+    background-image: linear-gradient(rgb(56, 116, 235), rgba(0, 87, 255,0.1));
+    color: #bbb9b9;
+}
+
+/* CONTENT */
+
+.contentDiv{
+    background-color: var(--cust-neutralWhite6);
+    padding-bottom: 100px;
+    margin-top: 25px;
+}
+
+.mainCardCont{
+    margin-top: 30px;
+    border-radius: 10px;
+    border: none;
+    box-shadow:
+        3px 3px 15px rgba(0, 0, 0, 0.3),
+        -3px -3px 15px rgba(255, 255, 255, 0.1);
+}
+
+.custCont{
+    min-height: 310px;
+}
+
+.cardheader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(var(--cust-primary), var(--cust-primary10));
+    color: var(--cust-white);
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+}
+
+.cardheader h6{
+    margin-bottom: 0;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.headerIcon{
+    margin: -35px 10px 0 10px;
+}
+
+.headerIcon i{
+    padding: 20px;
+    background: linear-gradient(var(--cust-white) 25%, var(--cust-grey));
+    color: var(--cust-primary);
+    font-size: 20px;
+    border-radius: 50%;
+}
+
+.modalBtn {
+    position: relative;
+    color: #FFF;
+    border: 1px solid #FFF;
+    background-color: transparent;
+    border-radius: 10px;
+    padding: 5px 20px;
+    overflow: hidden;
+    z-index: 1;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.modalBtn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75px;
+    width: 50px;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-25deg);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.modalBtn:hover {
+    background: linear-gradient(var(--cust-primary10),var(--cust-primary-hover4));
+    box-shadow:
+        4px 4px 10px rgba(0, 0, 0, 0.1),
+        -4px -4px 10px rgba(255, 255, 255, 0.1),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.2),
+        inset -1px -1px 2px rgba(0, 0, 0, 0.05);
+    border: 1px solid transparent;
+}
+
+.modalBtn:hover::before {
+    animation: shineNeumorphic 0.6s ease;
+}
+
+
+@media only screen and (max-width: 786px) {
+
+    .buttondiv{
+        font-size: 10px;
+        min-width: 40px;
+        padding: 5px 30px;
+        
+    }
+}
+
+@media screen and (max-width: 767px){
+    .lowerHeaderDiv {
+        flex-direction: column;
+    }
+    .dataTableSubDiv{
+        flex-direction: column;
+    }
+    .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate {
+        float: right !important;
+    }
+    .salesRepDivHeader {
+        font-size: 10px !important;
+    }
+}
+
+@media screen and (max-width: 576px){
+    .buttondiv{
+        font-size: 10px;
+        min-width: 40px;
+        padding: 5px 30px;
+        
+    }
+    .searchDiv{
+        display: flex;
+        justify-content: center;
+    }
+}
+
+
+@keyframes shineNeumorphic {
+    0% {
+        left: -75px;
+    }
+    100% {
+        left: 130%;
+    }
+}

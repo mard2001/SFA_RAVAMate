@@ -1,0 +1,1020 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    Data Maintenance
+  </title>
+<meta http-equiv='cache-control' content='no-cache'>
+<meta http-equiv='expires' content='0'>
+<meta http-equiv='pragma' content='no-cache'>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/BOOTSTRAP3/css/bootstrap.min.css"/>
+<script src="/BOOTSTRAP3/AJAX/jquery.min.js"></script>
+<script src="/BOOTSTRAP3/js/bootstrap.min.js"></script>
+ 
+<link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+<link rel="stylesheet" href="MULTISELECT/bootstrap-select.min.css"/>
+<link rel="stylesheet" href="/css/mdDesign.css">
+
+<script type="text/javascript" src="/DATERANGEPICKER/moment.min.js"></script>
+<script type="text/javascript" src="/DATERANGEPICKER/daterangepicker.js"></script>
+<link rel="stylesheet" href="/DATERANGEPICKER/daterangepicker.css">
+
+<link rel="stylesheet" href="/js/multi/dist/css/bootstrap-multiselect.css" type="text/css"/>
+</head>
+ <!--<div id="work-in-progress">
+          <div style="margin: 0 auto;">
+            <img src="img/fast.png" style="height: 80px; width: 480px; z-index: 1;"></br>
+            <img src="img/orbit-400px.gif" style="position: block; height: 200px;">
+          </div>
+   </div>-->
+<body>
+
+ <div id="mySidenav" class="sidenav">
+  <div class='image'><img alt='mdbuddylogo' class='logoMd' src='/img/mdbuddylogo_jeff.png'/></div>
+    <a href="Dashboard"> <span class='glyphicon glyphicon-home'></span> Dashboard</a>
+    <a href="digitalMapping"> <span class='glyphicon glyphicon-map-marker'></span> Digital Mapping</a>
+    <a href="customerMapping"> <span class="fa fa-users" aria-hidden="true"></span> Customer Mapping</a>
+    <a href="territoryGeofencing"> <span class='glyphicon glyphicon-cog'></span> Territory Geofencing</a>
+   <a data-toggle="collapse" href="#collapse1" id='navDrop'> <span class='glyphicon glyphicon-duplicate' id='changeIcon'></span> Reports
+     <i class="glyphicon glyphicon-menu-down pull-right"></i> </a>
+      <div id="collapse1" class="panel-collapse collapse" style="margin-left: 17px; font-size: 9px !important">
+      <a href="salesReport"> Sales Report</a>
+      <a href="fastsosyotransaction"> Fastsosyo Transaction</a>
+      <a href="salesAudit"> Sales Audit</a>
+        <a href="transactionLedger"> Transaction Ledger</a>
+        <a href="UnprocessedOrders"> Unprocessed Orders</a>
+        <a href="dsr"> DSR</a>
+        <a href="dcr"> Daily Collection</a>
+        <a href="stockRequest"> Stock Request</a>
+        <a href="unuploaded"> Unuploaded</a>
+        <a href="BOReport"> BO</a>
+        <a href="inventory"> Inventory Valuation</a>
+        <a href="Stocktake Report"> Stocktake</a>
+        <a href="jobberMaintenance"> Jobber</a>
+        <a href="syncreport">Sync Report</a>
+        <a href="soaprvreport">SO Approval</a>
+      </div>
+   <a data-toggle="collapse" href="#collapse2" id='navDrop' class="maintenanceCont"> <span class="fa fa-cogs" aria-hidden="true" id='changeIcon'></span> Maintenance
+    <i class="glyphicon glyphicon-menu-down pull-right"></i> </a>
+      <div id="collapse2" class="panel-collapse collapse" style="margin-left: 17px; font-size: 9px !important">
+      <a href="dataMaintenance.php" class="activeYes"> Data</a>
+        <a href="customer"> Customer</a>
+        <a href="cmf">CMF</a>
+        <a href="geoReset"> Georeset</a>
+        <a href="salesman"> Salesman</a>
+        <a href="product"> Product</a>
+        <a href="productbtdt"> BTDT Product</a>
+        <a href="customerTagging"> Tagging</a>
+        <a href="bankmaintenance"> Bank</a>
+        <a href="mcpcalibration">MCP Calibration</a>
+      </div>
+  <!-- <a href="Alert"> <span class='glyphicon glyphicon-envelope'></span> Alert Messages</a> -->
+  <hr />
+  <a href="https://mybuddy-sfa.com/SFA/v2/dashboard">Switch to New Dashboard</a>
+</div>
+
+  <div id="main">
+        <h4 class="display-4 dispMargin">
+          <a href="#" id='navBtn' class="btn btn-primary"  style='margin-right: 15px;'>
+           <span class="glyphicon glyphicon-menu-hamburger"></span> 
+          </a>
+          <span class='glyphicon glyphicon-cog'></span> Data Maintenance <small>v.4.3</small>
+            <span class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                    <a style='float:right;' href="#" class="dropdown-toggle" data-toggle="dropdown" id='dropThisDown'>
+                        <span class="label label-pill label-danger count" style='border-radius: 10px; font-size: 10px;'></span>
+                        <span class="fa fa-bell"></span>
+                    </a>
+                    
+                       <ul class="dropdown-menu" style='padding: 0'>
+                        <div id='notif-body'>
+                            <div id='notifs-icon-div'></div>
+                        </div>
+                        <a type="button" class="btn btn-default btn-block" href='mdAlert_bohol.php' id='seeAll' >See all</a>
+                       </ul>
+                </li>
+
+                 <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                      <i class="fa fa-user-circle-o"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="Profile.html"><i class="fa fa-user-circle-o"></i> My Account</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="#" id="admin-logout-btn"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                        </li>
+                    </ul>
+                 </li>
+              
+            </span>
+       </h4>
+
+         <div class="panel cust-panel">
+           <div class="panel-heading">
+                <i class='glyphicon glyphicon-cog'></i> <span id="titleHeading"></span>
+                
+                <span class="pull-right" style="cursor: pointer;" onclick="databasepurge()">
+                    <i class="glyphicon glyphicon-hdd"></i>
+                </span>
+           </div>
+            <div class="panel-body" style='background-color:#fff; color: black;'>   
+               <!--<button class='btn btn-info' onclick='custSync()'>Sync Customer</button>
+               <button class='btn btn-info' onclick='executeInventorySync()'>Sync Inventory</button>
+               <button class='btn btn-info' onclick='executeQueingSync()'>Sync SFA Queuing</button>-->
+
+                 <div class="row">
+                  <div class="col-sm-6">
+                    <div class="card card-block">
+                      <h3 class="card-title">Sync Customer</h3>
+                      <p class="card-text">This will allign customer details on MCP, NPIReturns Reason, Salesman details, Offtake, Musthave,Cycle Plan, buying Accounts from syspro.
+                        <br>
+                      <!-- <small class="text-info">
+                      Note: For those sites who are implementing already the latest SFA with at least v4.2.6.8, kindly click on [EXECUTE v4.2.6.8 ]
+                      </small> -->
+                      <small class="text-info">
+                      Note: Please install the latest mybuddy patch PL2207286. 
+                      </small>
+                      </p>
+    
+                      <a href="#" class="btn btn-primary" onclick='custSync()'>EXECUTE</a>
+                      <!-- <a href="#" class="btn btn-primary" onclick='custSync2()'>EXECUTE (v4.2.6.8+)</a> -->
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="card card-block">
+                      <h3 class="card-title">Sync Product</h3>
+                      <p class="card-text">This will allign product details & price list.</p>
+                      <a href="#" class="btn btn-primary" onclick='invSync()'>EXECUTE</a>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="card card-block">
+                      <h3 class="card-title">Sync SFA Queuing</h3>
+                      <p class="card-text">This will populate data for Nesle Queuing Services</p>
+                      <!--<a href="#" class="btn btn-primary" onclick='executeQueingSync()'>EXECUTE</a>-->
+                      <!--<a href="#" class="btn btn-warning" onclick='betasSync()'>EXECUTE (beta)</a>-->
+                      <a href="#" class="btn btn-primary" onclick='betasSync()'>EXECUTE</a>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="card card-block">
+                      <h3 class="card-title">Sync Stock Request</h3>
+                      <p class="card-text">This will populate stock request to Nestle Queing Services</p>
+                      <a href="#" class="btn btn-primary" onclick='exec_view_stocktakeModal()'>EXECUTE</a>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="card card-block">
+                      <h3 class="card-title">Data Replication</h3>
+                      <p class="card-text">Please select target account to be replicated for testing</p>
+                      <a href="#" class="btn btn-primary" onclick='executeInventorySync()'>EXECUTE</a>
+                    </div>
+                  </div>
+                 
+                  <div class="col-sm-6">
+                    <div class="card card-block">
+                      <h3 class="card-title">Sync Invoice (IDELIVER)</h3>
+                      <p class="card-text">This will populate ideliver invoice data for creating trip / freight order.</p>
+                      <a href="#" class="btn btn-primary" onclick='executSyncInvoiceIdeliver()'>EXECUTE</a>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="card card-block">
+                      <h3 class="card-title">Sync Sweeper Transaction (SOSYO)</h3>
+                      <p class="card-text">This will populate sosyo sweeper transaction data for reporting purposes.</p>
+                      <a href="#" class="btn btn-primary" onclick='executSyncSweeperTransaction()'>EXECUTE</a>
+                    </div>
+                  </div>
+
+                </div>
+           </div>
+         </div><!--main panel end-->
+
+         <div class="modal fade" id="SyncInventoryModal" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Data Replication</h4>
+                </div>
+                <div class="modal-body">
+                  <table>
+                    <tr>
+                      <td>SALESMAN:</td>
+                      <td><select id="salesmanList" name="salesmanList[]"></select>
+                     </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="execDatareplication()">Execute</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal fade" id="syncStockRequestModal" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">STOCK REQUEST SYNCHING</h4>
+                </div>
+                <div class="modal-body">
+                  <table class="table table-hover">
+                    <tr>
+                      <td>SALESMAN:</td>
+                      <td><select id="salesmanList_stk" name="salesmanList_stk[]" multiple="multiple"></select>
+                     </td>
+                    </tr>
+                    <tr>
+                      <td>DATE:</td>
+                      <td><span class="dssdatePicker" style="text-align: left; margin-left: 70px;"> &nbsp; 
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                        <span class="datestring"></span>
+                       </span>
+                     </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="exec_stockTake()">Execute</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="syncBetaModal" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">SFA QUEUING</h4>
+                </div>
+                <div class="modal-body">
+                  <table class="table table-hover">
+                    <tr>
+                      <td>SALESMAN:</td>
+                      <td><select id="salesmanList_beta" name="salesmanList_beta[]" multiple="multiple"></select>
+                     </td>
+                    </tr>
+                    <tr>
+                      <td>DATE:</td>
+                      <td><span class="dssdatePicker" style="text-align: left; margin-left: 70px;"> &nbsp; 
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                        <span class="datestring"></span>
+                       </span>
+                     </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="executeQueingSync_beta()">Execute</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal fade" id="purgeModal" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">CLEAN DATABASE DATA</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" placeholder="Enter password" id="purgePass" style="font-size: 15px; font-weight:bold; height: 50px; text-align: center;">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="checkpurgepass()">Proceed</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="duplicateUserModal" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">SESSION ENDED</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>Sorry, your session has been disconnected. Another user is currently using your account.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" onclick="cofirmationDupUser()">GOT IT</button>
+                    </div>
+                  </div>
+                </div>
+          </div>
+  </div><!--#main-->
+     <!-- Bootstrap core JavaScript-->
+  <script type="text/javascript" src="/web/web-commons.js"></script>
+  <script type="text/javascript" src="/js/bootbox.min.js"></script>
+  <script type="text/javascript" src="/js/multi/dist/js/bootstrap-multiselect.js"></script>
+  <script src="/HASH/md5.js"></script>
+  <script src="/HASH/aes.js"></script>
+  <script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+  <script src="js/chatApi.js"></script>
+  <script src="js/nstprg.js"></script>
+  <!-- <script type="text/javascript" src="js/duplicate-user.js"></script> -->
+  <script>
+  var usernm = localStorage.getItem("username");
+  var user = localStorage.getItem("adminUserName");
+      $('#userConnection').val(user);
+
+      $(window).on('beforeunload', function(){ 
+        var e = confirm('Do you really want to close?');
+        if(e){
+
+            insertsyncLogs('testing');
+        }
+      });
+
+      var GLBLCIDHOLDER;
+      checkuser_gtmtype();
+      getcompname();
+      function getcompname(){
+      $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {"type":"GET_COMPANYNAME", "CONN":con_info},
+          dataType: "json",
+          crossDomain: true,
+          cache: false,            
+            success: function(r){ 
+            $('#titleHeading').html(r[0].company.toUpperCase());
+            GLBLCIDHOLDER = r[0].DIST_CD;
+            }
+        });
+      } 
+      /*NOTIFICATION SECTION*/
+     showNotif();
+
+    $('#navDrop').click(function() {
+      $("i", this).toggleClass("glyphicon-menu-up glyphicon-menu-down");
+    });
+    
+    $(document).on('click', '.dropdown-toggle', function(){
+      $('.count').html('');
+       showNotif('yes');
+    });
+    $('#purgePass').val('').change();
+
+    setInterval(function(){
+     //loadPopup();
+     //showNotif();
+   }, 9000); 
+
+    dsspicker();
+    var dssdate;
+    function dsspicker(){
+      $('.datestring').html('Pick a date here..');
+      $('.dssdatePicker').daterangepicker({
+          "singleDatePicker": true,
+          "startDate": moment(),
+          "endDate": moment(),
+          "maxDate": moment(),
+      }, function(start, end, label) {
+        dssdate = start.format('YYYY-MM-DD');
+        var today = moment().format('YYYY-MM-DD');
+        $('.datestring').html(dssdate);
+      });
+    }
+
+    function betasSync(){
+      $('#syncBetaModal').modal('show');
+    }
+    
+    loadSalesman();
+
+    function loadSalesman(){
+     $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {"type":"dsr_salesmanLoad", "CONN":con_info},
+          dataType: "json",
+          crossDomain: true,
+          cache: false,            
+            success: function(data){ 
+              for(var x = 0; x<data.length; x++){
+                  $('#salesmanList').append('<option value="'+data[x].mdCode+'">'+data[x].Salesman+'</option>');
+
+                  $('#salesmanList_beta').append('<option value="'+data[x].mdCode+'">'+data[x].Salesman+'</option>');
+
+                  $('#salesmanList_stk').append('<option value="'+data[x].mdCode+'">'+data[x].Salesman+'</option>');
+
+                  
+               }
+
+               $('#salesmanList').multiselect({
+                  numberDisplayed: 1,
+                  enableCaseInsensitiveFiltering: true,
+                  includeSelectAllOption: true,
+                  selectAllNumber: true,
+                  buttonWidth: '300px',
+                  maxHeight: 300
+               });
+
+               $('#salesmanList_beta').multiselect({
+                  numberDisplayed: 1,
+                  enableCaseInsensitiveFiltering: true,
+                  includeSelectAllOption: true,
+                  selectAllNumber: true,
+                  buttonWidth: '300px',
+                  maxHeight: 300
+               });
+
+               $('#salesmanList_stk').multiselect({
+                  numberDisplayed: 1,
+                  enableCaseInsensitiveFiltering: true,
+                  includeSelectAllOption: true,
+                  selectAllNumber: true,
+                  buttonWidth: '300px',
+                  maxHeight: 300
+               });
+             }
+        });
+    }
+
+     function loadPopup(){
+           //notification
+
+             $.ajax ({
+              url: "../geofencing/GeofencingAPI.php",
+              type: "GET",
+              data: {"type":"view_notifications_popUp"},
+              dataType: "html",
+              crossDomain: true,
+              cache: false,            
+                success: function(response){ 
+               // console.log('Notification function has been refresh');                
+                $(".content").html(response);
+                
+                }
+            });
+        }
+
+        function showNotif(view=''){
+           //notification
+
+             $.ajax ({
+              url: "../geofencing/GeofencingAPI.php",
+              type: "GET",
+              data: {"type":"view_notifications_icon_"+user, "view":view},
+              dataType: "JSON",
+              crossDomain: true,
+              cache: false,            
+                success: function(response){ 
+               // console.log('Notification function has been refresh');                
+                $("#notifs-icon-div").html(response.notification);
+
+                  if(response.unseen_notification > 0)
+                  {
+                   $('.count').html(response.unseen_notification);
+                  }
+                
+                }
+            });
+        }
+        
+        function executeInventorySync(){
+          $('#SyncInventoryModal').modal('show');
+        }
+
+
+        
+        function invSync(){
+        var r = confirm('This could take time, please wait while we process your request.');
+        if(r){
+
+          insertsyncLogs('INVENTORY_SYNC');
+
+          var mdCode = $('#salesmanList').val();
+          var dialog = bootbox.dialog({
+                message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Syncing inventory please wait...</p>',
+                backdrop: true
+               // closeButton: false
+              });
+          var message = 'Successfully Saved!';
+          var botboxMsg = '';
+          var ajaxTime= new Date().getTime();
+          $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {"type":"SyncInventory", "mdCode":mdCode,"CONN":con_info , "site":user}, 
+              dataType: 'json',     
+              crossDomain: true,
+              cache: false,   
+              success: function(response){   
+               if(response){
+                  botboxMsg = '<b style="color: green;">Success!</b><p>Buddy inventory Successfully updated. Thank You!</p>';
+                }else{
+                  botboxMsg = '<b style="color: red;">Ops! Unable to Sync to Inventory!</b>' + response;
+                }
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                botboxMsg = '<b style="color: red;">Ops! Unable to Sync to Inventory!</b>' + XMLHttpRequest.responseText;
+                var totalTime = new Date().getTime()-ajaxTime;
+                dialog.init(function(){
+                      setTimeout(function(){
+                        dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                    }, 1000);
+                });
+               }
+              }).done(function () {
+                      dialog.init(function(){
+                            setTimeout(function(){
+                              dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                          }, 1000);
+                    });
+               });
+        }
+      }
+
+      function custSync(){
+        var r = confirm('This could take time, please wait while we process your request.');
+        if(r){
+
+          insertsyncLogs('CUSTOMER_SYNC');
+          var dialog = bootbox.dialog({
+             // title: '<h4 id="botboxT">Server Response</h4>',
+              message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Syncing customer please wait...</p>',
+              backdrop: true
+              //closeButton: false
+            });
+        var message = 'Successfully Saved!';
+        var botboxMsg = '';
+        var ajaxTime= new Date().getTime();
+        $.ajax ({
+            url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {"type":"SyncCustomer", "CONN":con_info}, 
+            dataType: 'json',     
+            crossDomain: true,
+            cache: false,   
+            success: function(response){   
+                 if(response == 1){
+                    botboxMsg = '<b style="color: green;">Success!</b><p>Buddy customers Successfully updated. Thank You!</p>';
+                  }else{
+                    botboxMsg = '<b style="color: red;">Ops! Unable to Sync to Customer!</b>' + response;
+                  }
+              },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              botboxMsg = '<b style="color: red;">Ops! Unable to Sync to Customer!</b> Please try again. ' + XMLHttpRequest.responseText;
+              dialog.init(function(){
+                    setTimeout(function(){
+                      dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                  }, 1000);
+              });
+             }
+          }).done(function () {
+                  dialog.init(function(){
+                        setTimeout(function(){
+                            dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                        }, 1000);
+                  });    
+          });
+        }
+      }
+
+      function custSync2(){
+        var r = confirm('This could take time, please wait while we process your request.');
+        if(r){
+          insertsyncLogs('CUSTOMER_SYNC');
+          var dialog = bootbox.dialog({
+             // title: '<h4 id="botboxT">Server Response</h4>',
+              message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Syncing customer please wait...</p>',
+              backdrop: true
+              //closeButton: false
+            });
+        var message = 'Successfully Saved!';
+        var botboxMsg = '';
+        var ajaxTime= new Date().getTime();
+        $.ajax ({
+            url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {"type":"SyncCustomer2", "CONN":con_info}, 
+            dataType: 'json',     
+            crossDomain: true,
+            cache: false,   
+            success: function(response){   
+                 if(response == 1){
+                    botboxMsg = '<b style="color: green;">Success!</b><p>Buddy customers Successfully updated. Thank You!</p>';
+                  }else{
+                    botboxMsg = '<b style="color: red;">Ops! Unable to Sync to Customer!</b>' + response;
+                  }
+              },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              botboxMsg = '<b style="color: red;">Ops! Unable to Sync to Customer!</b> Please try again. ' + XMLHttpRequest.responseText;
+              dialog.init(function(){
+                    setTimeout(function(){
+                      dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                  }, 1000);
+              });
+             }
+          }).done(function () {
+                  dialog.init(function(){
+                        setTimeout(function(){
+                            dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                        }, 1000);
+                  });    
+          });
+        }
+      }
+
+      function executeQueingSync_beta(){
+        
+        var r = confirm('This could take time, please wait while we process your request.');
+        if(r){
+
+          insertsyncLogs('QUEUING_SYNC');
+
+          var salesmanList = $('#salesmanList_beta').val();
+          var dialog = bootbox.dialog({
+               // title: '<h4 id="botboxT">Server Response</h4>',
+                message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Syncing SFA queues please wait...</p>',
+                backdrop: true
+                //closeButton: false
+              });
+          var message = 'Successfully Saved!';
+          var botboxMsg = '';
+          var ajaxTime= new Date().getTime();
+          $.ajax ({
+            url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {
+                    "type":"SYNC_SFA_QUEUING_BETA",
+                    "CONN":con_info,
+                    "date":dssdate,
+                    "salesman":salesmanList
+                  }, 
+            dataType: 'json',     
+            crossDomain: true,
+            cache: false,   
+            success: function(response){   
+                  if(response == 1){
+                    botboxMsg = '<b style="color: green;">Success!</b><p>SFA Queuing successfully updated. Thank You!</p>';
+                  }else{
+                    botboxMsg = '<b style="color: red;">Ops! Unable to Sync to SFA Queuing!</b>' + response;
+                  }
+              },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              botboxMsg = '<b style="color: red;">Ops! Unable to Sync to SFA Queuing!</b>' + XMLHttpRequest.responseText;
+              dialog.init(function(){
+                    setTimeout(function(){
+                      dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                  }, 1000);
+              });
+            }
+          }).done(function () {
+                  dialog.init(function(){
+                        setTimeout(function(){
+                            dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                        }, 1000);
+                  });
+                    
+          });
+        }
+      }
+
+      function executSyncSweeperTransaction(){
+        var r = confirm('This could take time, please wait while we process your request.');
+        if(r){
+
+          var dialog = bootbox.dialog({
+                message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Syncing sweeper transaction please wait...</p>',
+                backdrop: true
+               // closeButton: false
+              });
+          var message = 'Successfully Saved!';
+          var botboxMsg = '';
+          var ajaxTime= new Date().getTime();
+          $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {"type":"SYNC_SWEEPER_TRANSACTION", "CONN":con_info}, 
+              dataType: 'json',     
+              crossDomain: true,
+              cache: false,   
+              success: function(response){   
+               if(response){
+                  botboxMsg = '<b style="color: green;">Success!</b><p>Ideliver invoice successfully sync. Thank You!</p>';
+                }else{
+                  botboxMsg = '<b style="color: red;">Ops! Unable to Sync to Invoice!</b>' + response;
+                }
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                botboxMsg = '<b style="color: red;">Ops! Unable to Sync to Invoice!</b>' + XMLHttpRequest.responseText;
+                var totalTime = new Date().getTime()-ajaxTime;
+                dialog.init(function(){
+                      setTimeout(function(){
+                        dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                    }, 1000);
+                });
+               }
+              }).done(function () {
+                      dialog.init(function(){
+                            setTimeout(function(){
+                              dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                          }, 1000);
+                    });
+               });
+        }
+      }
+
+      function executSyncInvoiceIdeliver(){
+        var r = confirm('This could take time, please wait while we process your request.');
+        if(r){
+
+          var dialog = bootbox.dialog({
+                message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Syncing inventory please wait...</p>',
+                backdrop: true
+               // closeButton: false
+              });
+          var message = 'Successfully Saved!';
+          var botboxMsg = '';
+          var ajaxTime= new Date().getTime();
+          $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {"type":"SYNC_IDELIVER_INVOICE", "CONN":con_info , "site":GLBLCIDHOLDER}, 
+              dataType: 'json',     
+              crossDomain: true,
+              cache: false,   
+              success: function(response){   
+               if(response){
+                  botboxMsg = '<b style="color: green;">Success!</b><p>Ideliver invoice successfully sync. Thank You!</p>';
+                }else{
+                  botboxMsg = '<b style="color: red;">Ops! Unable to Sync to Invoice!</b>' + response;
+                }
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                botboxMsg = '<b style="color: red;">Ops! Unable to Sync to Invoice!</b>' + XMLHttpRequest.responseText;
+                var totalTime = new Date().getTime()-ajaxTime;
+                dialog.init(function(){
+                      setTimeout(function(){
+                        dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                    }, 1000);
+                });
+               }
+              }).done(function () {
+                      dialog.init(function(){
+                            setTimeout(function(){
+                              dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                          }, 1000);
+                    });
+               });
+        }
+      }
+
+      function executeQueingSync(){
+        var r = confirm('This could take time, please wait while we process your request.');
+        if(r){
+          insertsyncLogs('QUEUING_SYNC');
+          var dialog = bootbox.dialog({
+               // title: '<h4 id="botboxT">Server Response</h4>',
+                message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Syncing SFA queues please wait...</p>',
+                backdrop: true
+                //closeButton: false
+              });
+          var message = 'Successfully Saved!';
+          var botboxMsg = '';
+          var ajaxTime= new Date().getTime();
+          $.ajax ({
+                    url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+                    type: "GET",
+                    data: {"type":"SYNC_SFA_QUEUING", "CONN":con_info}, 
+                    dataType: 'json',     
+                    crossDomain: true,
+                    cache: false,   
+                    success: function(response){   
+                         if(response == 1){
+                            botboxMsg = '<b style="color: green;">Success!</b><p>SFA Queuing successfully updated. Thank You!</p>';
+                          }else{
+                            botboxMsg = '<b style="color: red;">Ops! Unable to Sync SFA QUEUING!</b>' + response;
+                          }
+                      },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                      botboxMsg = '<b style="color: red;">Ops! Unable to Sync SFA QUEUING!</b>' + XMLHttpRequest.responseText;
+                      dialog.init(function(){
+                            setTimeout(function(){
+                              dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                          }, 1000);
+                      });
+                     }
+                  }).done(function () {
+                          dialog.init(function(){
+                                setTimeout(function(){
+                                    dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                                }, 1000);
+                          });
+                           
+                     });
+        }
+      }
+
+      function exec_view_stocktakeModal(){
+        $('#syncStockRequestModal').modal('show');
+      }
+      
+      function exec_stockTake(){
+        var r = confirm('This could take time, please wait while we process your request.');
+        if(r){
+          insertsyncLogs('STOCKREQUEST_SYNC');
+          var salesmanList = $('#salesmanList_stk').val();
+          var dialog = bootbox.dialog({
+                message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Syncing stock request please wait...</p>',
+                backdrop: true
+               // closeButton: false
+              });
+          var message = 'Successfully Saved!';
+          var botboxMsg = '';
+          var ajaxTime= new Date().getTime();
+          $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {
+                    "type":"SYNC_STOCKTAKE",
+                    "CONN":con_info,
+                    "date":dssdate,
+                    "salesman":salesmanList
+                  }, 
+              dataType: 'json',     
+              crossDomain: true,
+              cache: false,   
+              success: function(response){   
+               if(response){
+                  botboxMsg = '<b style="color: green;">Success!</b><p>Sync Stock Request was Successful. Thank You!</p>';
+                }else{
+                  botboxMsg = '<b style="color: red;">Ops! Unable to sync Stock Request data!</b>' + response;
+                }
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                botboxMsg = '<b style="color: red;">Ops! Unable to sync Stock Request data!</b>' + XMLHttpRequest.responseText;
+                var totalTime = new Date().getTime()-ajaxTime;
+                dialog.init(function(){
+                      setTimeout(function(){
+                        dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                    }, 1000);
+                });
+               }
+              }).done(function () {
+                      dialog.init(function(){
+                            setTimeout(function(){
+                              dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                          }, 1000);
+                    });
+               });
+        }
+      }
+
+      function execDatareplication(){
+        var r = confirm('This could take time, please wait while we process your request.');
+        if(r){
+          insertsyncLogs('DATA_DUPLICATION');
+          var mdCode = $('#salesmanList').val();
+          var dialog = bootbox.dialog({
+                message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Syncing inventory please wait...</p>',
+                backdrop: true
+               // closeButton: false
+              });
+          var message = 'Successfully Saved!';
+          var botboxMsg = '';
+          var ajaxTime= new Date().getTime();
+          $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {"type":"SYNC_DATA_REPLACATION", "mdCode":mdCode,"CONN":con_info}, 
+              dataType: 'json',     
+              crossDomain: true,
+              cache: false,   
+              success: function(response){   
+               if(response){
+                  botboxMsg = '<b style="color: green;">Success!</b><p>Buddy Data Replication was Successful. Thank You!</p>';
+                }else{
+                  botboxMsg = '<b style="color: red;">Ops! Unable to replacate data!</b>' + response;
+                }
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                botboxMsg = '<b style="color: red;">Ops! Unable to replacate data!</b>' + XMLHttpRequest.responseText;
+                var totalTime = new Date().getTime()-ajaxTime;
+                dialog.init(function(){
+                      setTimeout(function(){
+                        dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                    }, 1000);
+                });
+               }
+              }).done(function () {
+                      dialog.init(function(){
+                            setTimeout(function(){
+                              dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                          }, 1000);
+                    });
+               });
+        }
+      }
+
+  
+      function insertsyncLogs(description){
+        var lockby = localStorage.getItem('user_id') +'-'+localStorage.getItem('fullname');
+          $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {
+                      "type":"INSERT_SYNC_LOGS",
+                      "description":description,
+                      "isLock":'1',
+                      "lockby":lockby,
+                      "CONN":con_info
+                    }, 
+              dataType: 'json',     
+              crossDomain: true,
+              cache: false,   
+              success: function(r){   
+                console.log(r);
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                var botboxMsg = '<b style="color: red;">Ops! Unable to replacate data!</b>' + XMLHttpRequest.responseText;
+                console.log(botboxMsg);
+               }
+          });
+      }
+      
+
+    $(window).bind("load", function () {
+          $('#work-in-progress').fadeOut();
+
+      });
+
+  function myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+          x.className += " responsive";
+      } else {
+          x.className = "topnav";
+      }
+  } 
+
+
+  (function($) {
+    $.fn.clickToggle = function(func1, func2) {
+        var funcs = [func1, func2];
+        this.data('toggleclicked', 0);
+        this.click(function() {
+            var data = $(this).data();
+            var tc = data.toggleclicked;
+            $.proxy(funcs[tc], this)();
+            data.toggleclicked = (tc + 1) % 2;
+        });
+        return this;
+    };
+   }(jQuery));
+
+ 
+    $("#navBtn").clickToggle(function() {   
+      openNav();
+    }, function() {
+        closeNav();
+    });
+  
+function imgError2(image) {
+      image.onerror = "";
+      image.src = "../img/salesmanPic.jpg";
+      return true;
+    }  
+</script>
+   
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "270px";
+    document.getElementById("main").style.marginLeft = "270px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+}
+
+
+</script>
+
+     
+</body>
+</html> 

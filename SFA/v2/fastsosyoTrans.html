@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FASTSOSYO TRANSACTION </title>
+    <link rel="icon" class="pageIconLink" href="" />
+
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+
+    <!-- GOOGLE MATERIAL ICON -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <!-- PICTOGRAMMERS ICON -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.3.67/css/materialdesignicons.min.css" />
+    
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- CSS STYLESHEETS -->
+    <link rel="stylesheet" href="constant/dynamicColor_stylesheet.css">
+    <link rel="stylesheet" href="css/offcanvas_stylesheet.css">
+    <link rel="stylesheet" href="css/fastsosyoTrans_stylesheet.css">
+    <link rel="stylesheet" href="css/latestDatatable_stylesheet.css">
+
+    <!-- DATE PICKER -->
+    <link rel="stylesheet" href="DATERANGEPICKER/daterangepicker.css">
+
+    <!--DATA TABLES CSS LATEST VERSION-->
+    <link rel="stylesheet" href="Commonusrs/DataTables/datatables.css"/>
+
+    <!--=================================virtual select import-=============================-->
+    <link rel="stylesheet" href="css/virtual-select/virtual-select.min.css"  type="text/css"/>
+    <script src="js/virtual-select/virtual-select.min.js"></script>
+</head>
+<body onload="init()">
+    <div class="mainDiv container-fluid">
+        <div class="headerDiv d-flex justify-content-between align-items-center py-3" style="color: #FFF;">
+            <div class="leftHeader d-flex align-items-center mx-3">
+                <button class="btn menubtn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasExample" style="color: #FFF;">
+                    <span class="material-symbols-outlined">
+                        menu
+                    </span>
+                </button>
+                <div id="navbarCompanyDetails" class="d-flex">
+                </div>
+            </div>
+            <h1 class="text-center">Fastsosyo Transaction</h1>
+            <div class="rightHeader d-flex justify-content-end align-items-center mx-3" id="defaultrightHeader" style="width: 260px;">
+                <div class="navbarDropdowns"></div>
+            </div>
+        </div>
+
+        <div class="contentDiv ">
+            <div class="salesRepDivHeader d-flex justify-content-between px-3 py-3">
+                <div class="leftsideHeader">
+                    <span class="mdi mdi-web" style="font-size: 20px;"></span>
+                    <span id="titleHeading"></span>
+                </div>
+                <!-- <div class="righsideHeader pull-right" id="reportrange1" style="background-color: transparent; cursor: pointer; color: white;">
+                    <span>Filter by Date</span> 
+                    <i class="mdi mdi-calendar-month-outline" style="font-size: 20px;"></i>    
+                    <i class="fa-solid fa-caret-down"></i>
+                </div> -->
+                <div class="rightsideBtnDiv">
+                    <a href="#" onclick="feedback()">Feedback Form <span class="mdi mdi-arrow-right-thin"></span></a>
+                </div>
+            </div>
+            <div class="lowerHeaderDiv d-flex justify-content-between px-3">
+                <div id="dt-body-right" class="buttonsDiv order-2 order-md-1">
+                    <!-- <button class="buttondiv" id="refreshBtn" aria-controls="stockRequest_TAB" style="padding: 5px 15px !important;">
+                        <span class="mdi mdi-refresh"></span>
+                    </button> -->
+                    <button class="buttondiv" id="downloadOrdersBtn" aria-controls="stockRequest_TAB">
+                        <span class="mdi mdi-download"></span>
+                        <span>Download Orders</span>
+                    </button>
+                    <button class="buttondiv datePickerDrow" id="filterDateBtn" aria-controls="stockRequest_TAB">
+                        <span class="mdi mdi-calendar-month-outline"></span>
+                        <span>Filter Date</span>
+                    </button>
+                    <!-- <button class="buttondiv" id="excelBtn" aria-controls="stockRequest_TAB">
+                        <span class="mdi mdi-microsoft-excel"></span>
+                        <span>Excel</span>
+                    </button>
+                    <button class="buttondiv" id="csvBtn" aria-controls="stockRequest_TAB">
+                        <span class="mdi mdi-file-document-outline"></span>
+                        <span>CSV</span>
+                    </button> -->
+                        <button class="buttondiv" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Others
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" id="refreshBtn" aria-controls="stockRequest_TAB">Reload</a></li>
+                            <li><a class="dropdown-item" href="fastsosyoactivations">Activations</a></li>
+                            <li><a class="dropdown-item" href="fastsosyo_calendar">Sosyo Calendars</a></li>
+                            <li><a class="dropdown-item" href="#" id="sysncSosyoSalesmanBtn">Sync Salesman (Sosyo)</a></li>
+                            <li><a class="dropdown-item" href="#" id="excelBtn" aria-controls="stockRequest_TAB">Export as Excel</a></li>
+                            <li><a class="dropdown-item" href="#" id="csvBtn" aria-controls="stockRequest_TAB">Export as CSV</a></li>
+                        </ul>
+
+                        <button class="buttondiv" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sync
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" id="sosyo_mcp_Btn" aria-controls="stockRequest_TAB">Sosyo MCP Day</a></li>
+                            <li><a class="dropdown-item" href="#" id="sosyo_customer_Btn" aria-controls="stockRequest_TAB">Sosyo Customer</a></li>
+                            <li><a class="dropdown-item" href="#" id="sosyo_pricelist_Btn" aria-controls="stockRequest_TAB">Sosyo Pricelist</a></li>
+                            <li><a class="dropdown-item" href="#" id="sosyo_int_Btn" aria-controls="stockRequest_TAB">Sosyo Inventory</a></li>
+                            <li><a class="dropdown-item" href="#" id="sosyo_dmb_Btn" aria-controls="stockRequest_TAB">Sosyo Dati mong Binili</a></li>
+
+                        </ul>
+                </div>
+                <div class="searchDiv order-1 order-md-2">
+                    <div class="searchbar" id="stockRequest_TAB_filterSearchBar" class="dataTables_filter">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input type="text" class="search-input" name="search" id="stockRequest_TAB_filterSearchBarInputField" placeholder="Search" aria-controls="stockRequest_TAB">
+                    </div>
+                </div>
+            </div>
+
+            <div class="contentTableDiv px-3 mx-1" >
+                <div class="loading-table m-auto text-center py-5" style="background-color: #FFF; border-radius: 10px;">
+                    <i class="fa fa-spinner fa-spin fa-3x fa-fw" style="font-size: 16px;"></i> Rendering data ...
+                    <span class="sr-only">Loading...</span>
+               </div>
+                <div class="innerTableDiv">
+                    <table id="stockRequest_TAB" class="display table table-striped table-hover " style="width: 100%; font-size: 10px;"></table>
+                    <div class="tableFooter text-end mx-4">Total Sales:</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+            <div class="offcanvas-header d-flex justify-content-between">
+                <button type="button" class="btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                    <span class="material-symbols-outlined">
+                        menu
+                    </span>
+                </button>
+                <div class="rightHeader d-flex justify-content-around align-items-center mx-3" id="smallScreenrightHeader">
+                    <div class="navbarDropdowns"></div>
+                </div>
+            </div>
+            <div class="offcanvas_headTitleDiv">
+            </div>
+            <div class="offcanvas-body px-0">
+                <div class="list-group">
+                    <div id="sidebarTabItems">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="tojobbermodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header detailsModalHeader">
+                    <button type="button" id="closeToJobberModal" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="padding-top: 0;">
+                    <div class="container-fluid text-center">
+                        <div class=" headButtonDiv d-flex justify-content-between">
+                            <div>
+                                <button class="modalbuttondiv" id="printBtn" onclick="printPickList()">
+                                    <span class="mdi mdi-printer-outline"></span>
+                                    <span>Print</span>
+                                </button>
+                                <button class="modalbuttondiv" id="sendDBtn" onclick="sentDetails()">
+                                    <span class="mdi mdi-email-fast-outline"></span>
+                                    <span>Send Details <span style="font-size: 10px;">(via sms)</span></span>
+                                </button>
+                            </div>
+                            <div>
+                                <button class="modalbuttondiv resendBtn" id="removeBtn" onclick="removeTagging()">
+                                    <span class="mdi mdi-tag-off"></span>
+                                    <span>Remove Tagging</span>
+                                </button>
+                                <button class="modalbuttondiv resendBtn" id="rsendBtn" onclick="resend_transaction()">
+                                    <span class="mdi mdi-email-fast-outline"></span>
+                                    <span>Resend Transaction</span>
+                                </button>
+                                <button class="modalbuttondiv verifyBtn" id="addJobberBtn" onclick="exec_asignSalesman()">
+                                    <span class="mdi mdi-check-circle"></span>
+                                    <span>Verify Transaction <span style="font-size: 10px;">(Send as draft)</span></span>
+                                </button>
+                            </div>
+                            <div>
+                                
+                            </div>
+                        </div>
+                        <div class="row g-1">
+                            <div class="col-sm-12 col-md-5 col-lg-4  col-xl-3 order-2 order-sm-2 order-md-1">
+                                <div class="storeMainDiv mainColDiv">
+                                    <div class="storeHeaderRow">
+                                        <h6 id="status_aio" class="fw-bold" style="color: #FFF;" ></h6>
+                                        <div class="storeDetails d-flex align-items-center px-2">
+                                            <img src="img/storePic.jpg" height="80" width="80" alt="">
+                                            <div class="storeDetailsName">
+                                                <p class="text-start">Store</p>
+                                                <h6 id="storename_aio" class="text-start" style="margin-bottom: 0;"></h6>
+                                            </div>
+                                        </div>
+                                        <div class="storeDetailsStatusDiv text-end">
+                                            <span style="margin-right: 100px; font-size: 11px;">Reference No.</span>
+                                            <div class="d-flex flex-row-reverse" >
+                                                <p id="refNo_aio" style="background-color: #FFF; color: #000; border-top-left-radius: 23px; width: 150px; margin-bottom: 0; text-align: center; font-size: 13px;">2</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="storesReportBody py-3">
+                                        <div class="py-2 px-3 salesReportRow validateGroup align-items-center">
+                                            <p>Salesman</p>
+                                            <select id="salesmanList" name="salesmanList[]" style="border: none;"></select>
+                                            <!-- <p id="owner_aio"></p>  -->
+                                        </div>
+                                        <div class="py-2 px-3 salesReportRow validateGroup align-items-center">
+                                            <p>Customer Code</p>
+                                            <select id="customerListSelect" style="border: none;"></select>
+                                            <!-- <p id="owner_aio"></p>  -->
+                                        </div>
+                                        <div class="py-2 px-3 salesReportRow">
+                                            <p>Owner</p>
+                                            <p id="owner_aio"></p> 
+                                        </div>
+                                        <div class="py-2 px-3 salesReportRow">
+                                            <p>Customer Code</p>
+                                            <p id="customerCode_aio"></p> 
+                                        </div>
+                                        <div class="py-2 px-3 salesReportRow">
+                                            <p>Contact</p>
+                                            <p id="storecontno_aio"></p> 
+                                        </div>
+                                        <div class="py-2 px-3 salesReportRow">
+                                            <p>Address</p>
+                                            <p id="address_aio"></p>
+                                        </div>
+                                        <div class="py-2 px-3 salesReportRow">
+                                            <p>LatlLng</p>
+                                            <p id="latlng_aio"></p>
+                                        </div>
+                                        <div class="py-2 px-3 salesReportRow">
+                                            <p># SKU</p>
+                                            <p id="sku_aio"></p>
+                                        </div>
+                                        <div class="py-2 px-3 salesReportRow">
+                                            <p>Amount</p>
+                                            <p id="amount_aio"></p>
+                                        </div>
+                                        <div class="py-2 px-3 salesReportRow">
+                                            <p>Salesman Assigned</p>
+                                            <p id="modal_typeChecker"></p>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <button id="dlorder" class="btn" type="button" onclick="downloadOrder()">Download Order <span class="mdi mdi-download-circle-outline"></span></button>
+                                        </div>
+                                        <span class="scorder">
+                                            <span style="font-size: 10px;">Download Status</span>
+                                            <span class="text-success"  style="font-size: 12px;">
+                                                <b>
+                                                    <i class="fas fa-check-circle"></i> Order was succesfully downloaded
+                                                </b>
+                                            </span>
+                                        </span>
+                                        <input type="hidden" name="" id="storeIDHolder">
+                                        <input type="hidden" id="salesman_res">
+                                        <input type="hidden" id="storeID_res">
+                                        <input type="hidden" id="customer_res">
+                                        <input type="hidden" id="refno_res">
+                                        <input type="hidden" id="transactionID_res">
+                                    </div>                                    
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-7 col-lg-8 col-xl-9 mapOuterDiv order-1 order-sm-1 order-md-2" >
+                                <!-- <div class="itemCodeMainDiv mainColDiv" style="width: 500px; height: 500px;"> -->
+                                    <div id="map" class="mapMainDiv mainColDiv w-100 h-100"></div>
+                                <!-- </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="sentDetailsModal" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Send Transaction via SMS</h4>
+                </div>
+                
+                <div class="modal-body">
+                    <label for="">Salesman Phone Number:</label>
+                    <input type="text" class="form-control form-control-lg" id="salesman_phonenum" maxlength="11" placeholder="09XXXXXXXXX" >
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="sentTransItems()">Send</button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=quarterly&key=AIzaSyAt0Pxe9_3DTav3DmUQzHfgd07s_LcJo7I"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?v=weekly&key=AIzaSyAt0Pxe9_3DTav3DmUQzHfgd07s_LcJo7I&libraries=drawing,geometry,places"></script> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- DATA TABLES JS LATEST VERSION -->
+    <script src="Commonusrs/DataTables/datatables.min.js"></script>
+
+    <script type="text/javascript" src="js/jasonday-printThis-c814846/printThis.js"></script>
+    <script type="text/javascript" src="js/mainjs.js"></script>
+
+    <!-- DATE PICKER -->
+    <script type="text/javascript" src="DATERANGEPICKER/moment.min.js"></script>
+    <script type="text/javascript" src="DATERANGEPICKER/daterangepicker.js"></script>
+    
+    <script src="HASH/md5.js"></script>
+    <script src="HASH/aes.js"></script>
+    <script src="nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+    <script type="text/javascript" src="web/web-commons.js"></script>
+    <script type="text/javascript" src="js/bootbox.min.js"></script>
+    <script type="text/javascript" src="js/scrolling.js"></script>
+    <script type="text/javascript" src="constant/dynamicScript.js"></script>
+    <script type="text/javascript" src="js/fastsosyoTrans.js"></script>
+</body>
+</html>

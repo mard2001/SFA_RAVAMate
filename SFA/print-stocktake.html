@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+	<title>Print Stocktake</title>
+    <link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+    <link rel="stylesheet" href="css/dcr.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <style>
+        #printBtn{
+            padding: 5px; background-color: rgb(19, 131, 175);
+            border-radius: 10px;
+            border: none;
+            margin: 0;
+            color: white;
+            width: 100px !important;
+        }
+
+        #printBtn:hover{
+            cursor: pointer;
+            background-color: rgb(163, 228, 233);
+        }
+    </style>
+</head>
+<body>
+
+<div id="fetchCont">
+    <span><i class="fa fa-spin fa-spinner"></i> Preparing print layout please wait...</span>
+</div>
+<div id="mainCont">
+    <h3>STOCKTAKE REPORT</h3>
+    <div id="dcr-mainBody">
+        <div style="float: left; margin-top: 10px;">
+            <button id="printBtn"><i class="fas fa-print"></i> PRINT</button><br/>
+            <span id="company">SALESMAN: <input type="text" name="" id="salesmanSELECTED" class="intp"> </span><br/>
+            <span id="dateAndTimeSelected">DATE SELECTED: <input type="text" name="" id="dateSELECTED" class="intp"></span><br/>
+            <span id="dateAndTime">DATE GENERATED: <input type="text" name="" id="dateGENERATED" class="intp"></span>
+        </div>
+        <br/>
+            <table style="border: 1px; width: 100%;" class="tablecont">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>DATE</th>
+                        <th>CUSTOMER</th>
+                        <th>CLASS</th>
+                        <th>STOCKTAKE NO.</th>
+                        <th>STOCKTAKE REQUIRED</th>
+                        <th>AVAILABLE</th>
+                        <th>OUT OF STOCK</th>
+                        <th>REMARKS</th>
+                    </tr>
+                </thead>
+                <tbody id="stktake_body"></tbody>
+            </table>
+    </div>
+	
+</div>
+    
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="/HASH/md5.js"></script>
+<script src="/HASH/aes.js"></script>
+<script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+<script type="text/javascript">
+	
+	var site = localStorage.getItem('fillteredSite_stockrequest');
+
+    var salesman = localStorage.getItem('salesman');
+    var start = localStorage.getItem('startDate_stk');
+    var end = localStorage.getItem('endDate_stk');
+
+    $('#dateSELECTED').val(start + ' - ' + end);
+    
+    collectionBody();
+    getcompname();
+    DisplayCurrentTime();
+
+    function getcompname(){
+    $.ajax ({
+        url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+        type: "GET",
+        data: {"type":"GET_COMPANYNAME", "CONN":con_info},
+        dataType: "json",
+        crossDomain: true,
+        cache: false,            
+        success: function(r){ 
+            $('#branchVal').html(r[0].company.toUpperCase());
+        }
+    });
+    } 
+    $('#mainCont').hide();
+    function collectionBody(){
+        $('#fetchCont').show();
+        $('#mainCont').hide();
+        $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {
+              "type":"stocktakeReportData",
+              "CONN":con_info,
+              "startDate": start,
+              "endDate": end,
+              "salesman":salesman
+            },
+          dataType: "json",
+          crossDomain: true,
+          cache: false,            
+            success: function(r){ 
+                $('#fetchCont').hide();
+                $('#mainCont').show();
+                let cont = '',  counter = 0;
+                    for(let x =0; x < r.length; x++){
+                        $('#salesmanSELECTED').val(r[0].SALESMAN);
+                        counter++;
+                        cont += '<tr>'+
+                                '<td>'+(x+1)+'</td>'+
+                                '<td>'+r[x].STKDATE+'</td>'+
+                                '<td class="text-left" style="padding-left: 20px;">'+r[x].CUSTOMER+'</td>'+
+                                '<td class="text-center"">'+r[x].CUSTOMERCHANNEL+'</td>'+
+                                '<td class="text-center"">'+r[x].STAKENO+'</td>'+
+                                '<td class="text-center">'+r[x].STKREQUIRED+'</td>'+
+                                '<td class="text-centert">'+r[x].STKAVAILABLE+'</td>'+
+                                '<td class="text-center">'+r[x].STKOUTOFSTOCK+'</td>'+
+                                '<td class="text-center"></td>'+
+                                '</tr>';
+                    }
+                    
+                    var max = 70;
+                    var counter2 = max - r.length;
+
+                    for(var x = 0; x < counter2; x++){
+                    var newCount = (counter + 1) + x;
+                        cont += '<tr>'+
+                                    '<td>'+newCount+'</td>'+
+                                    '<td></td>'+
+                                    '<td></td>'+
+                                    '<td></td>'+
+                                    '<td></td>'+
+                                    '<td></td>'+
+                                    '<td></td>'+
+                                    '<td></td>'+
+                                    '<td></td>'+
+                                '</tr>';
+                    }
+
+                    $('#stktake_body').html(cont);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert(XMLHttpRequest.responseText + ' CONTACT SYSTEM ADMINISTRATOR!');
+             }
+        });
+    }
+
+    function computePayment(cndamt, cashPayment, Amount, invoiceAmount){
+        var paymentTotal, pAmnt, pCashPayment;
+        if(cndamt == '-'){
+            pAmnt = 0;
+        }else{
+            pAmnt = Amount;
+        }
+
+        if(cashPayment == '-'){
+            pCashPayment = 0;
+        }else{
+            pCashPayment = Amount;
+        }
+
+        paymentTotal = Math.abs(invoiceAmount) - (pAmnt + pCashPayment);
+        if(paymentTotal < 1){
+            return '-';
+        }
+        return paymentTotal;
+    }
+
+    function DisplayCurrentTime() {
+      var date = new Date();
+      var hours = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
+      var am_pm = date.getHours() >= 12 ? "PM" : "AM";
+      hours = hours < 10 ? "0" + hours : hours;
+      var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+      var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+      time = hours + ":" + minutes + ":" + seconds + " " + am_pm;
+      
+      var dateTime = getDate() +' '+ time;
+     $('#dateGENERATED').val(dateTime);
+  }
+
+  function getDate(){
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+
+        if(dd<10) {
+            dd = '0'+dd
+        } 
+
+        if(mm<10) {
+            mm = '0'+mm
+        } 
+
+        today =  yyyy+'-'+ mm + '-' + dd;
+        return String(today);
+
+    }
+
+    $('#printBtn').click(function() {
+        $('#printBtn').hide();
+        window.print();
+        $('#printBtn').show();
+    });
+
+</script>
+</html>

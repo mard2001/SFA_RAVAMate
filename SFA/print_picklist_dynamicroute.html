@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <title>Print Pick List</title>
+
+    <!-- SWAL SWEET ALERT 2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <style>
+        body{
+            width: 90%;
+            margin: 0 auto;
+        }
+        
+        .maintable{
+            width: 100%;
+            text-align: center;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        .maintable tr td{
+            padding: 5px;
+            border-top: solid 1px black;
+            height: 30px;
+            text-align: left;
+            border: solid 1px;
+        }
+
+        .maintable thead tr th{
+            height: 20px;
+            text-align: center;
+            border: solid 1px;
+            /* background-color: #333;
+            color: white; */
+        }
+
+        .printbtn{
+            height: 40px;
+            width: 130px;
+            background-color: #03a5fc;
+            color: white;
+            padding: 10px;
+            outline: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .printbtn:hover{
+            transition: ease 0.2s;
+            background-color: #03d3fc;
+        }
+
+        .forminput{
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            width: 200px;
+            text-align: center;
+        }
+
+        p{
+            font-size: 12px !important;
+        }
+    </style>
+</head>
+<body class="bodymain">
+    <div>
+
+        <img class="logoprint" src="/img/mdlogo_web.png" style="float: left; height: 70px; width: 60px;" alt="">
+        <button class="printbtn" style="float: right;" onclick="printsummary()">PRINT</button><br>
+        <div class="header">
+            <div style="margin: 0 auto; text-align: center;">
+                <h4>PICK LIST</h4>
+            </div>
+            <div style="float: left;">
+                <p style="text-align: left;">SITE: <strong id="siteHolder">---</strong></p>
+                <p style="text-align: left;">UNLOADING DATE: <strong id="loadingdateholder">---</strong></p>
+                <p style="text-align: left;">PLATE #: <strong id="platenoholder">---</strong></p>
+            </div>
+        </div>
+        <br><br><br><br>
+        <div class="mainbody">
+            <table class="maintable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>STOCKCODE</th>
+                        <th>DESCRIPTION</th>
+                        <th>QTY</th>
+                        <th>AMOUNT</th>
+                        <th>REMARKS</th>
+                </thead>
+                <tbody id="bodymain">
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td style="border-right: none !important; border-left: none !important; border-bottom: none !important; text-align: right; " colspan="5">
+                           Total Amount: <strong id="totalAmountHolder"></strong>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <br><br><br><br>
+        <div class="footer">
+            <table style="width: 100%; border: none; margin: 0 auto; text-align: center;">
+                <tbody>
+                    <tr>
+                        <td>
+                            <div style="margin-right: 23%;">
+                                <span>
+                                    <input type="text" class="forminput" id="ack_dvname">
+                                </span><br><br>
+                                <small style="text-align: center; margin: 0 auto;">
+                                    PREPARED BY
+                                </small>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="">
+                                <span>
+                                    <input type="text" class="forminput" id="ack_dvname">
+                                </span><br><br>
+                                <small style="text-align: center; margin: 0 auto;">
+                                    NOTED BY
+                                </small>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="">
+                                <div>
+                                    <span>
+                                        <input type="text" class="forminput">
+                                    </span><br><br>
+                                    <small style="text-align: center; margin: 0 auto;">
+                                        APPROVED BY
+                                    </small>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+         
+        </div>
+    </div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/wbcmmns.js"></script>
+
+    <script src="v2/HASH/md5.js"></script>
+    <script src="v2/HASH/aes.js"></script>
+    <script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+
+    <!-- SWEET ALERT -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        var loadingdate = localStorage.getItem('LDNG_UNLOADINGDATE');
+        var loading_cID = localStorage.getItem('LDNG_CID');
+        var plateNo = localStorage.getItem('LDNG_PLATENO');
+      
+        $('#loadingdateholder').html(loadingdate);
+        $('#platenoholder').html(plateNo);
+
+        Swal.fire({
+            html: "Please Wait... Preparing Data to Print...",
+            timerProgressBar: true,
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+                setTimeout(() => {
+                    displaydata();
+                }, 1500);
+            },
+        });
+
+        getcompname();
+        function getcompname(){
+        $.ajax ({
+            url: GLOBALLINKAPI+"/connectionString/applicationipAPI.php",
+            type: "POST",
+            data: {"type":"GET_COMPANYNAME", "distCode": GBL_DISTCODE, "userID": GBL_USERID,},
+            dataType: "json",
+            crossDomain: true,
+            cache: false,            
+                success: function(r){ 
+                    $('#siteHolder').html(r[0].company.toUpperCase());
+                }
+            });
+        } 
+        
+        function displaydata(){
+            $.ajax ({
+                url: GLOBALLINKAPI+"/connectionString/applicationipAPI.php",
+                type: "POST",
+                data: {
+                        "type":"GET_DYNAMIC_ROUTE_PICKLIST",
+                        'cID':loading_cID,
+                        "distCode": GBL_DISTCODE, "userID": GBL_USERID,
+                    },
+                dataType: "json",
+                crossDomain: true,
+                cache: false,   
+                async: false,         
+                success: function(res){ 
+                    var cont = ``;
+
+                    // $('#ack_dvname').val(r[0].FO_DETAILS[0].DRIVERD);
+                    // $('#batchIDHolder').html(r[0].BATCHID);
+                    // $('#loadingdateholder').html(r[0].FO_DETAILS[0].formt_loadingdate);
+
+                    var totalf = 0.0;
+                    for(var x = 0; x < res.length; x++){
+                            cont += `
+                                <tr>
+                                    <td>`+(x+1)+`.</td>
+                                    <td>`+res[x].STOCKCODE+`</td>
+                                    <td>`+res[x].DESCRIPTION+`</td>
+                                    <td style="text-align: center;">`+res[x].UOM+`</td>
+                                    <td style="text-align: right;">`+res[x].TOTALPRICE+`</td>
+                                    <td></td>
+                                </tr>        
+                            `;
+
+                            totalf += parseFloat(res[x].TOTALPRICE_RAW);
+
+                    }
+
+                    // $('#platenoholder').html(res[0].VEHICLED);
+                    $('#bodymain').html(cont);
+                    $('#totalAmountHolder').html(totalf.toLocaleString());
+                    
+                    
+                    setTimeout(() => {
+                        Swal.close();
+                    }, 3000);
+                }
+            });
+        }
+
+        function printsummary(){
+            $('.printbtn').hide();
+            $('.logoprint').hide();
+            $('.maintable tr td').css({"font-size":"10px", "padding":"2px"});
+            $('.maintable thead tr th').css({"font-size":"10px", "height":"10px"});
+            
+            window.print();
+            $('.printbtn').show();
+            $('.logoprint').show();
+            $('.maintable tr td').css({"font-size":"12px", "padding":"5px"});
+            $('.maintable thead tr th').css({"font-size":"12px", "height":"20px"});
+
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+	<title>Print-DCR</title>
+    <link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+    <link rel="stylesheet" href="css/dcr.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <style>
+        #printBtn{
+            padding: 5px; background-color: rgb(19, 131, 175);
+            border-radius: 10px;
+            border: none;
+            margin: 0;
+            color: white;
+            width: 100px !important;
+        }
+
+        #printBtn:hover{
+            cursor: pointer;
+            background-color: rgb(163, 228, 233);
+        }
+    </style>
+</head>
+<body>
+
+<div id="fetchCont">
+    <span><i class="fa fa-spin fa-spinner"></i> Preparing print layout please wait...</span>
+</div>
+
+<div id="mainCont">
+    <div style="margin: 0 auto !important; text-align: center !important;">
+        <img src="../img/fastLogo.png" alt="disstributor company logo" style="width: 250px; height: 50px;">
+    </div>
+    <h3>DAILY COLLECTION REPORT (DCR)</h3>
+    <div id="dcr-mainBody">
+        <div style="float: left; margin-top: 10px;">
+            <button id="printBtn"><i class="fas fa-print"></i> PRINT</button><br/>
+            <span id="company">No: <input type="text" name="" id="h_divition" class="intp"> </span><br/>
+            <span id="dateAndTime">Division: <input type="text" name="" id="h_divition" class="intp"></span><br/>
+            <span id="dateAndTime">Salesman Code: <input type="text" name="" id="dcr_Salesman_val" class="intp"></span>
+        </div>
+        <div style="float: right;">
+            <span><span>Branch: </span><strong style="text-align: center; margin: 0 auto; margin-left: 40px;" id="branchVal"></strong><hr class="branchlIne"></span>
+            <span class="export btn">From<input type="text" name="" id="dcr_startdate" class="intp"></span><br>
+            <span class="export btn">To<input type="text" name="" id="dcr_enddate" class="intp"></span><br>
+            <span class="export btn">Print date: <span class="intp" id="printDate"></span></span>
+        </div>
+        <br/>
+            <table style="border: 1px; width: 100%;" class="tablecont">
+                <thead>
+                    <tr>
+                        <th rowspan="2">#</th>
+                        <th rowspan="2">O.R</th>
+                        <th rowspan="2">Customer</th>
+                        <th rowspan="2">S.I. #</th>
+                        <th rowspan="2">S.I. Amt.</th>
+                        <th colspan="2">Deductions CN/CM</th>
+                        <th rowspan="2">Cash<br>Payment</th>
+                        <th colspan="4">Check Payment</th>
+                        <th rowspan="2">Over/Under<br>Collection</th>
+                    </tr>
+                    <tr>
+                        <th>No.</th>
+                        <th>Amt</th>
+                        <th>Due Date</th>
+                        <th>Bank</th>
+                        <th>No.</th>
+                        <th>Payment</th>
+                    </tr>
+                </thead>
+                <tbody id="dcrtab_body"></tbody>
+                <tfoot>
+                    <tr class="trcells">
+                        <td colspan="5" class="text-right"><span style="padding-right: 10px;">TOTAL:</span> <span id="siAmount"></span></td>
+                        <td colspan="2" class="text-right" id="totalAmt"></td>
+                        <td class="text-right" id="totalCashPayment"></td>
+                        <td colspan="4" class="text-right" id="totalPayment"></td>
+                        <td id="totalOverUnderColl"></td>
+                    </tr>
+                    <tr>
+                        <td class="footer-inv"></td>
+                        <td class="footer-inv"></td>
+                        <td class="footer-inv"></td>
+                        <td class="footer-inv"></td>
+                        <td class="footer-inv"></td>
+                        <td class="footer-inv"></td>
+                        <td class="footer-inv"></td>
+                        <td class="footer-inv"></td>
+                        <td class="footer-inv"></td>
+                        <td colspan="4" class="border-visible">
+                            <span class="text-left" style="float:left;">GRAND TOTAL:</span><span style="float:right; font-weight: bold;" class="text-right" id="grandTotal"></span>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        
+            <div style="width: 200px; margin-top: 40px; float: left; text-align: center;">
+                <div>
+                    <span><hr/></span>
+                    <small class="smallfnt">Prepared by: (Signature over printed name)</small><br>
+                    <span class="hdr">SALESMAN</span></div>
+                <div style="margin-top: 50px;">
+                    <span><hr/></span>
+                    <small class="smallfnt">Reviewed by: (Signature over printed name)</small><br>
+                    <!-- <span class="hdr">BRANCH ACCOUNTANT</span> -->
+                </div>
+            </div>
+            
+            <div style="width: 400px; margin-top: 40px; float: left; text-align: center;">
+                <div>
+                    <span><hr/></span>
+                    <small class="smallfnt">Checked & Received by: (Signature over printed name)</small><br>
+                    <span class="hdr">CASHIER</span></div>
+                <div style="margin-top: 50px;">
+                    <span><hr/></span>
+                    <small class="smallfnt">Noted by: (Signature over printed name)</small><br>
+                    <!-- <span class="hdr">BRANCH MANAGER</span> -->
+                </div>
+            </div>
+        
+            <div style="width: 600px; margin-top: 40px; float: left; text-align: center;">
+                <table style="width: 400px; text-align: left; float:left; border-right: none !important;">
+                    <tr>
+                        <td style="text-align: center; font-weight: bold;">POSTING INFORMATION</td>
+                    </tr>
+                    <tr><td>Cash Journal #</td></tr>
+                    <tr><td>Entries Group #</td></tr>
+                    <tr><td>Date Posted:</td></tr>
+                    <tr><td>Posted by:</td></tr>
+                </table>
+                <table style="width: 200px; text-align: center; float:right; border-left: none !important;">
+                    <tr>
+                        <td colspan="2" style="text-align: center; font-weight: bold;"> DENOMINATION</td>
+                    </tr>
+                    <tr><td class="text-right deno-td">1,000.00 x</td><td></td></tr>
+                    <tr><td class="text-right deno-td">500.00 x</td><td></td></tr>
+                    <tr><td class="text-right deno-td">200.00 x</td><td></td></tr>
+                    <tr><td class="text-right deno-td">100.00 x</td><td></td></tr>
+                    <tr><td class="text-right deno-td">50.00 x</td><td></td></tr>
+                    <tr><td class="text-right deno-td">20.00 x</td><td></td></tr>
+                    <tr><td class="text-right deno-td">10.00 x</td><td></td></tr>
+                    <tr><td class="text-right deno-td">5.00 x</td><td></td></tr>
+                    <tr><td class="text-right deno-td">1.00 x</td><td></td></tr>
+                    <tr><td class="text-right deno-td">0.25 x</td><td></td></tr>
+                    <tr><td><strong>TOTAL</strong></td><td>____</td></tr>
+                </table>
+            </div>
+    </div>
+	
+</div>
+    
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="/HASH/md5.js"></script>
+<script src="/HASH/aes.js"></script>
+<script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+<script type="text/javascript">
+	
+	var site = localStorage.getItem('fillteredSite_stockrequest');
+
+    var salesman = localStorage.getItem('mdCode');
+    var start = localStorage.getItem('startDate');
+    var end = localStorage.getItem('endDate');
+
+    $('#dcr_startdate').val(start);
+    $('#dcr_enddate').val(end);
+    
+    collectionBody();
+    getcompname();
+    DisplayCurrentTime();
+
+    function getcompname(){
+    $.ajax ({
+        url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+        type: "GET",
+        data: {"type":"GET_COMPANYNAME", "CONN":con_info},
+        dataType: "json",
+        crossDomain: true,
+        cache: false,            
+        success: function(r){ 
+            $('#branchVal').html(r[0].company.toUpperCase());
+        }
+    });
+    } 
+    $('#mainCont').hide();
+    function collectionBody(){
+        $('#fetchCont').show();
+        $('#mainCont').hide();
+        $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {"type":"GET_DCR_PRINT_DATA", "CONN":con_info, "mdCode":salesman, "start":start, "end":end},
+          dataType: "json",
+          crossDomain: true,
+          cache: false,            
+            success: function(r){ 
+                var totalSIAmount = 0, totalAmt = 0, totalCashPayment = 0, totalPayment = 0, total_OverUnderCollection = 0;
+                var totalSuperPayment = 0;
+                $('#fetchCont').hide();
+                $('#mainCont').show();
+                let cont = '',  counter = 0;
+                var overundertotalCollectionOverallT = 0.0;
+                var grandTotalCMAmt = 0.0;
+                $('#dcr_Salesman_val').val(r[0].mdSalesmancode);
+                    for(let x =0; x < r.length; x++){
+                        counter++;
+                        var invoice = parseFloat(r[x].InvoiceAmount).toLocaleString();
+                        if(r[x].InvoiceAmount < 0){
+                            invoice = '<span style="color: red;">('+parseFloat(Math.abs(r[x].InvoiceAmount)).toLocaleString()+')</span>';
+                        }
+
+                        var cashPayment;
+                        var cndamt, siAmount_dem;
+                        var cndamtDeductions, paymentTotal;
+                        var totalAmt, totalCashPayment, totalPayment;
+                        if(r[x].InvoiceAmount < 0){ //meaning invoice is negative
+                            cndamtDeductions = invoice;
+                            totalAmt += Math.abs(r[x].InvoiceAmount);
+                            if(r[x].pType == 'Check'){
+                                paymentTotal = '-'
+                            }else{
+                                paymentTotal = '-'
+                            }
+                        }else{
+                            cndamtDeductions = '-';
+
+                            if(r[x].pType == 'Cash'){
+                                paymentTotal = '-';
+                                cashPayment = parseFloat(r[x].InvoiceAmount).toLocaleString();
+                                totalCashPayment += r[x].InvoiceAmount;
+
+                                // overundertotalCollection = r[x].InvoiceAmount - r[x].Amount;
+                                // console.log(overundertotalCollection +' from '+ r[x].InvoiceAmount +' '+ r[x].cashPayment);
+                            }else{
+                                cashPayment = '-';
+                                paymentTotal = parseFloat(r[x].Amount).toLocaleString();
+                                totalPayment += r[x].InvoiceAmount;
+                                
+
+                               
+                            }
+                        }
+
+                        if(paymentTotal != '-'){
+                            totalSuperPayment += r[x].Amount;
+                        }
+
+
+                        var overundertotalCollection = (parseFloat(r[x].InvoiceAmount) - parseFloat(r[x].Amountraw)) - parseFloat(r[x].CNDNAmount);
+                        overundertotalCollectionOverallT += overundertotalCollection;
+
+                        // var overUnderCollection, putThisOverUnderColl;
+                        // var paymentTotal = computePayment(cndamtDeductions, cashPayment, r[x].CNDNAmount, r[x].InvoiceAmount);
+                        // if(paymentTotal != '-'){
+                        //     totalPayment += paymentTotal;
+                        //     overUnderCollection = totalPayment - siAmount_dem;
+                        //     total_OverUnderCollection += overUnderCollection;
+                        //     paymentTotal = parseFloat(paymentTotal).toLocaleString();
+                        // }
+
+                        // console.log(putThisOverUnderColl);
+                        // if(Math.abs(overUnderCollection) < 1){
+                        //     putThisOverUnderColl = parseFloat(overUnderCollection).toLocaleString();
+                        // }else{
+                        //     putThisOverUnderColl = '-';
+                        // }
+
+                        totalSIAmount += parseFloat(Math.abs(r[x].InvoiceAmount));
+                        grandTotalCMAmt += r[x].CNDNAmount;
+
+                        cont += '<tr>'+
+                                '<td>'+(x+1)+'</td>'+
+                                '<td>'+r[x].ORNumber+'</td>'+
+                                '<td>'+r[x].custName+'</td>'+
+                                '<td>'+r[x].InvoiceNumber+'</td>'+
+                                '<td class="text-right">'+invoice+'</td>'+
+                                '<td class="text-left">'+r[x].CNDNRef+'</td>'+
+                                '<td class="text-right">'+r[x].CNDNAmount.toLocaleString()+'</td>'+
+                                '<td class="text-right">'+cashPayment+'</td>'+
+                                '<td>'+r[x].CheckDate+'</td>'+
+                                '<td>'+r[x].BankCode+'</td>'+
+                                '<td>'+r[x].CheckNo+'</td>'+
+                                '<td class="text-right">'+paymentTotal+'</td>'+
+                                '<td class="text-right">'+overundertotalCollection.toLocaleString()+'</td>'+
+                                //'<td class="text-right">'+putThisOverUnderColl+'</td>'+
+                                '</tr>';
+                    }
+
+
+                    var max = 15;
+                    var counter2 = max - r.length;
+
+                    for(var x = 0; x < counter2; x++){
+                    var newCount = (counter + 1) + x;
+                        cont += '<tr>'+
+                                    '<td>'+newCount+'</td>'+
+                                    '<td></td>'+
+                                    '<td></td>'+
+                                    '<td></td>'+
+                                    '<td></td>'+
+                                    '<td></td>'+
+                                    '<td></td>'+
+                                    '<td></td>'+
+                                    '<td></td>'+
+                                    '<td></td>'+
+                                    '<td></td>'+
+                                    '<td></td>'+
+                                    '<td></td>'+
+                                '</tr>';
+                    }
+                    // var thisOverTotal = 0;
+                    // if(total_OverUnderCollection != '-'){
+                    //     thisOverTotal = parseFloat(total_OverUnderCollection).toLocaleString();
+                    // }else{
+                    //     thisOverTotal = '-';
+                    // }
+
+
+                    $('#dcrtab_body').html(cont);
+                    $('#siAmount').html(parseFloat(totalSIAmount).toLocaleString());
+                    $('#totalCashPayment').html(parseFloat(totalCashPayment).toLocaleString());
+                    $('#totalAmt').html(parseFloat(grandTotalCMAmt).toLocaleString());
+                    // $('#totalPayment').html(parseFloat(totalPayment).toLocaleString());
+                    $('#totalPayment').html(parseFloat(totalSuperPayment).toLocaleString());
+                    $('#totalOverUnderColl').html(overundertotalCollectionOverallT.toLocaleString());
+                     $('#grandTotal').html(parseFloat((totalCashPayment + totalPayment) - totalAmt).toLocaleString());
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert(XMLHttpRequest.responseText + ' CONTACT SYSTEM ADMINISTRATOR!');
+             }
+        });
+    }
+
+    function computePayment(cndamt, cashPayment, Amount, invoiceAmount){
+        var paymentTotal, pAmnt, pCashPayment;
+        if(cndamt == '-'){
+            pAmnt = 0;
+        }else{
+            pAmnt = Amount;
+        }
+
+        if(cashPayment == '-'){
+            pCashPayment = 0;
+        }else{
+            pCashPayment = Amount;
+        }
+
+        paymentTotal = Math.abs(invoiceAmount) - (pAmnt + pCashPayment);
+        if(paymentTotal < 1){
+            return '-';
+        }
+        return paymentTotal;
+    }
+
+    function DisplayCurrentTime() {
+      var date = new Date();
+      var hours = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
+      var am_pm = date.getHours() >= 12 ? "PM" : "AM";
+      hours = hours < 10 ? "0" + hours : hours;
+      var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+      var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+      time = hours + ":" + minutes + ":" + seconds + " " + am_pm;
+      
+      var dateTime = getDate() +' '+ time;
+     $('#printDate').html(dateTime);
+  }
+
+  function getDate(){
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+
+        if(dd<10) {
+            dd = '0'+dd
+        } 
+
+        if(mm<10) {
+            mm = '0'+mm
+        } 
+
+        today =  yyyy+'-'+ mm + '-' + dd;
+        return String(today);
+
+    }
+
+    $('#printBtn').click(function() {
+        $('#printBtn').hide();
+        window.print();
+        $('#printBtn').show();
+    });
+
+</script>
+</html>

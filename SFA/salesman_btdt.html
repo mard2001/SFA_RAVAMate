@@ -1,0 +1,1849 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    Salesman
+  </title>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
+ <meta content="utf-8" http-equiv="encoding">
+
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+ <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">
+ <link rel="stylesheet" type="text/css" href="css/clockface.css">
+ <link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+ <link rel="stylesheet" href="/css/mdDesign.css"/>
+ <link rel="stylesheet" href="/js/bootstrap-multiselect-master/dist/css/bootstrap-multiselect.css" type="text/css"/>
+   
+</head>
+ <!--<div id="work-in-progress">
+          <div style="margin: 0 auto;">
+            <img src="img/fast.png" style="height: 80px; width: 480px; z-index: 1;"></br>
+            <img src="img/orbit-400px.gif" style="position: block; height: 200px;">
+          </div>
+   </div>-->
+<body>
+
+ <div id="mySidenav" class="sidenav">
+  <div class='image'><img alt='mdbuddylogo' class='logoMd' src='/img/mdbuddylogo_jeff.png'/></div>
+    <a href="https://mybuddy-sfa.com/SFA/Dashboard"> <span class='glyphicon glyphicon-home'></span> Dashboard</a>
+    <a href="https://mybuddy-sfa.com/SFA/digitalMapping"> <span class='glyphicon glyphicon-map-marker'></span> Digital Mapping</a>
+    <a href="https://mybuddy-sfa.com/SFA/customerMapping"> <span class="fa fa-users" aria-hidden="true"></span> Customer Mapping</a>
+    <a href="territoryGeofencing"> <span class="fa fa-unlock" aria-hidden="true"></span> Territory Geofencing</a>
+   <a data-toggle="collapse" href="#collapse1" id='navDrop'> <span class='glyphicon glyphicon-duplicate' id='changeIcon'></span> Reports
+    <i class="glyphicon glyphicon-menu-down pull-right"></i> </a>
+      <div id="collapse1" class="panel-collapse collapse" style="margin-left: 17px; font-size: 9px !important">
+        <a href="salesReport"> Sales Report</a>
+        <a href="fastsosyotransaction"> Fastsosyo Transaction</a>
+        <a href="salesAudit"> Sales Audit</a>
+        <a href="transactionLedger"> Transaction Ledger</a>
+        <a href="UnprocessedOrders"> Unprocessed Orders</a>
+        <a href="dsr"> DSR</a>
+        <a href="dcr"> Daily Collection</a>
+        <a href="stockRequest"> Stock Request</a>
+        <a href="unuploaded"> Unuploaded</a>
+        <a href="BOReport"> BO</a>
+        <a href="Stocktake Report"> Stocktake</a>
+        <a href="inventory"> Inventory Valuation</a>
+        <a href="jobberMaintenance"> Jobber</a>
+        <a href="syncreport">Sync Report</a>
+        <a href="soaprvreport">SO Approval</a>
+      </div>
+   <a data-toggle="collapse" href="#collapse2" id='navDrop' class="maintenanceCont"> <span class="fa fa-cogs" aria-hidden="true" id='changeIcon'></span> Maintenance
+    <i class="glyphicon glyphicon-menu-down pull-right"></i> </a>
+      <div id="collapse2" class="panel-collapse collapse" style="margin-left: 17px; font-size: 9px !important">
+        <a href="dataMaintenance" > Data</a>
+        <a href="customer"> Customer</a>
+        <a href="cmf">CMF</a>
+        <a href="geoReset" > Georeset</a>
+        <a href="salesman" class="activeYes"> Salesman</a>
+        <a href="product"> Product</a>
+        <a href="productbtdt"> BTDT Product</a>
+        <a href="customerTagging"> Tagging</a>
+        <a href="bankmaintenance"> Bank</a>
+        <a href="mcpcalibration">MCP Calibration</a>
+      </div>
+  <!-- <a href="Alert"> <span class='glyphicon glyphicon-envelope'></span> Alert Messages</a> -->
+    <hr />
+    <a href="https://mybuddy-sfa.com/SFA/v2/dashboard">Switch to New Dashboard</a>
+</div>
+
+  <div id="main">
+          <h4 class="display-4 dispMargin">
+            <a href="#" id='navBtn' class="btn btn-primary"  style='margin-right: 15px;'>
+             <span class="glyphicon glyphicon-menu-hamburger"></span> 
+            </a>
+             Salesman <small>v.6 <i style="font-size: 10px !important;"><i class="text-success fas fa-check-circle"></i> Modified-BTDT Ready</i></small>
+               <span class="nav navbar-nav navbar-right">
+                  <li class="dropdown">
+                      <a style='float:right;' href="#" class="dropdown-toggle" data-toggle="dropdown" id='dropThisDown'>
+                          <span class="label label-pill label-danger count" style='border-radius: 10px; font-size: 10px;'></span>
+                          <span class="fa fa-bell"></span>
+                      </a>
+                      <ul class="dropdown-menu" style='padding: 0'>
+                        <div id='notif-body'>
+                           <div id='notifs-icon-div'></div>
+                        </div>
+                        <a type="button" class="btn btn-default btn-block" href='mdAlert_bohol.php' id='seeAll' >See all</a>
+                      </ul>
+                  </li>
+                   <li class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user-circle-o"></i>
+                      </a>
+                      <ul class="dropdown-menu dropdown-user">
+                          <li><a href="Profile.html"><i class="fa fa-user-circle-o"></i> My Account</a>
+                          </li>
+                          <li class="divider"></li>
+                          <li><a href="#" id="admin-logout-btn"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                          </li>
+                      </ul>
+                   </li>
+                
+              </span>
+         </h4>
+
+         <div class="panel cust-panel">
+               <div class="panel-heading">
+                    <i class='glyphicon glyphicon-cog'></i> <span id="titleHeading"></span>
+               </div>
+               <div class="panel-body" style='background-color:#fff; color: black;'> 
+                  <div class="table-responsive">
+                    <table class="table table-hover nowrap overridesList" style="width: 100%;">
+                       <thead>
+                        <tr>
+                           <th>MD CODE</th>
+                           <th>NAME</th>
+                           <th>&#9742; SALESMAN</th>
+                           <th>&#9742; CASHIER</th>
+                           <th>&#9742; SUPPERVISOR</th>
+                           <th>DATE CREATED</th>
+                           <th>GEOCODING</th>
+                           <th>MD LEVEL</th>
+                           <th>WAREHOUSE</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
+               </div>
+         </div><!--main panel end-->
+
+           <!-- Modal -->
+          <div class="modal fade" id="salesmanDetailsModal" data-backdrop="static" data-keyboard="false" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header headerMod">
+                  <button type="button" class="close btnClose" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">SALESMAN DETAILS</h4>
+                </div>
+                <div class="modal-body salesmanMainModBody">
+                  <div class="picCont">
+                      <!-- <img class="s_Maintenace" onError="imgError(this)"/>
+                      <div class="changeImageBtn">
+                      <form id="fileForm" action="" method="post" enctype="multipart/form-data">
+                        <input type="file" class="hidden" name="fileToUpload" id="fileToUpload" accept=".jpg"/>
+                        <input type="hidden" id="imgMdCode" name="mdCode"/>
+                        <input type="hidden" id="imgSite" name="site"/>
+                        <input type="button" class="btn btn-primary btn-sm" value="UPDATE IMAGE" id="but_upload"><span class="btn btn-default btn-sm" id="uploadImg_BTN"><i class="fas fa-check"></i> SAVE</span><span class="btn btn-default btn-sm" id="cancelImg_BTN"><i class="fas fa-times"></i> CANCEL</span>
+                      </form>
+                      </div> -->
+                      <table class="table table-condesed table-striped s_body_info_table">
+                        <!--<tbody id="s_body_info"></tbody>-->
+                        <tbody>
+                          <tr>
+                            <td>Name</td>
+                            <td><strong id="name"></strong></td>
+                          </tr>
+                          <tr>
+                            <td>Color</td>
+                            <td><input type="color" name="" id="mdcolor" class="form-control"></td>
+                          </tr>
+                          <tr>
+                           <td>Contact No.</td>
+                           <td><input type="text" name="" id="contact" class="form-control" placeholder="09XXXXXXXXXX" maxlength="11"></td> 
+                          </tr>
+                          <tr>
+                            <td>MD Password</td>
+                            <TD><input type="text" name="" id="password" class="form-control"></TD>
+                          </tr>
+                          <!--<tr>
+                            <td>Password1</td>
+                            <TD><input type="text" name="" id="password1" class="form-control"></TD>
+                          </tr>-->
+                          <!-- <tr>
+                            <td>MD Level</td>
+                            <TD><input type="text" name="" id="mdlevel" class="form-control"></TD>
+                          </tr> -->
+                          <tr>
+						              <tr>
+                           <td>Call Time</td>
+                           <td><input type="text" name="" id="calltime" class="form-control"></td> 
+                          </tr>
+                            <td>Cashier (Mobile #)</td>
+                            <TD><input type="text" name="" id="eodnum1" class="form-control" placeholder="09XXXXXXXXXX" maxlength="11"></TD>
+                          </tr>
+                          <tr>
+                            <td>Supervisor Name</td>
+                            <td><input type="text" name="" id="upt_supvisorName" class="form-control" placeholder="supervisor name"></td>
+                          </tr>
+                          <tr>
+                            <td>Supervisor (Mobile #)</td>
+                            <TD><input type="text" name="" id="eodnum2" class="form-control" placeholder="09XXXXXXXXXX" maxlength="11"></TD>
+                          </tr>
+                          <tr>
+                            <td>Geolocking</td>
+                            <TD><input type="text" name="" id="geolocking" class="form-control" disabled></td>
+                          </tr>
+                          <tr>
+                            <td>Price Code</td>
+                            <td><input type="text" name="" id="priceCode" class="form-control"></td>
+                          </tr>
+                          <tr>
+                              <td>Loading Capacity</td>
+                              <td><input type="text" name="" id="capacityUpdate" class="form-control"></td>
+                            </tr>
+                          <tr>
+                            <td>Default ORD Type</td>
+                            <td><select id="defaultORDSelect" class="form-control">
+                              <option value="S">SWEEPER</option>
+                              <option value="T">TRUCK</option>
+                              <option value="B">BOOKING</option>
+                              <option value="X">BTDT</option>
+                              <option value="H">HYBRID</option>
+                              <option value="Y">BTDT - SALESMAN</option>
+                              <option value="D">BTDT - DRIVER</option>
+                            </select></td>
+                          </tr>
+
+                          <tr class="btdtfield">
+                            <td>Warehouse</td>
+                            <td>
+                                <select id="btdtwarehouseSelect" class="form-control"></select>
+                            </td>
+                          </tr>
+                          <tr id="sweeperTable">
+                            <td colspan="2">
+                              <!-- <h5 class="text-info"><i class="fas fa-users"></i> Sweeper Account</h5> -->
+                              <table class="table table-sm table-striped">
+                                <thead>
+                                  <tr>
+                                    <td>mdCode</td>
+                                    <td>Salesman</td>
+                                    <td style="text-align: right;"><button class="btn-sm btn btn-info" onclick="openSweeperModal()">Add Account</button></td>
+                                  </tr>
+                                </thead>
+                                <tbody id="sweeperTbody">
+                                  <tr>
+                                    <td colspan="3" style="text-align: center;">Press 'Add Account' button to set-up sweeper account/s for this salesman.</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </td>
+                          </tr>
+                          <tr id="btdtTableCont">
+                            <td colspan="2">
+                              <!-- <h5 class="text-info"><i class="fas fa-users"></i> Sweeper Account</h5> -->
+                                <span class="text-info">BTDT Assigned Salesman</span>
+                                <hr>
+                                  <table class="table table-sm table-striped">
+                                    <thead>
+                                      <tr>
+                                        <td>MDCODE</td>
+                                        <td>BTDT - Salesman</td>
+                                        <td style="text-align: right;"><button class="btn-sm btn btn-info" onclick="openBTDTModal()">Add Account</button></td>
+                                      </tr>
+                                    </thead>
+                                    <tbody id="btdtTbody">
+                                      <tr>
+                                        <td colspan="3" style="text-align: center;">Press 'Add Account' button to set-up btdt account/s for this driver.</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                               
+                       
+                            
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>STK List Default</td>
+                            <td><select id="stkListSelect" class="form-control">
+                              <option value="MH">Musthave only</option>
+                              <option value="MH+">Musthave w/ previous purchases</option>
+                            </select></td>
+                          </tr>
+                          <tr>
+                            <td>Minimun Stocktake SKU</td>
+                            <td><input type="number" name="" id="minstksku" class="form-control"></td>
+                          </tr>
+                          <TR>
+                            <td colspan="2">
+                              <em style="color: #808080;">*value must be 0 - 99</em>
+                            </td>
+                          </TR>
+                          <!-- <tr>
+                            <td>Preroute CL</td>
+                            <td><span class="text-indicator-preroute"></span>
+                              <label class="switch pull-right"><input type="checkbox" class="preroutecheck">
+                                <span class="slider round"></span>
+                              </label></td>
+                          </tr>
+                          <tr>
+                            <td>Postroute CL</td>
+                            <td><span class="text-indicator-postroute"></span>
+                              <label class="switch pull-right"><input type="checkbox" class="postroutecheck">
+                                <span class="slider round"></span>
+                              </label></td>
+                          </tr>
+                          <tr>
+                            <td>Stocktake CL</td>
+                            <td><span class="text-indicator-stocktake"></span>
+                              <label class="switch pull-right"><input type="checkbox" class="stocktakecheck">
+                                <span class="slider round"></span>
+                              </label></td>
+                          </tr> -->
+                          <tr>
+                            <td>SalesmanType</td>
+                            <td><span class="text-indicator-SalesmanType"></span>
+                              <label class="switch pull-right"><input type="checkbox" class="SalesmanType">
+                                <span class="slider round"></span>
+                              </label></td>
+                          </tr>
+                          <tr>
+                            <td>EOD</td>
+                            <td><span class="text-indicator-eod"></span>
+                              <label class="switch pull-right"><input type="checkbox" class="eodcheck">
+                                <span class="slider round"></span>
+                              </label></td>
+                          </tr>
+					  		          <tr>
+                            <td>Is Hybrid</td>
+                            <td><span class="text-indicator-hybrid"></span>
+                              <label class="switch pull-right"><input type="checkbox" class="ishybrid">
+                                <span class="slider round"></span>
+                              </label></td>
+                          </tr>
+                          <tr>
+                            <td>Restrict New Customer</td>
+                            <td><span class="text-indicator-newcustomer"></span>
+                              <label class="switch pull-right"><input type="checkbox" class="newcustomer">
+                                <span class="slider round"></span>
+                              </label></td>
+                          </tr>
+                          <tr>
+                            <td>Disable OTP</td>
+                            <td><span class="text-indicator-otpdisabled"></span>
+                              <label class="switch pull-right"><input type="checkbox" class="otpdisabled">
+                                <span class="slider round"></span>
+                              </label></td>
+                          </tr>
+                          
+                        </tbody>
+                      </table>
+                      <input type="hidden" name="" id="mdcodeholder">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-danger pull-left" id="disabled" onclick="disableSalesman()" data-dismiss="modal">Disable</button>
+                  <button class="btn btn-warning" style="float:left;" id="resetBtn" onclick="resetAccount()">Reset Account</button>
+                  <button class="btn btn-primary" id="savaChangesBtn" onclick="saveDataChanges()">Save Changes</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="addSalesmanModal" data-backdrop="static" data-keyboard="false" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header headerMod">
+                  <button type="button" class="close btnClose" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">ADD NEW SALESMAN</h4>
+                </div>
+                <div class="modal-body salesmanMainModBody">
+                  <div class="picCont">
+                      <!--<img class="s_Maintenace" onError="imgError(this)"/>
+                      <div class="changeImageBtn">
+                      <form id="fileForm" action="" method="post" enctype="multipart/form-data">
+                        <input type="file" class="hidden" name="fileToUpload" id="fileToUpload" accept=".jpg"/>
+                        <input type="hidden" id="imgMdCode" name="mdCode"/>
+                        <input type="hidden" id="imgSite" name="site"/>
+                        <input type="button" class="btn btn-primary btn-sm" value="UPDATE IMAGE" id="but_upload"><span class="btn btn-default btn-sm" id="uploadImg_BTN"><i class="fas fa-check"></i> SAVE</span><span class="btn btn-default btn-sm" id="cancelImg_BTN"><i class="fas fa-times"></i> CANCEL</span>
+                      </form>
+                      </div>-->
+                      <table class="table table-condesed table-striped s_body_info_table">
+                        <!--<tbody id="s_body_info"></tbody>-->
+                        <tbody>
+                          <tr>
+                            <td>Salesman Type</td>
+                            <td>
+                              <select id="salesmanTypeSelect" class="form-control">
+                                <option value="" disabled selected hidden>Choose here..</option>
+                                <option value="GROC">GROC</option>
+                                <option value="NP">NP</option>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Name</td>
+                            <td>
+                              <div style="margin: 0 auto; text-align: center;">
+                                <span id="fetchCont" class="text-primary"><i class="fa fa-spin fa-spinner"></i> fetching data...</span>
+                              </div>
+                              <select id="mdNameH" class="form-control"></select>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Password</td>
+                            <td><input type="password" name="" id="passwordH" class="form-control"></td>
+                          </tr>
+                          <tr>
+                            <td>Calltime</td>
+                            <td><input type="text" name="" id="calltimeH" data-format="hh:mm A" class="form-control"></td>
+                          </tr>
+                          <tr>
+                            <td>Price Code</td>
+                            <td>
+                              <select id="priceCodeH" class="form-control">
+                              </select>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Default Ord. Type</td>
+                            <td>
+                              <select id="defOrdTypeH" class="form-control">
+                                <option value="" disabled selected hidden>Choose here..</option>
+                                <option value="T">TRUCK</option>
+                                <option value="B">BOOKING</option>
+                                <option value="X">BTDT</option>
+                                <option value="H">HYBRID</option>
+                                <option value="Y">BTDT - SALESMAN</option>
+                                <option value="D">BTDT - DRIVER</option>
+                              </select>
+                            </td>
+                          </tr>
+                          <tr>
+                              <td>Loading Capacity</td>
+                              <td><input type="text" name="" id="capacityH" class="form-control"></td>
+                            </tr>
+                          <tr>
+                            <td>Color</td>
+                            <td><input type="color" name="" id="mdcolorH" class="form-control"></td>
+                          </tr>
+                          <tr>
+                           <td>Contact No.</td>
+                           <td><input type="text" name="" id="contactH" maxlength="11" class="form-control" placeholder="11 digit number format"></td> 
+                          </tr>
+                          <tr>
+                           <td>Cashier (Mobile #)</td>
+                           <td><input type="text" name="" id="eod1H" maxlength="11" class="form-control" placeholder="11 digit number format"></td> 
+                          </tr>
+                           <tr>
+                            <td>Supervisor Name</td>
+                            <td><input type="text" name="" id="supvisorName" class="form-control" placeholder="supervisor name"></td>
+                          </tr>
+                          <tr>
+                           <td>Supervisor (Mobile #)</td>
+                           <td><input type="text" name="" id="eod2H" maxlength="11" class="form-control" placeholder="11 digit number format"></td> 
+                          </tr>
+                        </tbody>
+                      </table>
+                      
+                  </div>
+                  
+                </div>
+                <div class="modal-footer">
+                  <div class="alert alert-danger error" style="float: left; width: 300px;">
+                    <strong><i class="fas fa-exclamation-circle"></i> Empty fields are not accepted!</strong>
+                  </div>
+                  <button class="btn btn-primary" id="saveBtn" onclick="exec_Save_Salesman()">Save</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal fade" id="sweeperModal" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Select Salesman</h4>
+                </div>
+                <div class="modal-body">
+                  <select id="sweeperSelect" class="form-control"></select>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" onclick="copyAccountSweeper()">Copy Account</button>
+                </div>
+              </div>
+            </div>
+            </div>
+
+
+            <div class="modal fade" id="btdtsalesmanModal" role="dialog">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Select Modified-BTDT Salesman</h4>
+                  </div>
+                  <div class="modal-body">
+                    <select id="btdtsalesmanSelect" class="form-control"></select>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="copyAccountBTDT()">Add Account</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            
+          <div class="modal fade" id="duplicateUserModal" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">SESSION ENDED</h4>
+                </div>
+                <div class="modal-body">
+                  <p>Sorry, your session has been disconnected. Another user is currently using your account.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" onclick="cofirmationDupUser()">GOT IT</button>
+                </div>
+              </div>
+            </div>
+            </div>
+  </div><!--#main-->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js "></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.print.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script type="text/javascript" src="js/clockface.js"></script>
+  <script type="text/javascript" src="/web/web-commons.js"></script>
+  <script type="text/javascript" src="/js/bootbox.min.js"></script>
+  <script type="text/javascript" src="/js/bootstrap-multiselect-master/dist/js/bootstrap-multiselect.js"></script>
+  <!-- <script type="text/javascript" src="js/duplicate-user.js"></script> -->
+  <script src="/HASH/md5.js"></script>
+  <script src="/HASH/aes.js"></script>
+  <script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+  <script src="js/chatApi.js"></script>
+  <script type="text/javascript" language="javascript">
+
+  var user = localStorage.getItem("adminUserName");
+
+  getcompname();
+  function getcompname(){
+  $.ajax ({
+      url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+      type: "GET",
+      data: {"type":"GET_COMPANYNAME", "CONN":con_info},
+      dataType: "json",
+      crossDomain: true,
+      cache: false,            
+        success: function(r){ 
+          $('#titleHeading').html(r[0].company.toUpperCase());
+        }
+    });
+  } 
+ 
+
+ $(function(){
+   $('#calltimeH').clockface();  
+ });
+ 
+ $('#navDrop').click(function() {
+   $("i", this).toggleClass("glyphicon-menu-up glyphicon-menu-down");
+  });
+
+ $('.error').hide();
+
+ function openSweeperModal(){
+  $('#sweeperModal').modal('show');
+ }
+  
+
+ function openBTDTModal(){
+  $('#btdtsalesmanModal').modal('show');
+ }
+
+  var sourceData;
+  function salesmanDataObject(){
+      $.ajax ({
+            url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {"type":"salesmanMaintenance", "CONN":con_info},
+            dataType: "json",
+            crossDomain: true,
+            cache: false,   
+            async: false,         
+              success: function(r){ 
+                 var localObj = [];
+                for(var x = 0; x < r.length; x++){
+                  localObj.push({
+                      mdCodeplusColor: '<i class="fas fa-circle" style="color: '+r[x].mdColor+'"></i> ' +r[x].mdCode,
+                      mdCode:r[x].mdCode,
+                      sname: r[x].sname,
+                      contactCellNumber: r[x].contactCellNumber,
+                      eodNumber1: r[x].eodNumber1,
+                      eodNumber2: r[x].eodNumber2,
+                      mdUserCreated: r[x].mdUserCreated,
+                      geoLocking: r[x].geoLocking,
+                      mdLevel: r[x].mdLevel,
+					            calltime: r[x].calltime,
+                      mdColor: r[x].mdColor,
+                      mdPassword: r[x].mdPassword,
+                      customerLastDateReset: r[x].customerLastDateReset,
+                      priceCode: r[x].priceCode,
+                      isGEORest: r[x].isGEORest,
+                      siteCode: r[x].siteCode,
+                      Password1: r[x].Password1,
+                      PreRouteCL: r[x].PreRouteCL,
+                      PostRouteCL: r[x].PostRouteCL,
+                      StockTakeCL: r[x].StockTakeCL,
+                      ImmediateHead: r[x].ImmediateHead,
+                      EOD: r[x].EOD,
+                      DefaultOrdType: r[x].DefaultOrdType,
+                      stkRequired: r[x].stkRequired,
+                      stkList: r[x].stkList,
+                      capacity: r[x].loadingCap,
+					            ishybrid: r[x].ishybrid,
+                      newCustomer: r[x].newCustomer,
+                      otpdisabled: r[x].DisableOTP,
+                      SalesmanType: r[x].SalesmanType,
+                      WarehouseCode: r[x].WarehouseCode
+                  });
+                }
+                sourceData = localObj;
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  alert("ERROR OCCUR: " + XMLHttpRequest.responseText);
+               }
+            });
+    }
+
+  var tableData;
+  var prerouteData, postrouteData, stoctakeData, eodData, ishybridData, newCustomer, otpdisabledData, SalesmanTypeData;
+    function salesmanDataTable(){
+       $('.loader-indicator h3').hide();
+        tableData =  $('table.overridesList').DataTable({
+                    "dom": 'Bfrtip',
+                    "responsive": true,
+                    "data": sourceData,
+                    "scrollX": true,
+                    "select": true,
+                    "ordering": true,
+                    "columns": [
+                        { "data": "mdCodeplusColor"},
+                        { "data": "sname"},
+                        { "data": "contactCellNumber" },
+                        { "data": "eodNumber1" },
+                        { "data": "eodNumber2" },
+                        { "data": "mdUserCreated"},
+                        { "data": "geoLocking"},
+                        { "data": "mdLevel"},
+                        { "data": "WarehouseCode"}
+                    ],
+                    buttons: [
+                       {
+                            extend: 'collection',
+                            text: 'Export',
+                            buttons: [ 'excel', 'print', 'copy' ]
+                       },
+                       {
+                        text: 'ADD NEW SALESMAN',
+                        className: 'addnewsalesman',
+                        action: function(e, dt, node, config){
+                          $('.error').hide();
+                          $('#mdNameH').val('');
+                          $('#salesmanTypeSelect').val('').change();
+                          $('#passwordH').val('');
+                          $('#mdcolorH').val('');
+                          $('#capacityH').val('');
+                          $('#contactH').val('');
+                          $('#eod1H').val('');
+                          $('#eod2H').val('');
+                          $('#addSalesmanModal').modal('show');
+                          salesmanList();
+                        }
+                      }
+                    ],
+                    "language": {
+                      "emptyTable": "No available salesman records as of now."
+                    },
+                    "aaSorting": [[ 0, "desc" ]],
+                    rowCallback: function(row, data, index){
+                  } 
+           });
+        $('table.overridesList').css('width', '100%')
+
+        $('table.overridesList tbody').on('click', 'tr', function () {
+            var tr = $(this).closest('tr');
+            var row = tableData.row(tr);
+            var mdCode = tr.find('td:eq(0)').text();
+            console.log(mdCode);
+            viewsalesman(row.data());
+        });
+
+        function viewsalesman(r){
+          GLOBALSWEEPERACCOUNTHOLDER = [];
+          GLOBALBTDTACCOUNTHODER = [];
+          $('#sweeperTbody #btdtTbody').html(` <tr>
+                                    <td colspan="3" style="text-align: center;">Press 'Add Account' button to set-up sweeper account/s for this salesman.</td>
+                                  </tr>`);
+
+          $('#sweeperTable').hide();
+          $('#btdtTableCont').hide();
+          $('#name').html(r.sname);
+          $('#contact').val(r.contactCellNumber);
+          $('#password').val(r.mdPassword);
+          $('#mdcodeholder').val(r.mdCode);
+
+          $('#mdcolor').val(r.mdColor);
+          $('#password1').val(r.Password1);
+          $('#mdlevel').val(r.mdLevel);
+          $('#eodnum1').val(r.eodNumber1);
+          $('#eodnum2').val(r.eodNumber2);
+          $('#geolocking').val(r.geoLocking);
+          $('#priceCode').val(r.priceCode);
+          $('#calltime').val(r.calltime);
+          $('#capacityUpdate').val(r.capacity);
+			
+          $('#defaultORDSelect').val(r.DefaultOrdType);
+          $('#stkListSelect').val(r.stkList);
+          $('#minstksku').val(r.stkRequired);
+
+          $('#upt_supvisorName').val(r.ImmediateHead);
+
+          $('#btdtwarehouseSelect').val(r.WarehouseCode);
+
+          if(r.DefaultOrdType == 'Y'){
+            $('.btdtfield').show();
+          }else{
+            $('.btdtfield').hide();
+          }
+
+          console.log('default ord: ' + r.DefaultOrdType);
+
+          if(r.PreRouteCL == '1'){
+            $('.text-indicator-preroute').html('<span style="color: green">ENABLED</span>');
+            $('.preroutecheck').prop("checked", true);
+          }else{
+            $('.text-indicator-preroute').html('<span style="color: red">DISABLED</span>');
+            $('.preroutecheck').prop("checked", false);
+          }
+
+          if(r.PostRouteCL == '1'){
+           $('.text-indicator-postroute').html('<span style="color: green">ENABLED</span>');
+            $('.postroutecheck').prop("checked", true);
+          }else{
+             $('.text-indicator-postroute').html('<span style="color: red">DISABLED</span>');
+             $('.postroutecheck').prop("checked", false);
+          }
+      
+          if(r.StockTakeCL == '1'){
+            $('.text-indicator-stocktake').html('<span style="color: green">ENABLED</span>');
+            $('.stocktakecheck').prop("checked", true);
+          }else{
+             $('.text-indicator-stocktake').html('<span style="color: red">DISABLED</span>');
+             $('.stocktakecheck').prop("checked", false);
+          }
+
+          if(r.EOD == '1'){
+            $('.eodcheck').prop("checked", true);
+            $('.text-indicator-eod').html('<span style="color: green">ENABLED</span>');
+          }else{
+             $('.eodcheck').prop("checked", false);
+             $('.text-indicator-eod').html('<span style="color: red">DISABLED</span>');
+          }
+		
+          if(r.ishybrid == '1'){
+              $('.ishybrid').prop("checked", true);
+              $('.text-indicator-hybrid').html('<span style="color: green">ENABLED</span>');
+          }else{
+             $('.ishybrid').prop("checked", false);
+             $('.text-indicator-hybrid').html('<span style="color: red">DISABLED</span>');
+          }
+
+          if(r.newCustomer == '1'){
+            $('.newcustomer').prop("checked", true);
+            $('.text-indicator-newcustomer').html('<span style="color: green">ENABLED</span>');
+          }else{
+             $('.newcustomer').prop("checked", false);
+             $('.text-indicator-newcustomer').html('<span style="color: red">DISABLED</span>');
+          }
+
+          if(r.otpdisabled == 'Y'){
+            $('.otpdisabled').prop("checked", true);
+            $('.text-indicator-otpdisabled').html('<span style="color: green">YES</span>');
+          }else{
+             $('.otpdisabled').prop("checked", false);
+             $('.text-indicator-otpdisabled').html('<span style="color: red">NO</span>');
+          }
+
+          if(r.SalesmanType == null || r.SalesmanType == ''){
+            $('.SalesmanType').prop("checked", true);
+            $('.text-indicator-SalesmanType').html('<span style="color: green">GROC</span>');
+          }else if(r.SalesmanType == 'GROC'){
+            $('.SalesmanType').prop("checked", true);
+            $('.text-indicator-SalesmanType').html('<span style="color: green">GROC</span>');
+          }else{
+             $('.SalesmanType').prop("checked", false);
+             $('.text-indicator-SalesmanType').html('<span style="color: red">NP</span>');
+          }
+          if(r.DefaultOrdType == 'S'){
+            get_sweeper_accounts(r.mdCode);
+            $('#btdtTableCont').hide();
+            $('#sweeperTable').show();
+          }
+
+          if(r.DefaultOrdType == 'D'){
+            get_btdt_salesman_accounts(r.mdCode);
+            $('#sweeperTable').hide();
+            $('#btdtTableCont').show();
+
+          }
+          $('#salesmanDetailsModal').modal('show');
+    }
+}
+
+
+salesmanList_sweeper();
+salesmanList_btdt();
+
+
+        $('.preroutecheck').click(function() {
+          if($('.preroutecheck').prop("checked") == true){
+              $('.text-indicator-preroute').html('<span style="color: green">ENABLED</span>');
+              prerouteData = 1;
+            }
+            else if($('.preroutecheck').prop("checked") == false){
+                $('.text-indicator-preroute').html('<span style="color: red">DISABLED</span>');
+              prerouteData = 0;
+            }
+        });
+
+        $('.postroutecheck').click(function() {
+          if($('.postroutecheck').prop("checked") == true){
+              $('.text-indicator-postroute').html('<span style="color: green">ENABLED</span>');
+              postrouteData = 1;
+            }
+            else if($('.postroutecheck').prop("checked") == false){
+                $('.text-indicator-postroute').html('<span style="color: red">DISABLED</span>');
+              postrouteData = 0;
+            }
+        });
+
+        $('.stocktakecheck').click(function() {
+          if($('.stocktakecheck').prop("checked") == true){
+              $('.text-indicator-stocktake').html('<span style="color: green">ENABLED</span>');
+              stoctakeData = 1;
+            }
+            else if($('.stocktakecheck').prop("checked") == false){
+                $('.text-indicator-stocktake').html('<span style="color: red">DISABLED</span>');
+              stoctakeData = 0;
+            }
+        });
+
+        $('.eodcheck').click(function() {
+          if($('.eodcheck').prop("checked") == true){
+              $('.text-indicator-eod').html('<span style="color: green">ENABLED</span>');
+              eodData = 1;
+            }
+            else if($('.eodcheck').prop("checked") == false){
+                $('.text-indicator-eod').html('<span style="color: red">DISABLED</span>');
+              eodData = 0;
+            }
+        });
+		
+		$('.ishybrid').click(function() {
+          if($('.ishybrid').prop("checked") == true){
+              $('.text-indicator-hybrid').html('<span style="color: green">ENABLED</span>');
+              ishybridData = 1;
+              console.log('hybrid val: ' + ishybridData);
+            }
+            else if($('.ishybrid').prop("checked") == false){
+                $('.text-indicator-hybrid').html('<span style="color: red">DISABLED</span>');
+              ishybridData = 0;
+              console.log('hybrid val: ' + ishybridData);
+            }
+        });
+
+
+        $('.newcustomer').click(function() {
+          if($('.newcustomer').prop("checked") == true){
+              $('.text-indicator-newcustomer').html('<span style="color: green">ENABLED</span>');
+              newCustomer = 1;
+              console.log('newCustomer val: ' + newCustomer);
+            }
+            else if($('.newcustomer').prop("checked") == false){
+                $('.text-indicator-newcustomer').html('<span style="color: red">DISABLED</span>');
+                newCustomer = 0;
+              console.log('newCustomer val: ' + newCustomer);
+            }
+        });
+
+        $('.otpdisabled').click(function() {
+          if($('.otpdisabled').prop("checked") == true){
+              $('.text-indicator-otpdisabled').html('<span style="color: green">YES</span>');
+              otpdisabledData = 'Y';
+              console.log('otpdisabled val: ' + otpdisabledData);
+            }
+            else if($('.otpdisabled').prop("checked") == false){
+                $('.text-indicator-otpdisabled').html('<span style="color: red">NO</span>');
+                otpdisabledData = 'N';
+              console.log('otpdisabled val: ' + otpdisabledData);
+            }
+        });
+
+        $('.SalesmanType').click(function() {
+          if($('.SalesmanType').prop("checked") == true){
+              $('.text-indicator-SalesmanType').html('<span style="color: green">GROC</span>');
+              SalesmanTypeData = 'GROC';
+              console.log('SalesmanType val: ' + SalesmanTypeData);
+            }
+            else if($('.SalesmanType').prop("checked") == false){
+                $('.text-indicator-SalesmanType').html('<span style="color: red">NP</span>');
+                SalesmanTypeData = 'NP';
+              console.log('SalesmanType val: ' + SalesmanTypeData);
+            }
+        });
+
+        
+        
+
+    //$('.changeImageBtn').hide();
+    /*$('.picCont').hover(function() {
+       console.log('you hover me');
+       $('.changeImageBtn').fadeIn();
+    });*/
+    
+    var imgHolderURL;
+    function viewSalesmanDetails(data){
+      $('#savaChangesBtn').hide();
+      var mdCode = data.mdCode;
+      imgHolderURL = "../img/salesman_"+user+"/"+data.mdCode+".jpg";
+      
+      $('#s_body_info').html(thisBodyDetails);
+      $('#salesmanDetailsModal').modal('show');
+      $('#imgMdCode').val(mdCode);
+      $('#imgSite').val(user);
+      $(".s_Maintenace").attr("src","../img/salesman_"+user+"/"+mdCode+".jpg"+"?"+ new Date().getTime());
+
+      $("#but_upload").show();
+      $("#uploadImg_BTN").hide();
+      $("#cancelImg_BTN").hide();
+    }
+
+  salesmanDataObject();
+  salesmanDataTable();
+
+function checksalesmannumber(){
+  var contact = $('#contact').val();
+  var mdcode = $('#mdcodeholder').val();
+  var res = '';
+  $.ajax ({
+    url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+    type: "GET",
+    data: {
+          "type":"CHECK_SALESMAN_NUMBER",
+          "contact": contact,
+          "mdcode":mdcode,
+          "CONN":con_info
+        },
+    dataType: "json",
+    crossDomain: true,
+    cache: false,   
+    async: false,
+      success: function(r){
+         res = r;
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        alert("ERROR OCCUR: " + XMLHttpRequest.responseText);
+      }
+  });
+
+  return res;
+}
+
+$('#sweeperTable').hide();
+$('#defaultORDSelect').on('change', function() {
+  var val = this.value;
+  if(val == 'S'){
+    $('#sweeperTable').show();
+  }else{
+    $('#sweeperTable').hide();
+    GLOBALSWEEPERACCOUNTHOLDER = [];
+  }
+
+  if(val == 'D'){
+    $('#btdtTableCont').show();
+  }else{
+    $('#btdtTableCont').hide();
+    GLOBALBTDTACCOUNTHODER = [];
+  }
+});
+
+
+
+
+
+function saveDataChanges(){
+  var mdcode = $('#mdcodeholder').val();
+  var password = $('#password').val();
+  var contact = $('#contact').val();
+  var color = $('#mdcolor').val();
+  var password1 = $('#password1').val();
+  var mdlevel = $('#mdlevel').val();
+  var eod1 = $('#eodnum1').val();
+  var eod2 = $('#eodnum2').val();
+  var geolocking = $('#geolocking').val();
+  var pricecode = $('#priceCode').val();
+  var calltime = $('#calltime').val();	
+  var capacity = $('#capacityUpdate').val();
+
+  var defordsel = $('#defaultORDSelect').val();
+  var stklist = $('#stkListSelect').val();
+  var stkreq = $('#minstksku').val();
+  var supervisor = $('#upt_supvisorName').val();
+
+  var warehouseCode = $('#btdtwarehouseSelect').val();
+
+  if($.trim(contact) == ''){
+    alert('Salesman contact number is required.');
+  }else if($.trim(supervisor) == ''){
+    alert('Supervisor name is required.');
+  }else{
+    var phonechecker = checksalesmannumber();
+    if(phonechecker == 1){
+      alert('Phone number ' + contact + ' already exist. Please try again.');
+    }else{
+      if(confirm('Are you sure you want to save all these changes?')) {
+          $.ajax ({
+            url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {
+                  "type":"update_salesman_maintenance",
+                  "geolocking": geolocking,
+                  "mdPassword":password,
+                  "password1":password1,
+                  "mdlevel":mdlevel,
+                  "eodNumber1":eod1,
+                  "eodNumber2":eod2,
+                  "contactcell":contact,
+                  "color":color,
+                  "pricecode":pricecode,
+                  //"thumbnail": '',
+                  "calltime":calltime,
+                  "defordsel":defordsel,
+                  "stklist":stklist,
+                  "stkreq":stkreq,
+                  "pre": prerouteData,
+                  "post": postrouteData,
+                  "stack": stoctakeData,
+                  "oedcl": eodData,
+                  "ishybrid":ishybridData,
+                  "mdCode": mdcode,
+                  "capacity":capacity,
+                  "newCustomer":newCustomer,
+                  'otpdisabled':otpdisabledData,
+                  'SalesmanTypeData':SalesmanTypeData,
+                  'supervisor':supervisor,
+                  'warehouseCode':warehouseCode,
+                  "CONN":con_info
+                },
+            dataType: "json",
+            crossDomain: true,
+            cache: false,   
+              success: function(r){ 
+                if(r == 1){
+
+                  //check if defortype is sweeper
+                  if(defordsel == 'S'){
+                    execinsert_Sweeper();
+                  }
+                  
+                  if(defordsel == 'D'){
+                    console.log('btdt_driver');
+                    execinsert_btdt();
+                  }
+                  
+
+                  salesmanDataObject();
+                  tableData.clear().rows.add(sourceData).draw();
+                  alert('All data was successfully updated!');
+            
+                }else{
+                  alert('Something went wrong! ' + r);
+                }
+            
+            $('#salesmanDetailsModal').modal('hide');
+                /*$('#savaChangesBtn').prop('disabled', false);
+                $('#savaChangesBtn').html('Save Changes');
+                $('#savaChangesBtn').hide();*/
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("ERROR OCCUR: " + XMLHttpRequest.responseText);
+                /*$('#savaChangesBtn').prop('disabled', false);
+                $('#savaChangesBtn').html('Save Changes');*/
+              }
+            });
+      }//if
+    } //else
+    
+  }//else
+  
+}
+
+function check_if_empty(){
+  var mdName = $('#mdNameH').val();
+  var mdPassword = $('#passwordH').val();
+  var contCellNum = $('#mdcolorH').val();
+  var capacity = $('#capacityH').val();
+  var mdColor = $('#contactH').val();
+  var eod1 = $('#eod1H').val();
+  var eod2 = $('#eod2H').val();
+  var calltimeH = $('#calltimeH').val();
+  var priceCodeH = $('#priceCodeH').val();
+  var defOrdTypeH = $('#defOrdTypeH').val();
+  var salesmanType = $('#salesmanTypeSelect').val();
+
+  if(mdName == '' ||
+    mdPassword == '' ||
+    contCellNum == '' ||
+    mdColor == '' ||
+    eod1 == '' ||
+    eod2 == '' ||
+    calltimeH == '' ||
+    priceCodeH == '' ||
+    capacity == '' ||
+    defOrdTypeH == '' ||
+    salesmanType == undefined){
+    return false;
+  }
+
+  return true;
+}
+
+
+function salesmanList(){
+  //$('#fetchCont').show();
+  $('#mdNameH').multiselect('destroy');
+
+  $.ajax ({
+        url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php", 
+        type: "GET",
+        data: {"type":"SALESMAN_LIST_FOR_INSERT", "CONN":con_info},
+        dataType: "json",
+        crossDomain: true,
+        cache: false,     
+        async: false,       
+        success: function(data){           
+         $('#fetchCont').hide();      
+         $('#mdNameH').html('');
+         $('#sweeperSelect').html('');
+         $('#mdNameH').append('<option value="" disabled selected hidden>Choose here..</option>');
+          for(var x = 0; x<data.length; x++){
+           $('#mdNameH').append('<option value="'+data[x].mdsalesmancode+'">'+data[x].name+'</option>');
+          }
+           $('#mdNameH').multiselect({
+              numberDisplayed: 1,
+              enableCaseInsensitiveFiltering: true,
+              includeSelectAllOption: true,
+              selectAllNumber: true,
+              buttonWidth: '300px',
+              maxHeight: 300
+           });
+        }//success here;
+    })
+}
+
+function salesmanList_sweeper(){
+  $('#mdNameH').multiselect('destroy');
+  $.ajax ({
+        url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php", 
+        type: "GET",
+        data: {"type":"get_all_salesman_sweeper", "CONN":con_info},
+        dataType: "json",
+        crossDomain: true,
+        cache: false,     
+        async: false,       
+        success: function(data){    
+         $('#sweeperSelect').html('');
+         $('#sweeperSelect').append('<option value="" disabled selected hidden>Choose here..</option>');
+          for(var x = 0; x<data.length; x++){
+           $('#sweeperSelect').append('<option value="'+data[x].mdCode+'">'+data[x].Salesman+'</option>');
+          }
+
+           $('#sweeperSelect').multiselect({
+              numberDisplayed: 1,
+              enableCaseInsensitiveFiltering: true,
+              includeSelectAllOption: true,
+              selectAllNumber: true,
+              buttonWidth: '100%',
+              maxHeight: 300
+           });
+        }//success here;
+    })
+}
+
+
+function salesmanList_btdt(){
+  $('#btdtsalesmanSelect').multiselect('destroy');
+  $.ajax ({
+        url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php", 
+        type: "GET",
+        data: {"type":"get_all_salesman_avl_btdt", "CONN":con_info},
+        dataType: "json",
+        crossDomain: true,
+        cache: false,     
+        async: false,       
+        success: function(data){    
+         $('#btdtsalesmanSelect').html('');
+         $('#btdtsalesmanSelect').append('<option value="" disabled selected hidden>Choose here..</option>');
+          for(var x = 0; x<data.length; x++){
+           $('#btdtsalesmanSelect').append('<option value="'+data[x].mdCode+'">'+data[x].Salesman+'</option>');
+          }
+
+           $('#btdtsalesmanSelect').multiselect({
+              numberDisplayed: 1,
+              enableCaseInsensitiveFiltering: true,
+              includeSelectAllOption: true,
+              selectAllNumber: true,
+              buttonWidth: '100%',
+              maxHeight: 300
+           });
+        }//success here;
+    })
+}
+
+priceCode();
+function priceCode(){
+  $('#fetchCont').show();
+  $('#mdNameH').multiselect('destroy');
+  $('#priceCodeH').html('');
+  $.ajax ({
+        url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php", 
+        type: "GET",
+        data: {"type":"PRICE_CODE", "CONN":con_info},
+        dataType: "json",
+        crossDomain: true,
+        cache: false,            
+        success: function(r){         
+        var cont = '';
+          $('#priceCodeH').append('<option value="" disabled selected hidden>Choose here..</option>');
+          for(var x = 0; x<r.length; x++){
+            cont += '<option value='+r[x].priceCode+'>'+r[x].priceCode+'</option>';
+          }
+          $('#priceCodeH').append(cont);
+        }//success here;
+    })
+}
+
+   (function($) {
+      $.fn.inputFilter = function(inputFilter) {
+        return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {
+          if (inputFilter(this.value)) {
+            this.oldValue = this.value;
+            this.oldSelectionStart = this.selectionStart;
+            this.oldSelectionEnd = this.selectionEnd;
+          } else if (this.hasOwnProperty("oldValue")) {
+            this.value = this.oldValue;
+            this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+          }
+        });
+      };
+    }(jQuery));
+
+    $("#contactH").inputFilter(function(value) {
+        return /^\d*$/.test(value); 
+    });
+
+    $("#contact").inputFilter(function(value) {
+        return /^\d*$/.test(value); 
+    });
+
+    $("#eodnum1").inputFilter(function(value) {
+        return /^\d*$/.test(value); 
+    });
+
+    $("#eodnum2").inputFilter(function(value) {
+        return /^\d*$/.test(value); 
+    });
+
+    $("#eod1H").inputFilter(function(value) {
+        return /^\d*$/.test(value); 
+    });
+
+    $("#eod2H").inputFilter(function(value) {
+        return /^\d*$/.test(value); 
+    });
+
+function exec_Save_Salesman(){
+  var mdName = $("#mdNameH option:selected").text();
+  var mdSalesmanCode = $('#mdNameH').val();
+  var mdPassword = $('#passwordH').val();
+  var mdColor = $('#mdcolorH').val();
+  var contCellNum = $('#contactH').val();
+  var capacity = $('#capacityH').val();
+  var eod1 = $('#eod1H').val();
+  var eod2 = $('#eod2H').val();
+  var calltimeH = $('#calltimeH').val();
+  var priceCodeH = $('#priceCodeH').val();
+  var defOrdTypeH = $('#defOrdTypeH').val();
+  var supervisor = $('#supvisorName').val();
+  var salesmanType = $('#salesmanTypeSelect').val();
+
+  $('.error').removeClass('shakeit');
+  if(!check_if_empty()){
+    $('.error').show();
+    $('.error').addClass('shakeit');
+  }else{
+    $('.error').hide();
+    $('#saveBtn').html("<i class='fa fa-spin fa-spinner'></i> saving...");
+    $('#saveBtn').prop('disabled', true);
+
+      $.ajax ({
+      url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+      type: "GET",
+      data: {
+              "type":"INSERT_SALESMAN",
+              "CONN":con_info,
+              "mdName":mdName.toUpperCase(),
+              "mdSalesmanCode":mdSalesmanCode.toUpperCase(),
+              "mdPassword":mdPassword,
+              "contCellNum":contCellNum,
+              "mdColor":mdColor,
+              "eod1":eod1,
+              "eod2":eod2,
+              "capacity":capacity,
+              "calltimeH":calltimeH,
+              "priceCodeH":priceCodeH,
+              "defOrdTypeH":defOrdTypeH,
+              "supervisor":supervisor,
+              "salesmanType":salesmanType
+            },
+      dataType: "json",
+      crossDomain: true,
+      cache: false,   
+      async: false,         
+        success: function(r){ 
+          if(r == 1){
+            salesmanDataObject();
+            tableData.clear().rows.add(sourceData).draw();
+            alert('Salesman succesfully inserted!');
+            $('#addSalesmanModal').modal('hide');
+          }else if(r == 'DUPLICATED'){
+            alert('SALESMAN ALREADY EXIST: \nCould not insert salesman ' + mdName.toUpperCase().trim() + '\n\nFor more details please call system administrator.');
+          }
+        },error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            alert("ERROR OCCUR: " + XMLHttpRequest.responseText);
+          }
+      });
+    $('#saveBtn').html("Save Changes");
+    $('#saveBtn').prop('disabled', false);
+  }
+}
+
+function saveChanges(){
+  if(confirm('Are you sure you want to save all these changes?')) {
+
+  }
+}
+
+
+$("#but_upload").click(function(){
+  $(".hidden").click();
+});
+
+$("#uploadImg_BTN").click(function (){
+  uploadNow();
+});
+
+$("#cancelImg_BTN").click(function (){
+   $("#but_upload").show();
+   $("#uploadImg_BTN").hide();
+   $("#cancelImg_BTN").hide();
+   $(".s_Maintenace").attr("src",imgHolderURL+"?"+ new Date().getTime());
+});
+
+function uploadNow(){
+  var fd = new FormData();
+      var files = $('#fileToUpload')[0].files[0];
+      fd.append( 'fileToUpload',files);
+      fd.append( 'mdCode', $('input[name=mdCode]').val());
+      fd.append( 'site', $('input[name=site]').val());
+      console.log('img:' + $('#fileToUpload')[0].files[0] + ' mdCode:' + $('input[name=mdCode]').val() +' site:'+ $('input[name=site]').val());
+      $.ajax({
+          url: 'upload.php',
+          type: 'post',
+          data: fd, 
+          contentType: false,
+          processData: false,
+          dataType: 'JSON',
+          success: function(response){
+              alert('Salesman image succesfully updated!');
+               $('.s_Maintenace').fadeOut(800, function(){
+                    $(".s_Maintenace").attr("src",response+"?"+ new Date().getTime()); 
+                    $('.s_Maintenace').fadeIn().delay(1500);
+                });
+               //salesmanDataObject();
+               //tableData.clear().rows.add(sourceData).draw();
+          },error: function(XMLHttpRequest, textStatus, errorThrown) { 
+               alert("ERROR OCCUR: " + XMLHttpRequest.responseText);
+               $('.picCont').fadeOut(800, function(){
+                    $('.picCont').fadeIn().delay(2000);
+
+                });
+          }
+      });
+
+      $("#but_upload").show();
+      $("#uploadImg_BTN").hide();
+      $("#cancelImg_BTN").hide();
+}
+
+$(".hidden").change(function(){
+  readURL(this);
+  $("#but_upload").hide();
+  $("#uploadImg_BTN").show();
+  $("#cancelImg_BTN").show();
+});
+  
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        
+        reader.onload = function (e) {
+            $('.s_Maintenace').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function imgError(image) {
+      image.onerror = "";
+      image.src = "../img/salesmanPic.jpg";
+      return true;
+    }  
+
+showNotif();
+
+$(document).on('click', '.dropdown-toggle', function(){
+$('.count').html('');
+ showNotif('yes');
+});
+
+setInterval(function(){
+//showNotif();
+}, 9000);
+
+  function showNotif(view=''){
+       $.ajax ({
+        url: "../geofencing/GeofencingAPI.php",
+        type: "GET",
+        data: {"type":"view_notifications_icon_"+user, "view":view},
+        dataType: "JSON",
+        crossDomain: true,
+        cache: false,            
+          success: function(response){ 
+         // console.log('Notification function has been refresh');                
+          $("#notifs-icon-div").html(response.notification);
+
+            if(response.unseen_notification > 0)
+            {
+             $('.count').html(response.unseen_notification);
+            }
+          
+          }
+      });
+  }
+        
+
+  (function($) {
+    $.fn.clickToggle = function(func1, func2) {
+        var funcs = [func1, func2];
+        this.data('toggleclicked', 0);
+        this.click(function() {
+            var data = $(this).data();
+            var tc = data.toggleclicked;
+            $.proxy(funcs[tc], this)();
+            data.toggleclicked = (tc + 1) % 2;
+        });
+        return this;
+    };
+   }(jQuery));
+
+ $("#navBtn").clickToggle(function() {   
+   openNav();
+ }, function() {
+     closeNav();
+ });
+
+ function imgError2(image) {
+   image.onerror = "";
+   image.src = "../img/salesmanPic.jpg";
+   return true;
+ } 
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "270px";
+    document.getElementById("main").style.marginLeft = "270px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+}
+
+//reset function
+function resetAccount(){
+    var mdCode = $('#mdcodeholder').val();
+    if(mdCode == ''){
+        alert('Salesman mdCode is required!');
+    }else{
+        $('#resetBTN').html('<i class="fa fa-spin fa-spinner"></i> updating..');
+        $.ajax ({
+            url: GLOBALLINKAPI+"/admin/connection/applicationApi.php",
+            type: "GET",
+            data: {"type":"RESET_ACCOUNT", 'mdCode':mdCode},
+            dataType: "json",
+            crossDomain: true,
+            cache: false,            
+            success: function(r){
+                if(r){
+                    alert('ACCOUNT WAS RESET!');
+                }else
+                alert('INVALID SALESMAN CODE. Please try again.'); 
+                $('#resetBTN').html('RESET');
+            }
+        });
+    }
+}
+
+
+function disableSalesman(){
+  var mdcode = $('#mdcodeholder').val();
+  var f = confirm('Are you sure you want to disable this salesman?');
+  if(f){
+    $.ajax ({
+        url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php", 
+        type: "GET",
+        data: {"type":"DISABLE_SALESMAN", "mdCode":mdcode, "CONN":con_info},
+        dataType: "json",
+        crossDomain: true,
+        cache: false,            
+        success: function(data){          
+          alert('Salesman successfully disabled.');
+          salesmanDataObject();
+          tableData.clear().rows.add(sourceData).draw();
+        }//success here;
+    })
+  }
+}
+
+var GLOBALBTDTACCOUNTHODER = [];
+function copyAccountBTDT(){
+  var mdCode = $('#btdtsalesmanSelect').val();
+  var salesman = $('#btdtsalesmanSelect option:selected').text();
+  if(mdCode == '' || mdCode == undefined){
+    alert('Please select a salesman to assign to btdt driver account.');
+  }else{
+    var f = confirm('Are you sure you want to assign this account?');
+    if(f){
+      var holder = {
+        'mdCode': mdCode,
+        'salesman': salesman
+      };
+
+      GLOBALBTDTACCOUNTHODER.push(holder);
+      console.log(GLOBALBTDTACCOUNTHODER);
+
+      holder = [];
+      var r = GLOBALBTDTACCOUNTHODER;
+      var cont = '';
+      for(var x = 0; x < r.length; x++){
+        cont += `
+          <tr>
+            <td>`+r[x].mdCode+`</td>
+            <td colspan="2">`+r[x].salesman+`</td>  
+          </tr>
+        `;
+      }
+      $('#btdtTbody').html(cont); 
+    }
+
+    $('#btdtsalesmanModal').modal('hide');
+  }
+}
+
+var GLOBALSWEEPERACCOUNTHOLDER = [];
+function copyAccountSweeper(){
+  var mdCode = $('#sweeperSelect').val();
+  var salesman = $('#sweeperSelect option:selected').text();
+  if(mdCode == '' || mdCode == undefined){
+    alert('Please select a salesman to copy for sweeper account.');
+  }else{
+    var f = confirm('Are you sure you want to copy this account?');
+    if(f){
+      var holder = {
+        'mdCode': mdCode,
+        'salesman': salesman
+      };
+
+      GLOBALSWEEPERACCOUNTHOLDER.push(holder);
+      console.log(GLOBALSWEEPERACCOUNTHOLDER);
+
+      holder = [];
+      var r = GLOBALSWEEPERACCOUNTHOLDER;
+      var cont = '';
+      for(var x = 0; x < r.length; x++){
+        cont += `
+          <tr>
+            <td>`+r[x].mdCode+`</td>
+            <td colspan="2">`+r[x].salesman+`</td>  
+          </tr>
+        `;
+      }
+      $('#sweeperTbody').html(cont); 
+    }
+
+    $('#sweeperModal').modal('hide');
+  }
+}
+
+function execinsert_Sweeper(){
+  var sweeperID = $('#mdcodeholder').val();
+  var r = GLOBALSWEEPERACCOUNTHOLDER;
+    for(var x = 0; x < r.length; x++){
+      insert_sweeperData(sweeperID, r[x].mdCode);
+    }
+}
+
+function insert_sweeperData(sweeperID, mdCode){
+  $.ajax ({
+      url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+      type: "GET",
+      data: {
+            "type":"INSERT_SWEEPER",
+            "sweeperID": sweeperID,
+            "mdCode":mdCode,
+            "CONN":con_info
+      },
+      dataType: "json",
+      crossDomain: true,
+      cache: false,   
+        success: function(r){ 
+          if(r){
+            console.log('Sweeper account inserted.');
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          alert("ERROR OCCUR: " + XMLHttpRequest.responseText);
+        }
+    });
+}
+
+
+
+function execinsert_btdt(){
+  var btdtdriverID = $('#mdcodeholder').val();
+  var r = GLOBALBTDTACCOUNTHODER;
+  console.log(r);
+    for(var x = 0; x < r.length; x++){
+      insert_btdtsalesmanData(btdtdriverID, r[x].mdCode);
+    }
+}
+
+function insert_btdtsalesmanData(btdt_samesman_mdCode, btdt_driver_mdCode){
+  $.ajax ({
+      url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+      type: "GET",
+      data: {
+            "type":"INSERT_BTDT_SALESMAN_ACCOUNT",
+            "btdt_samesman_mdCode": btdt_samesman_mdCode,
+            "btdt_driver_mdCode":btdt_driver_mdCode,
+            "CONN":con_info
+      },
+      dataType: "json",
+      crossDomain: true,
+      cache: false,   
+        success: function(r){ 
+          if(r){
+            console.log('Btdt account added to driver.');
+            salesmanList_btdt();
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          alert("ERROR OCCUR: " + XMLHttpRequest.responseText);
+        }
+    });
+}
+
+function get_sweeper_accounts(mdCode){
+  $.ajax ({
+      url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+      type: "GET",
+      data: {
+            "type":"GET_SWEEPER_ACCOUNT",
+            "mdCode":mdCode,
+            "CONN":con_info
+      },
+      dataType: "json",
+      crossDomain: true,
+      cache: false,   
+        success: function(r){ 
+          if(r.length != 0){
+            var cont = '';
+            for(var x = 0; x < r.length; x++){
+                cont += `
+                  <tr>
+                    <td>`+r[x].mdCode+`</td>
+                    <td>`+r[x].salesman+`</td>`+  
+                    '<td style="text-align: right;"><button class="btn btn-xs btn-danger" onclick="removeSweeperAcct(\''+r[x].sweeperID+'\', \''+r[x].mdCode+'\')">Remove</button></td>'+`  
+                  </tr>
+                `;
+              }
+
+              $('#sweeperTbody').html(cont); 
+          }else{
+            $('#sweeperTbody').html(` <tr>
+                                    <td colspan="3" style="text-align: center;">Press 'Add Account' button to set-up sweeper account/s for this salesman.</td>
+                                  </tr>`);
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          alert("ERROR OCCUR: " + XMLHttpRequest.responseText);
+        }
+    });
+}
+
+
+function get_btdt_salesman_accounts(mdCode){
+  $.ajax ({
+      url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+      type: "GET",
+      data: {
+            "type":"GET_BTDT_SALESMAN_ACCOUNT",
+            "mdCode":mdCode,
+            "CONN":con_info
+      },
+      dataType: "json",
+      crossDomain: true,
+      cache: false,   
+        success: function(r){ 
+          if(r.length != 0){
+            var cont = '';
+            for(var x = 0; x < r.length; x++){
+                cont += `
+                  <tr>
+                    <td>`+r[x].BTDT_SALESMAN_MDCODE+`</td>
+                    <td>`+r[x].salesman+`</td>`+  
+                    '<td style="text-align: right;"><button class="btn btn-xs btn-danger" onclick="removebtdtAcct(\''+r[x].BTDT_SALESMAN_MDCODE+'\', \''+r[x].BTDT_DRIVER_MDCODE+'\')">Remove</button></td>'+`  
+                  </tr>
+                `;
+              }
+
+              $('#btdtTbody').html(cont); 
+          }else{
+            $('#btdtTbody').html(` <tr>
+                                    <td colspan="3" style="text-align: center;">Press 'Add Account' button to set-up btdt account/s for this driver.</td>
+                                  </tr>`);
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          alert("ERROR OCCUR: " + XMLHttpRequest.responseText);
+        }
+    });
+}
+
+function removebtdtAcct(sweeperID, mdCode){
+  var f = confirm('Are you sure you want to remove this account?');
+  if(f){
+    $.ajax ({
+      url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+      type: "GET",
+      data: {
+            "type":"REMOVE_BTDT_SALESMAN_ACCOUNT",
+            "btdt_samesman_mdCode":mdCode,
+            "btdt_driver_mdCode":sweeperID,
+            "CONN":con_info
+      },
+      dataType: "json",
+      crossDomain: true,
+      cache: false,   
+        success: function(r){ 
+          if(r){
+            alert('btdt account ' +sweeperID+ ' was successfully removed.');
+            get_btdt_salesman_accounts(mdCode);
+            salesmanList_btdt();
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          alert("ERROR OCCUR: " + XMLHttpRequest.responseText);
+        }
+    });
+  }
+}
+
+function removeSweeperAcct(sweeperID, mdCode){
+  var f = confirm('Are you sure you want to remove this account?');
+  if(f){
+    $.ajax ({
+      url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+      type: "GET",
+      data: {
+            "type":"REMOVE_SWEEPER_ACCOUNT",
+            "mdCode":mdCode,
+            "sweeperID":sweeperID,
+            "CONN":con_info
+      },
+      dataType: "json",
+      crossDomain: true,
+      cache: false,   
+        success: function(r){ 
+          if(r){
+            alert('Sweeper account ' +mdCode+ ' was successfully removed.');
+            get_sweeper_accounts(sweeperID);
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          alert("ERROR OCCUR: " + XMLHttpRequest.responseText);
+        }
+    });
+  }
+}
+
+btdtwarehouse();
+function btdtwarehouse(){
+  $.ajax ({
+      url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+      type: "GET",
+      data: {
+            "type":"GET_BTDT_WH_LIST",
+            "CONN":con_info
+      },
+      dataType: "json",
+      crossDomain: true,
+      cache: false,   
+        success: function(r){ 
+          var cont = '<option value="DEFAULT">DEFAULT</option>';
+          for(var x = 0; x < r.length; x++){
+            cont += `<option value=`+r[x].Warehouse+`>`+r[x].Description+`</option>`;
+          }
+          $('#btdtwarehouseSelect').html(cont);
+        }
+    });
+}
+</script>
+</body>
+</html> 

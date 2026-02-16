@@ -1,0 +1,206 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body{
+    background-image: var(--main-background);
+    background-color: var(--main-backgroundColor);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    min-height: 100%;
+}
+
+/* NAVIGATION */
+
+.headerDiv{
+    height: 10vh;
+    color: #FFF;
+}
+
+.logoTextDiv{
+    margin-left: 10px;
+}
+
+.textHeader{
+    margin-bottom: 0;
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: -5px;
+}
+
+.textHeaderRed{
+    color: #FF0000;
+}
+
+.logoTextDiv .textSubHeader{
+    font-size: 12px;
+}
+
+.headerDiv .rightHeader button{
+    font-size: 1.4rem;
+    color: #FFF;
+}
+
+.headerDiv .rightHeader  button:hover{
+    color: #FFF;
+}
+
+.headerDiv .rightHeader .exportBtn{
+    box-shadow: 2px 2px 10px #a3a2a2;
+}
+
+
+#dataTab_salesmanCategory_MainCont{
+    /* background-color: rgba(4, 11, 47, 0.7); */
+    background-color: rgba(12, 84, 137, 0.7);
+    width: 600px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#driverTable{
+    width: 100%;
+}
+
+.datatableHeaderDiv{
+    display: flex;
+    justify-content: end;
+}
+
+.datatableFooterDiv{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* INFOWINDOW */
+.infoWindowTable tr td{
+    padding: 10px;
+}
+
+.badgeReview{
+    padding: 2px 10px;
+    border-radius: 20px;
+    background-color: #6f8bf1;
+    color: #FFF !important; 
+}
+
+.badgeReview:hover{
+    padding: 2px 10px;
+    border-radius: 20px;
+    background-color: #8da0e6;
+    color: #FFF;
+}
+/* MAP */
+.slideInMapBtn i{
+    background-color: rgba(12, 84, 137, 0.7);
+    color: #FFF;
+    margin-left: 5px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.sideBtn{
+    margin-right: 10px;
+    background-color: rgba(4, 11, 47, 0.8);
+    color: #FFF;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.sideBtn:hover{
+    background-color: rgba(4, 11, 47, 0.7);
+}
+
+
+/* MAP CONTROLS */
+#sideClyders {
+    margin-right: 10px;
+    margin-top: 10px;
+    padding: 15px 15px 40px 25px;
+    color: #040B2F;
+    width: 200px;
+    /* border: 1px solid #6c757d; */
+    border-radius: 15px;
+    background-color: rgb(255, 255, 255);
+    /* font: 400 11px Roboto, Arial, sans-serif; */
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.sideClydersBody{
+    /* padding: 0 20px; */
+}
+
+#sideClyders .form-check-input{
+    height: 1.3em;
+    width: 2.3em;
+}
+
+#sideClyders .form-check-input:checked {
+    background-color: #435ebe;
+    border-color: #435ebe;
+}
+
+#sideClyders .form-check-label{
+    color: #607080;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+#sideClyders .form-switch {
+    padding-left: 2.5em;
+}
+
+#sideClyders .form-check {
+    display: block;
+    min-height: 1.5rem;
+    /* padding-left: 1.7em; */
+    margin-bottom: .125rem;
+}
+
+.mapControl{
+    height: 10px;
+    width: 10px;
+}
+
+/* DATA TABLE */
+#dataTab_salesmanCategory_MainCont .dt-buttons button{
+    font-size: 10px;
+    padding: 2px 5px;
+    background-color: #4ea5d8;
+    color: #FFF;
+    border: 1px solid #d4d2d2;
+}
+
+#dataTab_salesmanCategory_MainCont .dt-buttons button:hover{
+    font-size: 10px;
+    padding: 2px 5px;
+    background-color: #0599f0;
+    color: #FFF;
+    border: 1px solid #d4d2d2;
+}
+
+.dt-buttons button{
+    font-size: 12px;
+    padding: 2px 5px;
+    background-color: #585e61;
+    color: #FFF;
+    border: 1px solid #d4d2d2;
+}
+
+.dt-buttons button:hover{
+    font-size: 12px;
+    padding: 2px 5px;
+    background-color: #d0d4d6;
+    color: #000;
+    border: 1px solid #d0d4d6;
+}

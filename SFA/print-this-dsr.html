@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+	<title>Print-StockRequest</title>
+	<link rel="shortcut icon" href="img/mdlogo_web.png" type="image/png">
+
+	<style type="text/css">
+		@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+		body {
+			margin: 0 auto;
+		    font-family: 'Poppins', sans-serif;
+		    background: #fafafa;
+		    font-size: 13px;
+		    width: 1550px;
+		}
+
+		table {
+		  border-collapse: collapse;
+		  text-align: center;
+		   width: 1550px;
+		}
+
+		th, thead, td {
+		  border: 1px solid black;
+		}
+
+		td:nth-child(1){
+			border-left: none !important;
+		}
+
+		td:nth-child(17){
+			border-right: none !important;
+		}
+
+		tfoot, .hdr{
+			font-weight: bold;
+		}
+
+		.blank_row
+		{
+		    height: 25px !important; /* overwrites any other rules */
+		    background-color: #FFFFFF;
+		}
+
+		tbody{
+			border-left: none !important;
+			border-right: none !important;
+		}
+
+		h3{
+			font-size: 17px;
+		}
+
+		hr { 
+		    display: block;
+		    margin-before: 0.5em;
+		    margin-after: 0.5em;
+		    margin-start: auto;
+		    margin-end: auto;
+		    overflow: hidden;
+		    width: 300px;
+		    border-style: inset;
+		    border-width: 1px;
+		}
+
+		.text-right{
+			text-align: right;
+			padding-right: 10px;
+		}
+
+		.text-center{
+			text-align: center;
+		}
+
+		.upright{
+			 writing-mode: tb-rl;
+		}
+	</style>
+</head>
+<body>
+	<h3 class="text-center">DAILY SALES REPORT</h3>
+	<div style="float: left;">
+		<span>Salesman: <span class="salesmancode hdr">---</span></span>
+	</div>
+	<div style="float: right;">
+		<span>DATE: <span class="daterequested hdr">---</span></span>
+	</div>
+	<table>
+		<tr>
+			<td rowspan="2">#</td>
+			<td rowspan="2">DSI No</td>
+			<td rowspan="2">Acutal Range</td>
+			<td rowspan="2">Actual/Booked Sales</td>
+			<td rowspan="2">Customer Name / Time Spent(Min)</td>
+			<td rowspan="2">Sales Target</td>
+			<td rowspan="2">BTS</td>
+			<td rowspan="2">Store Check</td>
+			<td colspan="4">CP/NP</td>
+			<td colspan="3">Market Returns</td>
+			<td rowspan="2">ISSUES</td>
+			<td rowspan="2">MARKERS</td>
+		</tr>
+		<tr>
+			<td class="upright"><span>30712 - </span><br/><span>mms12s</span></td>
+			<td class="upright"><span>30712 - </span><br/><span>mms12s</span></td>
+			<td class="upright"><span>30712 - </span><br/><span>mms12s</span></td>
+			<td class="upright"><span>30712 - </span><br/><span>mms12s</span></td>
+
+			<td>Damage</td>
+			<td>Expired</td>
+			<td>Total</td>
+		</tr>
+	</table>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript">
+
+	tembody();
+
+	function tembody(){
+		var cont = '';
+		for(var x = 0; x < 20; x++){
+			cont += '<tr class="blank_row">'+
+						'<td></td>'+
+						'<td></td>'+
+						'<td></td>'+
+						'<td></td>'+
+						'<td></td>'+
+						'<td></td>'+
+						'<td></td>'+
+						'<td></td>'+
+						'<td></td>'+
+						'<td></td>'+
+						'<td></td>'+
+						'<td></td>'+
+						'<td></td>'+
+						'<td></td>'+
+						'<td></td>'+
+						'<td></td>'+
+						'<td></td>'+
+					'</tr>';
+		}
+
+		$('tbody').append(cont);
+	}
+
+</script>
+</html>

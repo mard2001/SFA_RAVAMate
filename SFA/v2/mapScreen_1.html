@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAPSCREEN </title>
+    <link rel="icon" class="pageIconLink" href="" />
+
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+    
+    <!-- GOOGLE MATERIAL ICON -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <!-- PICTOGRAMMERS ICON -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.3.67/css/materialdesignicons.min.css" />
+    
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- CSS STYLESHEETS -->
+    <link rel="stylesheet" href="css/offcanvas_stylesheet.css">
+    <!-- <link rel="stylesheet" href="css/dashboard_stylesheet.css"> -->
+    <link rel="stylesheet" href="css/mapScreen_stylesheet.css">
+    <link rel="stylesheet" href="css/digitalmapping_stylesheet.css">
+    <!-- <link rel="stylesheet" href="css/bootstrap/bootstrap.css"> -->
+
+    <!--  DATE PICKER -->
+    <link rel="stylesheet" href="DATERANGEPICKER/daterangepicker.css">
+
+    <!-- DATATABLES -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.min.css">
+
+    <!-- SWAL SWEET ALERT 2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <!--=================================virtual select import-=============================-->
+    <link rel="stylesheet" href="css/virtual-select/virtual-select.min.css"  type="text/css"/>
+    <script src="js/virtual-select/virtual-select.min.js"></script>
+
+
+    
+    <style>
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+        #map2 {
+            height: 100%;
+            width: 100%;
+        }
+        #map3 {
+            height: 100%;
+            width: 100%;
+        }
+        #customerMapping_MainDiv{
+            height: 100%;
+            width: 100%;
+        }
+
+        #geofencing_MainDiv{
+            height: 100%;
+            width: 100%;
+        }
+        
+    </style>
+</head>
+<body>
+    
+    <div class="mainMapScreenDiv">
+        <div class="mainheaderDiv">
+            <div class="mapScreenDiv">
+                <button class="btn menubtn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasExample" style="color: #FFF;">
+                    <span class="material-symbols-outlined">
+                        menu
+                    </span>
+                </button>
+
+                <div class="buttonmainDiv d-flex justify-content-center p-4">
+                    <button type="button" class="btn btn-light d-flex align-items-center rounded-pill" id="digitalmappingMainBtn">
+                        <div class="buttonIcon">
+                            <span class="mdi mdi-cash-marker" style="font-size: 20px"></span>
+                        </div>
+                        <p class="my-0">Sales Mapping</p>
+                    </button>
+                    <button type="button" class="btn btn-light d-flex align-items-center rounded-pill buttonmainDivFocused" id="customermappingMainBtn" >
+                        <div class="buttonIcon">
+                            <span class="mdi mdi-account-group" style="font-size: 20px"></span>
+                        </div>
+                        <p class="my-0">Customer Mapping</p>
+                    </button>
+                    <button type="button" class="btn btn-light d-flex align-items-center rounded-pill " id="gefencingMainBtn">
+                        <div class="buttonIcon">
+                            <span class="mdi mdi-map-marker-radius" style="font-size: 20px"></span>
+                        </div>
+                        <p class="my-0">Territory Mapping</p>
+                    </button>
+                    <button type="button" class="btn btn-light d-flex align-items-center rounded-pill " id="mcpCalebMainBtn">
+                        <div class="buttonIcon">
+                            <span class="mdi mdi-map-marker-path" style="font-size: 20px"></span>
+                        </div>
+                        <p class="my-0">MCP Calibtration</p>
+                    </button>
+                </div>
+            </div>
+            <div class="arrowDiv text-center ">
+                <span class="material-symbols-outlined text-center rotate" id="dropMenu">
+                    keyboard_double_arrow_down
+                </span>
+            </div>
+        </div>
+
+        <div id="digitalMapping_MainDiv" style="display: none;">
+            <div class="outerContMain" id='outerContainer_id' style="display: none;"> 
+                <div class="loading-table">
+                   <i class="fa fa-spinner fa-spin fa-3x fa-fw message"></i> Preparing salesman list ..
+                    <span class="sr-only">Loading...</span>
+                </div>
+    
+                <div id='salesmanCategory'>
+                    <div class="arrow-side"><i onclick="flip1()" class="fa fa-angle-left arrow-side-icon" aria-hidden="true"></i></div> 
+                    <div class='container_salesman'>
+                        <table class='fixedHead' id="salesmanCategoryMainTable">
+                            <thead>
+                                <tr>
+                                    <th width='50%'>Salesman</th>
+                                    <th width=''>Calls</th>
+                                    <th width=''>Unproductive</th>
+                                    <th width=''>Selling Hours</th>
+                                    <th width=''>Sales</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <div class="scroll" data-simplebar>
+                            <table class='' id='floatTab'>
+                                <tbody id='dashboardDisplay' class="text-dark">
+                                </tbody>
+                            </table> 
+                        </div>
+                        <!-- <div id='overAllTotal'>
+                            <span class='pull-right' id='total'></span>
+                        </div>   -->
+                    </div>
+                </div>
+                <div id='categoryTable' class="categoryProp hidden">
+                    <div class="arrow-side2"><i onclick="flip2()" class="fa fa-angle-left arrow-side-icon2" aria-hidden="true"></i></div>
+                    <div class='container_productCat'>
+                        <div class="scroll" data-simplebar>
+                            <table class="table product-data-container" >
+                                <thead>
+                                <tr>
+                                    <th>CATEGORY</th>
+                                    <th class="text-center">SALES</th>
+                                    <th class="text-right">CONTRIBUTION</th>
+                                </tr>
+                                </thead>
+                                <tbody id='cateogoryDataTable'></tbody>
+                            </table>
+                        </div>
+                        <div class="table-footer footerDetails"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="outerContainer_dataTable" style="max-width: 550px;">
+                <div class="arrow-side"><i onclick="flip4()" class="fa fa-angle-left arrow-side-icon4" aria-hidden="true" style="margin-top: 120px !important;"></i></div> 
+                <div class="salesmappingMainCont">
+                    <table id="salesMappingTable" class="dispalysalesMappingTable p" style="width:100%; "></table>
+                        <tbody id="salesMappingTable_body">
+                        </tbody>
+                    </table>
+                    <div id='salesmap_overAllTotal'>
+                        <span class='pull-right' id='salesmap_total'></span>
+                    </div>  
+                </div>
+            </div>
+            <div id='mapBtnsContainer1' class="mapbuttonsdiv d-flex align-items-start flex-column float-end mx-3 my-5 DMmapBtnsContainer">
+                <button type="button" id='fullScreen'><span class="fs_icon mdi mdi-fullscreen"></span></button>
+                <button type="button" id="reportrange"><span class="mdi mdi-calendar-month"></span></button>
+                <button type="button" id='setSatellite'><span class="earthtogglebtn1 mdi mdi-earth"></span></button>
+                <button type="button" id='zoomIn'><span class="mdi mdi-magnify-plus-outline"></span></button>
+                <button type="button" id='zoomOut'><span class="mdi mdi-magnify-minus-outline"></span></button>
+                <button type="button" id='restorBtn' onclick='restoreLoc()'><span class="mdi mdi-crosshairs-gps"></span></button>
+            </div>
+            <!-- <div id="mapUserControlCont">
+                <button class='btn btn-sm btnrestore' id='restorBtn' onclick='restoreLoc()'>
+                    <span class="mdi mdi-crosshairs-gps"></span>
+                </button>
+            </div> -->
+            <div class="maploaderDiv">
+                <div class="maploader"></div>
+            </div>
+            <div id="map"></div>
+            <div class="" id="sideClyders" style="display: none;">
+                <div>
+                    <h5 class="text-center mx-auto">Map Controls</h5>
+                </div>
+                <hr class="mt-3 pb-2" />
+                <div class="card-body sideClydersBody">
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input mapControl" type="checkbox" id="clusteringchk"
+                            checked>
+                        <label class="form-check-label" for="clusteringchk">Cluster</label>
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input mapControl" type="checkbox" id="heatmapchk">
+                        <label class="form-check-label" for="heatmapchk">Heatmap</label>
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input mapControl" type="checkbox" id="salesmanchk">
+                        <label class="form-check-label" for="salesmanchk">Salesman Type</label>
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input mapControl" type="checkbox" id="categorychk" >
+                        <label class="form-check-label" for="categorychk">Item Category</label>
+                    </div>
+                    <!-- <div class="form-check form-switch ">
+                        <input class="form-check-input mapControl" type="checkbox" id="showmarkerschk1">
+                        <label class="form-check-label" for="showmarkerschk1">Show Markers</label>
+                    </div> -->
+                </div>
+            </div>
+        </div> 
+
+        <div id="customerMapping_MainDiv">
+           <div id='mapBtnsContainer2' class="mapbuttonsdiv d-flex align-items-start flex-column float-end mx-3 my-5 CMmapBtnsContainer">
+                <button type="button" id='fullScreen2'><span class="fs_icon mdi mdi-fullscreen"></span></button>
+                <button type="button" id='setSatellite2'><span class="earthtogglebtn2 mdi mdi-earth"></span></button>
+                <button type="button" id='zoomIn2'><span class="mdi mdi-magnify-plus-outline"></span></button>
+                <button type="button" id='zoomOut2'><span class="mdi mdi-magnify-minus-outline"></span></button>
+                <button type="button" id='zoomOut2'><span class="mdi mdi-magnify-minus-outline"></span></button>
+            </div>
+            <div id="custSelection">
+                <select id="custSelect_salesmanList" name="salesmanList[]" multiple>
+                </select>
+                <select class="form-control noArrow" id="mcpDaysSelection">
+                    <option value="" disabled selected hidden>Choose mcp day</option>
+                    <option value="7">All Day</option>
+                    <option value="1">Monday</option>
+                    <option value="2">Tuesday</option>
+                    <option value="3">Wednesday</option>
+                    <option value="4">Thursday</option>
+                    <option value="5">Friday</option>
+                    <option value="6">Saturday</option>
+                </select>
+                <button class='btn btn-primary btn-block mb-3' id='filterBtn' onclick="storeLocations_pinType()">Filter</button>
+            </div>
+            <div class="" id="sideClyders2" style="display: none; width: 220px;" >
+                <div>
+                    <h5 class="text-center mx-auto">Map Controls</h5>
+                </div>
+                <hr class="mt-3 pb-2" />
+                <div class="card-body sideClydersBody">
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input mapControl" type="checkbox" id="clusteringchk2"
+                            checked>
+                        <label class="form-check-label" for="clusteringchk">Cluster</label>
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input mapControl" type="checkbox" id="heatmapchk2">
+                        <label class="form-check-label" for="heatmapchk">Heatmap</label>
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input mapControl" type="checkbox" id="showmarkerschk2">
+                        <label class="form-check-label" for="showmarkerschk">Show Markers</label>
+                    </div>
+                    <div class="form-check form-switch ">
+                        <input class="form-check-input mapControl" type="checkbox" id="colorperdaychk2">
+                        <label class="form-check-label" for="perdaycolorchk2">Set Marker Colors by MCP Day</label>
+                        <!-- Default dropup button -->
+                        <div class="btn-group dropstart">
+                            <button type="button" class="btn btn-sm dropdown-toggle colorLegendBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                                Color Legend
+                            </button>
+                            <ul class="dropdown-menu colorLegendList">
+                                <li class="dropdown-item" onclick="setMarkerDay(-1)">
+                                    <span>
+                                        <span class="mdi mdi-map-marker-multiple-outline"></span>
+                                    </span> 
+                                    View All Markers
+                                </li>
+                                <hr class="m-1">
+                                <li class="dropdown-item" onclick="setMarkerDay(1)">
+                                    <span><i class="fa-solid fa-location-dot" style="color: #ff3419;"></i></span> Monday
+                                </li>
+                                <li class="dropdown-item" onclick="setMarkerDay(2)">
+                                    <span><i class="fa-solid fa-location-dot" style="color: #30965d;"></i></span> Tuesday
+                                </li>
+                                <li class="dropdown-item" onclick="setMarkerDay(3)">
+                                    <span><i class="fa-solid fa-location-dot" style="color: #e3db32;"></i></span> Wednesday
+                                </li>
+                                <li class="dropdown-item" onclick="setMarkerDay(4)">
+                                    <span><i class="fa-solid fa-location-dot" style="color: #5b2770;"></i></span> Thursday
+                                </li>
+                                <li class="dropdown-item" onclick="setMarkerDay(5)">
+                                    <span><i class="fa-solid fa-location-dot" style="color: #f76c00;"></i></span> Friday
+                                </li>
+                                <li class="dropdown-item" onclick="setMarkerDay(6)">
+                                    <span><i class="fa-solid fa-location-dot" style="color: #094375;"></i></span> Saturday
+                                </li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="outerContMain" id='CM_outerContainer_id'> 
+                <div class="loading-table">
+                    <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i> Rendering data ..
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <div id='CM_salesmanCategory'>
+                    <div class="arrow-side"><i onclick="flip1()" class="fa fa-angle-left arrow-side-icon" aria-hidden="true"></i></div> 
+                    <div class='container_salesman'>
+                        <table class='customerMap'>
+                        <thead>
+                            <tr>
+                            <th colspan="2"><i class="fa fa-info-circle" aria-hidden="true"></i> CUSTOMER LIST</th>
+                            </tr>
+                        </thead>
+                        </table>
+                        <div class="scroll" data-simplebar>
+                            <table class='table-condensed' id='CM_floatTab'>
+                            <tbody id='CM_dashboardDisplay'>
+                            </tbody>
+                            </table> 
+                        </div>
+                        <div id='overAllTotal'>
+                            <span class='pull-right' id='CM_total'></span>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+            <div class="maploaderDiv">
+                <div class="maploader"></div>
+            </div>
+            <div id="map2"></div>
+        </div>
+
+        <div id="geofencing_MainDiv" style="display: none;">
+            <div id='mapBtnsContainer3' class="mapbuttonsdiv d-flex align-items-start flex-column float-end mx-3 my-5 CMmapBtnsContainer">
+                <button type="button" id='fullScreen3'><span class="fs_icon mdi mdi-fullscreen"></span></button>
+                <button type="button" id='setSatellite3'><span class="earthtogglebtn3 mdi mdi-earth"></span></button>
+                <button type="button" id="mdi-hand-back-left-outline-maps-btn">
+                    <span class="mdi mdi-hand-back-left-outline"></span>
+                </button>
+                <button type="button" id="mdi-draw-pen-maps-btn">
+                    <span class="mdi mdi-draw-pen"></span>
+                </button>
+                <button type="button" id="mdi-eraser-maps-btn">
+                    <span class="mdi mdi-eraser"></span>
+                </button>
+                <button type="button" id='zoomIn3'><span class="mdi mdi-magnify-plus-outline"></span></button>
+                <button type="button" id='zoomOut3'><span class="mdi mdi-magnify-minus-outline"></span></button>
+            </div>
+            <div class="maploaderDiv">
+                <div class="maploader"></div>
+            </div>
+            <div id="map3"></div>
+            <div id="saveFenceDiv" class="mx-2" style="z-index: 100;">
+                <button class="btn btn-block btn-primary" id="proceed-mpa-btn" type="button" data-bs-toggle="modal" data-bs-target="#saveModal" style="width: 250px; margin-bottom: 30px;">Save New Fence</button>
+            </div>
+        </div>
+        
+        <!-- <div id="map"></div> -->
+    </div>
+    
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+        <div class="offcanvas-header">
+            <button type="button" class="btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <span class="material-symbols-outlined">
+                    menu
+                </span>
+            </button>
+        </div>
+        <div class="offcanvas_headTitleDiv">
+            <img src="img/mybuddyLogo.jpg" alt="mybuddyLogo" height="80px">
+            <h2 class="offcanvasHeader"><span class="offcanvasHeaderRed">MY</span>BUDDY</h2>
+            <h4 class="offcanvasSubHeader">Simple but not Simpler</h4>
+        </div>
+        <div class="offcanvas-body px-0">
+            <div class="list-group">
+                <a href="dashboard" class="list-group-item list-group-item-action d-flex">
+                    <span class="mdi mdi-monitor-dashboard"></span>
+                    <p class="px-2" style="margin-bottom: 0;">Dashboard</p>
+                </a>
+                <a href="mapScreen" class="list-group-item list-group-item-action d-flex">
+                    <span class="mdi mdi-map-marker-radius"></span>
+                    <p class="px-2" style="margin-bottom: 0;">Digital Mapping</p>
+                </a>
+                <!-- <a href="mapScreen" class="list-group-item list-group-item-action d-flex">
+                    <span class="mdi mdi-map-marker"></span>
+                    <p class="px-2" style="margin-bottom: 0;">Digital Mapping</p>
+                </a>
+                <a href="mapScreen" class="list-group-item list-group-item-action d-flex">
+                    <span class="mdi mdi-account-group"></span>
+                    <p class="px-2" style="margin-bottom: 0;">Customer Mapping</p>
+                </a>
+                <a href="mapScreen" class="list-group-item list-group-item-action d-flex">
+                    <span class="mdi mdi-map-marker-radius"></span>
+                    <p class="px-2" style="margin-bottom: 0;">Territory Geofencing</p>
+                </a> -->
+                <a href="reports" class="list-group-item list-group-item-action d-flex">
+                    <span class="mdi mdi-file-multiple"></span>
+                    <p class="px-2" style="margin-bottom: 0;">Reports</p>
+                </a>
+                <a href="maintenance" class="list-group-item list-group-item-action d-flex align-baseline reportBtn">
+                    <span class="mdi mdi-wrench-cog"></span>
+                    <p class="px-2" style="margin-bottom: 0;">Maintenance</p>
+                </a>
+                <!-- <a href="https://mybuddy-sfa.com/SFA/Alert.html" class="list-group-item list-group-item-action d-flex">
+                    <span class="mdi mdi-message-alert"></span>
+                    <p class="px-2" style="margin-bottom: 0;">Alert Messages</p>
+                </a> -->
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="dispModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header modal-header-info">
+                    <h2>Territory Information</h2>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped">
+                        <tr>
+                            <td><label>Territory Name:</label></td>
+                            <td><p id="name-lbl"></p></td>
+                        </tr>
+
+                        <tr>
+                            <td><label>Salesman:</label></td>
+                            <td><p id="disp-salesman"></p></td>
+                        </tr>
+
+                        <tr>
+                            <td><label>Date Created:</label></td>
+                            <td><p id="date-created"></p></td>
+                        </tr>
+
+                        <tr>
+                            <td><label>Color:</label></td>
+                            <td><p id="terrcolor"></p></td>
+                        </tr>
+                        
+                        <input type="hidden" name="mpa-id" id="mpa-id">
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" onclick="deleteMPA()">Delete</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+
+    <div class="modal fade" id="salesmanSselectionModal" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content" id="">
+                <div class="modal-header">
+                    <h6 class="modal-title">Selected date: <span id="salectedDates"></span></h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div style="text-align: center; margin: 0 auto;" >
+                        <span id="fetchCont" class="">
+                        <i class="fa fa-spin fa-spinner"></i> fetching salesman...
+                        </span>
+                    </div>
+                    <div id="salesmanListCont">
+                        <span>Select Salesman:</span>
+                        <select id="salesmanList" name="salesmanList[]" multiple></select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-bs-dismiss="modal" onclick="displaySalesManV2()">Filter</button>
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="duplicateUserModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">SESSION ENDED</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Sorry, your session has been disconnected. Another user is currently using your account.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="cofirmationDupUser()">GOT IT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="dispModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header modal-header-info">
+                    <h4>Territory Information</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped">
+                        <tr>
+                            <td><label>Territory Name:</label></td>
+                            <td><p id="name-lbl"></p></td>
+                        </tr>
+                        <tr>
+                            <td><label>Salesman:</label></td>
+                            <td><p id="disp-salesman"></p></td>
+                        </tr>
+                        <tr>
+                            <td><label>Date Created:</label></td>
+                            <td><p id="date-created"></p></td>
+                        </tr>
+                        <tr>
+                            <td><label>Color:</label></td>
+                            <td><p id="terrcolor"></p></td>
+                        </tr>
+                        <input type="hidden" name="mpa-id" id="mpa-id">
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" onclick="deleteMPA()">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="">Save New Boundary</h4>
+                </div>
+                <div class="modal-body">
+                    <label>Boundary Name: </label>
+                    <input type="text" name="mpa-name" class="form-control" id="mpa-name"/></br>
+                    <label>Salesman Incharge: </label>
+                    <select name="geofence_salesmanList" id="geofence_salesmanList">
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" onclick="saveMPA()">Save Boundary</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?v=quarterly&key=AIzaSyAt0Pxe9_3DTav3DmUQzHfgd07s_LcJo7I"></script> -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=quarterly&key=AIzaSyAt0Pxe9_3DTav3DmUQzHfgd07s_LcJo7I&libraries=drawing,geometry,places,visualization"></script>
+    <script type="text/javascript" src="js/mainjs.js"></script>
+    <!-- <script src="HASH/aes.js"></script> -->
+    <!-- <script src="nestle/connectionString/LOCALSTORAGE/storage.js"></script>-->
+
+    <!-- DATATABLES -->
+    <script type="text/javascript" src="https://cdn.datatables.net/2.0.2/js/dataTables.min.js"></script>
+
+    <!-- CHART JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> -->
+
+    <!-- SWEET ALERT -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>  -->
+    <script src="https://unpkg.com/@googlemaps/markerclusterer@2.3.1/dist/index.min.js"></script>
+    
+    <script type="text/javascript" src="DATERANGEPICKER/moment.min.js"></script>
+    <script type="text/javascript" src="DATERANGEPICKER/daterangepicker.js"></script>
+    <script src="HASH/md5.js"></script>
+    <script src="HASH/aes.js"></script>
+    <script type="text/javascript" src="web/web-commons.js"></script>
+
+    <script src="nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+    <script type="text/javascript" src="web/web-commons.js"></script>
+    <script type="text/javascript" src="js/bootbox.min.js"></script>
+    <script type="text/javascript" src="js/scrolling.js"></script>
+    <!-- <script type="text/javascript" src="js/digitalMapping.js"></script> -->
+    <!-- <script type="text/javascript" src="js/customerMapping.js"></script> -->
+    <!-- <script type="text/javascript" src="js/territoryGeofence.js"></script> -->
+    <script type="text/javascript" src="js/mapScreen_mapfunc_Merged.js"></script> 
+</body>
+</html>

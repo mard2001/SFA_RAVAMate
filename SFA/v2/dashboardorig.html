@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- <meta http-equiv="Content-Security-Policy" content="connect-src 'self' https://fastdevs-api.com;"> -->
+    <title>DASHBOARD </title>
+    <link rel="icon" class="pageIconLink" href="" />
+
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+    
+    <!-- GOOGLE MATERIAL ICON -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+
+    <!-- PICTOGRAMMERS ICON -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.3.67/css/materialdesignicons.min.css" />
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- DATA TABLES -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.min.css">
+    <!-- <link href="https://cdn.datatables.net/v/bs5/dt-2.0.3/b-3.0.1/fh-4.0.1/r-3.0.1/sb-1.7.0/datatables.min.css" rel="stylesheet"> -->
+
+    <!-- OWL CAROUSEL -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- SWAL SWEET ALERT 2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <!-- CSS STYLESHEETS -->
+    <link rel="stylesheet" href="/DATERANGEPICKER/daterangepicker.css">
+    <link rel="stylesheet" href="constant/dynamicColor_stylesheet.css">
+    <link rel="stylesheet" href="css/dashboard_stylesheet.css">
+    <link rel="stylesheet" href="css/offcanvas_stylesheet.css">
+    <link rel="stylesheet" href="css/mapScreen_stylesheet.css">
+
+    
+    <style>
+        .hidden {
+            display: none;
+        }
+
+        .contentFull{
+            display: none;
+        }
+
+        body{
+            background-color: #040B2F;
+        }
+
+    </style>
+</head>
+<body">
+
+    <div class="contentMainContainer" >
+        <div class="navbarDiv">
+            <nav class="navbar navbarContainer">
+                <div class="container-fluid">
+                    <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasExample" style="color: #FFF;">
+                        <span class="material-symbols-outlined">
+                            menu
+                        </span>
+                      </button>
+                    
+                    <div class="d-flex justify-content-around align-items-center rightIconDiv">
+                        <div class="navbarDropdowns"></div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="mainOutsideContainer row">
+            <div class="col-lg-12 col-xl-4 col-xxl-3 order-2 order-xl-1 mainOutsideLeftContainer DashboardLeftContent">
+                <div id="defaultPopUpScreen" >
+                    <!-- <div id="defaultScreenImg"></div> -->
+                    <div class="defaultPopUpScreenOuterDiv text-center">
+                        <div id="dashboard_headTitleDiv">
+                        </div>
+                        
+                        <div class="mainCarouselDiv">
+                            <div class="owl-carousel owl-theme defaultPopUpScreen-owl-carousel">
+                                <div class="item">
+                                    <img src="img/defaultMobile1.png" alt="mybuddyTest1.png">
+                                </div>
+                                <div class="item">
+                                    <img src="img/defaultMobile3.png" alt="mybuddyTest2.png">
+                                </div>
+                                <div class="item">
+                                    <img src="img/defaultMobile2.png" alt="mybuddyTest3.png">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboardMainUpperLeftDiv" id="upperMainDiv" style="display: none; visibility: hidden; transition: visibility 1s ease;">
+                    <div class="salesManDiv ">
+                        <div class="header">
+                            <div class="otherActivities d-flex align-items-start flex-row-reverse mx-2">
+                                <label class="switch">
+                                    <input type="checkbox" id="unprodSW">
+                                    <span class="slider round" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Display/hide unproductive customers assigned to this Salesman."></span>
+                                </label>
+                                <img src="img/unprodMarkerIcon.png" alt="unprodMarkerIcon" class="iconImg">
+                                <!-- <span style="font-size: 10px; margin: 5px 3px 0px 5px;"><i class="fa-solid fa-phone-slash"></i></span> -->
+
+                                <label class="switch">
+                                    <input type="checkbox" id="unvisitedSW">
+                                    <span class="slider round" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Display/hide unvisited customers assigned to this Salesman."></span>
+                                </label>
+                                <!-- <img src="img/unvisitedMarkerIcon.png" alt="unprodMarkerIcon" class="iconImg"> -->
+                                <span style="font-size: 15px; margin: 1.5px 3px 0px 3px; transform: scaleX(-1);"><i class="mdi mdi-store-off-outline"></i></span>
+                                
+                                <div class="mainMarker_SWDIV" style="display: none;">
+                                    <span style="font-size: 13px; margin: 4px 3px 0px 3px;"><i class="mdi mdi-storefront-outline"></i></span>
+                                    <label class="switch">
+                                        <input type="checkbox" id="mainMarkerSW">
+                                        <span class="slider round" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Display/hide productive customers assigned to this Salesman."></span>
+                                    </label>
+                                    <!-- <img src="img/unvisitedMarkerIcon.png" alt="unprodMarkerIcon" class="iconImg"> -->
+                                </div>
+
+                                <div class="syncDiv ">
+                                    <button type="button" class="btn mtdSyncBtn" id="mtdSyncBtn" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Re-sync specific salesman on their overview reports"><i class="fa-solid fa-rotate"></i></button>
+                                    <button type="button" class="btn markersLineBtn2" id="hidemarkersLineBtn2" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Hide the route to each Stores visited by this Salesman" onclick="hideMakersLine()" style="display: none;">Hide Route <i class="fa-solid fa-location-dot"></i></button>
+                                    <button type="button" class="btn markersLineBtn2" id="showmarkersLineBtn2" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Show the route to each Stores visited by this Salesman" onclick="showMakersLine()">Show Route <i class="fa-solid fa-location-dot"></i></button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3 mainImageDiv">
+                                    <div class="imageDiv">
+                                        <img src="img/salesmanPic.jpg" alt="salesmanProfilPicture" id="left_salesmanImage" >
+                                        <span class="imageColor"> </span>
+                                    </div>
+                                </div>
+                                <div class="col-9">
+                                    <h6 style="font-size: 1rem; margin: 5px 0 0 0; font-weight: 700;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" id="left_salesman_name">N44_JT_JUAN DELA CRUZ</h6>
+                                    <div class="row">
+                                        <div class="col" id="bookingDiv">
+                                            <p>---</p>
+                                        </div>
+                                        <div class="col badgeStatus">
+                                            <span class="badge" id="left_salesman_remarks">
+                                                <span>---</span> 
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row body">
+                            <div class="col-3">
+
+                            </div>
+                            <div class="col-9">
+                                <div class="row salesmanBodyRow">
+                                    <div class="col-6">
+                                        <i class="fa-solid fa-mobile-screen-button"></i>
+                                        <span id="left_salesman_num">09478569847</span>
+                                    </div>
+                                    <div class="col-6">
+                                        <i class="fa-solid fa-phone"></i>
+                                        <span id="left_calltime">8:00:00</span>
+                                    </div>
+                                    <div class="col-6">
+                                        <i class="fa-solid fa-calendar-days"></i>
+                                        <span id="left_dateBooking">Oct 20, 2023</span>
+                                    </div>
+                                    <div class="col-6">
+                                        <i class="fa-regular fa-clock"></i>
+                                        <span id="left_dateTime_transaction">9:54:41 AM</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="storeMainDiv ">
+                        <div class="row storeHead">
+                            <div class="col-3 imageDiv">
+                                <img src="img/storePic.jpg" alt="sariSariStore" id="left_storeImage" onerror="storeimgError(this)" onclick="viewPopUpImg(this, 0)">
+                            </div>
+                            <div class="col-9">
+                                <div class="row">
+                                    <div class="col-6 storeDetails">
+                                        <span style="font-size: 0.6rem;">Store visited:</span>
+                                        <h6 id="left_Loc" style="margin-bottom: 0;">ELJUN STORE</h6>
+                                        <p id="left_LocAddress">PUROK 6, POBLACION EAST, GARCIA HERNANDEZ, BOHOL</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="storeLocateDiv">
+                                            <div class="d-grid gap-1 py-1" style="padding-right: 1rem; max-width: 232px;">
+                                                <input type="hidden" id="currentLocStoreBtnVal">
+                                                <button type="button" class="rounded-pill locStoreBtn" onclick="showCurrentOnMap()">
+                                                    <span style="font-size: 0.63rem;">Locate Store</span>
+                                                    <span class="storeLocBtnPinNumber">1</span>
+                                                    <input type="hidden" id="left_storeLocTransacNumber">
+                                                </button>
+                                            </div>
+                                            
+                                            <div class="storeBtn d-flex flex-row">
+                                                <input type="hidden" id="hiddenInput_mdCode">
+                                                <button type="button" class="btn rounded-pill" style="padding-left: 0px;padding-right: 0px;" onclick="prevInfoLeft()"><i class="fa-solid fa-less-than"></i> Prev Store</button>
+                                                <button type="button" class="btn rounded-pill" style="padding-left: 0px;padding-right: 0px;" onclick="nextInfoLeft()">Next Store <i class="fa-solid fa-greater-than"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row storeBody">
+                            <div class="col-3">
+
+                            </div>
+                            <div class="col-9">
+                                <div class="row storebody_outerRow">
+                                    <div class="col-6 storebody_col">
+                                        <i class="fa-solid fa-calendar-days"></i>
+                                        <span id="left_dateVisited">Oct 20, 2023</span>
+                                    </div>
+                                    <div class="col-6 storebody_col">
+                                        <i class="fa-solid fa-map-pin "></i>
+                                        <span id="left_completedDist">3.19 meters in 8 mins.</span>
+                                    </div>
+                                    <div class="col-6 storebody_col">
+                                        <i class="fa-regular fa-clock"></i>
+                                        <span id="left_timeVisited">9:54:41 AM</span>
+                                    </div>
+                                    <div class="col-6 storebody_col">
+                                        <span id="left_batteryLife"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row storeFoot">
+                            <div class="col-12 storeFootCol">
+                                <input type="hidden" id="left_transactionID">
+                                <p>Sales: <span class="fw-bold"> ₱ 000.00</span><span class="fw-light"> (- SKU)</span></p>
+                                <button onclick="getTransactionDisplayLeft()">View details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="transacDets" style="display: none;">
+                    <div class="row">
+                        <div class="loadingTransactions my-5 text-center" style="display: none; color:#696969">
+                            <i class="fa-solid fa-spinner fa-spin" style="font-size: 30px;"></i>
+                            <span>Getting Sales Details</span>
+                        </div>
+                        <div id="left_transaction-details-holder" style="display: none;"></div>
+                    </div>
+                </div>
+                <div class="dashboardMainLowerLeftDiv mtdOverviewMainDiv" id="mtdOverviewMainDiv" style="display: none; visibility: hidden; transition: visibility 1s ease;">
+                    <div class="mainCardFlip">
+                        <div class="cardFlip-inner">   
+                            <div class="mtdTableDiv card1-front" id="eodLayout">
+                                <div class="row text-center">
+                                    <div class="col-6 d-flex align-items-center mtdHeader" id="changeEodMtd">
+                                        <i class="fa-solid fa-arrow-right-arrow-left mx-3" ></i>
+                                        <h6 class="py-1 no-select" style="margin-bottom: 0;" id="EodTitle">Current Day Review</h6>
+                                        <input type="hidden" name="mdCodeHolder" id="mdCodeHolder">
+                                    </div>
+                                    <div class="col-6 d-flex justify-content-around align-items-center mtdHeader">
+                                        <h6 style="margin-bottom: 0;">Remaining Selling Days</h6>
+                                        <span class="fw-bold" style="color: #FFB321; margin-bottom: 0;" id="eodremdaysCont">-</span> 
+                                    </div>
+                                </div>
+                                <div class="row mtdRow">
+                                    <div class="col-6 d-flex justify-content-around align-items-center mtdRow-left">
+                                        <div class="mtdRow_icon weekCalendarCont">
+                                            <img src="img/achievement_icon.png" alt="achievement_icon">
+                                            <div class="centeredWeekNo" id="centeredWeekNo">0</div>
+                                        </div>
+                                        <div class="mtdRow_details text-center ">
+                                            <p>Sales For the Day</p>
+                                            <p><span id="eodA_percentage">-</span> <i class="fa-solid" id="eodAArrowStatus"></i></p>
+                                            <p>Target <span class="fw-bold" id="eodA_target"></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mtdRow-right">
+                                        <div class="row">
+                                            <div class="col-sm-12 d-flex justify-content-between align-items-center px-4">
+                                                <p>Sales</p>
+                                                <p class="fw-bold" id="eodA_sales">---</p>
+                                            </div>
+                                            <div class="col-sm-12 d-flex justify-content-between align-items-center px-4">
+                                                <p>Balance</p>
+                                                <p class="fw-bold" style="color:#FF0000" id="eodA_balance">---</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mtdRow">
+                                    <div class="col-6 d-flex justify-content-around align-items-center mtdRow-left">
+                                        <div class="mtdRow_icon">
+                                            <img src="img/mustHave_icon.png" alt="mustHave_icon">
+                                        </div>
+                                        <div class="mtdRow_details text-center ">
+                                            <p>Must Have</p>
+                                            <p><span id="mustHave_Percentage">-</span> <i class="fa-solid" id="mustHave_ArrowStat"></i></p>
+                                            <p>Total MCP <span class="fw-bold" id="mustHaveTarget"></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mtdRow-right">
+                                        <div class="row">
+                                            <div class="col-sm-12 d-flex justify-content-between align-items-center px-4">
+                                                <p>Hit MCP</p>
+                                                <p class="fw-bold" id="mustHaveHit">---</p>
+                                            </div>
+                                            <div class="col-sm-12 d-flex justify-content-between align-items-center px-4">
+                                                <p>Balance MCP</p>
+                                                <p class="fw-bold" style="color:#FF0000" id="mustHaveBalance">---</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mtdRow">
+                                    <div class="col-6 d-flex justify-content-around align-items-center mtdRow-left">
+                                        <div class="mtdRow_icon">
+                                            <!-- <img src="img/rangeHitRate_icon.png" alt="rangeHitRate_icon"> -->
+                                            <img src="img/rangeHitRate_icon2.png" alt="rangeHitRate_icon">
+                                        </div>
+                                        <div class="mtdRow_details text-center ">
+                                            <p>Range Hit Rate</p>
+                                            <p><span id="eodrange_percentage">-</span> <i class="fa-solid" id="eodrange_overallArrowStatus"></i></p>
+                                            <p>Target MCP <span class="fw-bold" id="eodrangeTarget"></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mtdRow-right">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="row">
+                                                    <div class="col-3 d-flex flex-column align-items-center text-center fourcol">
+                                                        <span>Big</span>
+                                                        <span class="fw-bold" id="eodbig">-</span>
+                                                    </div>
+                                                    <div class="col-3 d-flex flex-column align-items-center text-center fourcol">
+                                                        <span>Hit</span>
+                                                        <span class="fw-bold" id="eodbighit">-</span>
+                                                    </div>
+                                                    <div class="col-3 d-flex flex-column align-items-center text-center fourcol">
+                                                        <span>Balance</span>
+                                                        <span class="fw-bold" id="eodbigbal">-</span>
+                                                    </div>
+                                                    <div class="col-3 d-flex align-items-center justify-content-center fourcol">
+                                                        <span class="fw-bold"><span id="eodbigper">-</span><i class="fa-solid" id="eodrange_bigArrowStatus"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="row">
+                                                    <div class="col-3 d-flex flex-column align-items-center text-center fourcol">
+                                                        <span>Small</span>
+                                                        <span class="fw-bold" id="eodsmall">-</span>
+                                                    </div>
+                                                    <div class="col-3 d-flex flex-column align-items-center text-center fourcol">
+                                                        <span>Hit</span>
+                                                        <span class="fw-bold" id="eodsmallhit">-</span>
+                                                    </div>
+                                                    <div class="col-3 d-flex flex-column align-items-center text-center fourcol">
+                                                        <span>Balance</span>
+                                                        <span class="fw-bold" id="eodsmallbal">-</span>
+                                                    </div>
+                                                    <div class="col-3 d-flex align-items-center justify-content-center fourcol">
+                                                        <span class="fw-bold"><span id="eodsmallper">-</span> <i class="fa-solid" id="eodrange_smallArrowStatus"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mtdRow">
+                                    <div class="col-6 d-flex justify-content-around align-items-center mtdRow-left">
+                                        <div class="mtdRow_icon">
+                                            <!-- <img src="img/cyclePlan_icon.png" alt="cyclePlan_icon"> -->
+                                            <img src="img/cyclePlan_icon2.png" alt="cyclePlan_icon">
+                                        </div>
+                                        <div class="mtdRow_details text-center ">
+                                            <p>Cycle Plan</p>
+                                            <p><span id="cp_percentage">-</span> <i class="fa-solid" id="cpArrowStatus"></i></p>
+                                            <p>Target MCP <span class="fw-bold" id="cp_target"></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mtdRow-right">
+                                        <div class="row">
+                                            <div class="col-sm-12 d-flex justify-content-between align-items-center px-4">
+                                                <p>Hit MCP</p>
+                                                <p class="fw-bold" id="cp_hit">---</p>
+                                            </div>
+                                            <div class="col-sm-12 d-flex justify-content-between align-items-center px-4">
+                                                <p>Balance</p>
+                                                <p class="fw-bold" style="color:#FF0000" id="cp_balance">---</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mtdRow">
+                                    <div class="col-6 d-flex justify-content-around align-items-center mtdRow-left">
+                                        <div class="mtdRow_icon">
+                                            <!-- <img src="img/geoCallRate_icon.png" alt="geoCallRate_icon"> -->
+                                            <img src="img/geoCallRate_icon2.png" alt="geoCallRate_icon">
+                                        </div>
+                                        <div class="mtdRow_details text-center ">
+                                            <p>Geo Call Rate</p>
+                                            <p><span id="eodgcr_percentage">-</span> <i class="fa-solid" id="eodgcr_arrowStatus"></i></p>
+                                            <p>Target Calls <span class="fw-bold" id="eodgcr_target"></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mtdRow-right">
+                                        <div class="row">
+                                            <div class="col-sm-12 d-flex justify-content-between align-items-center px-4">
+                                                <p>Actual</p>
+                                                <p class="fw-bold" id="eodgcr_visited">---</p>
+                                            </div>
+                                            <div class="col-sm-12 d-flex justify-content-between align-items-center px-4">
+                                                <p>Unvisited</p>
+                                                <p class="fw-bold" style="color:#FF0000" id="eodgcr_unvi">---</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mtdRow">
+                                    <div class="col-6 d-flex justify-content-around align-items-center mtdRow-left">
+                                        <div class="mtdRow_icon">
+                                            <img src="img/mcpStrikeRate_icon.png" alt="mcpStrikeRate_icon">
+                                        </div>
+                                        <div class="mtdRow_details text-center ">
+                                            <p>MCP Strike Rate</p>
+                                            <p><span id="eodsrPercentage">-</span> <i class="fa-solid" id="eodsrArrowStatus"></i></p>
+                                            <p>Target Calls <span class="fw-bold" id="eodsrTarget"></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mtdRow-right">
+                                        <div class="row">
+                                            <div class="col-sm-12 d-flex justify-content-between align-items-center px-4">
+                                                <p>Productive</p>
+                                                <p class="fw-bold" id="eodsrProd">---</p>
+                                            </div>
+                                            <div class="col-sm-12 d-flex justify-content-between align-items-center px-4">
+                                                <p>Balance</p>
+                                                <p class="fw-bold" style="color:#FF0000" id="eodsrUnprod">---</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>   
+                            <div class="mtdTableDiv card1-back" id="mtdLayout">
+                                <div class="row text-center">
+                                    <div class="col-6 d-flex align-items-center mtdHeader" id="changeMtdEod">
+                                        <i class="fa-solid fa-arrow-right-arrow-left mx-3" ></i>
+                                        <h6 class="py-1 no-select" style="margin-bottom: 0;">MTD Overview</h6>
+                                        <input type="hidden" name="mdCodeHolder" id="mdCodeHolder">
+                                    </div>
+                                    <div class="col-6 d-flex justify-content-around align-items-center mtdHeader">
+                                        <h6 style="margin-bottom: 0;">Remaining Selling Days</h6>
+                                        <span class="fw-bold" style="color: #FFB321; margin-bottom: 0;" id="remdaysCont">-</span> 
+                                    </div>
+                                </div>
+                                <div class="row mtdRow">
+                                    <div class="col-6 d-flex justify-content-around align-items-center mtdRow-left">
+                                        <div class="mtdRow_icon">
+                                            <img src="img/achievement_icon.png" alt="achievement_icon">
+                                        </div>
+                                        <div class="mtdRow_details text-center ">
+                                            <p>MTD Achievement</p>
+                                            <p><span id="mtdA_percentage">-</span> <i class="fa-solid" id="mtdAArrowStatus"></i></p>
+                                            <p>Target <span class="fw-bold" id="mtdA_target"></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mtdRow-right">
+                                        <div class="row">
+                                            <div class="col-sm-12 d-flex justify-content-between align-items-center px-4">
+                                                <p>Sales</p>
+                                                <p class="fw-bold" id="mtdA_sales">---</p>
+                                            </div>
+                                            <div class="col-sm-12 d-flex justify-content-between align-items-center px-4">
+                                                <p>Balance</p>
+                                                <p class="fw-bold" style="color:#FF0000" id="mtdA_balance">---</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mtdRow">
+                                    <div class="col-6 d-flex justify-content-around align-items-center mtdRow-left">
+                                        <div class="mtdRow_icon">
+                                            <img src="img/mcpStrikeRate_icon.png" alt="mcpStrikeRate_icon">
+                                        </div>
+                                        <div class="mtdRow_details text-center ">
+                                            <p>Buying Accounts</p>
+                                            <p><span id="uniquePercentage">-</span> <i class="fa-solid" id="srArrowStatus"></i></p>
+                                            <p>Target <span class="fw-bold" id="targetBuying"></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mtdRow-right">
+                                        <div class="row">
+                                            <div class="col-sm-12 d-flex justify-content-between align-items-center px-4">
+                                                <p>Active Buying</p>
+                                                <p class="fw-bold" id="activeBuying">---</p>
+                                            </div>
+                                            <div class="col-sm-12 d-flex justify-content-between align-items-center px-4">
+                                                <p>Unique Buying</p>
+                                                <p class="fw-bold" id="uniqueBuying">---</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mtdRow">
+                                    <div class="col-6 d-flex justify-content-around align-items-center mtdRow-left">
+                                        <div class="mtdRow_icon">
+                                            <!-- <img src="img/mcpProductivity_icon.png" alt="mcpProductivity_icon"> -->
+                                            <img src="img/mcpProductivity_icon2.png" alt="mcpProductivity_icon">
+                                        </div>
+                                        <div class="mtdRow_details text-center ">
+                                            <p>MCP Productivity</p>
+                                            <p><span id="mcpProductiviy_percentage">-</span> <i class="fa-solid" id="mcpProdArrowStatus"></i></p>
+                                            <p>Gross Calls <span class="fw-bold" id="mcpProductiviy_total"></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mtdRow-right">
+                                        <div class="row">
+                                            <div class="col-sm-12 d-flex justify-content-between align-items-center px-4">
+                                                <p>Productive Call</p>
+                                                <p class="fw-bold" id="mcpProductiviy_prod">---</p>
+                                            </div>
+                                            <div class="col-sm-12 d-flex justify-content-between align-items-center px-4">
+                                                <p>Not Productive</p>
+                                                <p class="fw-bold" style="color:#FF0000" id="mcpProductiviy_unprod">---</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mtdRow3">
+                                    <div class="col-6 d-flex justify-content-around align-items-center mtdRow3-left">
+                                        <div class="mtdRmtdRow3_icon">
+                                            <img src="img/geoCallRate_icon.png" alt="geoCallRate_icon">
+                                        </div>
+                                        <div class="mtdRow3_details text-center ">
+                                            <p>Geo Call Rate</p>
+                                            <p><span id="gcr_percentage">-</span> <i class="fa-solid" id="gcr_arrowStatus"></i></p>
+                                            <p>Target MCP <span class="fw-bold" id="gcr_target"></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mtdRow3-right">
+                                        <div class="row">
+                                            <div class="col-sm-12 d-flex justify-content-between align-items-center px-4">
+                                                <p>Productive</p>
+                                                <p class="fw-bold" id="gcr_visited">---</p>
+                                            </div>
+                                            <div class="col-sm-12 d-flex justify-content-between align-items-center px-4">
+                                                <p>Missed Calls</p>
+                                                <p class="fw-bold" style="color:#FF0000" id="gcr_unvi">---</p>
+                                            </div>
+                                            <div class="col-sm-12 d-flex justify-content-between align-items-center px-4">
+                                                <p>Actual</p>
+                                                <p class="fw-bold" id="gcr_actual">---</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- <div class="row mtdRow2">
+                                    <div class="col-6 d-flex justify-content-around align-items-center mtdRow2-left">
+                                        <div class="mtdRow_icon">
+                                            <img src="img/rangeHitRate_icon2.png" alt="rangeHitRate_icon">
+                                        </div>
+                                        <div class="mtdRow2_details text-center ">
+                                            <p>Average Range</p>
+                                            <p><span id="range_percentage">-</span> <i class="fa-solid" id="range_overallArrowStatus"></i></p>
+                                            <p>Calls <span class="fw-bold" id="rangeTarget"></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mtdRow2-right">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="row">
+                                                    <div class="col-3 d-flex flex-column align-items-center text-center fourcol">
+                                                        <span>Big</span>
+                                                        <span class="fw-bold" id="big">-</span>
+                                                    </div>
+                                                    <div class="col-3 d-flex flex-column align-items-center text-center fourcol">
+                                                        <span>Hit</span>
+                                                        <span class="fw-bold" id="bighit">-</span>
+                                                    </div>
+                                                    <div class="col-3 d-flex flex-column align-items-center text-center fourcol">
+                                                        <span>Balance</span>
+                                                        <span class="fw-bold" id="bigbal">-</span>
+                                                    </div>
+                                                    <div class="col-3 d-flex align-items-center justify-content-center fourcol">
+                                                        <span class="fw-bold"><span id="bigper">-</span><i class="fa-solid" id="range_bigArrowStatus"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="row">
+                                                    <div class="col-3 d-flex flex-column align-items-center text-center fourcol">
+                                                        <span>Small</span>
+                                                        <span class="fw-bold" id="small">-</span>
+                                                    </div>
+                                                    <div class="col-3 d-flex flex-column align-items-center text-center fourcol">
+                                                        <span>Hit</span>
+                                                        <span class="fw-bold" id="smallhit">-</span>
+                                                    </div>
+                                                    <div class="col-3 d-flex flex-column align-items-center text-center fourcol">
+                                                        <span>Balance</span>
+                                                        <span class="fw-bold" id="smallbal">-</span>
+                                                    </div>
+                                                    <div class="col-3 d-flex align-items-center justify-content-center fourcol">
+                                                        <span class="fw-bold"><span id="smallper">-</span> <i class="fa-solid" id="range_smallArrowStatus"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="row mtdRow3">
+                                    <div class="col-6 d-flex justify-content-around align-items-center mtdRow3-left">
+                                        <div class="mtdRow_icon">
+                                            <img src="img/rangeHitRate_icon2.png" alt="rangeHitRate_icon">
+                                        </div>
+                                        <div class="mtdRow3_details text-center ">
+                                            <p>Average Range</p>
+                                            <p><span id="range_percentage">-</span> <i class="fa-solid" id="range_overallArrowStatus"></i></p>
+                                            <p>Calls <span class="fw-bold" id="rangeTarget"></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mtdRow3-right">
+                                        <div class="row">
+                                            <div class="col-sm-12 d-flex justify-content-between align-items-center px-4">
+                                                <p>Volume</p>
+                                                <p class="fw-bold" id="mhTotal">---</p>
+                                            </div>
+                                            <div class="col-sm-12 d-flex justify-content-between align-items-center px-4">
+                                                <p>Value</p>
+                                                <p class="fw-bold" id="mhTotalAllowance">---</p>
+                                            </div>
+                                            <div class="col-sm-12 d-flex justify-content-between align-items-center px-4">
+                                                <p>Time Spent</p>
+                                                <p class="fw-bold" id="mhTotalAllowance">---</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="row mtdRow2">
+                                    <div class="col-6 d-flex justify-content-around align-items-center mtdRow2-left">
+                                        <div class="mtdRow_icon">
+                                            <img src="img/marketHygiene_icon2.png" alt="marketHygiene_icon">
+                                        </div>
+                                        <div class="mtdRow2_details text-center" >
+                                            <p>Market Hygiene</p>
+                                            <p><span id="mh_percentage">-</span> <i class="fa-solid" id="mhArrowStatus"></i></p>
+                                            <p style="visibility: hidden;">Target MCP</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mtdRow2-right">
+                                        <div class="row">
+                                            <div class="col-sm-12 d-flex justify-content-between align-items-center px-4">
+                                                <p>Total BO</p>
+                                                <p class="fw-bold" id="mhTotal">---</p>
+                                            </div>
+                                            <div class="col-sm-12 d-flex justify-content-between align-items-center px-4">
+                                                <p>BO Allowance</p>
+                                                <p class="fw-bold" style="color:#FF0000" id="mhTotalAllowance">---</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="row mtdRow">
+                                    <div class="col-6 d-flex justify-content-around align-items-center mtdRow-left">
+                                        <div class="mtdRow_icon">
+                                            <img src="img/eB2B_icon.png" alt="eB2B_icon">
+                                        </div>
+                                        <div class="mtdRow_details text-center">
+                                            <p></p>
+                                            <p><span id="mh_percentage">eB2B KPIs</span> <i class="fa-solid" id="mhArrowStatus"></i></p>
+                                            <p>Active MCP <span class="fw-bold" id="b2bActive"></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mtdRow-right">
+                                        <div class="row">
+                                            <div class="col-sm-12 b2bOuterCol">
+                                                <div class="row">
+                                                    <div class="col-6 d-flex flex-column align-items-center text-center b2bCol">
+                                                        <span>RavaMate Sales</span>
+                                                        <span class="fw-bold" id="mybuddySales">---</span>
+                                                    </div>
+                                                    <div class="col-6 d-flex flex-column align-items-center text-center b2bCol">
+                                                        <span>Fastsosyo Sales</span>
+                                                        <span class="fw-bold" id="fastsosyoSales">---</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 b2bOuterCol">
+                                                <div class="row">
+                                                    <div class="col-4 d-flex flex-column align-items-center text-center b2bCol">
+                                                        <span>Registered</span>
+                                                        <div style="white-space: nowrap;">
+                                                            <span class="fw-bold" id="b2b_reg">-</span>
+                                                            <span class="fw-bold" id="b2b_reg_per">-</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4 d-flex flex-column align-items-center text-center b2bCol">
+                                                        <span>Productive</span>
+                                                        <div style="white-space: nowrap;">
+                                                            <span class="fw-bold" id="b2b_prod">-</span>
+                                                            <span class="fw-bold" id="b2b_prod_per">-</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4 d-flex flex-column align-items-center text-center b2bCol">
+                                                        <span style="white-space: nowrap;">Hybrid Freq.</span>
+                                                        <span class="fw-bold" id="b2b_freq">-</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                              
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-xl-8 col-xxl-9 order-1 order-xl-2 mainOutsideRightContainer DashboardRightContent halfFullWidth">
+                <div class="loader" id="loading-table-main"> 
+                    <div class="loaderCustomSpinner"></div>
+                    <span class="mx-3">Rendering data ...</span>
+                </div>
+                <div class="dashboardMainUpperRightDiv">
+                    <div class="mapDivHeader d-flex justify-content-between px-3 py-2">
+                            <div class="leftsideHeader">
+                                <span class="mdi mdi-web"></span>
+                                <span id="headingTitle"> | Dashboard</span>
+                            </div>
+                            <div class="righsideHeader" id="datePicker">
+                                <span>
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                </span>
+                                <span id="time"></span>
+                            </div>
+                        </div>
+                    <div class="dashboardMapDiv">
+                        <!-- <div class="loader" id="loading-table-main"> 
+                            <div class="loaderCustomSpinner"></div>
+                            <span class="mx-3">Rendering data ...</span>
+                        </div> -->
+                        <div class="mapbuttonsdiv d-flex align-items-start flex-column float-end mx-3 my-5" id="defaultmapBtns">
+                            <div class="dropdown">
+                                <button type="button" id="mdi-cog-btn" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="mdi mdi-cog"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <!-- <li>
+                                        <a href="#" id='' class="dropdown-item"><input type="checkbox" id="geofenceBox"> Show Geofence</a>
+                                    </li> -->
+                                    <li>
+                                        <a href="#" id='catboxholder' class="dropdown-item"><input type="checkbox" id="categoryBox"> View Products</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <button type="button" id="mdi-earth-maps-btn">
+                                <span class="mdi mdi-earth"></span>
+                            </button>
+                            <button type="button" id="mdi-magnify-plus-outline-btn">
+                                <span class="mdi mdi-magnify-plus-outline"></span>
+                            </button>
+                            <button type="button" id="mdi-magnify-minus-outline-btn">
+                                <span class="mdi mdi-magnify-minus-outline"></span>
+                            </button>
+
+                            <!-- <button class='btn btn-sm btn-dash' data-toggle="tooltip" data-placement="left" title="Unattended Mode" style="background-color: #32eda8 !important; font-size: 21px;" id='stoprealtime'>
+                                <i class="fas fa-pause" ></i>
+                            </button> -->
+                            <button class='btn btn-sm btn-dash hidden' data-toggle="tooltip" data-placement="left" title="Attended Mode" style="background-color: #ed3b32 !important; font-size: 20px;" id='playrealtime'>
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <!-- <button type="button" id="mdi-pause-btn">
+                                <span class="mdi mdi-pause"></span>
+                            </button> -->
+                            <button type="button" id="mdi-target-btn">
+                                <span class="mdi mdi-target"></span>
+                            </button>
+                        </div>
+
+                        <div class="arrow-side3" id="arrow-side3"><i onclick="flip3()" id='arrIconLeftMainDivHolder' class="arrow-side-icon-leftDiv fa fa-angle-left " aria-hidden="true"></i></div>
+                        
+                        <div id="map"></div>
+                        <span class="badge rounded-pill text-bg-secondary my-2 px-3 py-2" id="fitToScreenBtn" style="cursor: pointer;">Fit to Screen</span>
+                        <input type="hidden" name="" id="lateDateHolder">
+                        <div id="lateSalesmanCont" class="mb-2">
+                            <table id='lateSalesman'>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div id="overviewBarOnMap" style="display: none !important;">
+                            <div class="d-flex justify-content-around align-items-start">
+                                <div class="overview_mtd d-flex flex-column justify-content-center mx-2">
+                                    <span class="overview_label">MTD SALES</span>
+                                    <div class="mtd-progress-bar" id="mtd-progress-bar"></div>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td class="overview_mtd_label">Total:</td>
+                                                <td class="overview_mtd_total">---</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="overview_mtd_label">Target:</td>
+                                                <td class="overview_mtd_target">---</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <span class="footerText"><span id="mtdPreviousPercentage"></span> vs Prev Month: <span id="mtdPreviousSales">---</span></span>
+                                </div>
+
+                                <div class="overview_salesman text-center mx-2">
+                                    <span class="overview_salesman_label mb-3">NUMBER OF SALESMAN<br>WORKING THIS MONTH</span>
+                                    <div class="d-flex justify-content-center totalDiv">
+                                        <img src="img/salesmanPic5.png" class='salesmanPic_img' id='salesmanPic_img' alt='no available image' onerror="imgError(this)"/> 
+                                        <div class="d-flex flex-column mx-2">
+                                            <span>TOTAL</span>
+                                            <span class="overview_salesman_total overviewSalesmanMonthly">0</span>
+                                        </div>
+                                    </div>
+                                    <span class="footerText footerTextSalesman"><span id="mtdPreviousPercentageSalesman"></span> vs Prev Month: <span id="mtdPreviousSalesman">0</span></span>
+                                </div>
+
+                                <div class="overview_daily d-flex flex-column justify-content-center mx-2">
+                                    <span class="overview_label">DAILY SALES</span>
+                                    <div class="daily-progress-bar" id="daily-progress-bar"></div>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td class="overview_daily_label">Total:</td>
+                                                <td class="overview_daily_total">---</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="overview_daily_label">Target:</td>
+                                                <td class="overview_daily_target">---</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <span class="footerText"><span id="dailyPreviousPercentage"></span> vs Yesterday: <span id="dailyPreviousSales">---</span></span>
+                                </div>
+
+                                <div class="overview_salesman text-center mx-2">
+                                    <span class="overview_salesman_label mb-3">NUMBER OF SALESMAN<br>WORKING TODAY</span>
+                                    <div class="d-flex justify-content-center totalDiv">
+                                        <img src="img/salesmanPic5.png" class='salesmanPic_img' id='salesmanPic_img' alt='no available image' onerror="imgError(this)"/> 
+                                        <div class="d-flex flex-column mx-2">
+                                            <span>TOTAL</span>
+                                            <span class="overview_salesman_total overviewSalesmanDaily">0</span>
+                                        </div>
+                                    </div>
+                                    <span class="footerText footerTextSalesman"><span id="dailyPreviousPercentageSalesman"></span> vs Yesterday: <span id="dailyPreviousSalesman">0</span></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="dispModal_deviation" class="deviationcont" style="display: none;">
+                            <span aria-hidden="true" class="pull-right closeFirstTransBtn">&times;</span>
+                            <div class="text-center" style='margin-bottom: 13px;'>
+                                <img style='text-align: center;' src="../img/salesmanPic.jpg" class='salesmanPic_dev' id='salesmanImage' alt='no available image' onerror="imgError(this)"/> 
+                            </div>
+                            <table class="devationTable"  id=''>
+                                <tr>
+                                    <td>Name</td>
+                                    <td id="salesman_name"></td>
+                                </tr>
+                                <tr>
+                                    <td>Call Time</td>
+                                    <td id="calltime"></td>
+                                </tr>
+                                <tr>
+                                    <td>Time Started</td>
+                                    <td id="dateTime_transaction"></td>
+                                </tr>
+                                <tr>
+                                    <td>Remarks</td>
+                                    <td id="salesman_remarks"></td>
+                                </tr>
+                                <tr class="mobileNoCont">
+                                    <td>Mobile No.</td>
+                                    <td id="salesman_num"></td>
+                                </tr>
+                                <tr>
+                                    <td>First Store</td>
+                                    <td data-toggle="tooltip" data-placement="top" title="Click to view on map!"><button id='firstCallLoc' onclick='showOnMap()' class="btn btn-primary btn-xs" style="font-size: 10px !important;"></button></td>
+                                </tr>
+                                <tr>
+                                    <td>View Route</td>
+                                    <td data-toggle="tooltip" data-placement="top" title="Click to view on map!">
+                                        <button type="button" id="showmarkersLineBtn" class="btn btn-outline-info" onclick="showMakersLine()" style="font-size: 12px;">Show</button>
+                                        <button type="button" id="hidemarkersLineBtn" class="btn btn-outline-danger" onclick="hideMakersLine()" style="font-size: 12px; display: none;">Hide</button>
+                                    </td>
+                                </tr>
+
+                                <input type="hidden" name="salesman-code" id="salesman-code">
+                                <input type="hidden" name="latLng" id='latLng'/>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboardMainLowerRightDiv">
+                    <div class="outerContMain" id='outerContainer_id' style="width: auto; position: relative; display: none;">
+                        <div id='salesmanCategory' style="width: auto !important;">
+                            <div class="arrow-side"><i onclick="flip1()" id='arrIconHolder' class="arrow-side-icon fa fa-angle-left " aria-hidden="true"></i></div>
+                            <div class='container_salesman' style="width: auto;">
+                                <div id="scrollHolder" class="scroll" data-simplebar style="width: auto;  min-width: 470px; height: auto;  min-height: 200px;">
+                                    <table class='table-condensed dataTableMainClass' id='floatTab' style="width: 100%; height: auto;">
+                                        <thead style="color: white;">
+                                            <tr>
+                                                <th width='35%'>All Salesman</th>
+                                                <th width=''>Attendance</th>
+                                                <th width=''>Calls</th>
+                                                <th width=''>Unproductive</th>
+                                                <th width=''>Selling Hours</th>
+                                                <th class='text-center'>Sales</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id='dashboardDisplay'>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id='overAllTotal'>
+                                    <span class='pull-right' id='total' style="padding-right: 10px;"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id='categoryTable' class="categoryProp hidden">
+                            <div class="arrow-side2"><i onclick="flip2()" class="arrow-side-icon2 fa fa-angle-left " aria-hidden="true"></i></div>
+                            <div class='container_productCat'>
+                                <div class="scroll" data-simplebar style="height: auto;  min-height: 200px;">
+                                    <table class="product-data-container">
+                                        <thead>
+                                        <tr>
+                                            <th>CATEGORY</th>
+                                            <th class="text-center">SALES</th>
+                                            <th class="text-right">CONTRIBUTION</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id='cateogoryDataTable'></tbody>
+                                    </table>
+                                </div>
+                                <div class="table-footer footerDetails"></div>
+                            </div>
+                        </div>
+
+                        <div class="loading-table text-center py-3">
+                            <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i> Rendering data ...
+                            <span class="sr-only">Loading...</span>
+                        </div>
+
+                        <div id="selectedCategoryProd" class="hidden">
+                            <span class="fa fa-times pull-right closeBtn"></span>
+                            <div id="prodSelName"></div>
+                            <div id="prodSelFooter">
+                                <span id="prodSelSales"></span>
+                                <span id="prodSelPercent" class="pull-right"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="outerMainTableCont table-responsive" style="position: relative;">
+                        <!-- <div class="loading-table text-center mt-5">
+                            <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i> Rendering data ...
+                            <span class="sr-only">Loading...</span>
+                        </div> -->
+                        <div id="salesmanMainDiv">
+                            <table class='table table-primary table-striped table-hover dataTableMainClass' id='outerTab' style="max-height: 210px !important; overflow: hidden;">
+                                <thead style="color: white;">
+                                    <tr>
+                                        <th width='35%'>All Salesman</th>
+                                        <th width=''>Attendance</th>
+                                        <th width=''>Calls</th>
+                                        <th width=''>Unproductive</th>
+                                        <th width=''>Selling Hours</th>
+                                        <th class='text-center'>Sales</th>
+                                    </tr>
+                                </thead>
+                                <tbody id='outerTabDashboardDisplay' style="max-height: 175px !important; overflow: hidden;">
+                                </tbody>
+                            </table>
+                            <div id='outerTableOverallTotal'>
+                                <span class='pull-right' id='outerTableTotal' style="padding-right: 10px;"></span>
+                            </div>
+                        </div>
+                        <div id="productsMainDiv" class="table-responsive" style="display: none;">
+                            <table class="outerProductTable table table-primary table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th>CATEGORY</th>
+                                    <th class="text-center">SALES</th>
+                                    <th class="text-right">CONTRIBUTION</th>
+                                </tr>
+                                </thead>
+                                <tbody id='outerCateogoryDataTable'></tbody>
+                            </table>
+                            <div class="outerFooterDetails pull-right"></div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+        <div class="offcanvas-header d-flex justify-content-between">
+            <button type="button" class="btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                <span class="material-symbols-outlined">
+                    menu
+                </span>
+            </button>
+            <div class="rightHeader d-flex justify-content-around align-items-center mx-3" id="smallScreenrightHeader">
+                <div class="navbarDropdowns"></div>
+            </div>
+        </div>
+        <div class="offcanvas_headTitleDiv">
+        </div>
+        <div class="offcanvas-body px-0">
+            <div class="list-group">
+                <div id="sidebarTabItems">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="deviationRemaingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" id="modalDiv" style="color: #000;">
+            <div class="modal-content" id="salesmanDeiationCont">
+                <div class="modal-header" style="border-bottom: none;">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Salesman Deviation</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body devRemainBody">
+                </div>
+                <div class="modal-footer justify-content-center" style="border-top: none;">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="" id="deviationRemaingModal_OnMap" >
+        <div class="modal-dialog modal-lg" id="modalDiv" style="color: #FFF;">
+            <div class="modal-content" id="salesmanDeiationCont">
+                <div class="modal-header mb-3">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Salesman Deviation</h1>
+                    <button type="button" class="btn-close" onclick="hideModal()"></button>
+                </div>
+                <div class="modal-body devRemainBody deviationRemaingModal_OnMap_Body">
+                </div>
+                <div class="mt-3 mb-0 text-center">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="hideModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="setUpSiteModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">SITE LOCATION</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Your site does not have a valid location. Press the 'SETUP' button to get started.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="siteLocSetting()">SETUP</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="popupStoreImg" style="display: none;"> 
+        <span class="popup_closeBtn" onclick="closePopUp()">&times;</span>
+        <div class="popup_sliderDiv">
+            <div class="popup_slider">
+                <button class="popup_prevBtn" onclick="changeSlide(-1)">&#10094;</button>
+                <img id="popup_sliderImage" src="img/storePic.jpg" alt="storePopUpImage" onError='storeimgError(this)'>
+                <button class="popup_nextBtn" onclick="changeSlide(1)">&#10095;</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FitText.js/1.2.0/jquery.fittext.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.6.7/jquery.timeago.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- can only work on fast domain -->
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?v=quarterly&key=AIzaSyCCPXj12d0e55vubddbz6rn9FOjHKP3A00&libraries=drawing,geometry,places&"></script> -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=weekly&key=AIzaSyAt0Pxe9_3DTav3DmUQzHfgd07s_LcJo7I&libraries=drawing,geometry,places"></script>
+
+    <!-- DATE PICKER -->
+    <script type="text/javascript" src="DATERANGEPICKER/moment.min.js"></script>
+    <script type="text/javascript" src="DATERANGEPICKER/daterangepicker.js"></script>
+    
+    <script type="text/javascript" src="web/web-commons.js"></script>
+    
+    <script src="HASH/md5.js"></script>
+    <script src="HASH/aes.js"></script>
+    <script src="nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+    <!-- <script type="text/javascript" src="web/commons-useradminguest.js"></script> -->
+    <script type="text/javascript" src="js/mainjs.js"></script>
+    <!-- <script src="https://cdn.datatables.net/v/bs5/dt-2.0.3/b-3.0.1/fh-4.0.1/r-3.0.1/sb-1.7.0/datatables.min.js"></script> -->
+    <script type="text/javascript" src="https://cdn.datatables.net/2.0.2/js/dataTables.min.js"></script>
+    <script type="text/javascript" src="js/bootbox.min.js"></script>
+    <script src="jQuery-Circular-Progress-Bar-With-Text-Counter/scripts/plugin.js"></script>
+    <script type="text/javascript" src="js/mtdOverviewFunc.js"></script>
+    <script type="text/javascript" src="constant/dynamicScript.js"></script>
+    <script type="text/javascript" src="js/dashboard_mapfunc_3rdApproach.js"></script>
+    
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery(".timeago").timeago();
+        });
+
+        $('#playrealtime').removeClass('hidden');
+        $('#playrealtime').hide();
+        $('#stoprealtime').click(function () {
+          displayAllData.pause();
+          $('#stoprealtime').hide();
+          $('#playrealtime').show();
+        });
+    
+        $('#playrealtime').click(function () {
+          displayAllData.resume();
+          $('#stoprealtime').show();
+          $('#playrealtime').hide();
+        });
+    </script>
+</body>
+</html>

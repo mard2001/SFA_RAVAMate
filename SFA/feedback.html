@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  	<meta name="description" content="">
+  	<meta name="author" content="">
+	<title>Sosyo Feedback</title>
+	<link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <link rel="stylesheet" type="text/css" href="css/dss.css">
+    <style>
+        
+        .checkibox{
+            font-family: sans-serif;
+            font-size: 1.3rem;
+            font-weight: bold;
+            gap: 0.5em;
+        }
+
+        input[type="checkbox"] {
+            /* -webkit-print-color-adjust: exact !important; 
+            -webkit-appearance: none;
+            appearance: none; */
+            background-color: #fff;
+            
+            text-align: center !important;
+            margin: 0;
+        }
+
+        input[type="checkbox"] {
+            appearance: none;
+            background-color: #fff;
+            margin: 0;
+            font: inherit;
+            color: currentColor;
+            width: 1.15em;
+            height: 1.15em;
+            border: 0.15em solid currentColor;
+            border-radius: 0.15em;
+            transform: translateY(-0.075em);
+        }
+
+        .checkibox + .checkibox {
+            margin-top: 1em;
+        }
+
+        input[type="checkbox"] {
+            place-content: center;
+        }
+
+        input[type="checkbox"]::before {
+            content: "";
+            width: 0.65em;
+            height: 0.65em;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            box-shadow: inset 1em 1em var(--form-control-color);
+        }
+
+        input[type="checkbox"] {
+            display: grid;
+            place-content: center;
+            text-align: center !important;
+        }
+
+        input[type="checkbox"]::before {
+            content: "";
+            width: 0.65em;
+            height: 0.65em;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            box-shadow: inset 1em 1em var(--form-control-color);
+        }
+
+        input[type="checkbox"]:checked::before {
+            transform: scale(1);
+        }
+
+        input[type="checkbox"]::before {
+            background-color: CanvasText;
+        }
+
+        input[type="checkbox"]::before {
+
+        transform-origin: bottom left;
+         clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+        }
+
+        input[type="checkbox"]:focus {
+            outline: max(2px, 0.15em) solid currentColor;
+            outline-offset: max(2px, 0.15em);
+        }
+        .inputsearch{
+            padding: 5px; height: 13px; border-radius: 3px; margin-bottom: 10px;
+            width: 200px;
+            /* border-top: none;
+            border-left: none;
+            border-right: none; */
+        }
+    </style>
+</head>
+<body>
+	<div id="heading">
+		<h3>Feedback Form</h3>
+
+		<!-- <div id="subHeading">
+			<span id="company"></span><br/>
+			<span id="dateAndTime"></span>
+		</div> -->
+		<div class="subHeading2">
+			<span class="print btn" onclick="execprint()"><i class="fas fa-print"></i> PRINT</span>
+			<span class="export btn" onclick="fnExcelReport()"><i class="fas fa-file-excel"></i> EXPORT</span>
+		</div>
+    </div>
+    <!-- <br><br><br><br><br>    -->
+	<div id="body">
+        <label for="">Search</label> <input type="text" class="inputsearch" id="searchInpt" placeholder="search anything here..">
+		<table style="border: 1px; width: 100%;" id="exceltbl">
+			<thead>
+				<tr class="hidethis">
+					<th colspan="15">FEEDBACK</th>
+				</tr>
+				<tr class="hidethis">
+					<th colspan="15" style="text-align: left; font-weight: normal;"><span id="compExp"></span></th>
+				</tr>
+				<tr class="hidethis">
+					<th colspan="15" style="text-align: left; font-weight: normal;"><span id="dateExp"></span></th>
+				</tr>
+				<tr style="padding: 10px;">
+					<th>#</th>
+					<th>DISTRIBUTOR</th>
+					<th>SALESMAN</th>
+					<th>CUSTCODE</th>
+                    <th>CUSTOMER NAME</th>
+                    
+					<th>DATE</th>
+					<th>ACTIVATED</th>
+					<th>INCOMPATIBLE PHONE</th>
+					<th>NO SIGNAL</th>
+                    <th>NO INTERNET</th>
+                    
+                    <TH>NO ELECTRICITY</TH>
+                    <TH>OWNER OUT</TH>
+                    <TH>NOT TECKHY</TH>
+                    <TH>NOT INTERESTED</TH>
+                    <TH>REMARKS</TH>
+				</tr>
+			</thead>
+            <tbody id="salesSummaryBody" style="text-align: center;"></tbody>
+        </table>
+	</div>
+
+	<iframe id="txtArea1" style="display:none"></iframe>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="/HASH/md5.js"></script>
+<script src="/HASH/aes.js"></script>
+<script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+<script type="text/javascript">
+	var user = localStorage.getItem("adminUserName");
+	var dateselected = localStorage.getItem("DSSdateSelected");
+
+	getcompname();
+	salessummary();
+
+	$('.hidethis').hide();
+	function execprint(){
+		$('.print').hide();
+		$('.export').hide();
+		window.print();
+		$('.print').show();
+		$('.export').show();
+	}
+
+	function salessummary(){
+        var distCode = localStorage.getItem('DISTCD');
+		$.ajax ({
+              url: "/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {"type":"GET_SOSYO_FEEDBACK", "CONN":con_info, "DIST_CODE":distCode},
+              dataType: "json",
+              crossDomain: true,
+              cache: false,            
+              async: false,
+                success: function(r){ 
+                	var cont = '';
+                	for(var x = 0; x < r.length; x++){
+                	cont += '<tr onclick="getactivated(\''+r[x].custCode+'\', \''+r[x].mdCode+'\',  \''+r[x].custName+'\', \''+x+'\')">'+
+                                '<td>'+(x+1)+'</td>'+
+                                '<td class="text-left">FDC BOHOL - NPI</td>'+
+                                '<td>'+r[x].mdCode+'</td>'+
+                                '<td>'+r[x].custCode+'</td>'+
+                                '<td style="text-align: left;">'+r[x].custName+'</td>'+
+                                '<td><input type="date" id="dateholder'+x+'" value="'+r[x].transdate+'"></td>'+
+                                // start of selectors
+                                '<td class="checkibox" style="">'+checkboxchecker(x, r[x].activated, 'isactivated', '35%', 'green')+'</td>'+
+                                '<td class="checkibox" style="">'+checkboxchecker(x, r[x].incompatible, 'ispatible', '45%', 'red')+'</td>'+
+                                '<td class="checkibox" style="">'+checkboxchecker(x, r[x].nosignal, 'nosignal', '35%', 'red')+'</td>'+
+                                '<td class="checkibox" style="">'+checkboxchecker(x, r[x].nointernet, 'nointernet', '35%', 'red')+'</td>'+
+                                '<td class="checkibox" style="">'+checkboxchecker(x, r[x].noelectricity, 'noelect', '38%', 'red')+'</td>'+
+                                '<td class="checkibox" style="">'+checkboxchecker(x, r[x].ownerout, 'ownerout', '34%', 'red')+'</td>'+
+                                '<td class="checkibox" style="">'+checkboxchecker(x, r[x].nottechy, 'nottech', '35%', 'red')+'</td>'+
+                                '<td class="checkibox" style="">'+checkboxchecker(x, r[x].notinterested, 'notinterested', '40%', 'red')+'</td>'+
+                                // remarks
+                                '<td style="padding: none !important;"><textarea name="" id="remarks'+x+'" cols="20" rows="1">'+r[x].remarks+'</textarea></td>'+
+                            '</tr>';
+
+					}
+
+					$('#salesSummaryBody').html(cont);   
+
+
+                   
+                }
+            });
+	}
+
+    function checkboxchecker(x, val, indicator, css, color){
+        if(parseInt(val) == 1){
+            return  '<input  class="chkbx" type="checkbox" id="'+indicator+x+'" name="vehicle'+x+'" style="color: '+color+'; margin-left: '+css+';" checked>';
+        }else{
+           return  '<input  class="chkbx" type="checkbox" id="'+indicator+x+'" name="vehicle'+x+'" style="color: '+color+'; margin-left: '+css+';">';
+        }
+       
+    }
+
+    function getactivated(custCode, salesman, customername, x){
+        var date = $('#dateholder'+x).val();
+        var remarks = $('textarea#remarks'+x).val();
+        var activated = 0, incomp = 0, nosignal = 0, nointernet = 0,
+         noelectric = 0, ownerout = 0, nottechy = 0, notinserted = 0;
+
+        if($('#isactivated'+x).is(':checked')){
+            activated = 1;
+            incomp = 0;
+            nosignal = 0,nointernet = 0,
+            noelectric = 0, ownerout = 0, nottechy = 0, notinserted = 0;
+
+            $( "#ispatible"+x ).prop( "checked", false );
+            $( "#nosignal"+x ).prop( "checked", false );
+            $( "#nointernet"+x ).prop( "checked", false );
+            $( "#noelect"+x ).prop( "checked", false );
+            $( "#ownerout"+x ).prop( "checked", false );
+            $( "#nottech"+x ).prop( "checked", false );
+            $( "#notinterested"+x ).prop( "checked", false );
+            $( "textarea#remarks"+x ).val('').change();
+        }else{
+            activated = 0;
+        }
+
+        if($('#ispatible'+x).is(':checked')){
+            incomp = 1;
+        }else{
+            incomp = 0;
+        }
+
+        if($('#nosignal'+x).is(':checked')){
+            nosignal = 1;
+        }else{
+            nosignal = 0;
+        }
+
+        if($('#nointernet'+x).is(':checked')){
+            nointernet = 1;
+        }else{
+            nointernet = 0;
+        }
+
+        if($('#noelect'+x).is(':checked')){
+            noelectric = 1;
+        }else{
+            noelectric = 0;
+        }
+
+        if($('#ownerout'+x).is(':checked')){
+            ownerout = 1;
+        }else{
+            ownerout = 0;
+        }
+
+        if($('#nottech'+x).is(':checked')){
+            nottechy = 1;
+        }else{
+            nottechy = 0;
+        }
+
+        if($('#notinterested'+x).is(':checked')){
+            notinserted = 1;
+        }else{
+            notinserted = 0;
+        }
+
+
+        updatefeedbackMDL(date, salesman, custCode, customername, activated, incomp, nosignal, nointernet, noelectric, ownerout, nottechy, notinserted, remarks);
+    }
+
+    $("#nimal").change(function() {
+        if(this.checked){
+            console.log('giclick');
+        }else{
+            console.log('walagiclick');
+        }
+    });
+
+
+    $("#searchInpt").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#salesSummaryBody tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+
+    function updatefeedbackMDL(date, salesman, custCode, customername, activated, incomp, nosignal, nointernet, noelectric, ownerout, nottechy, notinserted, remarks){
+        var distCode = localStorage.getItem('DISTCD');
+			$.ajax ({
+              url: "/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {
+                        "type":"UPDATE_SOSYO_FEEDBACK",
+                        "DIST_CODE":distCode,
+                        'date':date,
+                        'salesman':salesman,
+                        "custCode":custCode,
+                        'customername':customername,
+                        'activated':activated,
+                        'incomp':incomp,
+                        'nosignal':nosignal,
+                        'nointernet':nointernet,
+                        'noelectric':noelectric,
+                        'ownerout':ownerout,
+                        'nottechy':nottechy,
+                        'notinserted':notinserted,
+                        'remarks':remarks,
+                        "CONN":con_info,
+                    },
+              dataType: "json",
+              crossDomain: true,
+              cache: false,            
+                success: function(r){ 
+                    console.log(r);
+                }
+            });
+	}
+	
+	function getcompname(){
+			$.ajax ({
+              url: "/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {"type":"GET_COMPANYNAME", "CONN":con_info},
+              dataType: "json",
+              crossDomain: true,
+              cache: false,            
+                success: function(r){ 
+	            	$('#company').html(r[0].company.toUpperCase());
+	            	//$('#dateAndTime').html(r[0].serverTime);
+					$('#dateAndTime').html(dateselected);
+					$('#compExp').html(r[0].company.toUpperCase());
+					$('#dateExp').html(dateselected);
+                }
+            });
+	}
+
+	function getmiss(miss){
+		if(miss == '()'){
+			return '-';
+		}
+		return miss;
+	}
+
+	function fnExcelReport(){
+		var tab_text="<html xmlns='http://www.w3.org/1999/xhtml' lang='el-GR' lang='el-GR'>";
+		var tab_text=tab_text+"<?php Response.AddHeader('Content-Disposition', 'inline;filename=Dailysales.xls') ?>";
+		var tab_text=tab_text+"<meta http-equiv='content-type' content='text/plain; charset=UTF-8'/>";
+		var tab_text=tab_text+"<table border='1px'><tr>";
+		var textRange; var j=0;
+		tab = document.getElementById('exceltbl'); // id of table
+
+		for(j = 0 ; j < tab.rows.length ; j++)
+		{
+		tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
+		}
+
+		tab_text=tab_text+"</table>";
+		tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");
+		tab_text= tab_text.replace(/<img[^>]*>/gi,"");
+		tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, "");
+		tab_text= tab_text.replace(/<button[^>]*>|<\/button>/gi, "");
+
+		var ua = window.navigator.userAgent;
+		var msie = ua.indexOf("MSIE ");
+
+		sa = window.open('data:application/vnd.ms-excel,filename=Dailysales.xls,' + encodeURIComponent(tab_text));
+
+		return (sa);
+      /*var tab_text="<table border='2px'><tr>";
+      var textRange; var j=0;
+      tab = document.getElementById('exceltbl'); // id of table
+
+      for(j = 0 ; j < tab.rows.length ; j++) 
+      {     
+          tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
+          //tab_text=tab_text+"</tr>";
+      }
+
+      tab_text=tab_text+"</table>";
+      tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+      tab_text= tab_text.replace(/<img[^>]*>/gi,""); // remove if u want images in your table
+      tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+      var ua = window.navigator.userAgent;
+      var msie = ua.indexOf("MSIE "); 
+
+      if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+      {
+          txtArea1.document.open("txt/html","replace");
+          txtArea1.document.write(tab_text);
+          txtArea1.document.close();
+          txtArea1.focus(); 
+          sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
+      }  
+      else                 //other browser not tested on IE 11
+          sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));  
+
+      return (sa);*/
+
+  	}
+</script>
+
+</html>

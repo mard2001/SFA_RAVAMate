@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root{
+    font-family:  "Inter", sans-serif;
+    --cust-primary: #040B2F;
+    --cust-primary2: #1365a2;
+    --cust-primary3: #337ab7;
+    --cust-primary4: #3c69b2;
+    --cust-primary5: #3c69b2;
+    --cust-primary6: #183df7;
+    --cust-primary7: rgba(12, 84, 137, 0.9);
+    --cust-primary8: #435ebe;
+    --cust-primary9: #031841;
+    --cust-primary10: #051A66;
+    --cust-primary11: #2B46A1;
+
+    --cust-primary-hover: #184770;
+    --cust-primary-hover2: #1c2864;
+    --cust-primary-hover3: rgba(12, 84, 137, 1);
+    --cust-primary-hover4: #050C33;
+    --cust-primary-hover5: #061A64;
+
+    --cust-primary-map: rgba(12, 84, 137, 0.8);
+    --cust-primary-map2: rgba(19, 101, 162, 0.3);
+
+    --cust-white: #FFF; 
+    --cust-neutralWhite1: #DAE8FF;
+    --cust-neutralWhite2: #CFE2FF;
+    --cust-neutralWhite3: #C5D7F2;
+    --cust-neutralWhite4: #bfd1ec;
+    --cust-neutralWhite5: #BDD7FF;
+    --cust-neutralWhite6: #D2D2D2;
+    --cust-neutralWhite7: #F6F6F6;
+
+    --cust-grey: #949494;
+    --cust-grey2: #7D7D7D;
+    --cust-grey3: #A4A4A4;
+    --cust-grey4: #E7E7E7;
+
+    --cust-red: #FF0000;
+    --cust-red2: #FF6868;
+
+    --cust-success: #58FF69;
+    --cust-green1: #00FF1A;
+    --cust-green2: #96f8a0;
+    --cust-green3: #24e237;
+
+    --main-background: url("../img/reportsBackground.jpg");
+    --main-backgroundColor: transparent;
+
+    --main-font-family: "Inter", sans-serif;
+    --main-font-optical-sizing: auto;
+    --main-font-weight: 500;
+    --main-font-style: normal;
+}
+
+/* var(--cust-primary9) */
+#selectedCategoryProda{
+    background-color: rgba(0, 0, 0, 0.1); /* 3 */
+    background-color: rgba(0, 0, 0, 0.2); /* 2 */
+    background-color: rgba(0, 0, 0, 0.2); /* 2 */
+
+    background-color: rgba(128, 128, 128, 0.7); /* 1 */
+    background-color: rgba(128, 128, 128, 1) ; /* 1 */
+    background-color: rgba(40, 43, 53, 0.5); /* 1 */
+
+
+    background-color: #DAE8FF; /* 9 */
+    background-color: #1365a2; /* 9 */
+    background-color: #337ab7; /* 5 */
+    background-color: #184770; /* 4 */
+    background-color: rgba(12, 84, 137, 0.8); /* 4 */
+    background-color: #bfd1ec; /* 4 */
+    background-color: #cfe2ff; /* 3 */
+    background-color: #c5d7f2; /* 2 */
+    background-color: #BDD7FF; /* 2 */
+    background-color: #FF0000; /* 2 */
+    background-color: #435ebe; /* 2 */
+    background-color: rgba(19, 101, 162, 0.3); /* 2 */
+    background-color: #3c69b2; /* 1 */
+    background-color: #183df7; /* 1 */
+    background-color: rgba(12, 84, 137, 0.9); /* 1 */
+    background-color: rgba(12, 84, 137, 1); /* 1 */
+    background-color: #1c2864; /* 1 */
+}
+
+
+.animated-border-btn {
+    position: relative;
+    padding: 6px 12px;
+    margin: 0 5px;
+    font-size: 16px;
+    background-color: transparent;
+    color: var(--cust-white);
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.animated-border-btn .border {
+    position: absolute;
+    background-color: var(--cust-white);
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.animated-border-btn .top {
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 0%;
+}
+
+.animated-border-btn .right {
+    top: 0;
+    right: 0;
+    width: 2px;
+    height: 0%;
+}
+
+.animated-border-btn .bottom {
+    bottom: 0;
+    right: 0;
+    height: 2px;
+    width: 0%;
+}
+
+.animated-border-btn .left {
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    height: 0%;
+}
+
+.animated-border-btn:hover .top {
+    width: 100%;
+    transition-delay: 0s;
+}
+
+.animated-border-btn:hover .right {
+    height: 100%;
+    transition-delay: 0.3s;
+}
+
+.animated-border-btn:hover .bottom {
+    width: 100%;
+    transition-delay: 0.6s;
+}
+
+.animated-border-btn:hover .left {
+    height: 100%;
+    transition-delay: 0.9s;
+}

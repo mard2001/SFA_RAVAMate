@@ -1,0 +1,538 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Stocktake Report</title>
+  <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/BOOTSTRAP3/css/bootstrap.min.css"/>
+  <script src="/BOOTSTRAP3/AJAX/jquery.min.js"></script>
+  <script src="/BOOTSTRAP3/js/bootstrap.min.js"></script>
+
+  <link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+  <link rel="stylesheet" href="/css/mdDesign.css">
+
+  <script type="text/javascript" src="/DATERANGEPICKER/moment.min.js"></script>
+  <script type="text/javascript" src="/DATERANGEPICKER/daterangepicker.js"></script>
+  <link rel="stylesheet" href="/DATERANGEPICKER/daterangepicker.css">
+
+  <link rel="stylesheet" href="/Commonusrs/DATATABLES/jquery.dataTables.min.css"/>
+  <link rel="stylesheet" href="/Commonusrs/DATATABLES/editor.dataTables.min.css"/>
+  <link rel="stylesheet" href="/Commonusrs/DATATABLES/select.dataTables.min.css"/>
+  <link rel="stylesheet" href="/Commonusrs/DATATABLES/buttons.dataTables.min.css "/>
+  <link rel="stylesheet" href="/js/multi/dist/css/bootstrap-multiselect.css" type="text/css"/>
+</head>
+
+<body class="" id="page-top">
+  <div id="mySidenav" class="sidenav">
+    <div class='image'><img alt='mdbuddylogo' class='logoMd' src='/img/mdbuddylogo_jeff.png'/></div>
+      <a href="https://mybuddy-sfa.com/SFA/Dashboard"> <span class='glyphicon glyphicon-home'></span> Dashboard</a>
+      <a href="https://mybuddy-sfa.com/SFA/digitalMapping"> <span class='glyphicon glyphicon-map-marker'></span> Digital Mapping</a>
+      <a href="https://mybuddy-sfa.com/SFA/customerMapping"> <span class="fa fa-users" aria-hidden="true"></span> Customer Mapping</a>
+      <a href="territoryGeofencing"> <span class='glyphicon glyphicon-cog'></span> Territory Geofencing</a>
+     <a data-toggle="collapse" href="#collapse1" id='navDrop'> <span class='glyphicon glyphicon-duplicate' id='changeIcon'></span> Reports
+       <i class="glyphicon glyphicon-menu-down pull-right"></i> </a>
+        <div id="collapse1" class="panel-collapse collapse" style="margin-left: 17px; font-size: 9px !important">
+          <a href="salesReport"> Sales Report</a>
+          <a href="fastsosyotransaction"> Fastsosyo Transaction</a>
+          <a href="salesAudit"> Sales Audit</a>
+          <a href="transactionLedger"> Transaction Ledger</a>
+          <a href="UnprocessedOrders"> Unprocessed Orders</a>
+          <a href="dsr"> DSR</a>
+          <a href="dcr"> Daily Collection</a>
+          <a href="stockRequest"> Stock Request</a>
+          <a href="unuploaded"> Unuploaded</a>
+          <a href="BOReport"> BO</a>
+          <a href="Stocktake Report" class="activeYes"> Stocktake</a>
+          <a href="inventory"> Inventory Valuation</a>
+          <a href="jobberMaintenance"> Jobber</a>
+          <a href="syncreport">Sync Report</a>
+          <a href="soaprvreport">SO Approval</a>
+        </div>
+     <a data-toggle="collapse" href="#collapse2" id='navDrop' class="maintenanceCont"> <span class="fa fa-cogs" aria-hidden="true" id='changeIcon'></span> Maintenance
+      <i class="glyphicon glyphicon-menu-down pull-right"></i> </a>
+        <div id="collapse2" class="panel-collapse collapse" style="margin-left: 17px; font-size: 9px !important">
+          <a href="dataMaintenance"> Data</a>
+          <a href="customer"> Customer</a>
+          <a href="cmf">CMF</a>
+          <a href="geoReset"> Georeset</a>
+          <a href="salesman"> Salesman</a>
+          <a href="product"> Product</a>
+          <a href="productbtdt"> BTDT Product</a>
+          <a href="customerTagging"> Tagging</a>
+          <a href="bankmaintenance"> Bank</a>
+          <a href="mcpcalibration">MCP Calibration</a>
+        </div>
+    <!-- <a href="Alert"> <span class='glyphicon glyphicon-envelope'></span> Alert Messages</a> -->
+    <hr />
+    <a href="https://mybuddy-sfa.com/SFA/v2/dashboard">Switch to New Dashboard</a>
+  </div>
+    <div id="main">
+        <h4 class="display-4">
+           <a href="#" id='navBtn' class="btn btn-primary"  style='margin-right: 15px;'>
+             <span class="glyphicon glyphicon-menu-hamburger"></span> 
+           </a>
+          <span class='glyphicon glyphicon-file'></span> Stocktake
+          <span class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                    <a style='float:right;' href="#" class="dropdown-toggle" data-toggle="dropdown" id='dropThisDown'>
+                        <span class="label label-pill label-danger count" style='border-radius: 10px; font-size: 10px;'></span>
+                        <span class="fa fa-bell"></span>
+                    </a>
+                    
+                       <ul class="dropdown-menu" style='padding: 0'>
+                        <div id='notif-body'>
+                            <div id='notifs-icon-div'></div>
+                        </div>
+                        <a type="button" class="btn btn-default btn-block" href='mdAlert_bohol.php' id='seeAll' >See all</a>
+                       </ul>
+                </li>
+
+                  <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                      <i class="fa fa-user"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="Profile.html"><i class="fa fa-user"></i> My Account</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="#" id="admin-logout-btn"><i class="fa fa-lock fa-fw"></i>Logout</a>
+                        </li>
+                    </ul>
+                 </li>
+            </span>
+          </h4>
+         <div class="panel" style='background-color:#2c8dd6; color: white; margin-top: 20px;'>
+
+                <div class="panel-heading">
+                  <span class='glyphicon glyphicon-list-alt'></span>
+                  <span id="titleHeading" class="display-4"></span>
+
+                  <div id="reportrange1" class="pull-right" style="background-color: transparent; cursor: pointer; color: white;">
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                        <span>Filter by Date</span> <b class="caret"></b>
+                    </div>
+                </div>
+                <div class="panel-body" style='background-color:#fff; color: black;'> 
+                  <!--<button class="btn btn-success btn-sm" id="appvBtn">APPROVE</button>-->
+                    <div class="loading-table">
+                         <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i> Rendering data ...
+                          <span class="sr-only">Loading...</span>
+                    </div>
+                    <table id="stockRequest_TAB" class="display nowrap" width="100%">
+                      <thead>
+                         <tr>
+                            <th>DATE</th>
+                            <th>SALESMAN</th>
+                            <th>CUSTOMER</th>
+                            <th>CLASS</th>
+                            <th>STKTAKE #</th>
+                            <th>REQUIRED</th>
+                            <th>AVAILABLE</th>
+                            <th>OUT OF STOCK</th>
+                         </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                 </div>
+               </div>
+         </div><!--main panel end-->
+    
+    <div id="salesmanListModal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-800">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title"><i class="fa fa-list"></i> Salesman List</h4>
+          </div>
+          <div class="modal-body">
+              
+              <table class="table table-hover table-condensed table-striped">
+                <tr>
+                  <td>DATE SELECTED:</td>
+                  <td><span id="dateSelected"></span></td>
+                </tr>
+                <tr>
+                  <td>SALESMAN:</td>
+                  <td>
+                      <span id="fetchCont" class="">
+                        <i class="fa fa-spin fa-spinner"></i> fetching salesman...
+                      </span>
+                      <strong id="emptySalesman" class="text-danger">NO SALESMAN AVAILABLE ON THIS DATE!</strong>
+                      <select id="salesmanList" name="salesmanList[]"></select>
+                  </td>
+                </tr>
+              </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="dcrbtn" data-dismiss="modal" onclick="generate_Dcr_data()">PRINT</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    
+    <script src="/Commonusrs/DATATABLES/jquery.dataTables.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/dataTables.buttons.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/buttons.print.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/buttons.html5.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/jszip.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/ellipsis.js"></script>
+    <script src="/Commonusrs/DATATABLES/dataTables.select.min.js"></script>
+    <script src="/Commonusrs/DATATABLES/dataTables.checkboxes.min.js"></script>
+
+    <script type="text/javascript" src="/js/multi/dist/js/bootstrap-multiselect.js"></script>
+    <script type="text/javascript" src="/js/jasonday-printThis-c814846/printThis.js"></script>
+    <script type="text/javascript" src="/web/web-commons.js"></script>
+    <script type="text/javascript" src="/js/bootbox.min.js"></script>
+    <script type="text/javascript" src="/js/scrolling.js"></script>
+    <script src="/HASH/md5.js"></script>
+    <script src="/HASH/aes.js"></script>
+    <script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+    <script src="js/chatApi.js"></script>
+    <script type="text/javascript">
+      var user = localStorage.getItem("adminUserName");
+      var usertype = localStorage.getItem("usertype");
+
+      determineUserType(usertype); 
+
+      getcompname();
+
+      function loadSalesman(start, end){
+        $('#fetchCont').show();
+        $('#emptySalesman').hide();
+        $('#salesmanList').multiselect('destroy');
+        $.ajax ({
+            url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {"type":"STK_SALESMAN_LIST", "CONN":con_info, "start":start, "end":end},
+            dataType: "json",
+            crossDomain: true,
+            cache: false,            
+            success: function(data){ 
+              $('#fetchCont').hide();
+              $('#salesmanList').html('');
+              if(data.length == 0){
+                $('#salesmanList').hide();
+                $('#emptySalesman').show();
+                $('#dcrbtn').prop('disabled', true);
+              }else{
+                $('#salesmanList').show();
+                $('#dcrbtn').prop('disabled', false);
+                for(var x = 0; x<data.length; x++){
+                 $('#salesmanList').append('<option value="'+data[x].SALESMANCODE+'">'+data[x].SALESMAN+'</option>');
+                }
+                $('#salesmanList').multiselect({
+                  numberDisplayed: 1,
+                  enableCaseInsensitiveFiltering: true,
+                  includeSelectAllOption: true,
+                  selectAllNumber: true,
+                  buttonWidth: '300px',
+                  maxHeight: 300
+              });
+              }
+            }
+        });
+      }
+
+      function getcompname(){
+      $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {"type":"GET_COMPANYNAME", "CONN":con_info},
+          dataType: "json",
+          crossDomain: true,
+          cache: false,            
+            success: function(r){ 
+            $('#titleHeading').html(r[0].company.toUpperCase() +' / Stocktake');
+            }
+        });
+      } 
+
+      var sourceDat;
+      $('.loading-table').hide();
+      function stockRequestSourceData(start, end){
+      $('#stockRequest_TAB').hide();
+      $('.loading-table').show();
+      $('#salesmanListModal').modal('hide');
+      //var salesman = $('#salesmanList').val();
+      var dialog = bootbox.dialog({
+        message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> please wait...</p>',
+        backdrop: true
+      });
+      var botboxMsg = '';
+         $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {"type":"stocktakeReportData_All", "startDate":start, "endDate":end, "CONN":con_info},
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(r){ 
+                sourceDat = r;
+                $('#stockRequest_TAB').show();
+                $('.loading-table').hide();
+                dialog.modal('hide');
+               },//success
+               error: function(XMLHttpRequest, textStatus, errorThrown) {
+                botboxMsg = '<b class="text-danger">Ops! Something went wrong!</b><br/>' + XMLHttpRequest.responseText + ' CONTACT SYSTEM ADMINISTRATOR!';
+                dialog.init(function(){
+                      setTimeout(function(){
+                        dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                    }, 1000);
+                });
+              }
+              }).done(function () {
+                      dialog.init(function(){
+                            setTimeout(function(){
+                              dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                          }, 1000);
+                    });
+              });
+      }
+
+      datePicker();
+      var startPickDate, endPickDate;
+      function datePicker(){
+       var start = moment().subtract(29, 'days');
+        var end = moment();
+
+        $('#reportrange1').daterangepicker({
+            "alwaysShowCalendars": true,
+            "startDate": start,
+            "endDate": end,
+            "applyClass": "btn-primary",
+            "autoApply": false,
+            ranges: {
+               'Today': [moment(), moment()],
+               'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+               'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+               'This Month': [moment().startOf('month'), moment().endOf('month')],
+               'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        }, function(start, end, label) {
+            $('#reportrange1 span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            $('#dateSelected').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            startPickDate = start.format('YYYY-MM-DD');
+            endPickDate = end.format('YYYY-MM-DD');
+            // stockRequestSourceData(startPickDate, endPickDate);
+            // tableData.clear().rows.add(sourceDat).draw();
+            //loadSalesman(startPickDate, endPickDate);
+            //$('#salesmanListModal').modal('show');
+          });
+
+        $('#reportrange1').on('apply.daterangepicker', function(ev, picker) {
+          $('#stockRequest_TAB').hide();
+          var start = picker.startDate.format('YYYY-MM-DD');
+          var end = picker.endDate.format('YYYY-MM-DD');
+          startPickDate = start;
+          endPickDate = end;
+          stockRequestSourceData(startPickDate, endPickDate);
+          tableData.clear().rows.add(sourceDat).draw();
+          //stockRequestSourceData(start, end);
+          //loadSalesman(startPickDate, endPickDate);
+          //$('#salesmanListModal').modal('show');
+          //tableData.clear().rows.add(sourceDat).draw();
+        });
+      }
+
+      function generate_Dcr_data(){
+        //stockRequestSourceData(startPickDate, endPickDate);
+        //tableData.clear().rows.add(sourceDat).draw();
+
+        var salesman = $('#salesmanList').val();
+        localStorage.setItem('salesman', salesman);
+        localStorage.setItem('startDate_stk', startPickDate);
+        localStorage.setItem('endDate_stk', endPickDate);
+        window.open('print-stocktake', '_blank');
+      }
+
+      datatableApp();
+      var tableData;
+      function datatableApp(){
+           tableData = $('#stockRequest_TAB').DataTable({
+              "dom": 'Bfrtip',
+              "responsive": true,
+              "data": sourceDat,
+              "scrollX": true,
+              "ordering": false,
+              columns: [
+                  { data: "STKDATE" },
+                  { data: "SALESMAN" },
+                  { data: "CUSTOMER" },
+                  { data: "CUSTOMERCHANNEL"},
+                  { data: "STAKENO" },
+                  { data: "STKREQUIRED" },
+                  { data: "STKAVAILABLE" },
+                  { data: "STKOUTOFSTOCK" }
+                ],
+                buttons: [
+                  {
+                      text: 'PRINT',
+                      action: function(e, dt, node, config){
+                        if ( ! tableData.data().any() ) {
+                            alert( 'No data to print!' );
+                        }else{
+                          loadSalesman(startPickDate, endPickDate);
+                          $('#salesmanListModal').modal('show');
+                          
+                        }
+                      }   
+                  },
+                  {
+                      extend: 'excelHtml5',
+                      text: 'Excel',
+                      title: '',
+                      filename: 'STKREPORTS - '+ moment().format("DD-MMM-YYYY"),
+                      // exportOptions: {
+                      //     modifier: {
+                      //         page: 'current'
+                      //     },
+                      //     columns: ':visible'
+                      // },
+                      customize: function ( xlsx ) {
+                          //xlsx.xl['styles.xml'] = xmlStyle;
+                          //ecxelCustomize(xlsx);
+                          // exportAllData(startPickDate, endPickDate);
+                          // tableData.clear().rows.add(sourceDat).draw();
+                      },
+                      action: function(e, dt, button, config) {
+                        var f = confirm('This would generate all salesman records based on the date you filter.\nPress OK to continue.');
+                        if(f){
+                          // exportAllData(startPickDate, endPickDate);
+                          // tableData.clear().rows.add(sourceDat).draw();
+                          $('.loading').fadeIn();
+                          var that = this;
+                          setTimeout(function () {
+                              $.fn.dataTable.ext.buttons.excelHtml5.action.call(that,e, dt, button, config);
+                              $('.loading').fadeOut();
+                              // stockRequestSourceData(startPickDate, endPickDate);
+                              // tableData.clear().rows.add(sourceDat).draw();
+                          },500);
+                         
+                        }
+                      },
+                  },
+                // {
+                //   extend: 'print',
+                //   messageTop: 'SALEMAN: ' + $('#salesmanList').val()
+                // },
+                //'excel',
+              ]
+          });
+      }
+
+      function exportAllData(startPickDate, endPickDate){
+        $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {"type":"stocktakeReportData_All", "startDate":startPickDate, "endDate":endPickDate, "CONN":con_info},
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(r){ 
+                sourceDat = r;
+              }
+        });
+      }
+      function updateStockReq(refNo, mdCode, stockCode){
+         $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {
+                  "type":"updateStockRequest",
+                  "refNo": refNo,
+                  "mdCode":mdCode,
+                  "stockCode":stockCode,
+                  "CONN":con_info
+                 },
+              dataType: "html",
+              crossDomain: true,
+              cache: false,           
+              async: false, 
+              success: function(r){
+                if(r != 0){
+                  alert('Something went wrong! ERROR: ' + r);
+                }
+               }//success
+              });
+      }
+        
+     
+    
+        $("#btn-print").click(function () {
+             var salesman = $("#salesmanList option:selected").text();
+             var selectedSalesman = $("#salesmanList").val();
+             var date = $('#jobberDate').val();
+             var datePrinted = new Date().toLocaleString();
+
+             if(selectedSalesman == ''){
+              alert('Please select date first!');
+             }else{
+              //printData();
+                $('#printThisTable').printThis({
+                  importCSS: true,
+                  header: "<div>"+salesman+"<small class='pull-right'> Date Created: "+datePrinted+"</small></div>",
+                  pageTitle: "JOBBER FULL OUT FORM",
+                  printContainer: true,
+                  copyTagClasses: true
+                 });
+             }
+                
+        });
+
+      function printData(){
+        window.print();
+      }
+
+       (function($) {
+          $.fn.clickToggle = function(func1, func2) {
+              var funcs = [func1, func2];
+              this.data('toggleclicked', 0);
+              this.click(function() {
+                  var data = $(this).data();
+                  var tc = data.toggleclicked;
+                  $.proxy(funcs[tc], this)();
+                  data.toggleclicked = (tc + 1) % 2;
+              });
+              return this;
+          };
+         }(jQuery));
+
+       
+          $("#navBtn").clickToggle(function() {   
+            openNav();
+          }, function() {
+              closeNav();
+          });
+
+          $(window).bind("load", function () {
+              $('#work-in-progress').fadeOut();
+          });
+        
+          function imgError2(image) {
+            image.onerror = "";
+            image.src = "../img/salesmanPic.jpg";
+            return true;
+          }  
+
+          function openNav() {
+              document.getElementById("mySidenav").style.width = "270px";
+              document.getElementById("main").style.marginLeft = "270px";
+          }
+
+          function closeNav() {
+              document.getElementById("mySidenav").style.width = "0";
+              document.getElementById("main").style.marginLeft= "0";
+          }
+    </script>
+</body>
+</html>

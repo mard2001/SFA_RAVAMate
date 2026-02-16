@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#FFFFFF;stroke-width:27;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st1{fill:none;stroke:#0FECF4;stroke-width:24;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st2{fill:#0FECF4;}
+	.st3{display:none;}
+</style>
+<g id="Layer_2">
+	<line class="st0" x1="60.1" y1="198.4" x2="115.9" y2="216"/>
+	<line class="st0" x1="104.4" y1="84.5" x2="168.4" y2="161.1"/>
+	<line class="st0" x1="206.9" y1="44.9" x2="217.4" y2="115.5"/>
+	<polyline class="st1" points="409.9,206.5 409.9,180.4 383.9,168.9 219,222.9 198.8,250.8 198.8,427.3 219,448.5 430.2,448.5 
+		464.9,423.4 464.9,265.3 438.9,241.2 213.2,242.1 	"/>
+	<circle class="st2" cx="427" cy="340.6" r="17.4"/>
+</g>
+<g id="Layer_3" class="st3">
+	
+		<image style="display:inline;overflow:visible;" width="89" height="89" xlink:href="wallet.png"  transform="matrix(3.738 0 0 3.738 164.1786 149.5956)">
+	</image>
+</g>
+</svg>

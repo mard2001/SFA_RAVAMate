@@ -1,0 +1,93 @@
+.transitionModalBtn{
+    color: var(--cust-white);
+    background-image: linear-gradient(#02133F, #0E6BAD);
+    border: 2px solid var(--cust-white);
+    font-size: 12px !important;
+    animation: glow 1.5s infinite alternate; /* Apply the glow animation */
+    margin-top: 10px;
+    text-decoration: none;
+    text-transform: none;
+}
+
+.transitionModalBtn:hover{
+    color: #dadada;
+    border: 2px solid #02133F;
+}
+
+#transitionModal .transitionModalDialog{
+    background-image: var(--main-background);
+    background-color: var(--main-backgroundColor);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    color: var(--cust-white);
+    text-align: center;
+    border-radius: 20px !important;
+    border: 1px solid #02133F;
+}
+
+#transitionModal .modal_logoTextDiv{
+    margin-left: 10px;
+}
+
+#transitionModal .modal_textHeader{
+    margin-bottom: 0;
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: -5px;
+}
+
+#transitionModal .modal_textHeaderRed{
+    color: #FF0000;
+}
+
+#transitionModal .modal_logoTextDiv .textSubHeader{
+    font-size: 20px;
+}
+
+#transitionModal .yesBtn{
+    width: 100px;
+    color: #000;
+    background-color: var(--cust-white);
+    border: 2px solid var(--cust-white);
+    border-radius: 20px;
+}
+
+#transitionModal .yesBtn:hover{
+    color: var(--cust-white);
+    background-image: linear-gradient(to bottom ,#02133F, #0E6BAD);
+    border: 2px solid var(--cust-white);
+}
+
+#transitionModal .noBtn{
+    width: 100px;
+    color: var(--cust-white);
+    background-color: #FF5858;
+    border: 2px solid var(--cust-white);
+    border-radius: 20px;
+}
+
+#transitionModal .noBtn:hover{
+    color: var(--cust-white);
+    background-image: linear-gradient(#4A0000, #F84343);
+    border: 2px solid var(--cust-white);
+}
+
+#transitionModal .modalfooter{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px 0;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 5px #0E6BAD, 0 0 15px #0E6BAD, 0 0 30px #0E6BAD; /* Define the glow effect */
+    }
+    to {
+        box-shadow: 0 0 20px #0E6BAD, 0 0 30px #0E6BAD, 0 0 40px #0E6BAD; /* Define the glow effect */
+    }
+}

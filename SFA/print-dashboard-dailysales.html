@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  	<meta name="description" content="">
+  	<meta name="author" content="">
+	<title>Sales Summary</title>
+	<link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+	<link rel="stylesheet" type="text/css" href="css/dss.css">
+</head>
+<body>
+	<div id="heading">
+		<h3>DAILY SALES SUMMARY</h3>
+
+		<div id="subHeading">
+			<span id="company"></span><br/>
+			<span id="dateAndTime"></span>
+		</div>
+		<div class="subHeading2">
+			<span class="print btn" onclick="execprint()"><i class="fas fa-print"></i> PRINT</span>
+			<span class="export btn" onclick="fnExcelReport()"><i class="fas fa-file-excel"></i> EXPORT</span>
+		</div>
+	</div>
+	<div id="body">
+		<table style="border: 1px; width: 100%;" id="exceltbl">
+			<thead>
+				<tr class="hidethis">
+					<th colspan="10">DAILY SALES SUMMARY</th>
+				</tr>
+				<tr class="hidethis">
+					<th colspan="10" style="text-align: left; font-weight: normal;"><span id="compExp"></span></th>
+				</tr>
+				<tr class="hidethis">
+					<th colspan="10" style="text-align: left; font-weight: normal;"><span id="dateExp"></span></th>
+				</tr>
+				<tr>
+					<th>#</th>
+					<th>SALESMAN</th>
+					<th>TARGET</th>
+					<th>PROD.</th>
+					<th>UNPROD.</th>
+					<th>MISS</th>
+					<th>FIRST</th>
+					<th>LAST</th>
+					<th># HOURS</th>
+					<th>LAST SENT</th>
+					<th>AMOUNT</th>
+				</tr>
+			</thead>
+			<tbody id="salesSummaryBody" style="text-align: center;"></tbody>
+			<tfoot>
+				<tr>
+					<td colspan="11" id="totalSales" style="text-align: right;"></td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+
+	<iframe id="txtArea1" style="display:none"></iframe>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="/HASH/md5.js"></script>
+<script src="/HASH/aes.js"></script>
+<script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+<script type="text/javascript">
+	var user = localStorage.getItem("adminUserName");
+	var dateselected = localStorage.getItem("DSSdateSelected");
+
+	salessummary();
+	getcompname();
+
+	$('.hidethis').hide();
+	function execprint(){
+		$('.print').hide();
+		$('.export').hide();
+		window.print();
+		$('.print').show();
+		$('.export').show();
+	}
+
+	function salessummary(){
+		$.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {"type":"GET_ENDOFDAY_DETALS", "CONN":con_info, "date":dateselected},
+              dataType: "json",
+              crossDomain: true,
+              cache: false,            
+                success: function(r){ 
+                	var cont = '';
+                	for(var x = 0; x < r.transactions.length; x++){
+                	cont += '<tr>'+
+						'<td>'+(x+1)+'</td>'+
+						'<td class="text-left">'+r.transactions[x].mdName+'</td>'+
+						'<td>'+r.transactions[x].tcalls+'</td>'+
+						'<td>'+r.transactions[x].pCalls+'</td>'+
+						'<td>'+r.transactions[x].unpCalls+'</td>'+
+						'<td>'+r.transactions[x].missCall+'</td>'+
+						'<td>'+r.transactions[x].fcall+'</td>'+
+						'<td>'+r.transactions[x].lcall+'</td>'+
+						'<td>'+r.transactions[x].tSellHour+'</td>'+
+						'<td>'+r.transactions[x].LastSent+'</td>'+
+						'<td style="padding-right: 15px !important; text-align: right !important;">'+r.transactions[x].amount+'</td>'+
+					'</tr>';
+					}
+
+					$('#totalSales').html('<b>TOTAL: ' + parseFloat(r.totalsales[0].total).toLocaleString()+'</b>');
+					$('#salesSummaryBody').html(cont);   
+					//window.print();
+					//window.top.close();   
+                }
+            });
+
+		
+	}
+	
+	function getcompname(){
+			$.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {"type":"GET_COMPANYNAME", "CONN":con_info},
+              dataType: "json",
+              crossDomain: true,
+              cache: false,            
+                success: function(r){ 
+	            	$('#company').html(r[0].company.toUpperCase());
+	            	//$('#dateAndTime').html(r[0].serverTime);
+					$('#dateAndTime').html(dateselected);
+					$('#compExp').html(r[0].company.toUpperCase());
+					$('#dateExp').html(dateselected);
+                }
+            });
+	}
+
+	function getmiss(miss){
+		if(miss == '()'){
+			return '-';
+		}
+		return miss;
+	}
+
+	function fnExcelReport(){
+		var tab_text="<html xmlns='http://www.w3.org/1999/xhtml' lang='el-GR' lang='el-GR'>";
+		var tab_text=tab_text+"<?php Response.AddHeader('Content-Disposition', 'inline;filename=Dailysales.xls') ?>";
+		var tab_text=tab_text+"<meta http-equiv='content-type' content='text/plain; charset=UTF-8'/>";
+		var tab_text=tab_text+"<table border='1px'><tr>";
+		var textRange; var j=0;
+		tab = document.getElementById('exceltbl'); // id of table
+
+		for(j = 0 ; j < tab.rows.length ; j++)
+		{
+		tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
+		}
+
+		tab_text=tab_text+"</table>";
+		tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");
+		tab_text= tab_text.replace(/<img[^>]*>/gi,"");
+		tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, "");
+		tab_text= tab_text.replace(/<button[^>]*>|<\/button>/gi, "");
+
+		var ua = window.navigator.userAgent;
+		var msie = ua.indexOf("MSIE ");
+
+		sa = window.open('data:application/vnd.ms-excel,filename=Dailysales.xls,' + encodeURIComponent(tab_text));
+
+		return (sa);
+      /*var tab_text="<table border='2px'><tr>";
+      var textRange; var j=0;
+      tab = document.getElementById('exceltbl'); // id of table
+
+      for(j = 0 ; j < tab.rows.length ; j++) 
+      {     
+          tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
+          //tab_text=tab_text+"</tr>";
+      }
+
+      tab_text=tab_text+"</table>";
+      tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+      tab_text= tab_text.replace(/<img[^>]*>/gi,""); // remove if u want images in your table
+      tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+      var ua = window.navigator.userAgent;
+      var msie = ua.indexOf("MSIE "); 
+
+      if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+      {
+          txtArea1.document.open("txt/html","replace");
+          txtArea1.document.write(tab_text);
+          txtArea1.document.close();
+          txtArea1.focus(); 
+          sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
+      }  
+      else                 //other browser not tested on IE 11
+          sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));  
+
+      return (sa);*/
+
+  	}
+</script>
+
+</html>

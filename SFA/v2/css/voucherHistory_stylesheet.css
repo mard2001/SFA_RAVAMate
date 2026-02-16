@@ -1,0 +1,507 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body{
+    background-image: var(--main-background);
+    background-color: var(--main-backgroundColor);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    min-height: 100%;
+}
+
+/* NAVIGATION */
+
+.headerDiv{
+    height: 10vh;
+    color: #FFF;
+}
+
+.logoTextDiv{
+    margin-left: 10px;
+}
+
+.textHeader{
+    margin-bottom: 0;
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: -5px;
+}
+
+.textHeaderRed{
+    color: #FF0000;
+}
+
+.logoTextDiv .textSubHeader{
+    font-size: 12px;
+}
+
+.headerDiv .rightHeader button{
+    font-size: 1.4rem;
+    color: #FFF;
+}
+
+.headerDiv .rightHeader  button:hover{
+    color: #FFF;
+}
+
+.headerDiv .rightHeader .exportBtn{
+    box-shadow: 2px 2px 10px #a3a2a2;
+}
+
+/* HEADER */
+
+.salesRepDivHeader{
+    background-image: linear-gradient(var(--cust-primary), var(--cust-primary10));
+    color: #FFF;
+}
+
+/* CONTENT */
+
+.contentDiv{
+    background-color: #D2D2D2;
+    padding-bottom: 20px;
+}
+
+.buttonsDiv .buttondiv{
+    border: none;
+    border-radius: 20px;
+    margin: 10px 5px;
+    padding: 5px 30px;
+    box-shadow: 2px 2px 10px #949494;
+    background-color: #FFF;
+}
+
+.buttonsDiv .buttondiv:hover{
+    background-color: #040B2F;
+    color: #FFF;
+}
+
+.transacBtn{
+    margin: 3px 0;
+    padding: 5px 25px 5px 0;
+    border: none;
+    border-radius: 30px;
+    text-align: left;
+    background-image: url("../img/transacBtnBG.png");
+    background-size: 45%;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    box-shadow: 2px 2px 10px #949494;
+}
+
+.transacBtn:hover{
+    box-shadow: 2px 2px 10px #0E40F2;
+}
+
+.transacBtnIcon{
+    border: 5px solid #203499;
+    border-radius: 50%;
+    background-image: linear-gradient(#031844, #0E40F2);
+    color: #FFF;
+    font-size: 25px;
+    padding: 5px;
+    margin-right: 20px;
+}
+
+
+.defaultDataTableBtns{
+    display: none;
+}
+
+.searchDiv{
+    margin: 13px 10px;
+}
+
+.searchDiv .searchbar{
+    width: 300px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 20px;
+    background: #F6F6F6;
+}
+
+.searchDiv .searchbar .search-input{
+    font-size: 16px;
+    color: #040B2F;
+    margin-left: 14px;
+    outline: none;
+    border: none;
+    background: transparent;
+    flex: 1;
+}
+
+.div1{
+    text-align: start;
+    
+}
+
+.div1 div{
+    padding: 5px 30px 5px 15px;
+    /* margin: auto; */
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px #949494;
+    width: max-content;
+    background-color: #FFF;
+}
+
+.div1 div .mdi{
+    padding: 5px;
+    margin-right: 10px;
+    font-size: 25px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 10px #949494;
+    color: #949494;
+}
+
+.btn-valid{
+    padding: 10px 50px;
+    font-size: 18px;
+    background-color: #58FF69;
+    color: #FFF;
+}
+
+.btn-cancelled{
+    padding: 10px 40px;
+    font-size: 18px;    
+    background-color: #FF6868;
+    color: #FFF;
+}
+
+.bootbox-close-button{
+    float: right;
+    border: none;
+    background: transparent;
+}
+
+/* DataTables */
+.dataTableTop1{
+    background-color: #D2D2D2;
+}
+
+.dataTableMainDiv{
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    /* margin-top: 130px; */
+}
+
+#tableTitle{
+    background-image: url(../img/tableTitleBG.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:center;
+    color: #FFF;
+    padding: 20px 190px;
+    display: flex; /* Use flexbox for easier vertical alignment */
+    justify-content: center; /* Center horizontally */
+    align-items: center;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 30px;
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.dataTables_paginate.paging_simple_numbers{
+    padding: 2px 10px;
+    margin: auto;
+    /* margin-top: 80px; */
+    margin-bottom: 5px;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    height: 40px;
+    box-shadow: 2px 2px 10px #949494;
+    font-size: 12px;
+}
+
+.dt-button.buttons-collection {
+    border-radius: 10px;
+    padding: 5px 20px;
+    box-shadow: 2px 2px 10px #949494
+}
+
+#stockRequest_TAB_filter{
+    width: 300px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 20px;
+    background: #F6F6F6;
+}
+
+#stockRequest_TAB_filter input{
+    font-size: 16px;
+    color: #040B2F;
+    margin-left: 14px;
+    outline: none;
+    border: none;
+    background: transparent;
+    flex: 1;
+}
+
+.dataTableSubDiv{
+    text-align: end;
+    padding-right: 20px;
+}
+
+.dataTables_wrapper .dataTables_info{
+    float: right !important;
+    font-size: 13px;
+}
+
+.dataTables_wrapper .dataTables_filter{
+    float: right !important;
+}
+
+.dataTables_scroll{
+    background-color: #FFF;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.dt-buttons{
+    margin: 15px 0 0 10px;
+}
+
+table.dataTable tbody tr{
+    cursor: pointer;
+}
+
+.allCells{
+    width: 550px !important;
+}
+
+/* Fullscreen modal */
+.modal-fullscreen{
+    height: 75vh;
+    position: absolute;
+    bottom: 0;
+}
+
+.detailsModalHeader{
+    background-image: linear-gradient(#031841, #051A66);
+}
+
+.detailsModalHeader button{
+    background-color: #FF0000;
+    border: 5px solid #FFF;
+    border-radius: 50%;
+    font-size: 10px;
+}
+
+.dt-body-center{
+    text-align: center;
+}
+
+/* lefttmost column */
+.salesReportMainDiv{
+    box-shadow: 2px 2px 10px #949494;
+    border-radius: 23px;
+    padding: 10px;
+}
+
+.salesReportMainDiv .salesReportHeaderRow{
+    background-image: url(../img/backgroundCircle_Right.png), linear-gradient(#031841, #051A66);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    border-top-left-radius: 23px;
+    border-top-right-radius: 23px;
+    color: #FFF;
+}
+
+.salesReportMainDiv .salesReportHeaderRow .salesmanDetails img{
+    border-radius: 50%;
+    border: 3px solid #FF0000;
+}
+
+.salesReportMainDiv .salesReportHeaderRow .salesmanDetailsName{
+    padding-left: 10px;
+}
+
+.salesReportMainDiv .salesReportHeaderRow .salesmanDetailsName p{
+    font-size: 11px;
+    margin-bottom: 0;
+}
+
+.salesReportMainDiv .salesReportRow{
+    box-shadow: 2px 2px 10px #949494;
+    border-radius: 23px;
+    margin: 5px 0 ;
+}
+
+.salesReportMainDiv .salesReportRow p{
+    margin-bottom: 0;
+    font-size: 14px;
+}
+
+.salesReportMainDiv .salesReportRow p:first-child{
+    font-weight: 500;
+    color: #7D7D7D;
+}
+
+/* Middle column */
+.salesDetailsMainDiv{
+    box-shadow: 2px 2px 10px #949494;
+    border-radius: 23px;
+}
+
+.salesDetailsMainDiv .salesDetailstHeaderRow{
+    background-image: url(../img/backgroundCircle_Right.png), linear-gradient(#031841, #051A66);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    border-top-left-radius: 23px;
+    border-top-right-radius: 23px;
+    color: #FFF;
+}
+
+.salesDetailsMainDiv .salesDetailstHeaderRow .customerDetails img{
+    border-radius: 50%;
+    border: 3px solid #2B46A1;
+}
+
+.salesDetailsMainDiv .salesDetailstHeaderRow .customerDetailsName{
+    padding-left: 10px;
+}
+
+.salesDetailsMainDiv .salesDetailstHeaderRow .customerDetailsName p{
+    font-size: 11px;
+    margin-bottom: 0;
+}
+
+.salesDetailsMainDiv .salesDetailsRow{
+    box-shadow: 2px 2px 10px #949494;
+    border-radius: 23px;
+    margin: 5px 0 ;
+}
+
+.addressDiv .fa-solid{
+    color: #FF0000;
+    font-size: 30px;
+}
+
+.salesDetailsMainDiv .salesDetailsRow .addressDiv p{
+    margin-bottom: 0;
+    font-size: 14px;
+}
+
+.deliDateDiv{
+    display: inline;
+}
+.salesDetailsIcon{
+    font-size: 30px;
+    color: #FFF;
+    background-image: linear-gradient(#031841, #051A66);
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.remarksDiv{
+    margin: 20px 0 10px 0;
+    border: 1px solid #7D7D7D;
+    border-radius: 23px;
+    height: 93px;
+}
+
+.totalAmountMainDiv{
+    padding: 2px 30px;
+    background-image: linear-gradient(#031841, #051A66);
+    color: #FFF;
+    border-bottom-left-radius: 23px;
+    border-bottom-right-radius: 23px;
+    height: 35px;
+}
+
+.totalAmountMainDiv .totalAmountLeft .mdi-sigma{
+    margin-right: 5px;
+    background-color: #FFF;
+    color: #051A66;
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    text-align: center;
+}
+
+/* Rightmost column */
+.itemCodeMainDiv{
+    box-shadow: 2px 2px 10px #949494;
+    border-radius: 23px;
+    padding: 10px;
+    min-height: 690px;
+}
+
+.itemCodeMainDiv .itemCodeHeaderRow{
+    background-image: url(../img/backgroundCircle_Left.png), url(../img/backgroundCircle_Right.png), linear-gradient(#031841, #051A66);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left, right, center;
+    border-top-left-radius: 23px;
+    border-top-right-radius: 23px;
+    color: #FFF;
+}
+
+.itemCodeMainDiv .tableresponsive{
+    height: 470px; 
+    overflow: auto;
+    overflow-y: scroll; 
+    overflow-x: scroll;
+    margin-top: 50px;
+}
+
+@media only screen and (max-width: 786px) {
+    #tableTitle{ 
+        padding: 20px 140px; 
+        font-size: 15px;
+        font-weight: 900;
+    } 
+    .buttonsDiv .buttondiv{
+        font-size: 10px;
+        min-width: 40px;
+        padding: 5px 30px;
+        
+    }
+}
+
+@media screen and (max-width: 767px){
+    .lowerHeaderDiv {
+        flex-direction: column;
+    }
+    .dataTableSubDiv{
+        flex-direction: column;
+    }
+    .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate {
+        float: right !important;
+    }
+    #tableTitle{
+        padding: 20px 100px;
+        font-size: 12px;
+        font-weight: 900;
+    }
+    .salesRepDivHeader {
+        font-size: 10px !important;
+    }
+}
+
+@media screen and (max-width: 576px){
+    .buttonsDiv{
+        display: flex;
+        justify-content: center;
+    }
+    .buttonsDiv .buttondiv{
+        font-size: 10px;
+        min-width: 40px;
+        padding: 5px 30px;
+        
+    }
+    .searchDiv{
+        display: flex;
+        justify-content: center;
+    }
+}

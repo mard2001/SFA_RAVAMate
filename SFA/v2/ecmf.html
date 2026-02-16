@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- <meta http-equiv="Content-Security-Policy" content="connect-src 'self' https://fastdevs-api.com;"> -->
+    <title>E-CMF </title>
+    <link rel="icon" class="pageIconLink" href="" />
+
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+
+    <!-- GOOGLE MATERIAL ICON -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <!-- PICTOGRAMMERS ICON -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.3.67/css/materialdesignicons.min.css" />
+    
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- CSS STYLESHEETS -->
+    <link rel="stylesheet" href="constant/dynamicColor_stylesheet.css">
+    <link rel="stylesheet" href="css/offcanvas_stylesheet.css">
+    <link rel="stylesheet" href="css/pendingRequest_stylesheet.css">
+    <link rel="stylesheet" href="css/latestDatatable_stylesheet.css">
+
+    <!-- SWAL SWEET ALERT 2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <!-- DATE PICKER -->
+    <link rel="stylesheet" href="DATERANGEPICKER/daterangepicker.css">
+
+    <!--DATA TABLES CSS LATEST VERSION-->
+    <link rel="stylesheet" href="Commonusrs/DataTables/datatables.css"/>
+
+    <!--=================================virtual select import-=============================-->
+    <link rel="stylesheet" href="css/virtual-select/virtual-select.min.css"  type="text/css"/>
+    <script src="js/virtual-select/virtual-select.min.js"></script>
+
+</head>
+<body>
+    <div class="mainDiv container-fluid">
+        <div class="headerDiv d-flex justify-content-between align-items-center py-3" style="color: #FFF;">
+            <div class="leftHeader d-flex align-items-center mx-3">
+                <button class="btn menubtn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasExample" style="color: #FFF;">
+                    <span class="material-symbols-outlined">
+                        menu
+                    </span>
+                </button>
+                <div id="navbarCompanyDetails" class="d-flex">
+                </div>
+            </div>
+            <h1 class="text-center">Electronic CMF</h1>
+            <div class="rightHeader d-flex justify-content-end align-items-center mx-3" id="defaultrightHeader" style="width: 260px;">
+                <div class="navbarDropdowns"></div>
+            </div>
+        </div>
+
+        <div class="contentDiv ">
+            <div class="salesRepDivHeader d-flex justify-content-between px-3 py-3">
+                <div class="leftsideHeader">
+                    <span class="mdi mdi-web" style="font-size: 20px;"></span>
+                    <span id="titleHeading"></span>
+                </div>
+                <div class="righsideHeader d-flex">
+                    <!-- <button class="mainbtn" onclick="backToReports()"><span class="mdi mdi-arrow-left"></span> Main Menu</button> -->
+                </div>
+            </div>
+
+            <div class="contentTableDiv px-3 mx-1 mt-2" >
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <!-- <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="so-tab" data-bs-toggle="tab" data-bs-target="#so-tab-pane" type="button" role="tab" aria-controls="so-tab-pane" aria-selected="false">SO Transactions</button>
+                    </li> -->
+                    <li class="nav-item" role="presentation">  
+                        <button class="nav-link active" id="cmf-tab" data-bs-toggle="tab" data-bs-target="#cmf-tab-pane" type="button" role="tab" aria-controls="cmf-tab-pane" aria-selected="true">E-CMF Records</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade" id="so-tab-pane" role="tabpanel" aria-labelledby="so-tab" tabindex="0" style="background-color: #FFF; padding: 10px;border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; border-top-right-radius: 10px;">
+                        <div id="pending_soList">
+                            <table class="table table-hover display nowrap tabtables pendingSO_TBL" style="width: 100% !important;">
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade show active" id="cmf-tab-pane" role="tabpanel" aria-labelledby="cmf-tab" tabindex="0" style="background-color: #FFF; padding: 10px;border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; border-top-right-radius: 10px;">
+                        <div id="pending_cmfList">
+                            <table class="table table-hover display nowrap tabtables pendingCMF_TBL" style="width: 100% !important;">
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+            <div class="offcanvas-header d-flex justify-content-between">
+                <button type="button" class="btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                    <span class="material-symbols-outlined">
+                        menu
+                    </span>
+                </button>
+                <div class="rightHeader d-flex justify-content-around align-items-center mx-3" id="smallScreenrightHeader">
+                    <div class="navbarDropdowns"></div>
+                </div>
+            </div>
+            <div class="offcanvas_headTitleDiv">
+            </div>
+            <div class="offcanvas-body px-0">
+                <div class="list-group">
+                    <div id="sidebarTabItems">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="pendingReqmodal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fa fa-file"></i> Request Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-hover table-condensed table-striped">
+                        <tr>
+                            <td>Transaction Type.</td>
+                            <td id="upt_transtype" class=""></td>
+                        </tr>
+                        <tr>
+                            <td>Transaction Date</td>
+                            <td id="upt_transdate" class=""></td>
+                        </tr>
+                        <tr>
+                            <td>mdCode</td>
+                            <td id="upt_mdcode" class=""></td>
+                        </tr>
+                        <tr>
+                            <td>Refno</td>
+                            <td id="upt_refno" class=""></td>
+                        </tr>
+                        <tr>
+                            <td>SKU #</td>
+                            <td id="upt_sku" class=""></td>
+                        </tr>
+                        <tr>
+                            <td>Volume QTY</td>
+                            <td id="upt_vol" class=""></td>
+                        </tr>
+                        <tr>
+                            <td>Amount</td>
+                            <td id="upt_amt" class=""></td>
+                        </tr>
+                        <tr>
+                            <td>Remarks</td>
+                            <td id="upt_remarks" class="">----</td>
+                        </tr>
+                        <tr>
+                            <td>Status</td>
+                            <td id="upt_status" class=""></td>
+                        </tr>
+                    </table>
+                    <hr>
+                    <h4>Transaction Details</h4>
+                    <table id="transacitondetails_data" class="table table-condensed table-striped">
+
+                    </table>
+
+                    <input type="hidden" id="cIDHolder">
+                    <input type="hidden" id="mdCodeHolder">
+                    <input type="hidden" id="appvNumHolder">
+                    <input type="hidden" id="otpHolder">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger btnactions" data-bs-dismiss="modal" onclick="denyreq()">Denied</button>
+                    <button type="button" class="btn btn-success btnactions" data-bs-dismiss="modal" onclick="appvreq()">Approve</button>
+                    <button type="button" class="btn btn-primary resendBtn" data-bs-dismiss="modal" onclick="resendappvreq()">Re-send Approval</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="actionModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Please indicate remarks:</h5>
+                </div>
+                <div class="modal-body">
+                    <textarea name="" class="form-control" id="req_remarks" cols="30" rows="10"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="submitreq()" data-bs-dismiss="modal">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="cmfmodaletails" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content" style="overflow:hidden;">
+                <div class="modal-header">
+                    <h5 class="modal-title">CMF Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body overModal">
+                    <table class="table table-hover">
+                        <tr>
+                            <td>CMFID:</td>
+                            <td class="font-weight-bold" id="vl_cmfID"></td>
+                        </tr>
+                        <tr>
+                            <td>CUSTCODE:</td>
+                            <td class="font-weight-bold" id="vl_custCode"></td>
+                        </tr>
+                        <tr>
+                            <td>SALES PERSON:</td>
+                            <td class="font-weight-bold" id="vl_salesperson"></td>
+                        </tr>
+                        <tr>
+                            <td>SOLD TO NAME:</td>
+                            <td class="font-weight-bold" id="">
+                            <input type="text" class="form-control" id="vl_soldname">
+                            </td>
+                        </tr>
+                    
+                        <tr>
+                        <td>CONTACT PERSON:</td>
+                        <td class="font-weight-bold" id="">
+                            <input type="text" class="form-control" id="vl_contactperson">
+                        </td>
+                    </tr>
+
+                        <tr>
+                            <td>CUSTOMER MOBILE #:</td>
+                            <td class="font-weight-bold" id="">
+                            <input type="text" class="form-control" id="vl_custnumber">
+                            </td>
+                        </tr>
+
+                        <tr>
+                        <tD>EMAIL</tD>
+                        <td class="font-weight-bold" id="">
+                            <input type="text" class="form-control" id="vl_email">
+                        </td>
+                        </tr>
+
+                        <tr>
+                        <td>GEOAREA</td>
+                        <td class="font-weight-bold" id="">
+                            <input type="text" class="form-control" id="vl_geoarea">
+                        </td>
+                    </tr>
+
+                        <tr>
+                        <td>CHAIN</td>
+                        <td class="font-weight-bold" id="">
+                            <input type="text" class="form-control" id="vl_chain">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>COVERAGE DAY</td>
+                        <td class="font-weight-bold" id="">
+                        <input type="text" class="form-control" id="vl_coverageday">
+                        </td>
+                    </tr>
+
+                        <tr>
+                        <td>TIN</td>
+                        <td class="font-weight-bold" id="">
+                            <input type="text" class="form-control" id="vl_tin">
+                        </td>
+                    </tr>
+
+                        <tr>
+                            <td>POSTAL CODE</td>
+                            <td class="font-weight-bold" id="">
+                            <input type="text" class="form-control" id="vl_postalcode">
+                            </td>
+                        </tr>
+
+                        <tr>
+                        <td>MUNICIPALITY</td>
+                        <td class="font-weight-bold" id="">
+                            <input type="text" class="form-control" id="vl_municipaplity">
+                        </td>
+                    </tr>
+
+                        <tr>
+                            <td>BARANGAY</td>
+                            <td class="font-weight-bold" id="">
+                            <input type="text" class="form-control" id="vl_barangay">
+                            </td>
+                        </tr>
+
+                        <tr>
+                        <td>OTHER INFO (SHIP TO)</td>
+                        <td class="font-weight-bold" id="">
+                            <input type="text" class="form-control" id="vl_othershipto">
+                        </td>
+                        </tr>
+
+                        <tr>
+                        <td>OTHER INFO (SOLD TO)</td>
+                        <td class="font-weight-bold" id="">
+                            <input type="text" class="form-control" id="vl_othersoldto">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>CUSTOMER CLASS</td>
+                        <td class="font-weight-bold" id="">
+                        <input type="text" class="form-control" id="vl_custclass">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>FREQUENCY</td>
+                        <td class="font-weight-bold" id="">
+                        <input type="text" class="form-control" id="vl_frequency">
+                        </td>
+                    </tr>
+
+                        <tr>
+                            <td>ADDRESS:</td>
+                            <td class="font-weight-bold" id="">
+                            <input type="text" class="form-control" id="vl_address">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>REQUEST DATE:</td>
+                            <td class="font-weight-bold" id="vl_reqdate">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>STATUS:</td>
+                            <td class="font-weight-bold" id="vl_stat">
+                            </td>
+                        </tr>
+                    </table>
+                    <input type="hidden" id="cmfstatdiff">
+                    <input type="hidden" name="" id="cmfIDHolder">
+                </div>
+
+                <div class="modal-footer d-flex justify-content-between">
+                    <div>
+                        <button type="button" class="btn btn-warning pull-left" onclick="updatecmf()">Update</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" onclick="approveCMF(2)">Approve</button>
+                        <button type="button" class="btn btn-danger" onclick="approveCMF(0)">Disapprove</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <!-- DATA TABLES JS LATEST VERSION -->
+    <script src="Commonusrs/DataTables/datatables.min.js"></script>
+
+    <!-- DATE PICKER -->
+    <script type="text/javascript" src="DATERANGEPICKER/moment.min.js"></script>
+    <script type="text/javascript" src="DATERANGEPICKER/daterangepicker.js"></script>
+
+    <!-- SWEET ALERT -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script type="text/javascript" src="js/jasonday-printThis-c814846/printThis.js"></script>
+    <script type="text/javascript" src="js/mainjs.js"></script>
+    <script src="HASH/md5.js"></script>
+    <script src="HASH/aes.js"></script>
+    <script src="nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+    <script type="text/javascript" src="web/web-commons.js"></script>
+    <script type="text/javascript" src="js/bootbox.min.js"></script>
+    <script type="text/javascript" src="js/scrolling.js"></script>
+    <script type="text/javascript" src="constant/dynamicScript.js"></script>
+    <script type="text/javascript" src="js/pendingRequest.js"></script>
+
+</body>
+</html>

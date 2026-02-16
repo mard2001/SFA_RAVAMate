@@ -1,0 +1,795 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--main-font-family);
+    font-optical-sizing: var(--main-font-optical-sizing);
+    font-weight: var(--main-font-weight);
+    font-style: var(--main-font-style);
+}
+
+html, body{
+    background-image: var(--main-background);
+    background-color: var(--main-backgroundColor);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    min-height: 100%;
+}
+
+/* NAVIGATION */
+
+.headerDiv{
+    height: 10vh;
+    color: var(--cust-white);
+}
+
+.logoTextDiv{
+    margin-left: 10px;
+}
+
+.textHeader{
+    margin-bottom: 0;
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: -5px;
+}
+
+.textHeaderRed{
+    color: var(--cust-red);
+}
+
+.logoTextDiv .textSubHeader{
+    font-size: 12px;
+}
+
+.headerDiv .rightHeader button{
+    font-size: 1.4rem;
+    color: var(--cust-white);
+}
+
+.headerDiv .rightHeader  button:hover{
+    color: var(--cust-white);
+}
+
+.headerDiv .rightHeader .exportBtn{
+    box-shadow: 2px 2px 10px #a3a2a2;
+}
+
+/* HEADER */
+
+.salesRepDivHeader{
+    background-image: linear-gradient(var(--cust-primary), var(--cust-primary10));
+    color: var(--cust-white);
+}
+
+.rightsideBtnDiv a{
+    padding: 10px 25px;
+    border: none;
+    border-radius: 20px;
+    background-image: linear-gradient(rgba(0, 87, 255,1), rgba(0, 87, 255,0.1));
+    text-decoration: none;
+    color: var(--cust-white);
+    font-size: 14px;
+}
+
+.rightsideBtnDiv a:hover{
+    background-image: linear-gradient(rgb(56, 116, 235), rgba(0, 87, 255,0.1));
+    color: #bbb9b9;
+}
+
+/* CONTENT */
+
+.contentDiv{
+    background-color: var(--cust-neutralWhite6);
+    margin-bottom: 20px;
+}
+
+.buttonsDiv .buttondiv{
+    border: none;
+    border-radius: 20px;
+    margin: 10px 5px;
+    padding: 5px 40px;
+    box-shadow: 2px 2px 10px var(--cust-grey);
+    background-color: var(--cust-white);
+}
+
+.buttonsDiv .buttondiv:hover{
+    background-color: var(--cust-primary);
+    color: var(--cust-white);
+}
+
+.transacBtn{
+    margin: 3px 0;
+    padding: 5px 25px 5px 0;
+    border: none;
+    border-radius: 30px;
+    text-align: left;
+    background-image: url("../img/transacBtnBG.png");
+    background-size: 45%;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    box-shadow: 2px 2px 10px var(--cust-grey);
+}
+
+.transacBtn:hover{
+    box-shadow: 2px 2px 10px #0E40F2;
+}
+
+.transacBtnIcon{
+    border: 5px solid #203499;
+    border-radius: 50%;
+    background-image: linear-gradient(#031844, #0E40F2);
+    color: var(--cust-white);
+    font-size: 25px;
+    padding: 5px;
+    margin-right: 20px;
+}
+
+
+.defaultDataTableBtns{
+    display: none;
+}
+
+.searchDiv{
+    margin: 13px 10px;
+}
+
+.searchDiv .searchbar{
+    width: 300px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 20px;
+    background: var(--cust-neutralWhite7);
+}
+
+.searchDiv .searchbar .search-input{
+    font-size: 16px;
+    color: var(--cust-primary);
+    margin-left: 14px;
+    outline: none;
+    border: none;
+    background: transparent;
+    flex: 1;
+}
+
+.div1{
+    text-align: start;
+    
+}
+
+.div1 div{
+    padding: 5px 30px 5px 15px;
+    /* margin: auto; */
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px var(--cust-grey);
+    width: max-content;
+    background-color: var(--cust-white);
+}
+
+.div1 div .mdi{
+    padding: 5px;
+    margin-right: 10px;
+    font-size: 25px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 10px var(--cust-grey);
+    color: var(--cust-grey);
+}
+
+.btn-valid{
+    padding: 10px 50px;
+    font-size: 18px;
+    background-color: var(--cust-success);
+    color: var(--cust-white);
+}
+
+.btn-cancelled{
+    padding: 10px 40px;
+    font-size: 18px;    
+    background-color: var(--cust-red2);
+    color: var(--cust-white);
+}
+
+.bootbox-close-button{
+    float: right;
+    border: none;
+    background: transparent;
+}
+
+/* MAP */
+#map{
+    height: 80vh;
+    /* width: 100vh; */
+}
+
+/* .sideBtn{
+    margin-right: 10px;
+    margin-bottom: 3px;
+    padding: 6px;
+    font-size: 18px;
+    height: 2.1rem;
+    width: 2.1rem;
+    background-color: var(--cust-primary);
+    color: var(--cust-white);
+    border-radius: 50%;
+    font-size: 10px;
+    transition: all 0.3s ease;
+}
+
+.sideBtn:hover {
+    background: linear-gradient(
+        135deg,
+        var(--cust-primary9),
+        var(--cust-primary)
+    );
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 20px rgba(0, 153, 255, 0.2);
+    color: #ffffff;
+    cursor: pointer;
+} */
+
+.sideBtn{
+    margin-bottom: 3px;
+    margin-right: 10px;
+    /* padding: 6px; */
+    font-size: 10px;
+    height: 2.1rem;
+    width: 2.1rem;
+    background-color: var(--cust-primary);
+    color: var(--cust-white);
+    border-radius: 50%;
+}
+
+.sideBtn:hover{
+    background: linear-gradient(
+        135deg,
+        var(--cust-primary9),
+        var(--cust-primary-hover3)
+    );
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 20px rgba(65, 82, 94, 0.2);
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.5s ease;
+
+}
+
+
+.container_salesman{
+    width: 470px;
+    background-color: rgba(12, 84, 137, 0.8);
+    border-radius: 5px;
+    padding: 5px 0px;
+}
+
+.container_productCat{
+    width: 400px;
+    background-color: rgba(12, 84, 137, 0.9);
+}
+
+#driverTable thead tr th{
+    background-color: rgba(12, 84, 137, 0.9);
+    color: #FFF;
+}
+#vehicleListData tr td{
+    background-color: rgba(12, 84, 137, 0.9);
+    color: #FFF;
+}
+
+#driverTable_filter{
+    padding: 10px 10px 10px 0;
+    color: #FFF;
+}
+
+#driverTable_filter label input{
+    background: transparent;
+    border: 1px solid #FFF;
+    color: #FFF;
+    padding: 3px;
+}
+
+#driverTable_info{
+    color: #FFF;
+    padding-left: 10px;
+}
+
+#driverTable_paginate a{
+    color: #FFF !important;
+    background-color: transparent;
+}   
+
+.paginate_button.current{
+    background: #304164 !important;
+    border: 1px solid #304164 !important;
+    border-radius: 5px !important;
+}
+
+.useBtn{
+    font-size: 10px;
+    padding: 0px 8px;
+}
+
+.datatableheader{
+    padding: 10px 10px 5px 0;
+    color: #FFF;
+}
+
+.datatablefooter{
+    padding: 5px 5px 15px 5px;
+    color: #FFF;
+}
+
+.filterAmtBtn{
+    background: rgba(6, 63, 104, 0.5);
+    color: #FFF;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+.filterAmtBtn:hover{
+    background: #0dcaf0;
+    color: #FFF;
+    cursor: pointer;
+}
+
+.container_salesman.step_2 div h5{
+    color: #FFF;
+    font-size: 14px;
+}   
+
+.fixedHead{
+    height: 30px;
+    width: 470px;
+    padding: 4px;
+}
+
+.fixedHead thead tr th,
+.fixedHead tbody tr td{
+    color: #FFF;
+}
+
+.container_salesman.step_2 #overAllTotal{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #FFF;
+}
+
+.container_salesman.step_2 #overAllTotal .pull-left button{
+    font-size: 10px;
+    padding: 5px 10px;
+}
+
+.arrow-side{
+  /* background-color: black !important; */
+   height: 360px;
+   width: 20px;
+   z-index: 1;
+   position: absolute;
+   right: 0 !important;
+   margin-right: -25px;
+}
+
+.arrow-side i{
+    background-color: rgba(12, 84, 137, 0.4);
+    color: #FFF;
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.arrow-side i:hover{
+    background-color: rgba(12, 84, 137, 0.8);
+    color: #FFF;
+    cursor: pointer;
+}
+/* scrolling effect */
+.scroll{
+  width: 100%;
+  height: 300px;
+}
+
+.scrollDiable{
+  width: 100%;
+  /*max-height: 590px;*/
+  height: 590px;
+  /*overflow: auto;*/
+}
+
+[data-simplebar] {
+    position: relative;
+    z-index: 0;
+    overflow: hidden!important;
+    max-height: inherit;
+    -webkit-overflow-scrolling: touch; /* Trigger native scrolling for mobile, if not supported, plugin is used. */
+}
+
+[data-simplebar="init"] {
+    display: flex;
+}
+
+.simplebar-scroll-content {
+    overflow-x: hidden!important;
+    overflow-y: scroll;
+    min-width: 100%!important;
+    max-height: inherit!important;
+    box-sizing: content-box!important;
+}
+
+.simplebar-content {
+    overflow-y: hidden!important;
+    overflow-x: scroll;
+    box-sizing: border-box!important;
+    min-height: 100%!important;
+}
+
+.simplebar-track {
+    z-index: 1;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 11px;
+}
+
+.simplebar-scrollbar {
+    position: absolute;
+    right: 2px;
+    width: 7px;
+    min-height: 10px;
+}
+
+.simplebar-scrollbar:before {
+    position: absolute;
+    content: "";
+    background: black;
+    border-radius: 7px;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transition: opacity 0.2s linear;
+}
+
+.simplebar-track:hover .simplebar-scrollbar:before,
+.simplebar-track .simplebar-scrollbar.visible:before {
+    /* When hovered, remove all transitions from drag handle */
+    opacity: 0.5;
+    transition: opacity 0 linear;
+}
+
+.simplebar-track.vertical {
+    top: 0;
+}
+
+.simplebar-track.vertical .simplebar-scrollbar:before {
+    top: 2px;
+    bottom: 2px;
+}
+
+.simplebar-track.horizontal {
+    left: 0;
+    width: auto;
+    height: 11px;
+}
+
+.simplebar-track.horizontal .simplebar-scrollbar:before {
+    height: 100%;
+    left: 2px;
+    right: 2px;
+}
+
+.horizontal.simplebar-track .simplebar-scrollbar {
+    right: auto;
+    top: 2px;
+    height: 7px;
+    min-height: 0;
+    min-width: 10px;
+    width: auto;
+}
+
+/* INFO WINDOW */
+.gm-style-iw.gm-style-iw-c{
+    padding: 0;
+}
+.gm-style-iw-chr{
+    position: absolute;
+    right: 0;
+    height: 25px !important;
+    align-items: center;
+    margin-right: 8px;
+}
+
+.IWMainContainer{
+    width: 100%;
+}
+
+.IWImageBtn{
+    position: absolute;
+    top: 60px;
+    width: 100%;
+    /* display: flex;
+    justify-content: space-between; */
+}
+
+.IWImageBtn button{
+    background-color: transparent;
+    border: none;
+    color: #FFF;
+}
+
+.IWImageBtn button:first-child{
+    float: left;
+    margin-left: 10px;
+}
+
+.IWImageBtn button:last-child{
+    float: right;
+    margin-right: 10px;
+}
+
+.IWImageContainer{
+    height: 130px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.IWMarkerStatus {
+    position: relative;
+    z-index: 5;
+    top: 35px;
+    width: 155px;
+    height: 20px;
+    background-color: var(--cust-primary);
+    color: white;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    clip-path: polygon(0% 0%, 100% 1%, 90% 50%, 99% 100%, 0% 99%, 0% 99%);
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: -20px;
+}
+
+
+.IWContentHeader{
+    margin-top: -30px;
+    padding: 15px 15px 10px 15px;
+    width: 100%;
+    background-color: var(--cust-primary) !important;
+    color: #ddd;
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
+    z-index: 10;
+    position: relative; 
+}
+
+.IWContentHeader .custDetails{
+    display: flex;
+    flex-direction: column;
+    padding-right: 10px;
+}
+
+.IWContentHeader #IW_CustCode{
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.IWContentHeader #IW_CustName{
+    font-weight: 800;
+    font-size: 16px;
+}
+
+.IWContentHeader #IW_Address{
+    font-size: 8.5px;
+}
+
+.IWContentDetail{
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    /* margin: auto; */
+    padding: 10px 15px;
+    background-color: #FFF;
+    width: 100%;
+    z-index: 10;
+    position: relative;
+}
+
+.IWContentDetail .textdiv{
+    display: flex;
+    flex-direction: column;
+}
+
+.IWContentDetail div .titleText{
+    font-size: 9.5px;
+    margin-bottom: 2px;
+    color: #b8babc;
+}
+
+.IWContentDetail div .valueText{
+    margin: 0 0 1px 4px;
+    font-size: 11px;
+}
+
+.IWMainContainer .storeImg{
+    width: 150px;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;    
+    display: block; 
+    margin: auto;
+}
+
+.exportBtn {
+    position: relative;
+    color: #FFF;
+    border: 1px solid #FFF;
+    background-color: transparent;
+    border-radius: 10px;
+    padding: 5px 20px;
+    overflow: hidden;
+    z-index: 1;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.exportBtn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75px;
+    width: 50px;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-25deg);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.exportBtn:hover {
+    background: linear-gradient(var(--cust-primary10),var(--cust-primary-hover4));
+    box-shadow:
+        4px 4px 10px rgba(0, 0, 0, 0.1),
+        -4px -4px 10px rgba(255, 255, 255, 0.1),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.2),
+        inset -1px -1px 2px rgba(0, 0, 0, 0.05);
+    border: 1px solid transparent;
+}
+
+.exportBtn:hover::before {
+    animation: shineNeumorphic 0.6s ease;
+}
+
+
+/* Data table */
+/* DataTable Latest 07-07-25 */
+.dt-search{
+    color: #FFF;
+    padding: 5px 10px 10px 0;
+}
+
+.dt-search input {
+    background-color: rgba(255, 255, 255, 0.1); /* default */
+    color: #FFF;
+    border: 1px solid #ccc;
+}
+
+.dt-search input:focus {
+    background-color: transparent;
+    color: #FFF;
+    border-color: #fff;
+    outline: none;
+}
+
+.dataTableMainDiv .dt-scroll{
+    margin-top: 10px;
+    padding: 0 10px 15px 10px;
+}
+
+.dataTablePagination{
+    padding: 0 10px;
+    margin-top: 5px;
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+.dataTablePagination .pagination .dt-paging-button .page-link{
+    color: var(--cust-white) !important;
+    border: none;
+    border-radius: 5px;
+    font-size: 10px;
+    background: transparent;
+
+}
+
+.dataTablePagination .pagination .dt-paging-button.active .page-link{
+    background-color: var(--cust-primary9) !important;
+    color: var(--cust-white) !important; 
+    border: none;
+}
+
+.dataTablePagination .pagination .dt-paging-button.disabled .page-link{
+    background: transparent!important;
+    color: #fff !important; 
+    border: none;
+}
+
+#floatTab #dashboardDisplay tr td{
+    background: transparent !important;
+    color: #FFF;
+}
+
+
+@media only screen and (max-width: 786px) {
+    #tableTitle{ 
+        padding: 20px 140px; 
+        font-size: 15px;
+        font-weight: 900;
+    } 
+    .buttonsDiv .buttondiv{
+        font-size: 10px;
+        min-width: 40px;
+        padding: 5px 30px;
+        
+    }
+}
+
+@media screen and (max-width: 767px){
+    .lowerHeaderDiv {
+        flex-direction: column;
+    }
+    .dataTableSubDiv{
+        flex-direction: column;
+    }
+    .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate {
+        float: right !important;
+    }
+    #tableTitle{
+        padding: 20px 100px;
+        font-size: 12px;
+        font-weight: 900;
+    }
+    .salesRepDivHeader {
+        font-size: 10px !important;
+    }
+}
+
+@media screen and (max-width: 576px){
+    .buttonsDiv{
+        display: flex;
+        justify-content: center;
+    }
+    .buttonsDiv .buttondiv{
+        font-size: 10px;
+        min-width: 40px;
+        padding: 5px 30px;
+        
+    }
+    .searchDiv{
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@keyframes shineNeumorphic {
+    0% {
+        left: -75px;
+    }
+    100% {
+        left: 130%;
+    }
+}

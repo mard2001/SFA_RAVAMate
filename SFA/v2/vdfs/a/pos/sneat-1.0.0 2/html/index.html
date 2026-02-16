@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  class="light-style customizer-hide"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../assets/"
+  data-template="vertical-menu-template-free"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+
+    <title>POS - Login</title>
+
+    <meta name="description" content="" />
+
+    <!-- Favicon -->
+    <!-- <link rel="icon" type="image/x-icon" href="../assets/img/favicon/sosyo.png" /> -->
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+    <!-- Page CSS -->
+    <!-- Page -->
+    <link rel="stylesheet" href="../assets/vendor/css/pages/page-auth.css" />
+    <!-- Helpers -->
+    <script src="../assets/vendor/js/helpers.js"></script>
+
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="../assets/js/config.js"></script>
+  </head>
+
+  <body>
+    <!-- Content -->
+
+    <div class="container-xxl">
+      <div class="authentication-wrapper authentication-basic container-p-y">
+        <div class="authentication-inner">
+          <!-- Register -->
+          <div class="card">
+            <div class="card-body">
+              <!-- Logo -->
+              <div class="app-brand justify-content-center">
+                <!-- <img src="../assets/img/favicon/sosyo.png" style="height: 160px; width:160px;" alt="sosyo icon"> -->
+              </div>
+              <!-- /Logo -->
+              <h4 class="mb-2 text-center">POS Admin <small>v.1</small> 👋</h4>
+              <!-- <hr> --> <br>
+              <!-- <p class="mb-4">Is everything you need to manage your store and build your online presence.</p> -->
+
+              <div id="formAuthentication" class="mb-3">
+                <div class="mb-3 step1">
+                  <label for="phonenumber" class="form-label">Username</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="username"
+                    placeholder="yourusername"
+                    autofocus
+                    style="text-align: center; font-weight: bold;"
+                  />
+                  <label for="phonenumber" class="form-label">Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    placeholder="yourp@ssword"
+                    autofocus
+                    style="text-align: center; font-weight: bold;"
+                  />
+                </div>
+                <div class="mb-3">
+                  <button class="btn btn-primary w-100 step1" onclick="singIn()">Sign in</button>
+                </div>
+            </div>
+
+              <!-- <p class="text-center">
+                <span>New on our platform?</span>
+                <a href="auth-register-basic.html">
+                  <span>Create an account</span>
+                </a>
+              </p> -->
+            </div>
+          </div>
+          <!-- /Register -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Core JS -->
+    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../assets/vendor/js/bootstrap.js"></script>
+    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+    <!-- <script src="../js/inhs.js"></script> -->
+    <script src="../assets/js/main.js"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script>
+
+        var GLOBALURL = "https://asissfa.com/shpos/";
+
+        $('#formAuthentication').show();
+
+        function singIn(){
+          var username = $('#username').val();
+          var password = $('#password').val();
+          if($.trim(username) == '' || $.trim(password) == ''){
+            alert('Username and password is required.');
+          }else{
+            
+            $.ajax ({
+                url: GLOBALURL  + "/dist/API/applicationAPI.php",
+                type: "POST",
+                data: {
+                        "type":"LOGIN_ADMIN",
+                        'username':username,
+                        'password':password
+                    },
+                dataType: "json",
+                crossDomain: true,
+                cache: false,   
+                async: false,         
+                success: function(r){ 
+                  if(r != 0){
+                      localStorage.setItem('S_ADMID', r[0].USERID);
+                      localStorage.setItem('S_ADMNAME', r[0].FULLNAME.toUpperCase());
+                      alert('Welcome to POS Admin ' + r[0].FULLNAME.toUpperCase());
+                      window.location.href = 'dashboard.html';
+                  }else{
+                    alert('Invalid user credentials please try again.');
+                  }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("ERROR OCCUR: " + XMLHttpRequest.responseText);
+                }
+              });
+              
+          }
+        }
+
+        
+    </script>
+  </body>
+</html>

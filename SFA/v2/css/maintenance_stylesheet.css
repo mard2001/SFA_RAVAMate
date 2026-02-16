@@ -1,0 +1,169 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--main-font-family);
+    font-optical-sizing: var(--main-font-optical-sizing);
+    font-weight: var(--main-font-weight);
+    font-style: var(--main-font-style);
+}
+
+html, body{
+    background-image: var(--main-background);
+    background-color: var(--main-backgroundColor);
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100%;
+}
+
+.headerDiv{
+    height: 10vh;
+    color: var(--cust-white);
+}
+
+.logoTextDiv{
+    margin-left: 10px;
+}
+
+.textHeader{
+    margin-bottom: 0;
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: -5px;
+}
+
+.textHeaderRed{
+    color: var(--cust-red);
+}
+
+.logoTextDiv .textSubHeader{
+    font-size: 12px;
+}
+
+.headerDiv .rightHeader button{
+    font-size: 1.6rem;
+    color: var(--cust-white);
+}
+
+.headerDiv .rightHeader  button:hover{
+    color: var(--cust-white);
+}
+
+.headerDiv .rightHeader .exportBtn{
+    box-shadow: 2px 2px 10px #a3a2a2;
+}
+
+/* CARD */
+
+.mainConstantRowColDiv .col{
+    position: relative;
+}
+
+.mainCards{
+    border: 0;
+    border-radius: 35px;
+}
+
+.mainCards .card-header{
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
+    background-color: var(--cust-primary);
+    color: var(--cust-white);
+    border: 0;
+    
+}
+
+.innerRoundDiv{
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 15px #a3a2a2;
+    cursor: pointer;
+}
+
+.mainConstantRowColDiv .col .card-header{
+    opacity: 1;
+    display: block;
+    transition: .5s ease;
+    backface-visibility: hidden;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+} 
+
+.card-body-overlay{
+    background-color: rgba(4, 11, 47, 0.5);
+    height: 82%;
+    width: 100%; 
+    border-bottom-left-radius: 35px;
+    border-bottom-right-radius: 35px;
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 59.5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.mainConstantRowColDiv .col:hover .card-body-overlay{
+    opacity: 1;
+}
+
+/* Button with shine effect */
+.card-body-overlay a {
+    border-radius: 20px;
+    background-color: var(--cust-primary9);
+    width: 10em;
+    font-size: 13px;
+    text-decoration: none;
+    padding: 8px 16px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    overflow: hidden;
+    z-index: 3;
+    color: var(--cust-white);
+
+}
+
+/* Shine effect */
+.card-body-overlay a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100px;
+    width: 100px;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        rgba(215, 16, 16, 0) 30%,
+        rgba(255,255,255,0.6) 60%,
+        rgba(255,255,255,0) 80%
+    );
+    transform: skewX(-20deg);
+}
+
+/* Trigger shine on hover */
+.card-body-overlay a:hover::before {
+    animation: shine 1s ease forwards;
+}
+
+
+.card-body-overlay a:hover {
+    box-shadow: 2px 2px 20px var(--cust-white);
+}
+
+@keyframes shine {
+    0%   { left: -100px; }
+    100% { left: 100%; }
+}
+

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Sync Logs </title>
+    <link rel="icon" href="img/mybuddyLogo.jpg" />
+
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+
+    <!-- GOOGLE MATERIAL ICON -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <!-- PICTOGRAMMERS ICON -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.3.67/css/materialdesignicons.min.css" />
+    
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- CSS STYLESHEETS -->
+    <link rel="stylesheet" href="constant/dynamicColor_stylesheet.css">
+    <link rel="stylesheet" href="css/offcanvas_stylesheet.css">
+    <link rel="stylesheet" href="css/ericlogs_stylesheet.css">
+    <link rel="stylesheet" href="css/latestDatatable_stylesheet.css">
+
+    <!-- DATE PICKER -->
+    <link rel="stylesheet" href="DATERANGEPICKER/daterangepicker.css">
+
+    <!--DATA TABLES CSS LATEST VERSION-->
+    <link rel="stylesheet" href="Commonusrs/DataTables/datatables.css"/>
+
+    <!--=================================virtual select import-=============================-->
+    <link rel="stylesheet" href="css/virtual-select/virtual-select.min.css"  type="text/css"/>
+    <script src="js/virtual-select/virtual-select.min.js"></script>
+
+    <!-- SWAL SWEET ALERT 2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+
+</head>
+<body>
+    <div class="mainDiv container-fluid">
+        <div class="headerDiv d-flex justify-content-between align-items-center py-3" style="color: #FFF;">
+            <div class="leftHeader d-flex align-items-center mx-3">
+                <button class="btn menubtn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasExample" style="color: #FFF;">
+                    <span class="material-symbols-outlined">
+                        menu
+                    </span>
+                </button>
+                <div id="navbarCompanyDetails" class="d-flex">
+                </div>
+            </div>
+            <h1 class="text-center">Admin Sync Logs</h1>
+            <div class="rightHeader d-flex justify-content-end align-items-center mx-3" id="defaultrightHeader" style="width: 260px;">
+                <div class="navbarDropdowns"></div>
+            </div>
+        </div>
+
+        <div class="contentDiv ">
+            <div class="salesRepDivHeader d-flex justify-content-between px-3 py-3">
+                <div class="leftsideHeader">
+                    <span class="mdi mdi-web" style="font-size: 20px;"></span>
+                    <span id="titleHeading"></span>
+                </div>
+                <div class="righsideHeader pull-right" style="background-color: transparent; cursor: pointer; color: white;">
+                    <button type="button" class="btn filterBtn" data-bs-toggle="modal" data-bs-target="#filterReport">
+                        Filter
+                    </button>
+                </div>
+            </div>
+            <div class="lowerHeaderDiv d-flex justify-content-between px-3">
+                <div id="dt-body-right" class="buttonsDiv order-2 order-md-1">
+                    <button class="buttondiv" id="excelBtn" aria-controls="stockRequest_TAB">
+                        <span class="mdi mdi-microsoft-excel"></span>
+                        <span>Excel</span>
+                    </button>
+                    <button class="buttondiv" id="printBtn" aria-controls="stockRequest_TAB">
+                        <span class="mdi mdi-printer-outline"></span>
+                        <span>Print</span>
+                    </button>
+                </div>
+                <div class="searchDiv order-1 order-md-2">
+                    <div class="searchbar" id="stockRequest_TAB_filterSearchBar" class="dataTables_filter">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input type="text" class="search-input" name="search" id="stockRequest_TAB_filterSearchBarInputField" placeholder="Search" aria-controls="stockRequest_TAB">
+                    </div>
+                </div>
+            </div>
+
+            <div class="contentTableDiv px-3 mx-1" >
+                <table id="stockRequest_TAB" class="display table table-striped table-hover " style="width: 100%; font-size: 10px;"></table>
+            </div>
+        </div>
+
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+            <div class="offcanvas-header d-flex justify-content-between">
+                <button type="button" class="btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                    <span class="material-symbols-outlined">
+                        menu
+                    </span>
+                </button>
+                <div class="rightHeader d-flex justify-content-around align-items-center mx-3" id="smallScreenrightHeader">
+                    <div class="navbarDropdowns"></div>
+                </div>
+            </div>
+            <div class="offcanvas_headTitleDiv">
+            </div>
+            <div class="offcanvas-body px-0">
+                <div class="list-group">
+                    <div id="sidebarTabItems">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="filterReport" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Filter</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3">
+                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Date</label>
+                    <div class="col-sm-10">
+                        <div id="reportrange1">
+                            <span>Filter by Date</span> 
+                            <i class="mdi mdi-calendar-month-outline" style="font-size: 20px;"></i>    
+                            <i class="fa-solid fa-caret-down"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="filterReportBtn" class="btn">Generate Report</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+        <div class="modal fade" id="salesDmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header detailsModalHeader">
+                    <button type="button" class="btn resendBtn" data-dismiss="modal" onclick="resendItem()">RESEND ITEM</button>
+                    <button type="button" class="btn-close closeBtn" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid text-center">
+                        <div class="row g-1">
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                <div class="salesReportMainDiv mainColDiv">
+                                    <div class="salesReportHeaderRow pt-2">
+                                        <h6 class="fw-bold" style="color: #FFF;">Salesman Details</h6>
+                                        <div class="salesmanDetails d-flex align-items-center justify-content-center px-2">
+                                            <img src="img/salesmanPic.jpg" height="80" width="80" alt="">
+                                            <div class="salesmanDetailsName">
+                                                <p class="text-start">Salesman</p>
+                                                <h6 id="modal_salesman" class="text-start" style="margin-bottom: 0;"></h6>
+                                                <p class="text-start fw-bold" style="height: 16.5px;"> </p>
+                                                <input type="hidden" id="salesmanCode">
+                                            </div>
+                                        </div>
+                                        <div class="salesmanDetailsStatusDiv text-end">
+                                            <span style="margin-right: 100px; font-size: 11px;">Status</span>
+                                            <div class="d-flex flex-row-reverse" >
+                                                <p id="modal_status" style="background-color: #FFF; color: #000; border-top-left-radius: 23px; width: 150px; margin-bottom: 0; text-align: center; font-size: 13px;"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="py-3">
+                                        <input type="hidden" id="transaction">
+                                        <div class="py-3 px-3 salesReportRow">
+                                            <p>Document No.</p>
+                                            <p id="modal_docNo"></p> 
+                                        </div>
+                                        <div class="py-3 px-3 salesReportRow">
+                                            <p>MdCode</p>
+                                            <p id="modal_mdCode"></p> 
+                                        </div>
+                                        <div class="py-3 px-3 salesReportRow">
+                                            <p>Warehouse Code</p>
+                                            <p id="modal_WHCode"></p>
+                                        </div>
+                                        <div class="py-3 px-3 salesReportRow">
+                                            <p>Bad Order Warehouse</p>
+                                            <p id="modal_WHBO"></p>
+                                        </div>
+                                        <div class="py-3 px-3 salesReportRow">
+                                            <p>Good Stock Return WH</p>
+                                            <p id="modal_GSRW"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                <div class="salesDetailsMainDiv mainColDiv">
+                                    <div style="padding: 5px;">
+                                        <div class="salesDetailstHeaderRow pt-2">
+                                            <h6 class="fw-bold" style="color: #FFF;">Sales Details</h6>
+                                            <div class="customerDetails d-flex align-items-center justify-content-center px-2">
+                                                <img src="img/storePic.jpg" height="80" width="80" alt="">
+                                                <div class="customerDetailsName">
+                                                    <p class="text-start">Customer</p>
+                                                    <h6 id="modal2_customername" class="text-start" style="margin-bottom: 0;"></h6>
+                                                    <p id="modal2_customerID" class="text-start fw-bold"></p>
+                                                    <input type="hidden" id="contactPerson">
+                                                </div>
+                                            </div>
+                                            <div class="customerRefNoDiv text-end">
+                                                <span style="margin-right: 50px; font-size: 11px;">Reference No.</span>
+                                                <div class="d-flex flex-row-reverse" >
+                                                    <p id="modal2_refnoH" style="background-color: #FFF; color: #000; border-top-left-radius: 23px; width: 150px; margin-bottom: 0; text-align: center; font-size: 16px;"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="py-2 px-3 salesDetailsRow d-flex flex-column" style="margin-top: 16px;">
+                                            <p style="text-align: start; font-size: 11px; color: #7D7D7D; margin-bottom: 4px;">Address</p>
+                                            <div class="addressDiv d-flex">
+                                                <i class="fa-solid fa-location-dot"></i>
+                                                <p class="text-start mx-4" id="modal2_address"></p>
+                                            </div>
+                                        </div>
+                                        <div class="container-fluid px-1 text-center">
+                                            <div class="row gx-2">
+                                                <div class="col-sm-7 col-md-7 col-lg-7"> 
+                                                    <div class=" py-1 px-3 salesDetailsRow">
+                                                        <p style="color: #7D7D7D; font-size: 12px; margin-bottom: 0;">Delivery Date</p>
+                                                        <input type="hidden" id="deldate">
+                                                        <div class="deliDateDiv d-flex align-self-center align-items-center" style="margin-bottom: 5px;">
+                                                            <div>
+                                                                <span class="mdi mdi-calendar-month-outline salesDetailsIcon"></span>
+                                                            </div>
+                                                            <div class="text-center container"> 
+                                                                <p style="color: #7D7D7D; font-size: 7.5px; margin-bottom: 0;">Date</p>
+                                                                <h6 id="modal2_transactionD" style="margin-bottom: 0; font-size: 12px;"></h6>
+                                                                <p style="color: #7D7D7D; font-size: 7.5px; margin-bottom: 0;">MM/DD/YYYY</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="deliDateDiv d-flex align-self-center align-items-center">
+                                                            <div>
+                                                                <span class="mdi mdi-clock-time-five-outline salesDetailsIcon"></span>
+                                                            </div>
+                                                            <div class="text-center container"> 
+                                                                <p style="color: #7D7D7D; font-size: 7.5px; margin-bottom: 0;">Time</p>
+                                                                <h6 id="modal2_transactionT" style="margin-bottom: 0; font-size: 12px;"></h6>
+                                                                <p style="color: #7D7D7D; font-size: 7.5px; margin-bottom: 0;">H/M/S/MS</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-5 col-md-5 col-lg-5">
+                                                    <div class="py-1 px-3 salesDetailsRow batteryDiv">
+                                                        <p style="color: #7D7D7D; font-size: 12px; margin-bottom: 0;">Battery Status</p>
+                                                        <div class="image-circle m-auto my-1">
+                                                            <div class="d-flex justify-content-center align-items-center">
+                                                                <h6 id="modal2_battPercentage" style="margin-bottom: 0; font-weight: 900;">0%</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-center remarksDiv">
+                                            <p style="margin-bottom: 0; color: #7D7D7D; font-size: 14px;">Remarks</p>
+                                            <p id="modal2_remarks"></p>
+                                        </div>
+                                    </div>
+                                    <div class="totalAmountMainDiv d-flex justify-content-between align-items-center ">
+                                        <div class="totalAmountLeft d-flex  align-items-center">
+                                            <!-- <span class="mdi mdi-sigma"></span> -->
+                                            <!-- <p style="margin-bottom: 0; font-size: 12px;">Total Amount</p> -->
+                                        </div>
+                                        <div class="totalAmountRight">
+                                            <h6 style="margin-bottom: 0; font-weight: 900;" id="modal2_totalAm"></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-lg-6">
+                                <div class="itemCodeMainDiv mainColDiv">
+                                    <div class="itemCodeHeaderRow pt-2">
+                                        <h4>ITEM CODE</h4>
+                                        <p style="margin-bottom: 0;">Date</p>
+                                        <h6 style="padding-bottom: 20px;" id="itemCodeHeaderRowDate"></h6>
+                                    </div>
+                                    <div class="tableresponsive">
+                                        <table class="table table-hover table-striped fixed_header">
+                                            <thead>
+                                                <tr>
+                                                    <th>STOCKCODE</th>
+                                                    <th style="text-align: center !important;">DESCRIPTION</th>
+                                                    <th style="text-align: center !important;">QUANTITY</th>
+                                                    <th style="text-align: center !important;">AMOUNT</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="salesDetailsBody">
+                                                <tr>
+                                                    <td>12559957</th>
+                                                    <td style="text-align: left !important; padding-left: 30px;">MMS 80x150g N1 PH</td>
+                                                    <td style="text-align: right !important; padding-right: 50px;">2/0/0</td>
+                                                    <td style="text-align: right !important; padding-right: 50px;">₱ 9,908.02</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>12550895</th>
+                                                    <td style="text-align: left !important; padding-left: 30px;">Bear Brand Junior 400g</td>
+                                                    <td style="text-align: right !important; padding-right: 50px;">1/0/0</td>
+                                                    <td style="text-align: right !important; padding-right: 50px;">₱ 654.93</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>12436421</th>
+                                                    <td style="text-align: left !important; padding-left: 30px;">Bear brand PMD 192x33g Ph</td>
+                                                    <td style="text-align: right !important; padding-right: 50px;">10/0/0</td>
+                                                    <td style="text-align: right !important; padding-right: 50px;">₱ 400,834.56</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>42788</th>
+                                                    <td style="text-align: left !important; padding-left: 30px;">Creamy White Twin Pack 9+1</td>
+                                                    <td style="text-align: right !important; padding-right: 50px;">1/0/0</td>
+                                                    <td style="text-align: right !important; padding-right: 50px;">₱ 106.64</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- DATA TABLES JS LATEST VERSION -->
+    <script src="Commonusrs/DataTables/datatables.min.js"></script>
+    <!-- DATE PICKER -->
+    <script type="text/javascript" src="DATERANGEPICKER/moment.min.js"></script>
+    <script type="text/javascript" src="DATERANGEPICKER/daterangepicker.js"></script>
+
+    <!-- <script type="text/javascript" src="/js/multi/dist/js/bootstrap-multiselect.js"></script> -->
+    <script type="text/javascript" src="js/jasonday-printThis-c814846/printThis.js"></script>
+    <script type="text/javascript" src="js/mainjs.js"></script>
+
+    <!-- SWEET ALERT -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="HASH/md5.js"></script>
+    <script src="HASH/aes.js"></script>
+    <script src="nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+    <script type="text/javascript" src="web/web-commons.js"></script>
+    <script type="text/javascript" src="js/bootbox.min.js"></script>
+    <script type="text/javascript" src="js/scrolling.js"></script>
+    <script type="text/javascript" src="constant/dynamicScript.js"></script>
+    <script type="text/javascript" src="js/admsynclogs.js"></script>
+</body>
+</html>

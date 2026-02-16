@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Reset Salesman</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <script src="../admin/js/datapn.js"></script>
+    <style>
+        #phoneNumber{
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="mainCont">
+        <div class="col-md-6" style="margin: 0 auto; margin-top: 3%;">
+            <h5 style="margin-top: 40px; margin: 0 auto; text-align: center;">Salesman Reset Module</h5>
+            <table class="table table-dark" style="margin-top: 10px;">
+                <tr>
+                    <td>MDCODE</td>
+                    <td><input type="text" id="mdCode" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button class="btn btn-primary btn-block" id="resetBTN" onclick="resetAccount()">RESET</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="singInmodal"  data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Reset Salesman Module - Sign-in</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <!-- <label for="">Phone #:</label> -->
+                <input id="phoneNumber" type="text" maxlength="11" placeholder="09XXXXXXXXX" class="form-control form-control-lg bvalidation">
+                <input id="OTP" type="text" maxlength="6" placeholder="OTP" class="form-control form-control-lg afvalidation">
+            
+                <small class="text-info afvalidation">One Time Pin (OTP) was sent to your phone please check your messages.</small>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary bvalidation" onclick="validatePhone()" id="validateBtn">Validate</button>
+              <button type="button" class="btn btn-primary afvalidation" onclick="confirmOTP()" id="confirmBtn">Confirm</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</body>
+<script>
+    var GLOBALOTPHOLDER = '';
+    // empty the feild
+    $('#phoneNumber').val('');
+    $('#OTP').val('');
+
+    //before sign-in
+    $('#singInmodal').modal('show');
+    $('#mainCont').hide();
+    $('.afvalidation').hide();
+
+    //confirm OTP
+    function confirmOTP(){
+        var otp = $('#OTP').val();
+        if(otp == ''){
+            alert('Please provide the OTP.');
+        }else{
+            if(otp == GLOBALOTPHOLDER){
+                alert('Welcome..');
+                $('#singInmodal').modal('hide');
+                $('#mainCont').show();
+            }else{
+                alert('OTP was invalid.');
+            }
+        }
+    }
+
+    //phone number validation
+    function validatePhone(){
+        var pn = $('#phoneNumber').val();
+        if(pn == ''){   
+            alert('Provide a phone number.');
+        }else{
+            $('#validateBtn').html('<i class="fa fa-spin fa-spinner"></i> validating phone number..');
+            $('#validateBtn').prop('disabled', true);
+            var validation = phoneChecker(pn);
+            console.log(validation);
+            if(validation == 'chck'){
+                $('.bvalidation').hide();
+                $('.afvalidation').show();
+
+                var OTP = 100000 + Math.floor(Math.random() * 900000);
+                GLOBALOTPHOLDER = OTP;
+                etextMoSend(pn, OTP);
+
+            }else{
+                alert(pn + ' is not registered. Contact system admin.');
+                $('.bvalidation').show();
+                $('.afvalidation').hide();
+
+            }
+            $('#validateBtn').html('Validate');
+            $('#validateBtn').prop('disabled', false);
+        }
+    }
+
+    function phoneChecker(phonenumber){
+        var flag = 'nchck';
+        for(var x = 0; x < pn.length; x++){
+            if(pn[x].phonenum == phonenumber){
+               flag = 'chck';
+               console.log('tama');
+            }
+        }
+
+        return flag;
+    }
+    
+    //reset function
+    function resetAccount(){
+        var mdCode = $('#mdCode').val();
+        if(mdCode == ''){
+            alert('Salesman mdCode is required!');
+        }else{
+            $('#resetBTN').html('<i class="fa fa-spin fa-spinner"></i> updating..');
+            $.ajax ({
+                url: "/admin/connection/applicationApi.php",
+                type: "GET",
+                data: {"type":"RESET_ACCOUNT", 'mdCode':mdCode},
+                dataType: "json",
+                crossDomain: true,
+                cache: false,            
+                success: function(r){
+                    if(r){
+                        alert('ACCOUNT WAS RESET!');
+                    }else
+                    alert('INVALID SALESMAN CODE. Please try again.'); 
+                    $('#resetBTN').html('RESET');
+                }
+            });
+        }
+    }
+
+    //OTP SEND
+    function etextMoSend(number, OTP){
+      var message = "Welcome to Mybuddy - Reset Salesman Portal! Your OTP is: " + OTP;
+      $.ajax ({
+        url: "../web/databaseApi.php",
+        type: "POST",
+        data: {
+                "type":"MESSAGE_API",
+                "phoneNumber":number,
+                "message":message,
+                "senderID":'MYBUDDY'
+              },
+        dataType: "json",
+        crossDomain: true,
+        cache: false,  
+        async: false,          
+        success: function(r){
+          console.log('email resp: ' + r);
+        }
+      });
+    }
+</script>
+</html>

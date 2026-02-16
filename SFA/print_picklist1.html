@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Partner - Pick List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet"> 
+    <style>
+        html{
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+
+        .tab1 tr td{
+            border-bottom: solid 1px black;
+            padding: 3px;
+        }
+
+        .tab1{
+            border-collapse: collapse;
+        }
+        
+        body{
+            font-size: 11px;
+        }
+
+        .pk_inpt{
+            padding: 3px;
+            width: 100px;
+            text-align: center;
+            background-color: white;
+            outline: none;
+            color: black;
+            outline: none;
+            border: solid 0.5px black;
+        }
+
+        .pk_inpt_2{
+            border-top: none;
+            border-right: none;
+            border-left: none;
+            width: 500px;
+            outline: none;
+        }
+
+        .pullout_inpt{
+            border-top: none;
+            border-right: none;
+            border-left: none;
+            outline: none;
+            width: 260px;
+            text-transform:uppercase;
+        }
+
+        #fetchCont{
+            font-size: 20px;
+            color: #202786;
+            margin-top: 200px !important;
+            font-weight: normal !important;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .fa-spin{
+            margin-right: 10px;
+            font-size: 30px;
+        }
+
+        #printBtn{
+            padding: 5px; background-color: rgb(19, 131, 175);
+            border-radius: 10px;
+            border: none;
+            margin: 0;
+            color: white;
+            width: 100px !important;
+        }
+
+        #printBtn:hover{
+            cursor: pointer;
+            background-color: rgb(163, 228, 233);
+        }
+
+    </style>
+</head>
+<body>
+    <div id="fetchCont">
+        <span><i class="fa fa-spin fa-spinner"></i> Preparing print layout please wait...</span>
+    </div>
+    <div id="mainCont" style="width: 80%; margin: 0 auto; padding: 3px; display: none;">
+        <!-- <div style="float: right; margin-bottom: 30px;">
+            <button id="printBtn"><i class="fas fa-print"></i> PRINT</button>
+        </div> -->
+        <div class="mainheader">
+            <div style="float: left;">
+                <img src="https://fastsosyo.com/comports/admin/cmpnts/dist/fastsosyoimg/fastsosyo-icon.png" alt="" style="height: 100px; width: 100px;"><br>
+                <!-- <span style="font-size: 7px;">UNIT A2 B3 L4, MERIDIAN INDUSTRIAL COMPLEX,<br>
+                BRGY. MACABILING, STA. ROSA LAGUNA, PHILIPPINES 4027<br>
+                Phone:+632 8 519 4688 TO 89, LAG +63 49 5505216;+63 49 550 4785<br>
+                WEBSITE: www.spvcphp.com</span> -->
+            </div>
+            <div style="float: right;">
+                <button id="printBtn"><i class="fas fa-print"></i> PRINT</button><br><br>
+                <span style="font-weight: normal; font-size: 30px;">PICK LIST <small>v.2.4</small></span><br>
+                <table>
+                    <tr>
+                        <td>DATE</td>
+                        <td><input type="text" class="pk_inpt" id="pl_date" disabled></td>
+                    </tr>
+                    <tr>
+                        <td>TRANSACTION #:</td>
+                        <td><input type="text" class="pk_inpt" id="pl_plID" disabled></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br><br><br><br><br><br><br><br>
+        <!-- <br><br><br><br><br> -->
+        <div class="subheader">
+            <span>PARTNER NAME: <input type="text" class="pk_inpt_2" id="pl_storangefa"></span><br>
+            <span style="font-size: 11px;">FACILITY ADDRESS: <input style="font-size: 11px;" type="text" class="pk_inpt_2" id="pl_storageAdd" style="margin-left: 48px;"></span>
+        </div>
+        <div class="mainbody">
+            <table class="tab1" style="width: 100%; margin-top: 20px;">
+                <thead>
+                    <tr>
+                        <td colspan="7" style="font-weight: bold;">PULL OUT REQUEST DETAILS</td>
+                    </tr>
+                    <tr style="background-color:lightseagreen; color: white;">
+                        <td style="text-align: center;">ITEM CODE</td>
+                        <td style="text-align: center;">DESCRIPTION</td>
+                        <td style="text-align: center;">QTY</td>
+                        <!-- <td style="text-align: center;">UOM</td> -->
+                        <!-- <td style="text-align: center;">CHARGE</td> -->
+                        <td style="text-align: center;">EXP</td>
+                        <td style="text-align: center;">REMARKS</td>
+                    </tr>
+                </thead>
+                <tbody id="picklistbody"></tbody>
+                <tfoot>
+                    <!-- <tr>
+                        <td colspan="7">&nbsp;</td>
+                    </tr> -->
+                    <!-- <tr>
+                        <td>&nbsp;</td>
+                        <td style="text-align: right; font-weight: bold; border-top: solid 2px black;">TOTAL QTY</td>
+                        <td style="text-align: center; font-weight: bold; border-top: solid 2px black;" id="totalPLQuant">---</td>
+                        <td style="border-top: solid 2px black;"></td>
+                        <td style="text-align: right; font-weight: bold; border-top: solid 2px black;" id="totalCharge">---</td>
+                        <td></td>
+                        <td></td>
+                    </tr> -->
+                    <!-- <tr>
+                        <td colspan="7">&nbsp;</td>
+                    </tr> -->
+                </tfoot>
+            </table>
+            <br><br>
+        </div>
+        <div class="footerPL">
+            <div style="width: 70%;">
+                <span>PULL OUT REQUESTED BY (CUSTOMER):</span><br>
+                <b id="pl_requestedby"></b><hr>
+                <span>PULL OUT AUTHORIZED BY:</span><br>
+                <span>
+                    <input type="text" class="pullout_inpt" style="border-bottom: none;" id="pl_authorizedby">
+                </span><hr>
+                <span style="font-size: 13px;">PULL OUT VEHICLE AND PERSONNEL DETAILS</span>
+                <table style="width: 700px !important;">
+                    <tr>
+                        <td>COMPANY</td>
+                        <td><input type="text" class="pullout_inpt" id="pull_company"></td>
+                    </tr>
+                    <tr>
+                        <td>DRIVER</td>
+                        <td><input type="text" class="pullout_inpt" id="pull_Driver"></td>
+                    </tr>
+                    <tr>
+                        <td>HELPER</td>
+                        <td><input type="text" class="pullout_inpt" id="pull_help"></td>
+                    </tr>
+                     <tr>
+                        <td>VEHICLE</td>
+                        <td><input type="text" class="pullout_inpt" id="pull_vehicle"></td>
+                    </tr>
+                     <tr>
+                        <td>PLATE NUMBER</td>
+                        <td><input type="text" class="pullout_inpt" id="pull_plateno"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="font-weight: bold;">
+                            PULL OUT DATE
+                        </td>
+                    </tr>
+                     <tr>
+                        <td colspan="2" style="border: 1px solid black; text-align: center">
+                            <span style="padding: 4px; font-weight: bold; font-size: 15px;" id="pl_pulloutdate">---</span>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td colspan="2">
+                            SO Reference: <span id="soreflist"></span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://fastsosyo.com/comports/admin/cmpnts/dist/js/common.js"></script>
+    <script type="text/javascript" src="https://mybuddy-sfa.com/DATERANGEPICKER/moment.min.js"></script>
+    <script>
+
+        
+        $('#fetchCont').show();
+        $('#mainCont').hide();
+
+        // $('#fetchCont').hide();
+        // $('#mainCont').show();
+        var STOREPHONENUMBER = localStorage.getItem('STOREPHONENUMBER');
+        var SOSYOCUSTNAME = localStorage.getItem('SOSYOSTORENAME');
+        var GLOBALPARTNERNAME = '';
+        picklistbody();
+        function picklistbody(){
+            var transID = localStorage.getItem('PRTBRTRANSID');
+            // alert(transID);
+            $.ajax ({
+                url: GLOBALURL  + "/dist/API/applicationAPI.php",
+                type: "GET",
+                data: {
+                        "type":"GET_PARTNER_TRANSPICKLIST_NESTLE_ONLY",
+                        'transID':transID,
+                    },
+                dataType: "json",
+                crossDomain: true,
+                cache: false,           
+                async: false, 
+                success: function(r){
+                    var cont = '';
+                    var plQuant = 0;
+                    var soreflist = '';
+                    var totalcharge = 0.0;
+                        for(var x = 0; x < r.length; x++){
+                            
+                        cont += `<tr>
+                                    <td>`+r[x].REFERENCENO+`</td>
+                                    <td>`+r[x].DESCRIPTION+`</td>
+                                    <td style="text-align: center;">`+r[x].UOM+`</td>
+                                    
+                                    <td></td>
+                                    <td></td>
+                                </tr>`;
+
+                                plQuant = parseFloat(plQuant) + parseFloat(r[x].QUANTITY);
+                                totalcharge = parseFloat(totalcharge) + parseFloat(r[x].TOTALCHARGE);
+                        }
+
+                    var limit = 10;
+                    var reminder = limit - r.length;
+                    for(var x = 0; x < reminder; x++){
+                        cont += `<tr>
+                                    <td>&nbsp;</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>`;
+                    }
+
+                    var pulloutdat = moment().format('dddd') +', '+ moment().format('Do MMMM YYYY'); 
+
+                    $('#pl_requestedby').html(SOSYOCUSTNAME);
+                    // $('#pl_authorizedby').html('-');
+
+                    $('#soreflist').html(transID);
+                    $('#totalPLQuant').html(parseFloat(plQuant).toLocaleString());
+                    $('#totalCharge').html('TOTAL CHARGE ' +parseFloat(totalcharge).toLocaleString());
+                    $('#pl_date').val(moment().format('YYYY-MM-DD'));
+                    $('#pl_plID').val(transID);
+                    $('#pl_storangefa').val(r[0].SUPPLIERNAME);
+                    $('#pl_storageAdd').val('');
+                    $('#pl_pulloutdate').html(pulloutdat);
+                    $('#picklistbody').html(cont);
+                    $('#pull_company').val('NESTLE PHILIPPINES INC.');
+                    getPulloutDetails();
+                    $('#fetchCont').hide();
+                    $('#mainCont').show();
+
+                    GLOBALPARTNERNAME = r[0].SUPPLIERNAME;
+                }
+            });  
+        }
+
+        function getPulloutDetails(){
+            var pl_ID = localStorage.getItem('PRTBRTRANSID');
+            $.ajax ({
+                url: GLOBALURL  + "/dist/API/applicationAPI.php",
+                type: "GET",
+                data: {
+                        "type":"GET_PULLOUT_DETAILS",
+                        'pl_ID':pl_ID
+                    },
+                dataType: "json",
+                crossDomain: true,
+                cache: false,           
+                async: false, 
+                success: function(r){
+                    $('#pl_storangefa').val(r[0].STORAGEFACILITY);
+                    $('#pl_storageAdd').val(r[0].STORAGEADDRESS);
+                    $('#pl_authorizedby').val(r[0].AUTHORIZEDBY);
+                    $('#pull_Driver').val(r[0].DRIVER);
+                    $('#pull_help').val(r[0].HELPER);
+                    $('#pull_vehicle').val(r[0].VEHICLE);
+                    $('#pull_plateno').val(r[0].PLATENO);
+                    $('#pull_company').val(r[0].COMPANY);
+                }
+            });
+        }
+
+        function insertPulloutDetails(){
+            var pl_ID = localStorage.getItem('PRTBRTRANSID');
+            var partnerIDAdmin = localStorage.getItem('PRTADMID');
+            var storage = $('#pl_storangefa').val();
+            var storageadd = $('#pl_storageAdd').val();
+            var authorizedby = $('#pl_authorizedby').val();
+            var driver = $('#pull_Driver').val();
+            var helper = $('#pull_help').val();
+            var vehicle = $('#pull_vehicle').val();
+            var platenumber = $('#pull_plateno').val();
+            var company = $('#pull_company').val();
+            $.ajax ({
+                url: GLOBALURL  + "/dist/API/applicationAPI.php",
+                type: "POST",
+                data: {
+                        "type":"INSRT_PULLOUT_DETAILS",
+                        'pl_ID':pl_ID,
+                        'storage':storage,
+                        'storageadd':storageadd,
+                        'authorizedby':authorizedby,
+                        'driver':driver,
+                        'company':company,
+                        'helper':helper,
+                        'vehicle':vehicle,
+                        'platenumber':platenumber,
+                        'partnerIDAdmin':partnerIDAdmin
+                    },
+                dataType: "json",
+                crossDomain: true,
+                cache: false,           
+                async: false, 
+                success: function(r){
+                    if(r){
+                        console.log('success');
+                    }
+                }
+            });
+        }
+
+
+        function updatePartnerTransaction(){
+            var pl_ID = localStorage.getItem('PRTBRTRANSID');
+            $.ajax ({
+                url: GLOBALURL  + "/dist/API/applicationAPI.php",
+                type: "POST",
+                data: {
+                        "type":"UPDATE_PARTNER_TRANSACTION",
+                        'transID':pl_ID,
+                        'stat':'2'
+                    },
+                dataType: "json",
+                crossDomain: true,
+                cache: false,           
+                async: false, 
+                success: function(r){
+                    if(r){
+                        console.log('success');
+                    }
+                }
+            });
+        }
+
+        $('#printBtn').click(function() {
+            $('#printBtn').html('<i class="fa fa-spin fa-spinner" style="font-size: 10px;"></i> Printing');
+            insertPulloutDetails();
+            updatePartnerTransaction();
+            // $('body').css({'font-size':'6px'});
+            // $('input').css({'font-siz':'6px'});
+            // $('.input_1').css({'width':'160px'});
+            // $('.separator').css({'margin-top':'420px'});
+            $('#printBtn').hide();
+            sms(STOREPHONENUMBER, 'Good day, your fastsosyo order for '+GLOBALPARTNERNAME+' is being prepared please expect a call from our salesman.\n\nThanks you.');
+            window.print();
+            // $('body').css({'font-size':'10px'});
+            // $('input').css({'font-siz':'11px'});
+            // $('.input_1').css({'width':'200px'});
+            // $('.separator').css({'margin-top':'40px'});
+            $('#printBtn').html('<i class="fas fa-print"></i> PRINT');
+            $('#printBtn').show();
+        });
+    </script>
+</body>
+</html>

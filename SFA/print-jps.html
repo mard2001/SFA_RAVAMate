@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  	<meta name="description" content="">
+  	<meta name="author" content="">
+	<title>JPS</title>
+	<link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+	<link rel="stylesheet" type="text/css" href="/css/jps.css">
+</head>
+<body>
+	<div id="heading">
+		<h3>JOBBER PULLOUT SLIP (JPS)</h3>
+
+		<div id="subHeading">
+			<span>CUSTOME NO: <b id="customerIDH"></b></span><br/>
+			<span>CUSTOMER NAME: <b id="customernmH"></b></span>
+		</div>
+
+		<div id="subHeading2">
+			<span> REFERENCE NO: <b id="refnoH">1231212</b></span><br/>
+			<span>DATE: <b id="dateH">2019-10-22</b></span>
+		</div>
+
+	</div>
+	<div id="body">
+		<table class="maintable" width="100%" style="border: 1px;">
+			<col style="width:5%">
+			<col style="width:7.5%">
+			<col style="width:50%">
+			<col style="width:10%">
+			<col style="width:2%">
+			<col style="width:2%">
+			<col style="width:2%">
+			<col style="width:10%">
+			<thead>
+				<tr>
+					<th rowspan="2">#</th>
+					<th rowspan="2">ITEM CODE</th>
+					<th rowspan="2">DESCRIPTION</th>
+					<th rowspan="2">UNIT COST</th>
+					<th colspan="3">QUANTITY</th>
+					<th rowspan="2">AMOUNT</th>
+				</tr>
+				<tr>
+					<th>CS</th>
+					<th>IB</th>
+					<th>PC</th>
+				</tr>
+			</thead>
+			<tbody id="jobberBody" style="text-align: center;"></tbody>
+			<tfoot>
+				<tr>
+					<td class="text-left"></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td id="cstotal"></td>
+					<td id="ibtotal"></td>
+					<td id="pctotal"></td>
+					<td id="totalSales" class="text-right" style="padding-right:10px;"></td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+	<div class="fotter-table firstfooter">
+		<div class="firstpair" style="float:left;">
+			<span><input type="text" name="" class="footerText"></span>
+			<input type="text" name="" class="footerText scndInput"></span><br/>
+			<span>PULLOUT BY: <span id="salesmanName" class="entries"></span></span>
+			<span class="scndText1">DATE</span>
+		</div>
+
+		<div class="firstpair" style="float:right">
+			<span><input type="text" name="" class="footerText"></span>
+			<input type="text" name="" class="footerText scndInput"></span><br/>
+			<span>RELEASED BY: <span id="custName" class="entries"></span></span>
+			<span class="scndText">DATE</span>
+		</div>
+	</div>
+	<div class="fotter-table firstfooter">
+		<div class="firstpair" style="float:left;">
+			<span><input type="text" name="" class="footerText"></span>
+			<input type="text" name="" class="footerText scndInput"></span><br/>
+			<span>APPROVED BY: <span id="" class="entries"></span></span>
+			<span class="thrdText">DATE</span>
+		</div>
+	</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="/HASH/md5.js"></script>
+<script src="/HASH/aes.js"></script>
+<script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+<script type="text/javascript">
+	var user = localStorage.getItem("adminUserName");
+	get_stockCard_Details();
+	function get_stockCard_Details(){
+		var passRefno = localStorage.getItem("jpsprintRefno");
+         $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {
+                      "type":"JOBBER_PRINT_DETAILS",
+                      "CONN":con_info,
+                      "refNo":passRefno
+                    },
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(r){
+              	$('#jobberBody').html('');
+                var cont = '', counter = 0;
+                $('#custName').html(r.body[0].custCode+' '+r.body[0].custName);
+				$('#customerIDH').html(r.body[0].custCode);
+                $('#customernmH').html(r.body[0].custName);
+                $('#dateH').html(r.body[0].transDate);
+                $('#refnoH').html(r.body[0].refNo);
+                $('#salesmanName').html(r.body[0].mdSalesmancode+' '+r.body[0].salesman);
+				$('#salesmanCode').html(r.body[0].mdSalesmancode);
+
+                for(var x = 0; x < r.body.length; x++){
+                  counter++;
+                  cont += '<tr>'+
+                         '<td>'+(x+1)+'</td>'+
+                         '<td>'+r.body[x].StockCode+'</td>'+
+                         '<td class="text-left" style="padding-left:10px;">'+r.body[x].Description+'</td>'+
+                         '<td></td>'+
+                         '<td class="text-center">'+r.body[x].QTYStockUOM+'</td>'+
+                         '<td class="text-center">'+r.body[x].QTYOtherUom+'</td>'+
+                         '<td class="text-center">'+r.body[x].QTYPCS+'</td>'+
+                         '<td class="text-right" style="padding-right: 10px;">'+r.body[x].amount +'</td>'+
+                       +'</tr>';
+                }
+
+                var max = 35;
+	      		var counter2 = max - r.body.length;
+
+	      		for(var x = 0; x < counter2; x++){
+	      		var newCount = (counter + 1) + x;
+	      			cont += '<TR>'+
+	      						'<td>'+newCount+'</td>'+
+								'<td></td>'+
+								'<td></td>'+
+								'<td></td>'+
+								'<td></td>'+
+								'<td></td>'+
+								'<td></td>'+
+								'<td></td>'+
+							'</TR>';
+	      		}
+
+                $('#jobberBody').html(cont);
+				$('#totalSales').html(parseFloat(r.tamount).toLocaleString());
+				$('#cstotal').html(r.tcs);
+				$('#ibtotal').html(r.tib);
+				$('#pctotal').html(r.tpc);
+
+				window.print();
+				window.top.close();
+               }//success
+              });
+
+        
+      }
+</script>
+
+</html>
