@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Admin</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="design/design.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
+  <link href="https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+  <link rel="shortcut icon" href="../img/mdlogo_web.png" type="image/png">
+</head>
+
+<body>
+<nav class="navbar navbar-expand-sm fixed-top navbarcustom bg-dark">
+  <a class="navbar-brand" href="home.html"> <img src="../img/mdlogo_web.png" class="homeLogo"> mybuddy</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end flex-column" id="collapsibleNavbar">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <div class="dropdown dropdown-menu-left">
+          <a type="button" class="nav-link btn btn-dark dropdown-toggle" data-toggle="dropdown" href="#"><i class="fas fa-comments"></i>
+          <span class="badge badge-pill badge-danger">12</span></a>
+          <div class="dropdown-menu dropdown-menu-right pushNotifDiv">
+              <p>MESSAGES WILL BE POSTED HERE!</p>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <div class="dropdown dropdown-menu-left">
+          <a type="button" class="nav-link btn btn-dark dropdown-toggle" data-toggle="dropdown" href="#"><i class="fas fa-bell"></i><span class="badge badge-pill badge-danger"></span></a>
+          <div class="dropdown-menu dropdown-menu-right pushNotifDiv">
+              <p>ALL CONCERNS WILL BE POSTED HERE!</p>
+          </div>
+        </div>
+      </li> 
+      <li class="nav-item">
+        <div class="dropdown dropdown-menu-left">
+          <a type="button" class="nav-link btn btn-dark dropdown-toggle" data-toggle="dropdown" href="#"><i class="fas fa-user"></i></a>
+          <div class="dropdown-menu dropdown-menu-right">
+              <span class="dropdown-item" id="usernameid"></span>
+              <a class="dropdown-item" href="login.html" id="loginBtn"><i class="fas fa-sign-out-alt"></i> Login</a>
+              <div class="dropdown-divider"></div>
+              <!--<a class="dropdown-item text-dark" href="#" id="manageBtn"><i class="fas fa-cogs"></i> Manage Account</a>-->
+              <a class="dropdown-item text-dark" href="PatchList" id=""><i class="fas fa-list"></i> Patch List</a>
+              <a class="dropdown-item text-dark" href="#" id="logoutBtn_admin"><i class="fas fa-lock"></i> Logout</a>
+          </div>
+        </div>
+      </li> 
+    </ul>
+  </div>  
+</nav>
+
+<div class="jumbotron text-center">
+   <nav class="navbar navbar-expand-sm justify-content-center">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link linktab nav_cust" href="#" id="onlineListBtn"><i class="fas fa-circle blink_me"></i> ONLINE</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link linktab nav_cust" href="#" id="listMatBtn"><i class="fas fa-globe-americas"></i> WEB USERS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link linktab nav_cust" href="#" id="viewMatBtn"><i class="fas fa-mobile-alt"></i> MOBILE USERS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link linktab nav_cust" href="#" id="siteListBtn"><i class="fas fa-list-alt"></i> SITE LIST</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link linktab nav_cust backtocreate" href="#" id="addMatBtn"><i class="fas fa-plus-circle"></i> CREATE</a>
+        </li>
+      </ul>
+    </nav>
+</div>
+
+<div class="container">
+  <div class="onlineUserContainer">
+    <table id="" class="table table-hover onlineListWebTable custTable" style="width:100%">
+            <thead class="thead-secondary">
+               <tr>
+                 <th></th>
+                 <th>FULL NAME</th>
+                 <th>SITE NAME</th>
+                 <th>LOG IN</th>
+                 <th>LOG OUT</th>
+                 <th>STATUS</th>
+                 <th></th>
+               </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+  </div>
+  <div class="listMaterialsContainer hidden">
+          <table id="" class="table table-hover listWebTable_ALL custTable" style="width:100%">
+            <thead class="thead-secondary">
+               <tr>
+                 <!-- <th></th> -->
+                 <th>FULL NAME</th>
+                 <th>DISTRIBUTOR</th>
+                 <th>LAST LOGIN</th>
+                 <th>STATUS</th>
+               </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+  </div>
+  
+  <div class="viewMaterialsContainer hidden">
+     <table id="" class="table table-hover listMobileTable custTable" style="width:100%">
+        <thead class="thead-secondary">
+           <tr>
+            <th>MDCODE</th>
+            <th>SITE NAME</th>
+            <th>LAST ACTIVE</th>
+            <th>VERSION</th>
+            <th>STATUS</th>
+           </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+  </div>
+
+  <div class="viewSiteListContainer hidden">
+    <!--<div><input type="text" name="" class="custsearch" placeholder="Search"></div>-->
+    <div class="siteContainer scroll" data-simplebar></div>
+  </div>
+
+  <div class="addMaterialsContainer hidden">
+    <div class="selectionHolder">
+     <div class="row d-flex justify-content-center">
+      
+        <div class="col-sm-4">
+          <div class="card">
+            <div class="card-body">
+              <i class="fas fa-user-tie fa-5x custicon"></i>
+              <p class="card-text">This action provides a creation of user which is granted to login in mdbuddy web portal.</p>
+              <a href="#" class="custBtn" onclick="showUserCreation()"><i class="fas fa-plus"></i> Create User</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="card">
+            <div class="card-body">
+              <i class="fas fa-map-marked fa-5x custicon"></i>
+              <p class="card-text">This action provides a creation of web portal, particularly in a specific branch or site.</p>
+              <a href="#" class="custBtn" onclick="showSiteCreation()"><i class="fas fa-plus"></i> Create Site</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="createUserContainer">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item backtocreate"><a href="#">Create</a></li>
+          <li class="breadcrumb-item"><a href="#">New User</a></li>
+        </ol>
+      </nav>
+       <div class="imgContainer">
+        <img class="user_image" id="item-img" src="../img/salesmanPic.jpg" onerror="imgError(this)"><br/>
+        <div class="changeImageBtn">
+          <form id="fileForm" action="" method="post" enctype="multipart/form-data">
+            <input type="file" class="hidden" name="fileToUpload" id="fileToUpload" accept=".jpg"/>
+            <input type="hidden" id="img_admin_fname" name="img_admin_fname"/>
+            <input type="button" class="cust_button_browse" value="BROWSE IMAGE" id="btn_upload">
+          </form>
+        </div>
+      </div>
+      <div style="margin: 0 auto; text-align: center; width: 550px;">
+        <table class="table">
+       <!--<tr>
+          <td class="text-left">Username:</td>
+          <td><input class="form-control" type="text" name="" id="username">
+          <div class="alert alert-danger customalert" role="alert" id="userchecker"></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="text-left">Password: </td>
+          <td><input class="form-control" type="password" name="" id="password"></td>
+           <span id="unichecker"></span>
+        </tr>-->
+        <tr>
+          <td class="text-left">Full Name: </td>
+          <td><input class="form-control" type="text" name="" id="fullname"></td>
+          <span id="unichecker"></span>
+        </tr>
+        <tr>
+          <td class="text-left">Email: </td>
+          <td><input class="form-control" type="text" name="" id="email">
+          <div class="alert alert-danger customalert" role="alert" id="emailchecker"></div>
+		      </td>
+        </tr>
+        <tr>
+          <td class="text-left">Contact No: </td>
+          <td><input class="form-control" type="text" name="" id="contactno">
+           <div class="alert alert-danger customalert" role="alert" id="contactchecker"></div>
+          </td>
+        </tr>
+        <!--<tr>
+          <td class="text-left">Distributor's Code: </td>
+          <td>
+            <select class="form-control" id="distributor"></select>
+          </td>
+        </tr>-->
+        <tr>
+          <td class="text-left">Site: </td>
+          <td>
+            <select class="form-control" id="site"></select>
+          </td>
+        </tr>
+        <tr>
+          <td class="text-left">Usertype: </td>
+          <td>
+            <select class="form-control" id="usertype">
+              <option value="" disabled selected hidden>Choose here..</option>
+              <option value="WEB_GUEST">GUEST</option>
+              <option value="WEB">ADMIN</option>
+            </select>
+          </td>
+        </tr>
+        <tr id="overallchecker">
+        	<td colspan="2">
+        		<div class="alert alert-danger customalert inputschecker" id="" role="alert" ></div>
+        	</td>
+        </tr>
+        <tr>
+          <td colspan="2"><button class="cust_button addItemBtn" onclick="addAdmin()"><i class="fas fa-plus-circle"></i> ADD USER</button></td>
+        </tr>
+      </table>
+      </div>
+    </div> 
+    <div class="createSiteContainer">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item backtocreate"><a href="#">Create</a></li>
+          <li class="breadcrumb-item"><a href="#">New Site</a></li>
+        </ol>
+      </nav>
+
+      <div id="site_creation_form">
+        <input type="text" name="" id="sitename" class="cust_map_inpt" placeholder="site name"><br/>
+        <input type="text" name="" id="sitepinpoint" class="cust_map_inpt" placeholder="site location"><br/>
+        <div class="alert alert-danger customalert" role="alert" id="siteChecker"></div>
+        <button class="cust_button_map" onclick="savesite()">Save and Continue</button>
+      </div>
+      <div id="map" style="height: 400px;"></div>
+    </div>  
+  </div>
+
+  <div class="modal fade" id="action_user_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h6 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-info-circle"></i> USER INFORMATION</h6>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body" style=" ">
+	        <div class="imgContainer">
+	          <img class="update_material_modal_img" id="item-img-update" src="../img/salesmanPic.jpg" onerror="imgError(this)"><br/>
+	          <div class="changeImageBtn">
+	            <form id="fileForm" action="" method="post" enctype="multipart/form-data">
+	              <input type="file" class="hiddenUpdate" name="fileToUpload" id="fileToUpload" accept=".jpg"/>
+	              <input type="hidden" id="img-materials-id" name="img-materials-id-update"/>
+	              <input type="hidden" id="" name="formaterials" value="product" />
+	              <input type="button" class="btn btn-primary btn-sm" value="UPDATE IMAGE" id="btn_upload_update">
+	            </form>
+	          </div>
+	        </div>
+	        <div style="margin: 0 auto; width: 100%;">
+	          <table class="table table-hover">
+	         <tr>
+	            <td>Username:</td>
+	            <td id="upt-username"></td>
+	          </tr>
+	          <TR>
+	            <td>Full Name: </td>
+	            <td><input type="text" name="" class="form-control" id="upt-fullname"></td>
+	          </TR>
+	          <tr>
+	            <td>Distributor: </td>
+	            <td><input type="text" name="" class="form-control" id="upt-distributor"></td>
+	          </tr>
+	          <tr>
+	            <td>Sitecode: </td>
+	            <td><input type="text" name="" class="form-control" id="upt-sitecode"></td>
+	          </tr>
+	        </table>
+
+           <!--<div class="body-footer moreSettingsCont">
+             <legend><i class="fas fa-cogs"></i> More settings <i class="fas fa-chevron-down"></i></legend>
+           </div>-->
+	        
+          </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary" id="uptbutton">Save changes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</div>
+
+  <div class="modal fade" id="activateUserModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title"><i class="fas fa-user-cog"></i> Activate User</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body configUserbod"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script> 
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<script type="text/javascript" src="js/notfunction.js"></script>
+<script type="text/javascript" src="/js/scrolling.js"></script>
+<script type="text/javascript">
+
+ var user = localStorage.getItem("admin_username");
+ if(user == null || user == undefined){
+   window.location.href = "https://mdbuddyonline.access.ly";
+  }else{
+    $('#manageBtn').show();
+    $('#logoutBtn').show();
+    $('#loginBtn').hide();
+    $('#registerBtn').hide();
+    $('#usernameid').html(user.toUpperCase());
+  }
+
+$('.hidethissec').hide();
+
+//VALIDATION CHECKERS
+$('#userchecker').hide();
+$('#emailchecker').hide();
+$('#contactchecker').hide();
+$('#siteChecker').hide();
+
+
+dateFilter();
+var startPickDate_e, endPickDate_e, if1dayisSelected;
+function dateFilter(){
+  var start = moment().subtract(0, 'days');
+  var end = moment();
+  $('.filterDate').daterangepicker({
+      "alwaysShowCalendars": true,
+      "startDate": start,
+      "endDate": end,
+      "maxDate": end,
+      "applyClass": "btn-primary",
+      "autoApply": false,
+      ranges: {
+          'Today': [moment(), moment()],
+          'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+          'This Month': [moment().startOf('month'), moment().endOf('month')],
+          'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+      }
+  }, function(start, end, label) {
+        var d1 = moment(start);
+        var d2 = moment(end);
+        if1dayisSelected = d2.diff(d1);
+        
+    });
+  
+    console.log('testing date filter');
+  $('.filterDate').on('apply.daterangepicker', function(ev, picker) {
+    startPickDate_e = picker.startDate.format('YYYY-MM-DD');
+    endPickDate_e = picker.endDate.format('YYYY-MM-DD');
+  });
+}
+
+
+$('#password').focus(function() {
+$('#userchecker').removeClass('shakeit');
+  var username = $('#username').val();
+  $.ajax ({
+      url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+        type: "GET",
+        data: {
+            "type":"check_user",
+            "user":username,
+          },
+        dataType: "json",
+        crossDomain: true,
+        cache: false,  
+        async: false,          
+        success: function(r){
+          if(r != 0){
+          	
+          	$('#userchecker').addClass('shakeit');
+            $('#userchecker').show();
+            $('#userchecker').html('Username already taken.');
+          }else{
+            $('#userchecker').hide();
+            //$('#userchecker').html('');
+            //$('#userchecker').css({"color":"transparent"});
+          }
+        }
+      });
+});
+
+/*$("#contactno").keydown(function(e) {
+        var oldvalue=$(this).val();
+        var field=this;
+        setTimeout(function () {
+            if(field.value.indexOf('+63') !== 0) {
+                $(field).val(oldvalue);
+            } 
+        }, 1);
+   });*/
+var emailandcontactChecker = 0;
+$('#contactno').focus(function() {
+$('#emailchecker').removeClass('shakeit');
+  var email = $('#email').val();
+  $.ajax ({
+        url: "/web/databaseApi.php",
+        type: "GET",
+        data: {
+            "type":"check_email",
+            "email":email,
+          },
+        dataType: "json",
+        crossDomain: true,
+        cache: false,  
+        async: false,          
+        success: function(r){
+          if(r != 0){
+          	$('#emailchecker').addClass('shakeit');
+            $('#emailchecker').show();
+            $('#emailchecker').html('Email already taken by another user.');
+            emailandcontactChecker = 1;
+          }else{
+            emailandcontactChecker = 0;
+            $('#emailchecker').hide();
+          }
+        }
+      });
+});
+
+$('#site').focus(function() {
+$('#contactchecker').removeClass('shakeit');
+  var contact = $('#contactno').val();
+  var formatedCont = contact.replace('0','+63');
+  console.log(formatedCont);
+  $.ajax ({
+        url: "/web/databaseApi.php",
+        type: "GET",
+        data: {
+            "type":"check_contact",
+            "contactnum":formatedCont,
+          },
+        dataType: "json",
+        crossDomain: true,
+        cache: false,  
+        async: false,          
+        success: function(r){
+          if(r != 0){
+            $('#contactchecker').addClass('shakeit');
+            $('#contactchecker').show();
+            $('#contactchecker').html('This number is already taken by other user.');
+            emailandcontactChecker = 1;
+          }else{
+            emailandcontactChecker = 0;
+            $('#contactchecker').hide();
+          }
+        }
+      });
+});
+
+
+
+clearInputs();
+
+function showUserCreation(){
+  $('.selectionHolder').hide();
+  $('.createUserContainer').show();
+}
+
+function showSiteCreation(){
+  $('.selectionHolder').hide();
+  $('.createSiteContainer').show();
+}
+
+function verifyInputs(){
+	var username = $('#username').val();
+	var pass = $('#password').val();
+	var fullname = $('#fullname').val();
+	var email = $('#email').val();
+	var contactno= $('#contactno').val();
+	//var dist = $('#distributor').val();
+	var dist = 'NPI';
+	var site = $('#site').val();
+	var usertype = $('#usertype').val();
+	
+	var stat;
+	if(username == '' || pass == '' || fullname == '' || email == '' || contactno == '' || dist == '' || site == '' || usertype == ''){
+		stat = false;
+	}else{
+		stat = true;
+	}
+
+	return stat;
+}
+
+$(".hidden").change(function(){
+  readURL(this);
+});
+
+$(".hiddenUpdate").change(function(){
+  readURL_update(this);
+});
+
+  
+function readURL(input) {
+	if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+
+	    reader.onload = function (e) {
+	        $('#item-img').attr('src', e.target.result);
+	    }
+	    reader.readAsDataURL(input.files[0]);
+	}
+}
+
+function readURL_update(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        
+        reader.onload = function (e) {
+            $('#item-img-update').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+$('#overallchecker').hide();
+function addAdmin(){
+	var username = $('#username').val();
+	var password = $('#password').val();
+	var fullname = $('#fullname').val();
+	var designation = $('#designation').val();
+	var contactno = $('#contactno').val();
+  var formatedCont = contactno.replace('0','+63');
+  console.log(formatedCont);
+	var email = $('#email').val();
+  var usertype = $("#usertype").val();
+	//var distributor = $('#distributor').val();
+	var distributor = 'NPI';
+	var sitecode = $('#site').val();
+    //$('#img-materials-id').val(itemNo);
+
+	$('#overallchecker').hide();
+    $('.inputschecker').removeClass('shakeit');
+    if(!verifyInputs()){
+      $('#overallchecker').show();
+      $('.inputschecker').addClass('shakeit');
+	    $('.inputschecker').html('<strong>Unable to Proceed:</strong> Empty inputs not allowed!');
+    }else{
+      if(emailandcontactChecker == 1){
+        $('#overallchecker').show();
+        $('.inputschecker').addClass('shakeit');
+        $('.inputschecker').html('<strong>Unable to Proceed:</strong> Check contact number or email fields!');
+      }else{
+        $('#overallchecker').hide();
+        $.ajax ({
+        url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+          type: "GET",
+          data: {
+              "type":"add_user",
+              "username":'staticusrnm',
+              "password":'staticuspwrd',
+              "fullname":fullname,
+              "usertype":usertype,
+              "designation":designation,
+              "contactno":formatedCont,
+              "email":email,
+              "distributor":distributor,
+              "sitecode":sitecode
+                    },
+                  dataType: "JSON",
+                  crossDomain: true,
+                  cache: false,  
+                  async: false,          
+                  success: function(r){
+                    if(r == '1'){
+                      $('#img_admin_fname').val(username);
+                      upload();
+                      etextMo_send(fullname, contactno);
+                      alert('USER SUCCESSFULLY ADDED!');
+                      clearInputs();
+                    }
+
+                  },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("ERROR OCCUR DURING ADDING USER: " + XMLHttpRequest.responseText);
+                 }
+            });
+      }
+    }
+}
+
+function etextMo_send(fullname, number){
+      var message = 'WELCOME TO MYBUDDY '+fullname+'! \n You may now access the realtime dashboard using this link: \n'+
+      'https://mybuddy.dynns.com';
+      console.log('uyuyuy');
+      $.ajax ({
+            url: "https://www.itexmo.com/php_api/api.php",
+            type: "POST",
+            data: {
+                   "1" : number,
+                   "2" : message,
+                   "3" : "DE-FASTD139785_N8FG8",
+                   "5" : "HIGH" 
+                  },
+            crossDomain: true,
+            cache: false,            
+            success: function(r){ 
+                console.log('Etextmo res: ' + r);
+              }
+       });
+    }
+
+$("#distributor").change(function() {
+    var distributor = $("#distributor option:selected").text();
+    $('.hidethissec').show();
+    get_siteCode(distributor);
+ });
+
+getAllsite();
+function getAllsite(){
+ $.ajax ({
+      url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+        type: "GET",
+        data: {
+            "type":"get_all_sites",
+          },
+        dataType: "JSON",
+        crossDomain: true,
+        cache: false,  
+        async: false,          
+        success: function(r){
+        	 $('#distributor').append('<option value="" disabled selected hidden>Choose here..</option>');
+        	for(var x =0; x < r.length; x++){
+        		$('#distributor').append('<option value='+r[x].sitedistributorcode+'>'+r[x].sitedistributorcode+'</option>');
+        	}
+        }
+    });
+}
+var staticdist = 'NPI';
+get_siteCode(staticdist);
+function get_siteCode(distributor){
+ $('#site').html('');
+ $.ajax ({
+      url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+        type: "GET",
+        data: {
+            "type":"get_fdc_sites",
+            "sitecode": distributor
+          },
+        dataType: "JSON",
+        crossDomain: true,
+        cache: false,  
+        async: false,          
+        success: function(r){
+        	$('#site').append('<option value="" disabled selected hidden>Choose here..</option>');
+        	for(var x =0; x < r.length; x++){
+        		$('#site').append('<option value='+r[x].sitecode+'>'+r[x].sitename+'</option>');
+        	}
+        }
+    });
+}
+
+allSiteList();
+function allSiteList(){
+  $.ajax ({
+      url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+        type: "GET",
+        data: {
+            "type":"get_all_sitesInfo"
+          },
+        dataType: "JSON",
+        crossDomain: true,
+        cache: false,        
+        success: function(r){
+          var content = '';
+          for(var x = 0; x < r.length; x++){
+            var chevron = 'dpicon'+x;
+            content += ' <div id="accordionInfo'+x+'">'+
+            '<div class="card custAccord">'+
+             '<div class="card-header titleaccordion" onclick="togglechevron(\''+chevron+'\')" data-toggle="collapse" href="#collapseOne'+x+'">'+
+                '<a class="card-link"><i class="fas fa-map-marker text-cust"></i> '+
+                  r[x].sitename +' - <span class="text-muted">'+r[x].sitedistributor+'</span><i class="fas fa-chevron-down float-right dpicon'+x+' text-cust"></i>'+
+                '</a>'+
+              '</div>'+
+              '<div id="collapseOne'+x+'" class="collapse" data-parent="#accordionInfo'+x+'">'+
+                '<div class="card-body">'+
+                  'Site Code: '+r[x].sitecode+
+                  '<br/> Site Name: '+r[x].sitename+
+                  '<br/> Site Distributor: '+r[x].sitedistributor +' '+r[x].sitedistributorcode+
+                  '<br/> Location: <a href="https://www.google.com/maps?q='+r[x].latitude+','+r[x].longitude+'" target="_blank" class="text-cust">'+r[x].latitude +' '+r[x].longitude+'</a>'+
+                '</div>'+
+              '</div>'+
+            '</div>'+
+            '</div>';
+          }
+          $('.siteContainer').html(content);
+
+        }
+      });
+}
+
+weblist_all();
+var sourceWeb_List;
+function weblist_all(){
+$.ajax ({
+  url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+    type: "GET",
+    data: {
+            "type":"get_web_users_all"
+          },
+    dataType: "json",
+    crossDomain: true,
+    cache: false,  
+    async: false,          
+    success: function(r){
+        var localObj = [], status;
+        for(var x = 0; x < r.length; x++){
+         if(r[x].ASTATUS == 'AC'){
+          status = '<span class="btn btn-primary btn-sm">ACTIVE</span>';
+         }else{
+          status = '<span class="btn btn-danger btn-sm">INACTIVE</span>';
+         }
+          localObj.push({
+             img: "<img src='img/admin_img/"+r[x].AUSERNAME+".jpg' onerror='imgError(this)' class='avatar-img'/>",
+              AUSERNAME: r[x].AUSERNAME,
+              AFULLNAME: r[x].AFULLNAME,
+              DISTRIBUTOR: r[x].ADISTRIBUTOR +' '+ r[x].sitename,
+              ADATECREATED: r[x].ADATECREATED,
+              ALOGTIME: r[x].ALOGTIME,
+              ASTATUS: status,
+              ASTATCHECKER: r[x].ASTATUS
+          });
+        }
+
+        sourceWeb_List = localObj;
+    }
+  });
+}
+
+getWebUsers();
+function getWebUsers(){
+	 $.ajax ({
+          url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+            type: "GET",
+            data: {
+                "type":"get_web_users"
+              },
+            dataType: "JSON",
+            crossDomain: true,
+            cache: false,  
+            async: false,          
+            success: function(r){
+            	if(r == 'false'){
+            		console.log('nodata');
+            	}else{
+            		var localObj = [], logtime;
+                for(var x = 0; x < r.length; x++){
+                 if(r[x].STATUS == 2){
+                 	logtime = '<span class="onlinebadge">ONLINE</span>';
+                 }else{
+                 	logtime = '<span class="offlinebadge">LOGOUT</span>';
+                 }
+                  localObj.push({
+                      img: "<img src='img/admin_img/"+r[x].AUSERNAME+".jpg' onerror='imgError(this)' class='avatar-img'/>",
+                      username: r[x].AUSERNAME,
+                      fullname: r[x].AFULLNAME.toUpperCase(),
+                      distributor: r[x].ADISTRIBUTOR,
+                      sitename: r[x].ASITENAME,
+                      sitecode: r[x].ASITECODE,
+                      login: getTime(r[x].LOGIN),
+                      logout: getTime(r[x].LOGOUT),
+                      status: logtime,
+                      latitude: r[x].LATITUDE,
+                      longitude: r[x].LONGITUDE,
+                      ip: r[x].IP,
+                      device: r[x].DEVICE,
+                      browser: r[x].BROWSER,
+                      os: r[x].OS,
+                      locate: '<a href="https://www.google.com/maps?q='+r[x].LATITUDE+','+r[x].LONGITUDE+'" target="_blank" class="locateuser" data-toggle="tooltip" data-placement="right" title="View user location"><i class="fas fa-globe text-dark"></i></a>'
+                      
+                  });
+                }
+
+                sourceWeb = localObj;
+            	}
+            }
+
+        });
+}
+
+function getTime(datetime){
+	var d = new Date(datetime);
+	var res = d.getHours() +':'+d.getMinutes()+':'+d.getSeconds(); // => 51
+	
+	var time;
+	if(datetime == ' ' || datetime == null || datetime == undefined){
+		return '---';
+	}else{
+		if(res == '0:0:0'){
+			time = '---';
+		}else{
+			time = res;
+		}
+		return time;
+	}
+}
+
+var tableData, sourceWeb;
+webUsersApp();
+function webUsersApp(){
+	tableData = $('table.onlineListWebTable').DataTable({
+              "dom": 'Bfrtip',
+              "responsive": true,
+              "data": sourceWeb,
+              "scrollX": '100%',
+              "ordering": false,
+              "pageLength": 5,
+              // language: {
+              //   select: {
+              //       rows: ""
+              //   }
+              // },
+              columns: [
+              	  { data: "img"},
+                  { data: "fullname"},
+                  { data: "sitename"},
+                  { data: "login" },
+                  { data: "logout" },
+                  { data: "status"},
+                  { data: "locate"}
+                ],
+                buttons: [
+                  {
+                    text: '<i class="fas fa-calendar-alt"></i> Filter Logs',
+                    className: 'filterDate',
+                    // action: function(e, dt, node, config){
+                    //   dateFilter();
+                    // }
+                  }
+                ]
+          }).draw(true).columns.adjust();
+
+      
+	    $('table.onlineListWebTable tbody').on('click', 'tr', function () {
+            var tr = $(this).closest('tr');
+            var row = tableData.row(tr);
+            //var data = tr.find('td:eq(1)').text();
+            //updateUser(row.data());
+            showsvr(row.data());
+           
+        });
+
+        function showsvr(r){
+        	alert("IP ADDRESS: " +r.ip + '\n'+ "BROSER USED: "+r.browser +'\n'+ 'DEVICE: '+ r.device +'\n'+ 'OS: '+ r.os);
+        }
+
+      /*$('.locateuser').click(function(){
+         var tr = $(this).closest('tr');
+         var row = tableData.row(tr);
+         var dat = row.data();
+         console.log('you click me: ' + dat);
+          //window.open("https://www.google.com/maps?q="+dat.latitude+","+dat.longitude, "_blank");
+      });*/
+
+
+      $('.deleteUser').click(function() {
+        	var a = confirm('Are you sure you want to delete this user?');
+        	if(a){
+        		alert('DELETED');
+        	}
+      });
+
+      function updateUser(r){
+        $('#upt-username').html(r.username);
+  			$('#upt-fullname').val(r.fullname);
+  			$('#upt-distributor').val(r.distributor);
+  			$('#upt-sitecode').val(r.sitecode);
+  			$('#action_user_modal').modal('toggle');
+      }
+}
+
+webUsersApp_All();
+var tableData_All;
+function webUsersApp_All(){
+  tableData_All = $('table.listWebTable_ALL').DataTable({
+              "dom": 'frtip',
+              "responsive": true,
+              "data": sourceWeb_List,
+              "scrollX": true,
+              "ordering": false,
+              "pageLength": 5,
+              language: {
+                select: {
+                    rows: ""
+                }
+              },
+              columns: [
+                  // { data: "img"},
+                  { data: "AFULLNAME"},
+                  { data: "DISTRIBUTOR"},
+                  { data: "ALOGTIME" },
+                  { data: "ASTATUS" },
+                ],
+          }).draw(true).columns.adjust();
+
+       $('table.listWebTable_ALL tbody').on('click', 'tr', function () {
+            var tr = $(this).closest('tr');
+            var row = tableData_All.row(tr);
+            //var data = tr.find('td:eq(0)').text();
+            //updateUser(row.data());
+            activateUser(row.data());
+        });
+
+       function activateUser(r){
+        var cont = '';
+        if(r.ASTATCHECKER == 'AC'){
+          var status = 'IN';
+            cont = '<label class="switch">'+
+                      '<input type="checkbox" checked id="updateCheck">'+
+                      '<span class="slider round" onclick="update_status_user(\''+r.AUSERNAME+'\', \''+status+'\')"></span>'+
+                   '</label><h4 class="text-success indicatorText">ENABLED</h4>';
+        }else{
+          var status = 'AC';
+            cont = '<label class="switch">'+
+                      '<input type="checkbox" id="updateCheck">'+
+                      '<span class="slider round" onclick="update_status_user(\''+r.AUSERNAME+'\', \''+status+'\')""></span>'+
+                   '</label><h4 class="text-danger indicatorText">DISABLED</h4>';
+        }
+       
+        $('.configUserbod').html(cont);
+        $('#activateUserModal').modal('show');
+       }
+}
+
+ function update_status_user(user, status){
+        $.ajax ({
+          url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+            type: "GET",
+            data: {
+                "type":"update_enable_user",
+                "userID": user,
+                "status": status
+              },
+            dataType: "JSON",
+            crossDomain: true,
+            cache: false,  
+            async: false,          
+            success: function(r){
+              if(status == 'IN'){
+                $('.indicatorText').html('<h4 class="text-danger indicatorText">DISABLED</h4>');
+                 weblist_all();
+                 tableData_All.clear().rows.add(sourceWeb_List).draw();
+              }else{
+                $('.indicatorText').html('<h4 class="text-success indicatorText">ENABLED</h4>');
+                 weblist_all();
+                 tableData_All.clear().rows.add(sourceWeb_List).draw();
+              }
+            }
+          });
+       }
+
+function upload(){
+  var fd = new FormData();
+      var files = $('#fileToUpload')[0].files[0];
+      fd.append( 'fileToUpload',files);
+      fd.append( 'fname', $('input[name=img_admin_fname]').val());
+      $.ajax({
+          url: 'js/upload.php',
+          type: 'POST',
+          data: fd, 
+          contentType: false,
+          processData: false,
+          dataType: 'text',
+          success: function(response){
+              //alert('Salesman image succesfully updated!');
+              console.log(response);
+               /*$('#item-img').fadeOut(800, function(){
+                    $('#item-img').attr("src",response+"?"+ new Date().getTime()); 
+                    $('#item-img').fadeIn().delay(1500);
+                });*/
+                $('#item-img').attr("src", "img/noimage.png"); 
+          },error: function(XMLHttpRequest, textStatus, errorThrown) { 
+               alert("ERROR OCCUR: " + XMLHttpRequest.responseText);
+               $('.picCont').fadeOut(800, function(){
+                    $('.picCont').fadeIn().delay(2000);
+
+                });
+          }
+      });
+}
+
+
+      mobileUsersSourceData();
+      var mobileUsersData;
+      function mobileUsersSourceData(){
+         $.ajax ({
+              url: "connection/applicationAPI.php",
+              type: "GET",
+              data: {"type":"GET_MOBILE_USERS"},
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(r){ 
+                var localObj = [];
+                for(var x = 0; x < r.length; x++){
+                  var remarks = '<span class="btn-danger btn btn-sm">HOLD</span>';
+                  
+                  if(r[x].isHold == 0){
+                    remarks = '<span class="btn-primary btn btn-sm">ACTIVE</span>';
+                  }
+                  localObj.push({
+                      name: r[x].mdCode,
+                      siteName: r[x].SiteName,
+                      logtime: r[x].LastActive,
+                      versionNo: r[x].verNumber,
+                      status: remarks
+                  });
+                }
+
+                mobileUsersData = localObj;
+               }//success
+              });
+      }
+
+      $('#viewMatBtn').on('click', function (e) {
+        $($.fn.dataTable.tables(true)).DataTable()
+           .columns.adjust()
+           .responsive.recalc();
+      });
+
+      $('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
+        $($.fn.dataTable.tables(true)).DataTable()
+           .columns.adjust()
+           .responsive.recalc();
+      });
+      mobileUsersApp();
+      var tableData2;
+      function mobileUsersApp(){
+        tableData2 = $('table.listMobileTable').DataTable({
+              "dom": 'frtip',
+              "responsive": true,
+              "data": mobileUsersData,
+              "scrollX": true,
+              "ordering": false,
+              "pageLength": 5,
+              language: {
+                select: {
+                    rows: ""
+                }
+              },
+              columns: [
+                  { data: "name" },
+                  { data: "siteName" },
+                  { data: "logtime" },
+                  { data: "versionNo" },
+                  { data: "status"}
+                ],
+          }).draw(true).columns.adjust();
+
+         $($.fn.dataTable.tables(true)).DataTable()
+           .columns.adjust()
+           .responsive.recalc();
+
+           $('table.listMobileTable tbody').on('click', 'tr', function () {
+            var tr = $(this).closest('tr');
+            var row = tableData.row(tr);
+            var data = tr.find('td:eq(1)').text();
+            alert(row);
+        });
+      }
+
+      
+function imgError(image) {
+      image.onerror = "";
+      image.src = "../img/salesmanPic.jpg";
+      return true;
+    }  
+
+var count;
+function onlineIndicator(){
+$.ajax ({
+  url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+    type: "GET",
+    data: {
+            "type":"online_indicator"
+          },
+    dataType: "json",
+    crossDomain: true,
+    cache: false,  
+    async: false,          
+    success: function(r){
+    	var local = r[0].activeIndicator;
+    	if(local != count){
+    		count = r[0].activeIndicator;
+    		getWebUsers();
+  			tableData.clear().rows.add(sourceWeb).draw();
+  			console.log('reload');
+    	}
+    }
+  });
+}
+
+getMacAddress();
+function getMacAddress(){
+$.ajax ({
+  url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+    type: "GET",
+    data: {
+            "type":"get_user_macAddress"
+          },
+    dataType: "json",
+    crossDomain: true,
+    cache: false,  
+    async: false,          
+    success: function(r){
+    	console.log(r);
+    }
+  });
+}
+
+setInterval(function(){
+	onlineIndicator();
+}, 3000);
+
+function checkemptymap(){
+  var sitename = $('#sitename').val();
+  var sitepoint = $('#sitepinpoint').val();
+  var res;
+  if(sitename == '' || sitepoint == ''){
+  	res = false;
+  }else{
+  	res = true;
+  }
+  return res;
+}
+
+var globalLat;
+var globalLng;
+function savesite(){
+	$('#siteChecker').removeClass('shakeit');
+	if(!checkemptymap()){
+	  $('#siteChecker').show();
+	  $('#siteChecker').addClass('shakeit');
+	  $('#siteChecker').html('<i class="fas fa-exclamation-circle"></i> Empty fields not accepted!');
+	}else{
+
+	    //var sitezoom = map.getZoom();
+	    var sitezoom = 9;
+	    var sitename = $('#sitename').val();
+		var siteloc = $('#sitepinpoint').val();
+		var lat = destmarker.getPosition().lat();
+		var lng = destmarker.getPosition().lng();
+		$.ajax ({
+	  url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+	    type: "GET",
+	    data: {
+	            "type":"save_new_site",
+	            "sitename":sitename,
+	            "siteloc":siteloc,
+	            "sitezoom":sitezoom,
+	            "lat":lat,
+	            "lng":lng
+	          },
+	    dataType: "json",
+	    crossDomain: true,
+	    cache: false,  
+	    async: false,          
+	    success: function(r){
+	    	if(r == 'true'){
+	    		alert('succesfully CREATED');
+	    		location.reload();
+	    	}
+	    }
+	  });
+	}
+}
+
+var collectormarkers = [];
+function remvmarker() {
+	for (var i = 0; i < collectormarkers.length; i++) {
+	  collectormarkers[i].setMap(null);
+	}
+	collectormarkers = [];
+}
+
+var map, destmarker = [];
+function initMap() {
+
+var directionsService = new google.maps.DirectionsService; 
+var directionsDisplay = new google.maps.DirectionsRenderer;
+
+    mapOptions = {
+      zoom: 6, 
+      center: {lat: 12.8797, lng: 121.7740},
+      mapTypeId: 'roadmap',
+      controlSize: 25,
+      zoomControl: false,
+      scaleControl: false,
+      streetViewControl: true,
+      fullscreenControl: true,
+      mapTypeControl: false
+    }
+      
+  map = new google.maps.Map(document.getElementById('map'), mapOptions);
+  new formcreation(map);
+
+  sitelocation();
+
+  function sitelocation(){
+    var options = {componentRestrictions: {country: "ph"}};
+    var originAutocomplete = new google.maps.places.Autocomplete(document.getElementById('sitepinpoint'), options);
+    google.maps.event.addListener(originAutocomplete, 'place_changed', function () {
+            var place = originAutocomplete.getPlace();
+             var lat = place.geometry.location.lat();
+             var lng = place.geometry.location.lng();
+
+            remvmarker();
+            destmarker = new google.maps.Marker({
+	          position: {lat: lat, lng: lng},
+	          draggable:true,
+	          map: map,
+	          title: 'Hello World!'
+	        });
+
+            collectormarkers.push(destmarker);
+	        map.setCenter(destmarker.getPosition());
+	        map.setZoom(13);
+        });
+  }
+}
+
+
+
+function formcreation(map){
+      this.map = map;
+      var dispDeviation = document.getElementById("site_creation_form");
+      this.map.controls[google.maps.ControlPosition.LEFT].push(dispDeviation);
+}
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=places&sensor=false&key=AIzaSyDLoVO6tuULs2vHjrJ-EX41-M1OEUakHRQ&libraries=places&callback=initMap"
+    async defer></script>
+</body>
+</html>

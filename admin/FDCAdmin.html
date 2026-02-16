@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="../img/mdlogo_web.png" type="image/png">
+    <title>MY ADMIN</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="design/admin.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+
+</head>
+
+<body onload="init()">
+
+    <div class="wrapper">
+        <div id="content">
+
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <button class="btn btn-sec d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <h2 class="h4"><span class="marginHeader"></span> Dashboard <i class="text-muted subHeader"></i></h2>
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><span id='time' class="text-dark"></span></a>
+                            </li>
+                             <li class="nav-item dropdown">
+                                  <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" id='dropThisDown'>
+                                      <span class="badge badge-pill badge-warning count" style='border-radius: 10px; font-size: 10px;'></span>
+                                      <span class="fas fa-bell text-dark"></span>
+                                  </a>
+                                  
+                                 <ul class="dropdown-menu dropdown-menu-right dropdown-pill thisContNotif">
+                                  <div id="notificationElement" class="scroll" data-simplebar>
+                                      <div id='notifs-icon-div'></div>
+                                  </div>
+                                  <a type="button" class="btn btn-secondary btn-block" href='mdAlert_nutriPanay' id='seeAll' >See all</a>
+                                 </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="#"><i class="fas fa-sign-out-alt"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="card">
+                <div class="">
+                         <div class="outerContMain" id='outerContainer_id'> 
+                      <div class="loading-table">
+                         <i class="fas fa-spinner fa-spin fa-3x fa-fw"></i> Rendering data ...
+                          <span class="sr-only">Loading...</span>
+                      </div>
+                        <div id='salesmanCategory'>
+                          <div class="arrow-side"><i onclick="flip1()" class="fas fa-angle-left arrow-side-icon" aria-hidden="true"></i></div>
+                            <div class='container_salesman'>
+                             <table class='fixedHeadNew'>
+                                   <thead class="thHeight">
+                                      <tr>
+                                        <!--<th><span>Salesman</span><span class="searchBtn marginSBTN"><input type="text" class="searchInput" name="" placeholder="search salesman.." /><i class="fas fa-search searchIcon"></i></span></th>-->
+                                        <th colspan="2" width='50%'>SALESMAN</th>
+                                        <th width='' class="text-right" >CALLS</th>
+                                        <th width='' class="text-right" >UNPROD</th>
+                                        <th width='' class="text-center" >HOURS</th>
+                                        <th class="text-right" >SALES</th>
+                                     </tr>
+                                  </thead>
+                              </table>
+                              <div class="scroll" data-simplebar>
+                                 <div id='floatTab'>
+                                   <table class="dashboardDisplayCont">
+                                     <tbody class="" id='dashboardDisplay'></tbody>
+                                   </table>
+                                  </div> 
+                               </div>
+                               <div id='overAllTotal'>
+                                    <span class='float-sm-right' id='total'></span>
+                               </div>  
+                           </div>
+                        </div>
+
+                       <!--product category-->
+                       <div id='categoryTable' class="categoryProp">
+                        <div class="arrow-side2"><i onclick="flip2()" class="fas fa-angle-left arrow-side-icon2" aria-hidden="true"></i></div>
+                        <div class='container_productCat'>
+                          <div class="scroll" data-simplebar>
+                            <table class="table product-data-container">
+                              <thead>
+                                 <tr>
+                                  <th>CATEGORY</th>
+                                  <th class="text-center">SALES</th>
+                                  <th class="text-right">CONTRIBUTION</th>
+                                 </tr>
+                              </thead>
+                              <tbody id='cateogoryDataTable'></tbody>
+                           </table>
+                          </div>
+                          <div class="table-footer footerDetails float-sm-right"></div>
+                        </div>
+                       </div>
+                    </div>
+                     <div id='mapBtnsContainer'>
+                      <button class='btn btn-sm btn-dash' id='fullScreen'><i class="fas fa-expand fs_icon"></i></button>
+                        <br/> 
+                      <button class='btn btn-sm btn-dash' id='setSatellite'><i class="fas fa-globe-americas sat_icon"></i></button>
+                        <br/>     
+                      <button class='btn btn-sm btn-dash' id='zoomIn'><i class="fas fa-search-plus"></i></button>
+                        <br/>
+                      <button class='btn btn-sm btn-dash' id='zoomOut'><i class="fas fa-search-minus"></i></button><br/>
+                      <button class='btn btn-sm btn-dash' id='heatmap'><i class="fas fa-fire-alt"></i></button>
+                    </div>
+
+                    <div id="mapUserControlCont">
+                      <button class='btn btn-sm btnrestore' id='restorBtn' onclick='restoreLoc()'><img src="../img/loc-marker.png"></button>
+                    </div>
+
+
+                <div id="map"></div>
+                </div>
+                 <table id='lateSalesman'>
+                </table>
+
+                <!--
+                  <div id='lateSalesmanContainer'>
+                    <div id='lateSalesman'></div>
+                  </div>
+                -->
+              
+            </div>
+
+            <div class="modal fade" id="dispModal_deviation" aria-hidden="true">
+              <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">First Transaction Info</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                     <div class="text-center" style='margin-bottom: 13px;'>
+                            <img style='text-align: center;' class='salesmanPic' id='salesmanImage' src='../img/salesmanPic.jpg' alt='no available image'/> 
+                     </div>
+
+                         <table class="table table-hover table-sm">
+                          <tr>
+                            <td><label>Name:</label></td>
+                            <td><p id="salesman_name"></p></td>
+                          </tr>
+
+                          <tr>
+                            <td><label>Time Started:</label></td>
+                            <td><p id="dateTime_transaction"></p></td>
+                          </tr>
+
+                           <tr>
+                            <td><label>Remarks:</label></td>
+                            <td><p id="salesman_remarks"></p></td>
+                          </tr>
+
+                            <tr>
+                              <td><label>Mobile No.:</label></td>
+                              <td><p id="salesman_num"></p></td>
+                           </tr>
+
+                            <tr>
+                              <td><label>Location</label></td>
+                              <td data-toggle="tooltip" data-placement="top" title="Click to view on map!"><button id='firstCallLoc' onclick='showOnMap()' class="btn btn-primary btn-xs"></button></td>
+                            </tr>
+                        
+                              <input type="hidden" name="salesman-code" id="salesman-code">
+                              <input type="hidden" name="latLng" id='latLng'/>
+                        
+                        </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="modal fade" id="dispModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                          <div class="modal-header modal-header-info">
+                              <h3>Territory Information</h3>
+                          </div>
+                          <div class="modal-body">
+                              <table class="table table-striped">
+                          <tr>
+                            <td><label>Territory Name:</label></td>
+                            <td><p id="name-lbl"></p></td>
+                          </tr>
+
+                          <tr>
+                            <td><label>Salesman:</label></td>
+                            <td><p id="disp-salesman"></p></td>
+                          </tr>
+
+                           <tr>
+                            <td><label>Date Created:</label></td>
+                            <td><p id="date-created"></p></td>
+                          </tr>
+
+                            <tr>
+                              <td><label>Color:</label></td>
+                              <td><p id="terrcolor"></p></td>
+                           </tr>
+                              <input type="hidden" name="mpa-id" id="mpa-id">
+                        </table>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          </div>
+                      </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
+              </div><!-- /.modal -->
+
+          </div><!--content-->
+    </div>
+
+    <div class="overlay"></div>
+    
+     <!-- Font Awesome JS -->
+    
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=weekly&key=AIzaSyAt0Pxe9_3DTav3DmUQzHfgd07s_LcJo7I" async></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    
+    <script type="text/javascript" src="../js/scrolling.js"></script>
+    <script type="text/javascript" src="js/admin.js"></script>
+    <script src="../push/push.js"></script>
+    <script type="text/javascript">
+         /*$(document).ready(function () {
+            $("#sidebar").mCustomScrollbar({
+                theme: "minimal"
+            });
+
+            $('#dismiss, .overlay').on('click', function () {
+                $('#sidebar').removeClass('activeYes');
+                $('.overlay').removeClass('activeYes');
+            });
+
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').addClass('activeYes');
+                $('.overlay').addClass('activeYes');
+                $('.collapse.in').toggleClass('in');
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            });
+        });*/
+    </script>
+</body>
+
+</html>

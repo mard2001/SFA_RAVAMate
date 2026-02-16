@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Admin</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="design/design.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
+   <link rel="shortcut icon" href="../img/mdlogo_web.png" type="image/png">
+  
+</head>
+
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+  <a class="navbar-brand" href="home.html"> <img src="../img/mdlogo_web.png" class="homeLogo"> MDBuddy</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end flex-column" id="collapsibleNavbar">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <div class="dropdown dropdown-menu-left">
+          <a type="button" class="nav-link btn btn-dark dropdown-toggle" data-toggle="dropdown" href="#"><i class="fas fa-bell"></i><span class="badge badge-pill badge-danger"></span></a>
+          <div class="dropdown-menu dropdown-menu-right">
+              
+          </div>
+        </div>
+      </li> 
+      <li class="nav-item">
+        <div class="dropdown dropdown-menu-left">
+          <a type="button" class="nav-link btn btn-dark dropdown-toggle" data-toggle="dropdown" href="#"><i class="fas fa-user"></i></a>
+          <div class="dropdown-menu dropdown-menu-right">
+              <span class="dropdown-item" id="usernameid"></span>
+              <a class="dropdown-item" href="login.html" id="loginBtn"><i class="fas fa-sign-out-alt"></i> Login</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="manage.html" id="manageBtn"><i class="fas fa-cogs"></i> Manage Account</a>
+              <a class="dropdown-item" href="#" id="logoutBtn"><i class="fas fa-lock"></i> Logout</a>
+              <a class="dropdown-item" href="signup.html" id="registerBtn"><i class="fas fa-file-alt"></i></i> Register</a>
+          </div>
+        </div>
+      </li> 
+    </ul>
+  </div>  
+</nav>
+
+<div class="jumbotron text-center">
+   <!--<div class="btn-group btn-group-sm">
+    <button type="button" class="btn btn-secondary" id="listMatBtn">WEB USERS</button>
+    <button type="button" class="btn btn-secondary" id="addMatBtn">MOBILE USERS</button>
+    <button type="button" class="btn btn-secondary" id="viewMatBtn">ADD USER</button>
+  </div>-->
+   <nav class="navbar navbar-expand-sm justify-content-center">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-dark linktab" href="#" id="listMatBtn">WEB USERS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark linktab" href="#" id="viewMatBtn">MOBILE USERS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark linktab" href="#" id="addMatBtn">ADD USER</a>
+        </li>
+      </ul>
+    </nav>
+</div>
+
+<div class="container" style="margin-top:30px">
+  <h4 class="topProdCont"><i class="fas fa-globe"></i> WEB USERS</h4>
+  <hr/>
+
+  <div class="listMaterialsContainer">
+    <table id="" class="table table-hover listWebTable" style="width:100%">
+        <thead class="thead-secondary">
+           <tr>
+           	 <th></th>
+           	 <TH>USER NAME</TH>
+             <th>FULL NAME</th>
+             <th>DISTRIBUTOR</th>
+             <th>SITE CODE</th>
+             <th>LOG IN</th>
+             <th>LOG OUT</th>
+             <th>STATUS</th>
+             <!--<th></th>-->
+           </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+  </div>
+  
+  <div class="viewMaterialsContainer">
+     <table id="" class="table table-hover listMobileTable" style="width:100%">
+        <thead class="thead-secondary">
+           <tr>
+             <th></th>
+             <th>NAME</th>
+             <th>SITECODE</th>
+             <th>LOG TIME</th>
+             <th>REMARKS</th>
+             <th>STATUS</th>
+           </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+  </div>
+
+  <div class="addMaterialsContainer">
+    <div class="stepwizard col-md-offset-3">
+        <div class="stepwizard-row setup-panel">
+          <div class="stepwizard-step">
+            <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+            <p>Step 1</p>
+          </div>
+          <div class="stepwizard-step">
+            <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+            <p>Step 2</p>
+          </div>
+          <div class="stepwizard-step">
+            <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+            <p>Step 3</p>
+          </div>
+        </div>
+      </div>
+  
+    <form role="form" action="" method="post">
+      <div class="row setup-content" id="step-1">
+        <div class="col-xs-6 col-md-offset-3">
+          <div class="col-md-12">
+            <h3> Step 1</h3>
+            <div class="form-group">
+              <label class="control-label">First Name</label>
+              <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Last Name</label>
+              <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Address</label>
+              <textarea required="required" class="form-control" placeholder="Enter your address"></textarea>
+            </div>
+            <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+          </div>
+        </div>
+      </div>
+      <div class="row setup-content" id="step-2">
+        <div class="col-xs-6 col-md-offset-3">
+          <div class="col-md-12">
+            <h3> Step 2</h3>
+            <div class="form-group">
+              <label class="control-label">Company Name</label>
+              <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Company Address</label>
+              <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address">
+            </div>
+            <button class="btn btn-primary prevBtn btn-lg pull-left" type="button">Previous</button>
+            <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+          </div>
+        </div>
+      </div>
+      <div class="row setup-content" id="step-3">
+        <div class="col-xs-6 col-md-offset-3">
+          <div class="col-md-12">
+            <h3> Step 3</h3>
+            <button class="btn btn-primary prevBtn btn-lg pull-left" type="button">Previous</button>
+            <button class="btn btn-success btn-lg pull-right" type="submit">Submit</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal fade" id="action_user_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h6 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-info-circle"></i> USER INFORMATION</h6>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body" style=" ">
+	        <div class="imgContainer">
+	          <img class="update_material_modal_img" id="item-img-update" src="../img/salesmanPic.jpg" onerror="imgError(this)"><br/>
+	          <div class="changeImageBtn">
+	            <form id="fileForm" action="" method="post" enctype="multipart/form-data">
+	              <input type="file" class="hiddenUpdate" name="fileToUpload" id="fileToUpload" accept=".jpg"/>
+	              <input type="hidden" id="img-materials-id" name="img-materials-id-update"/>
+	              <input type="hidden" id="" name="formaterials" value="product" />
+	              <input type="button" class="btn btn-primary btn-sm" value="UPDATE IMAGE" id="btn_upload_update">
+	            </form>
+	          </div>
+	        </div>
+	        <div style="margin: 0 auto; width: 100%;">
+	          <table class="table table-hover">
+	         <tr>
+	            <td>Username:</td>
+	            <td id="upt-username"></td>
+	          </tr>
+	          <TR>
+	            <td>Full Name: </td>
+	            <td><input type="text" name="" class="form-control" id="upt-fullname"></td>
+	          </TR>
+	          <tr>
+	            <td>Distributor: </td>
+	            <td><input type="text" name="" class="form-control" id="upt-distributor"></td>
+	          </tr>
+	          <tr>
+	            <td>Sitecode: </td>
+	            <td><input type="text" name="" class="form-control" id="upt-sitecode"></td>
+	          </tr>
+	        </table>
+
+           <!--<div class="body-footer moreSettingsCont">
+             <legend><i class="fas fa-cogs"></i> More settings <i class="fas fa-chevron-down"></i></legend>
+           </div>-->
+	        
+          </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary" id="uptbutton">Save changes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script> 
+<!--<script type="text/javascript" src="web/web-commons.js"></script>-->
+<script type="text/javascript">
+
+$(document).ready(function () {
+  var navListItems = $('div.setup-panel div a'),
+          allWells = $('.setup-content'),
+          allNextBtn = $('.nextBtn'),
+        allPrevBtn = $('.prevBtn');
+
+  allWells.hide();
+
+  navListItems.click(function (e) {
+      e.preventDefault();
+      var $target = $($(this).attr('href')),
+              $item = $(this);
+
+      if (!$item.hasClass('disabled')) {
+          navListItems.removeClass('btn-primary').addClass('btn-default');
+          $item.addClass('btn-primary');
+          allWells.hide();
+          $target.show();
+          $target.find('input:eq(0)').focus();
+      }
+  });
+  
+  allPrevBtn.click(function(){
+      var curStep = $(this).closest(".setup-content"),
+          curStepBtn = curStep.attr("id"),
+          prevStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().prev().children("a");
+
+          prevStepWizard.removeAttr('disabled').trigger('click');
+  });
+
+  allNextBtn.click(function(){
+      var curStep = $(this).closest(".setup-content"),
+          curStepBtn = curStep.attr("id"),
+          nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+          curInputs = curStep.find("input[type='text'],input[type='url']"),
+          isValid = true;
+
+      $(".form-group").removeClass("has-error");
+      for(var i=0; i<curInputs.length; i++){
+          if (!curInputs[i].validity.valid){
+              isValid = false;
+              $(curInputs[i]).closest(".form-group").addClass("has-error");
+          }
+      }
+
+      if (isValid)
+          nextStepWizard.removeAttr('disabled').trigger('click');
+  });
+
+  $('div.setup-panel div a.btn-primary').trigger('click');
+});
+
+ //var user = localStorage.getItem("adminUserName");
+ var user = 'JHUN WOOGIE ARRABIS';
+ if(user == null || user == undefined){
+    $('#manageBtn').hide();
+    $('#logoutBtn').hide();
+    $('#loginBtn').show();
+    $('#registerBtn').show();
+  }else{
+    $('#manageBtn').show();
+    $('#logoutBtn').show();
+    $('#loginBtn').hide();
+    $('#registerBtn').hide();
+    $('#usernameid').html(user);
+  }
+
+  $('#uploadImg_BTN').hide();
+  $('#cancelImg_BTN').hide();
+
+  $("#btn_upload").click(function(){
+    $(".hidden").click();
+  });
+
+  $("#btn_upload_update").click(function(){
+    $(".hiddenUpdate").click();
+  });
+
+//show list of materials on default
+  
+  $('.listMaterialsContainer').show();
+  $('.addMaterialsContainer').hide();
+  $('.viewMaterialsContainer').hide();
+  $('#listMatBtn').addClass('active');
+//show list of materials
+$('#listMatBtn').click(function(){
+  $('.topProdCont').html('<i class="fas fa-globe"></i> WEB USERS');
+  $('.listMaterialsContainer').show();
+  $('.addMaterialsContainer').hide();
+  $('.viewMaterialsContainer').hide();
+  $('#listMatBtn').addClass('active');
+  $('#addMatBtn').removeClass('active');
+  $('#viewMatBtn').removeClass('active');
+
+  getWebUsers();
+  tableData.clear().rows.add(sourceWeb).draw();
+});
+//show add materials
+$('#addMatBtn').click(function(){
+  $('.topProdCont').html('<i class="fas fa-user-plus"></i> ADD USER');
+  $('.addMaterialsContainer').show();
+  $('.listMaterialsContainer').hide();
+  $('.viewMaterialsContainer').hide();
+  $('#addMatBtn').addClass('active');
+  $('#listMatBtn').removeClass('active');
+  $('#viewMatBtn').removeClass('active');
+
+});
+
+//show view order materials
+$('#viewMatBtn').click(function(){
+  //tableData2.columns.adjust().draw();
+  $('.topProdCont').html('<i class="fas fa-mobile-alt"></i> MOBILE USERS');
+  $('.viewMaterialsContainer').show();
+  $('.listMaterialsContainer').hide();
+  $('.addMaterialsContainer').hide();
+
+  $('#viewMatBtn').addClass('active');
+  $('#listMatBtn').removeClass('active');
+  $('#addMatBtn').removeClass('active');
+});
+
+
+function clearInputs(){
+	$('#username').val('');
+	$('#password').val('');
+	$('#fullname').val('');
+	$('#email').val('');
+	$('#contactno').val('');
+	$('#distributor').val('');
+	$('#site').val('');
+}
+
+$(".hidden").change(function(){
+  readURL(this);
+});
+
+$(".hiddenUpdate").change(function(){
+  readURL_update(this);
+});
+
+  
+function readURL(input) {
+	if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+
+	    reader.onload = function (e) {
+	        $('#item-img').attr('src', e.target.result);
+	    }
+	    reader.readAsDataURL(input.files[0]);
+	}
+}
+
+function readURL_update(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        
+        reader.onload = function (e) {
+            $('#item-img-update').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function addAdmin(){
+	var username = $('#username').val();
+	var password = $('#password').val();
+	var fullname = $('#fullname').val();
+	var designation = $('#designation').val();
+	var contactno = $('#contactno').val();
+	var email = $('#email').val();
+	var distributor = $('#distributor').val();
+	var sitecode = $('#site').val();
+    //$('#img-materials-id').val(itemNo);
+  $.ajax ({
+          url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+            type: "GET",
+            data: {
+                "type":"add_user",
+                "username":username,
+				"password":password,
+				"fullname":fullname,
+				"designation":designation,
+				"contactno":contactno,
+				"email":email,
+				"distributor":distributor,
+				"sitecode":sitecode
+              },
+            dataType: "JSON",
+            crossDomain: true,
+            cache: false,  
+            async: false,          
+            success: function(r){
+              if(r == '1'){
+                alert('USER SUCCESSFULLY ADDED!');
+                $('#img_admin_fname').val(username);
+                upload();
+                clearInputs();
+              }
+
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  alert("ERROR OCCUR DURING ADDING USER: " + XMLHttpRequest.responseText);
+               }
+          });
+}
+
+$("#distributor").change(function() {
+    var distributor = $("#distributor option:selected").text();
+    get_siteCode(distributor);
+ });
+
+getAllsite();
+function getAllsite(){
+ $.ajax ({
+      url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+        type: "GET",
+        data: {
+            "type":"get_all_sites",
+          },
+        dataType: "JSON",
+        crossDomain: true,
+        cache: false,  
+        async: false,          
+        success: function(r){
+        	 $('#distributor').append('<option value="" disabled selected hidden>Select your option..</option>');
+        	for(var x =0; x < r.length; x++){
+        		$('#distributor').append('<option value='+r[x].sitedistributorcode+'>'+r[x].sitedistributorcode+'</option>');
+        	}
+        }
+    });
+}
+
+function get_siteCode(distributor){
+ $('#site').html('');
+ $.ajax ({
+      url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+        type: "GET",
+        data: {
+            "type":"get_fdc_sites",
+            "sitecode": distributor
+          },
+        dataType: "JSON",
+        crossDomain: true,
+        cache: false,  
+        async: false,          
+        success: function(r){
+        	$('#site').append('<option value="" disabled selected hidden>Choose here..</option>');
+        	for(var x =0; x < r.length; x++){
+        		$('#site').append('<option value='+r[x].sitecode+'>'+r[x].sitename+'</option>');
+        	}
+        }
+    });
+}
+
+getWebUsers();
+function getWebUsers(){
+	 $.ajax ({
+          url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+            type: "GET",
+            data: {
+                "type":"get_web_users"
+              },
+            dataType: "JSON",
+            crossDomain: true,
+            cache: false,  
+            async: false,          
+            success: function(r){
+            	var localObj = [], logtime;
+                for(var x = 0; x < r.length; x++){
+                 if(r[x].AISONLINE == 1){
+                 	logtime = '<span class="badge badge-primary">ONLINE</span>';
+                 }else{
+                 	logtime = '<span class="badge badge-secondary">OFFLINE</span>';
+                 }
+                  localObj.push({
+                      img: "<img src='img/admin_img/"+r[x].AUSERNAME+".jpg' onerror='imgError(this)' class='avatar-img'/>",
+                      username: r[x].AUSERNAME,
+                      fullname: r[x].AFULLNAME.toUpperCase(),
+                      distributor: r[x].ADISTRIBUTOR,
+                      sitecode: r[x].ASITECODE,
+                      login: getTime(r[x].ALOGTIME),
+                      logout: '---',
+                      status: logtime,
+                      //deleteIcon: '<i class="fas fa-globe-americas text-info"></i>'
+                  });
+                }
+
+                sourceWeb = localObj;
+            }
+
+        });
+}
+
+function getTime(datetime){
+	var d = new Date(datetime);
+	var res = d.getHours() +':'+d.getMinutes()+':'+d.getSeconds(); // => 51
+	
+	var time;
+	if(datetime == '---'){
+		return '---';
+	}else{
+		if(res == '0:0:0'){
+			time = '---';
+		}else{
+			time = res;
+		}
+		return time;
+	}
+}
+var tableData, sourceWeb;
+webUsersApp();
+function webUsersApp(){
+	tableData = $('table.listWebTable').DataTable({
+              "dom": 'Bfrtip',
+              "responsive": true,
+              "data": sourceWeb,
+              "scrollX": true,
+              "ordering": false,
+              "pageLength": 5,
+              language: {
+                select: {
+                    rows: ""
+                }
+              },
+              columns: [
+              	  { data: "img"},
+              	  { data: "username"},
+                  { data: "fullname"},
+                  { data: "distributor"},
+                  { data: "sitecode" },
+                  { data: "login" },
+                  { data: "logout" },
+                  { data: "status"},
+                  //{ data: "deleteIcon"}
+                ],
+          }).draw(true).columns.adjust();
+
+	    $('table.listWebTable tbody').on('click', 'tr', function () {
+            var tr = $(this).closest('tr');
+            var row = tableData.row(tr);
+            var data = tr.find('td:eq(1)').text();
+            updateUser(row.data());
+           
+        });
+
+        $('.deleteUser').click(function() {
+        	var a = confirm('Are you sure you want to delete this user?');
+        	if(a){
+        		alert('DELETED');
+        	}
+        });
+
+        function updateUser(r){
+        	$('#upt-username').html(r.username);
+			$('#upt-fullname').val(r.fullname);
+			$('#upt-distributor').val(r.distributor);
+			$('#upt-sitecode').val(r.sitecode);
+			$('#action_user_modal').modal('toggle');
+        }
+}
+
+function upload(){
+  var fd = new FormData();
+      var files = $('#fileToUpload')[0].files[0];
+      fd.append( 'fileToUpload',files);
+      fd.append( 'fname', $('input[name=img_admin_fname]').val());
+      $.ajax({
+          url: 'js/upload.php',
+          type: 'POST',
+          data: fd, 
+          contentType: false,
+          processData: false,
+          dataType: 'text',
+          success: function(response){
+              //alert('Salesman image succesfully updated!');
+              console.log(response);
+               /*$('#item-img').fadeOut(800, function(){
+                    $('#item-img').attr("src",response+"?"+ new Date().getTime()); 
+                    $('#item-img').fadeIn().delay(1500);
+                });*/
+                $('#item-img').attr("src", "img/noimage.png"); 
+          },error: function(XMLHttpRequest, textStatus, errorThrown) { 
+               alert("ERROR OCCUR: " + XMLHttpRequest.responseText);
+               $('.picCont').fadeOut(800, function(){
+                    $('.picCont').fadeIn().delay(2000);
+
+                });
+          }
+      });
+}
+
+
+      mobileUsersSourceData();
+      var mobileUsersData;
+      function mobileUsersSourceData(){
+         $.ajax ({
+              url: "../nestle/ApplicationAPI.php",
+              type: "GET",
+              data: {"type":"getLate", "site":'bohol'},
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(r){ 
+                var localObj = [];
+                for(var x = 0; x < r.length; x++){
+                  localObj.push({
+                      img: "<img src='data:image/jpeg;base64,"+r[x].thumbnail+"' class='avatar-img'/>",
+                      name: r[x].salesmanName,
+                      sitecode: 'BOHOL',
+                      logtime: r[x].TransTime,
+                      remarks: r[x].alert,
+                      status: '<span class="text-success">ONLINE</span>'
+                  });
+                }
+
+                mobileUsersData = localObj;
+               }//success
+              });
+      }
+
+      $('#viewMatBtn').on('click', function (e) {
+        $($.fn.dataTable.tables(true)).DataTable()
+           .columns.adjust()
+           .responsive.recalc();
+      });
+
+      mobileUsersApp();
+      var tableData2;
+      function mobileUsersApp(){
+        tableData2 = $('table.listMobileTable').DataTable({
+              "dom": 'Bfrtip',
+              "responsive": true,
+              "data": mobileUsersData,
+              "scrollX": true,
+              "ordering": false,
+              "pageLength": 5,
+              language: {
+                select: {
+                    rows: ""
+                }
+              },
+              columns: [
+                  { data: "img"},
+                  { data: "name" },
+                  { data: "sitecode" },
+                  { data: "logtime" },
+                  { data: "remarks" },
+                  { data: "status"}
+                ],
+          }).draw(true).columns.adjust();
+
+         $($.fn.dataTable.tables(true)).DataTable()
+           .columns.adjust()
+           .responsive.recalc();
+
+           $('table.listMobileTable tbody').on('click', 'tr', function () {
+            var tr = $(this).closest('tr');
+            var row = tableData.row(tr);
+            var data = tr.find('td:eq(1)').text();
+            alert(data);
+        });
+
+      }
+
+      
+function imgError(image) {
+      image.onerror = "";
+      image.src = "../img/salesmanPic.jpg";
+      return true;
+    }  
+
+var count;
+function onlineIndicator(){
+$.ajax ({
+  url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+    type: "GET",
+    data: {
+            "type":"online_indicator"
+          },
+    dataType: "json",
+    crossDomain: true,
+    cache: false,  
+    async: false,          
+    success: function(r){
+    	var local = r[0].activeIndicator;
+    	if(local != count){
+    		count = r[0].activeIndicator;
+    		getWebUsers();
+  			tableData.clear().rows.add(sourceWeb).draw();
+  			console.log('reload');
+    	}
+    	
+    }
+  });
+}
+
+setInterval(function(){
+	onlineIndicator();
+}, 3000);
+
+
+</script>
+</body>
+</html>

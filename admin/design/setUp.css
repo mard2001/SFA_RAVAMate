@@ -1,0 +1,541 @@
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+body, html{
+    height: 100%;
+    width: 100%;
+}
+body {
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.homeLogo{
+	height: 35px;
+	width: 35px;
+}
+
+.jumbotron{
+	height: 50px;
+}
+
+.nav_cust{
+  font-weight: bold !important;
+  color: #333;
+  letter-spacing: 1px;
+  margin-left: 30px;
+  transition: 0.2s ease;
+}
+
+.nav_cust:hover{
+  color: #782635;
+  letter-spacing: 3px;
+  padding: 10px;
+  transition: 0.2s ease;
+}
+
+.activecust{
+  color: #d4425c;
+  border-bottom: solid 1px #d4425c;
+}
+
+.navbarcustom{
+  /*background-color: #363435;*/
+}
+
+.pushNotifDiv{
+  width: 220px;
+  height: 200px;
+}
+
+.navbarcustom a {
+  color: white;
+}
+
+.custicon{
+  color: #d4425c;
+  margin: 0;
+  text-align: center;
+  float: center; 
+}
+
+.text-cust{
+  color: #d4425c !important;
+  font-size: 17px;
+}
+
+.custAccord{
+  border-left: none !important;
+  border-right: none !important;
+  transition: 0.2s ease;
+}
+
+.custAccord:hover{
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.text-cust:hover{
+  color: #d4425c !important;
+  cursor: pointer;
+}
+
+.titleaccordion{
+  background-color: transparent !important;
+  cursor: pointer;
+  border-bottom: none !important;
+}
+
+.siteContainer{
+  width: 800px;
+  margin: 0 auto;
+  height: 400px;
+  overflow-y: auto;
+}
+
+.custsearch{
+  height: 30px;
+  width: 300px;
+  padding: 10px;
+  border-radius: 5px;
+  border: thin 0.2px #333;
+}
+
+.custBtn{
+  background-color: white;
+  color: #d4425c;
+  transition: 0.2s ease;
+}
+
+.custBtn:hover{
+  border: solid 1px #d4425c;
+  transition: 0.2s ease;
+  color: #d4425c;
+  padding: 5px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+
+.custTable thead{
+  background-color: #d4425c;
+  color: white;
+}
+
+.navbarcustom a : hover {
+  color: white;
+}
+
+.blink_me {
+  color: #d4425c;
+  animation: blinker 1.2s linear infinite;
+}
+
+@keyframes blinker {  
+  50% { opacity: 0; }
+}
+
+.onlinebadge{
+  color: #d4425c;
+  font-size: 12px;
+  padding: 5px;
+  letter-spacing: 3px;
+  font-weight: bold;
+}
+
+.offlinebadge{
+  color: black;
+  font-size: 12px;
+  padding: 5px;
+  letter-spacing: 3px;
+  font-weight: bold;
+}
+
+
+.avatar-img{
+	height: 40px;
+	width: 40px;
+	border-radius: 100%;
+	border: solid 1px #ddd;
+	padding: 2px;
+}
+
+.imgContainer{
+ 	margin: 0 auto;
+ 	text-align: center;
+ 	margin-bottom: 20px;
+ }
+
+.update_material_modal_img{
+ 	height: 150px;
+ 	width: 120px;
+ 	border-radius: 100%;
+ }
+
+.changeImageBtn{
+  width: 400px;
+  margin: 0 auto;
+}
+
+.changeImageBtn:hover{
+  cursor: pointer;
+}
+
+.hidden, .hiddenUpdate {
+    display:none;
+}
+
+.user_image{
+	height: 200px;
+	width: 170px;
+  border-radius: 100%;
+}
+
+#btn_upload{
+	margin-top: 10px;
+}
+
+.moreSettingsCont{
+}
+
+.moreSettingsCont legend{
+	font-size: 14px;
+	text-align: center;
+}
+
+#site_creation_form{
+  margin-top: 10px;
+  margin-left: 10px;
+  position: absolute;
+  z-index: 1;
+}
+
+.cust_map_inpt{
+  height: 40px;
+  padding: 5px;
+  width: 300px;
+  font-size: 13px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+}
+
+.cust_button_map{
+  background-color: #d4425c;
+  border: none;
+  outline: none;
+  width: 300px;
+  color: white;
+  padding: 10px;
+}
+
+#zoomLevel{
+  background-color: white;
+}
+ .pac-container, .pac-item{
+    z-index: 2147483647 !important;
+ }
+
+.cust_button{
+  background-color: #d4425c;
+  border: none;
+  outline: none;
+  width: 300px;
+  color: white;
+  padding: 10px;
+}
+
+.cust_button_browse{
+  background-color: white;
+  width: 200px;
+  color: #d4425c;
+  padding: 5px;
+  border: solid 1px #d4425c;
+  transition: ease 0.2s;
+}
+
+.cust_button_browse:hover{
+  background-color: #d4425c;
+  color: white;
+  border: solid 1px #d4425c;
+  transition: ease 0.2s;
+}
+
+/**/
+.stepwizard-step p {
+    margin-top: 10px;
+}
+.stepwizard-row {
+    display: table-row;
+}
+.stepwizard {
+    display: table;
+    width: 50%;
+    position: relative;
+}
+.stepwizard-step button[disabled] {
+    opacity: 1 !important;
+    filter: alpha(opacity=100) !important;
+}
+.stepwizard-row:before {
+    top: 14px;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    z-order: 0;
+}
+.stepwizard-step {
+    display: table-cell;
+    text-align: center;
+    position: relative;
+}
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 100%;
+}
+
+/*SWITCH CSS*/
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.selectionUser{
+  float:left;
+}
+
+.selectionSite{
+  float:right;
+}
+
+.selectionHolder{
+  margin: 0 auto;
+}
+
+.fa-5x{
+  margin-bottom: 15px;
+}
+
+/*==================== SCROLING EFFECTS =======================*/
+/*scrolling effect*/
+.sitelistcont_scroll{
+  width: 100%;
+  height: 300px;
+}
+
+[data-simplebar] {
+    position: relative;
+    z-index: 0;
+    overflow: hidden!important;
+    max-height: inherit;
+    -webkit-overflow-scrolling: touch; /* Trigger native scrolling for mobile, if not supported, plugin is used. */
+}
+
+[data-simplebar="init"] {
+    display: flex;
+}
+
+.simplebar-scroll-content {
+    overflow-x: hidden!important;
+    overflow-y: scroll;
+    min-width: 100%!important;
+    max-height: inherit!important;
+    box-sizing: content-box!important;
+}
+
+.simplebar-content {
+    overflow-y: hidden!important;
+    overflow-x: scroll;
+    box-sizing: border-box!important;
+    min-height: 100%!important;
+}
+
+.simplebar-track {
+    z-index: 1;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 11px;
+}
+
+.simplebar-scrollbar {
+    position: absolute;
+    right: 2px;
+    width: 7px;
+    min-height: 10px;
+}
+
+.simplebar-scrollbar:before {
+    position: absolute;
+    content: "";
+    background: black;
+    border-radius: 7px;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transition: opacity 0.2s linear;
+}
+
+.simplebar-track:hover .simplebar-scrollbar:before,
+.simplebar-track .simplebar-scrollbar.visible:before {
+    /* When hovered, remove all transitions from drag handle */
+    opacity: 0.5;
+    transition: opacity 0 linear;
+}
+
+.simplebar-track.vertical {
+    top: 0;
+}
+
+.simplebar-track.vertical .simplebar-scrollbar:before {
+    top: 2px;
+    bottom: 2px;
+}
+
+.simplebar-track.horizontal {
+    left: 0;
+    width: auto;
+    height: 11px;
+}
+
+.simplebar-track.horizontal .simplebar-scrollbar:before {
+    height: 100%;
+    left: 2px;
+    right: 2px;
+}
+
+.horizontal.simplebar-track .simplebar-scrollbar {
+    right: auto;
+    top: 2px;
+    height: 7px;
+    min-height: 0;
+    min-width: 10px;
+    width: auto;
+}
+
+.containerDetails{
+  height: 20px;
+  background-color: #333;
+}
+
+.fa-minus-square{
+  font-size: 20px;
+  color: white;
+}
+
+.customalert{
+  margin-top: 10px !important;
+}
+
+.shakeit {
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+  
+}
+
+.onl{
+  font-size: 10px;
+  color: #42d69b;
+}
+
+.offl{
+  font-size:  10px;
+  color: #d64c42;
+}
+
+#zoomIndicator{
+  width: 100px;
+  height: 60px;
+  background-color: #fff;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.zoom-value{
+  font-size: 30px;
+  font-weight: bold;
+  margin: 0 auto;
+  text-align: center;
+  right: 50%;
+}

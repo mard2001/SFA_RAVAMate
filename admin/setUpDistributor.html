@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>SET UP</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="design/setUp.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
+  <link rel="shortcut icon" href="../img/mdlogo_web.png" type="image/png">
+</head>
+<body>
+
+  <div class="addMaterialsContainer" style="height: 100%;">
+    <div class="createSiteContainer" style="height: 100%;">
+      <div id="site_creation_form">
+        <input type="text" name="" id="sitepinpoint" class="cust_map_inpt" placeholder="site location"><br/>
+        <input type="text" name="" id="sitezipcode" class="cust_map_inpt" placeholder="zipCode" style="margin-top: 5px;"><br/>
+        <input type="hidden" name="" id="zoomLevel" value="0" class="cust_map_inpt" placeholder="ZOOM LEVEL"><br/>
+        <div class="alert alert-danger customalert" role="alert" id="siteChecker"></div>
+        <button class="cust_button_map" onclick="savesite()">Save and Continue</button>
+      </div>
+      <div id="zoomIndicator">
+        <span class="zoom-text">ZOOM INDICATOR</span><br/>
+        <div class="zoom-value">9</div>
+      </div>
+      <div id="map" style="height: 100%;"></div>
+    </div>  
+  </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script> 
+<!-- <script type="text/javascript" src="js/notfunction.js"></script> -->
+<script src="/HASH/md5.js"></script>
+<script src="/HASH/aes.js"></script>
+<script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+<script type="text/javascript" src="/js/scrolling.js"></script>
+<script type="text/javascript">
+  var GLOBALLINKAPI = 'https://fast-onesolutions.com/BUDDYGBLAPI/';
+//  var user = localStorage.getItem("admin_username");
+//  if(user == null || user == undefined){
+//    window.location.href = "https://mdbuddyonline.access.ly";
+//   }else{
+//     $('#manageBtn').show();
+//     $('#logoutBtn').show();
+//     $('#loginBtn').hide();
+//     $('#registerBtn').hide();
+//     $('#usernameid').html(user.toUpperCase());
+//   }
+$('.addMaterialsContainer').show();
+$('.hidethissec').hide();
+
+//VALIDATION CHECKERS
+$('#sitepinpoint').val('');
+$('#sitezipcode').val('');
+$('#userchecker').hide();
+$('#emailchecker').hide();
+$('#contactchecker').hide();
+$('#siteChecker').hide();
+
+$('#password').focus(function() {
+$('#userchecker').removeClass('shakeit');
+  var username = $('#username').val();
+  $.ajax ({
+      url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+        type: "GET",
+        data: {
+            "type":"check_user",
+            "user":username,
+          },
+        dataType: "json",
+        crossDomain: true,
+        cache: false,  
+        async: false,          
+        success: function(r){
+          if(r != 0){
+          	
+          	$('#userchecker').addClass('shakeit');
+            $('#userchecker').show();
+            $('#userchecker').html('Username already taken.');
+          }else{
+            $('#userchecker').hide();
+            //$('#userchecker').html('');
+            //$('#userchecker').css({"color":"transparent"});
+          }
+        }
+      });
+});
+
+/*$("#contactno").keydown(function(e) {
+        var oldvalue=$(this).val();
+        var field=this;
+        setTimeout(function () {
+            if(field.value.indexOf('+63') !== 0) {
+                $(field).val(oldvalue);
+            } 
+        }, 1);
+   });*/
+
+$('#zoomLevel').prop( "disabled", true );
+
+function getTime(datetime){
+	var d = new Date(datetime);
+	var res = d.getHours() +':'+d.getMinutes()+':'+d.getSeconds(); // => 51
+	
+	var time;
+	if(datetime == ' ' || datetime == null || datetime == undefined){
+		return '---';
+	}else{
+		if(res == '0:0:0'){
+			time = '---';
+		}else{
+			time = res;
+		}
+		return time;
+	}
+}
+
+      
+function imgError(image) {
+      image.onerror = "";
+      image.src = "../img/salesmanPic.jpg";
+      return true;
+    }  
+
+
+function checkemptymap(){
+  var sitename = $('#sitename').val();
+  var sitepoint = $('#sitepinpoint').val();
+  var zipcode = $('#sitezipcode').val();
+  var res;
+  if(sitename == '' || sitepoint == '' || zipcode == ''){
+  	res = false;
+  }else{
+  	res = true;
+  }
+  return res;
+}
+
+function alertMsg(msg){
+    $('#siteChecker').show();
+	$('#siteChecker').addClass('shakeit');
+	$('#siteChecker').html('<i class="fas fa-exclamation-circle"></i> ' + msg);
+}
+
+var globalLat;
+var globalLng;
+var globalZoom;
+function savesite(){
+	$('#siteChecker').removeClass('shakeit');
+	if(!checkemptymap()){
+        alertMsg('Empty fields not accepted!');
+	}else{
+        if(destmarker.length == 0){   
+            console.log(destmarker + ' is null');
+            alertMsg('Location is not registered!');
+        }else{
+            $('#siteChecker').hide();
+            //var sitezoom = map.getZoom();
+            var zipCode = $('#sitezipcode').val();
+            var sitename = $('#sitename').val();
+            var siteloc = $('#sitepinpoint').val();
+            var lat = destmarker.getPosition().lat();
+            var lng = destmarker.getPosition().lng();
+            
+            if(zipCodeChecker(zipCode) == 0){
+              $.ajax ({
+                    url: GLOBALLINKAPI+"nestle/connectionString/applicationipAPI.php",
+                    type: "GET",
+                    data: {
+                            "type":"SETUP_SITE_LOCATION",
+                            "CONN":con_info,
+                            "sitezoom":globalZoom,
+                            "lat":lat,
+                            "lng":lng,
+                            "zipCode":zipCode
+                          },
+                    dataType: "json",
+                    crossDomain: true,
+                    cache: false,  
+                    async: false,          
+                    success: function(r){
+                    	if(r == 1){
+                    		alert('SETUP SUCCESSFULL!');
+                    		window.location = "https://mybuddy-sfa.com/SFA/dashboard";
+                    	}
+                    }
+                  });
+            }else{
+              alertMsg('WARNING: Zipcode already exist!');
+            }
+                	
+        }
+	}
+}
+
+function zipCodeChecker(zipCode){
+  var delimter;
+  $.ajax ({
+        url: GLOBALLINKAPI+"nestle/connectionString/applicationipAPI.php",
+        type: "GET",
+        data: {
+                "type":"ZIPCODE_INSERT_CHECKER",
+                "CONN":con_info,
+                "zipCode":zipCode
+              },
+        dataType: "json",
+        crossDomain: true,
+        cache: false,  
+        async: false,          
+        success: function(r){
+           delimter = r;
+        }
+      });
+    return delimter;
+}
+
+var collectormarkers = [];
+function remvmarker() {
+	for (var i = 0; i < collectormarkers.length; i++) {
+	  collectormarkers[i].setMap(null);
+	}
+  collectormarkers = [];
+  
+}
+
+var map, destmarker = [];
+function initMap() {
+
+var directionsService = new google.maps.DirectionsService; 
+var directionsDisplay = new google.maps.DirectionsRenderer;
+var zm = 9;
+var lt = 0.0;
+var lg = 0.0;
+
+zm = localStorage.getItem('p_center');
+if(lt == '' || lg == ''){
+  lt = 12.8797;
+  lg = 121.7740;
+  zm = 6;
+}else{
+  lt = localStorage.getItem('p_lat');
+  lg = localStorage.getItem('p_lng');
+  zm = localStorage.getItem('p_center');
+
+ 
+}
+
+console.log(lt +' '+ lg +' '+ zm);
+
+    mapOptions = {
+      zoom: parseInt(zm), 
+      center: {lat: parseFloat(lt), lng: parseFloat(lg)},
+      mapTypeId: 'roadmap',
+      controlSize: 25,
+      zoomControl: false,
+      scaleControl: false,
+      streetViewControl: true,
+      fullscreenControl: true,
+      mapTypeControl: false
+    }
+      
+  map = new google.maps.Map(document.getElementById('map'), mapOptions);
+  new formcreation(map);
+  new zoomCont(map);
+
+  map.addListener('zoom_changed', function() {
+    getZoomLevel();
+  });
+
+  // var marker = new google.maps.Marker({
+  //   position: new google.maps.LatLng(lt, lg),
+  //   draggable: true,
+  //   animation: google.maps.Animation.DROP,
+  //   title:"Site Current Position"
+  // });
+
+  // marker.setMap(map);
+
+  sitelocation();
+  
+  function getZoomLevel(){
+    var zoomInDelimeter = map.getZoom();
+    $('#zoomLevel').val('Zoom Level: '+ zoomInDelimeter);
+    $('.zoom-value').html( zoomInDelimeter);
+    globalZoom = zoomInDelimeter;
+  }
+
+  function sitelocation(){
+    var options = {componentRestrictions: {country: "ph"}};
+    var originAutocomplete = new google.maps.places.Autocomplete(document.getElementById('sitepinpoint'), options);
+    google.maps.event.addListener(originAutocomplete, 'place_changed', function () {
+            var place = originAutocomplete.getPlace();
+             var lat = place.geometry.location.lat();
+             var lng = place.geometry.location.lng();
+
+            remvmarker();
+            destmarker = new google.maps.Marker({
+	          position: {lat: lat, lng: lng},
+	          draggable:true,
+	          map: map,
+	          title: 'Map Center POV!'
+	        });
+
+            collectormarkers.push(destmarker);
+	        map.setCenter(destmarker.getPosition());
+	        map.setZoom(10);
+        });
+  }
+}
+
+
+
+function formcreation(map){
+    this.map = map;
+    var dispDeviation = document.getElementById("site_creation_form");
+    this.map.controls[google.maps.ControlPosition.LEFT].push(dispDeviation);
+}
+
+function zoomCont(map){
+  this.map = map;
+  var dispDeviation = document.getElementById("zoomIndicator");
+  this.map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(dispDeviation);
+}
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=places&sensor=false&key=AIzaSyCCPXj12d0e55vubddbz6rn9FOjHKP3A00&libraries=places&callback=initMap"
+    async defer></script>
+</body>
+</html>

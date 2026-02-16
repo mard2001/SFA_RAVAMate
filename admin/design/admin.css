@@ -1,0 +1,851 @@
+html, body{
+  padding: 0;
+  margin: 0;
+}
+
+#map{
+  height:530px;
+  width: 100%;
+}
+
+.storeImageTable tr td img{
+  height: 110px !important;
+  width: 135px !important;
+}
+
+
+.storeImageTable{
+  margin: 0 auto !important;
+  text-align: center !important;
+}
+
+.storeImageTable tr td{
+  padding: 5px;
+}
+
+#customerData{
+  text-align: center !important;
+  color: #1a4791;
+}
+
+.ellipsisCustName{
+    max-width: 30px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+  .details{
+    padding-top: 40px;
+  }
+
+  .details2{
+    padding-top: 40px;
+  }
+
+#dashboardDisplay tr:hover{
+  color: white;
+  /*background-color: #1365a2;*/
+  background-color: #333;
+  transition: ease 0.2s;
+}
+
+.customerHolder:hover{
+  cursor: pointer;
+}
+
+.store1{
+  margin-right: 10px;
+}
+
+.fixed-top{
+  margin-top: 0 !important;
+  top: 0 !important;
+  margin-bottom: 40px !important;
+}
+
+#dashboardDisplay tr{
+  font-size: 0.7rem;
+}
+
+#dashboardDisplay{
+  padding: 5px;
+}
+
+.ifEmpty tr th{
+  font-size: 15px;
+  font-weight: normal;
+}
+
+.loading-table h4{
+  font-size: 12px;
+}
+
+.loading-table p{
+  font-size: 12px;
+  color: #fff;
+  text-align: center;
+  font-style: italic;
+}
+
+.sevenBlwSell{
+  background-color: #660000;
+  color: white;
+  padding: 2px;
+  border-radius: 100%;
+}
+
+.salesmanPic{
+  height: 90px;
+  width: 90px;
+  border-radius: 100%;
+}
+
+.fixedHeadNew thead tr td{
+  text-align: center;
+  font-weight: normal !important;
+  font-size: 10px;
+}
+
+.fixedHeadNew{
+  padding: 4px;
+  height: 35px;
+  background-color: #333;
+  color: white;
+  width: 473px;
+}
+
+.imgDashPic{
+  height: 30px;
+  width: 30px;
+  border-radius: 100%;
+  margin-right: 10px;
+  border: solid 1px #333;
+}
+
+.searchBtn{
+  margin-left: 145px;
+
+}
+
+.marginSBTN{
+}
+.searchIcon{
+  margin-left: 5px;
+}
+
+.searchIcon:hover{
+  cursor: pointer;
+}
+
+.searchInput{
+  border-radius: 10px;
+}
+
+.fixedHead{ 
+  height: 30px;
+  width:473px;
+}
+
+.fixedHead th{
+  padding: 4px;
+  font-size: 12px;
+  height: 34px;
+  /*color: #1A237E;*/
+  /*background-color: #1365a2;*/
+  background-color: #333;
+  color: white;
+  font-weight: normal;
+}
+
+#overAllTotal{
+  color: white;
+  font-size: 13px;
+  width: 100%;
+  padding: 5px;
+  height: 30px;
+  /*background-color: #1365a2;*/
+  background-color: inherit;
+}
+
+.deviationIndi{
+  font-size: 10px;
+  float: right;
+  margin-right: 12px;
+  padding: 4px;
+}
+
+#floatTab{ 
+  font-size: 10px;
+  color: white;
+
+}
+
+#floatTab .salesmanName:hover{
+  background-color: rgba(51,51,51, 0.9);
+  color: white;
+}
+
+.outerContainer{ 
+  position: absolute;
+  z-index: 1;
+  margin-left: 20px !important;
+  margin-top: 15px;
+  background-color: rgba(19, 101, 162, 0.1);
+}
+
+
+#restorBtn{
+  right: 0;
+  z-index: 1;
+}
+
+
+.avatarImg{
+   border-radius: 100%;
+   width: 35px;
+   height: 35px;
+   margin-right: 3px;
+}
+
+.salesmanName:hover{
+  cursor: pointer;
+}
+
+.salesmanName{
+  font-size: 12px !important;
+  margin-bottom: 30px !important;
+  padding: 10px;
+}
+
+.countSM{
+  color: white;
+  font-size: 12px;
+  border-radius:100%;
+  float:center;
+  width: 50px;
+  padding: 4px;
+  font-weight: bold;
+
+}
+
+.count{
+  color: black;
+}
+
+.notificationTable tr td a{
+  font-size: 12px !important;
+  background-color: transparent !important;
+  color: black;
+}
+
+.thisContNotif{
+   padding: 0 !important;
+} 
+
+ .notif_a{
+  background-color: none !important;
+  padding-left: 0 !important;
+}
+
+#locate{
+  right: 0 !important;
+}
+
+#skuHolder{
+  transition: ease 0.2s;
+}
+
+.img-circle{
+  border-radius: 100%;
+  height: 90px;
+  width: 90px;
+}
+
+
+.loading-table{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  color: white;
+}
+
+
+/*.dropdown-toggle:after { content: none }*/
+.nav-link:after { content: none }
+.btn-dash{
+  margin-right: 10px !important; 
+  margin-bottom: 0.3rem;
+  border-radius: 100% !important;
+  height: 35px !important;
+  width: 35px !important;
+}
+
+#notificationElement{
+  top: 0 !important;
+  bottom: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+#notifs-icon-div{
+  top: 0 !important;
+  bottom: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.icon{
+  font-size: 13px;
+  margin-right: 25px;
+  padding-top: 40px !important;
+}
+
+.salesmanCode{
+  font-size: 17px;
+}
+
+.categoryProp{
+  color: white;
+}
+
+.categoryProp table thead{
+  color: white;
+  background-color: rgba(19, 101, 162, 0.9);
+}
+
+.categoryProp table thead:hover{
+  /*background-color: rgba(19, 101, 162, 0.9);*/
+  cursor:pointer;
+}
+
+.categoryProp table tbody tr:hover{
+  background-color: rgba(19, 101, 162, 1);
+}
+
+.categoryProp table .footer tr{
+  background-color: rgba(19, 101, 162, 0.9);
+}
+
+.container_productCat{
+  width: 300px;
+  background-color: rgba(19, 101, 162, 0.9);
+}
+
+.arrow-side-icon:hover{
+   background-color: #1365a2;
+   cursor: pointer;
+   transition: ease 0.1s;
+}
+
+.grandTotal{
+   margin-left: 30%;
+}
+
+#total{
+
+}
+
+.arrow-side2{
+  /* background-color: black !important; */
+   height: 360px;
+   width: 20px;
+   z-index: 1;
+   position: absolute;
+   right: 0 !important;
+}
+
+.sidenav-logo{
+    width: 200px;
+    height: 90px;
+    margin-left: 25px !important;
+}
+
+.nutri-logo{
+    width: 40px;
+    height: 40px;
+    margin-left: 20px;
+}
+
+.footerDetails{
+  padding: 5px;
+  font-size: 13px;
+}
+
+.arrow-side-icon{
+  color: white;
+  margin-top: 155px;
+  font-size: 3em !important;
+  padding-bottom: 2px;
+  padding-left: 2px;
+  padding-right: 2px;
+  margin-left: 23px;
+  background-color: rgba(19, 101, 162, 0.3);
+  /*-webkit-box-shadow: 4px 0 10px -2px #888;
+          box-shadow: 4px 0 10px -2px #888;*/
+}
+
+
+.arrow-side-icon2{
+  color: white;
+  margin-top: 155px;
+  font-size: 3rem !important;
+  padding-bottom: 2px;
+  padding-left: 2px;
+  padding-right: 2px;
+  margin-left: 23px;
+  background-color: rgba(19, 101, 162, 0.3);
+  /*-webkit-box-shadow: 4px 0 10px -2px #888;
+          box-shadow: 4px 0 10px -2px #888;*/
+}
+
+.arrow-side-icon2:hover{
+   background-color: #1365a2;
+   cursor: pointer;
+   transition: ease 0.1s;
+}
+
+.navbar-expand-lg{
+  margin-bottom: 10px !important;
+  margin-top: 10px !important;
+}
+
+.subHeader{
+  font-size: 10px;
+  margin-bottom: -3px;
+}
+
+#skuHolder:hover{
+  cursor: pointer;
+  font-weight: bold;
+  transition: ease 0.2s;
+}
+
+.height-details{
+   max-height: 150px;
+   overflow: auto;
+}
+
+#prevMD{
+  float: left;
+  font-size: 30px;
+  left: -10 !important;
+
+}
+
+#nextMD{
+  float: right;
+  font-size: 30px;
+  right: -10 !important;
+}
+
+#prevMD, #nextMD:hover{
+  cursor: pointer;
+}
+
+.cont_marker_header{
+  margin: 0 auto;
+  text-align: center;
+  left: 50%;
+  width: 100%;
+}
+
+/*start of scrooling */
+/*scrolling effect*/
+.scroll{
+  width: 100%;
+  height: 300px;
+}
+
+[data-simplebar] {
+    position: relative;
+    z-index: 0;
+    overflow: hidden!important;
+    max-height: inherit;
+    -webkit-overflow-scrolling: touch; /* Trigger native scrolling for mobile, if not supported, plugin is used. */
+}
+
+[data-simplebar="init"] {
+    display: flex;
+}
+
+.simplebar-scroll-content {
+    overflow-x: hidden!important;
+    overflow-y: scroll;
+    min-width: 100%!important;
+    max-height: inherit!important;
+    box-sizing: content-box!important;
+}
+
+.simplebar-content {
+    overflow-y: hidden!important;
+    overflow-x: scroll;
+    box-sizing: border-box!important;
+    min-height: 100%!important;
+}
+
+.simplebar-track {
+    z-index: 1;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 11px;
+}
+
+.simplebar-scrollbar {
+    position: absolute;
+    right: 2px;
+    width: 7px;
+    min-height: 10px;
+}
+
+.simplebar-scrollbar:before {
+    position: absolute;
+    content: "";
+    background: black;
+    border-radius: 7px;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transition: opacity 0.2s linear;
+}
+
+.simplebar-track:hover .simplebar-scrollbar:before,
+.simplebar-track .simplebar-scrollbar.visible:before {
+    /* When hovered, remove all transitions from drag handle */
+    opacity: 0.5;
+    transition: opacity 0 linear;
+}
+
+.simplebar-track.vertical {
+    top: 0;
+}
+
+.simplebar-track.vertical .simplebar-scrollbar:before {
+    top: 2px;
+    bottom: 2px;
+}
+
+.simplebar-track.horizontal {
+    left: 0;
+    width: auto;
+    height: 11px;
+}
+
+.simplebar-track.horizontal .simplebar-scrollbar:before {
+    height: 100%;
+    left: 2px;
+    right: 2px;
+}
+
+.horizontal.simplebar-track .simplebar-scrollbar {
+    right: auto;
+    top: 2px;
+    height: 7px;
+    min-height: 0;
+    min-width: 10px;
+    width: auto;
+}
+
+.containerDetails{
+  height: 20px;
+  background-color: #333;
+}
+
+.fa-minus-square{
+  font-size: 20px;
+  color: white;
+}
+
+#latesalesmanCont{
+  margin: 0 auto !important;
+  text-align: center;
+  position: absolute;
+}
+
+ #lateSalesman{
+  width: 50%;
+  /*background-color: transparent;
+  margin: auto !important;
+  width: 50%;
+  -webkit-transform: translateZ(0);
+  left: 0; bottom: 0; right: 0;*/
+}
+
+
+#insideSalesman{
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+
+.container_salesman{
+  width: 474px;
+  background-color: rgba(51,51,51, 0.8);
+}
+
+.outerContMain{
+  position: absolute;
+  z-index: 1;
+  margin-left: 10px;
+  margin-top: 11px;
+}
+
+.ellipsis {
+        max-width: 200px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+#dispModal_deviation{
+
+}
+/*SCROLLING EFFECT*/
+
+.scroll{
+  width: 100%;
+  height: 300px;
+}
+
+[data-simplebar] {
+    position: relative;
+    z-index: 0;
+    overflow: hidden!important;
+    max-height: inherit;
+    -webkit-overflow-scrolling: touch; /* Trigger native scrolling for mobile, if not supported, plugin is used. */
+}
+
+[data-simplebar="init"] {
+    display: flex;
+}
+
+.simplebar-scroll-content {
+    overflow-x: hidden!important;
+    overflow-y: scroll;
+    min-width: 100%!important;
+    max-height: inherit!important;
+    box-sizing: content-box!important;
+}
+
+.simplebar-content {
+    overflow-y: hidden!important;
+    overflow-x: scroll;
+    box-sizing: border-box!important;
+    min-height: 100%!important;
+}
+
+.simplebar-track {
+    z-index: 1;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 11px;
+}
+
+.simplebar-scrollbar {
+    position: absolute;
+    right: 2px;
+    width: 7px;
+    min-height: 10px;
+}
+
+.simplebar-scrollbar:before {
+    position: absolute;
+    content: "";
+    background: black;
+    border-radius: 7px;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transition: opacity 0.2s linear;
+}
+
+.simplebar-track:hover .simplebar-scrollbar:before,
+.simplebar-track .simplebar-scrollbar.visible:before {
+    /* When hovered, remove all transitions from drag handle */
+    opacity: 0.5;
+    transition: opacity 0 linear;
+}
+
+.simplebar-track.vertical {
+    top: 0;
+}
+
+.simplebar-track.vertical .simplebar-scrollbar:before {
+    top: 2px;
+    bottom: 2px;
+}
+
+.simplebar-track.horizontal {
+    left: 0;
+    width: auto;
+    height: 11px;
+}
+
+.simplebar-track.horizontal .simplebar-scrollbar:before {
+    height: 100%;
+    left: 2px;
+    right: 2px;
+}
+
+.horizontal.simplebar-track .simplebar-scrollbar {
+    right: auto;
+    top: 2px;
+    height: 7px;
+    min-height: 0;
+    min-width: 10px;
+    width: auto;
+}
+
+/*end of scroll*/
+.arrow-side{
+  /* background-color: black !important; */
+   height: 300px;
+   width: 20px;
+   z-index: 1;
+   position: absolute;
+   right: 0 !important;
+}
+
+.arrow-side-icon:hover{
+   background-color: #1365a2;
+   cursor: pointer;
+   transition: ease 0.1s;
+}
+
+.arrow-side-icon2{
+  color: white;
+  margin-top: 155px;
+  font-size: 30px;
+  padding-bottom: 2px;
+  padding-left: 2px;
+  padding-right: 2px;
+  margin-left: 23px;
+  background-color: rgba(19, 101, 162, 0.3);
+  /*-webkit-box-shadow: 4px 0 10px -2px #888;
+          box-shadow: 4px 0 10px -2px #888;*/
+}
+
+.arrow-side-icon2:hover{
+   background-color: #1365a2;
+   cursor: pointer;
+   transition: ease 0.1s;
+}
+
+#firstCallInfo table tr td p{
+  color: #fff;
+}
+
+#firstCallInfo{
+  margin-left: 6px;
+  margin-top: 10px;
+  border-radius: 5px;
+  background-image: linear-gradient(to bottom right, #222326, #464749);
+  height: 400px;
+
+}
+#early{
+  transition: 0.2s ease;
+  border-radius: 100%;
+  width: 35px;
+  height: 35px;
+  border: solid 2px green;
+  margin-left: 4px;
+  margin-bottom: 4px;
+}
+
+#late{
+  border-radius: 100%;
+  width: 35px;
+  height: 35px;
+  border: solid 2px red;
+  margin-left: 4px;
+  margin-bottom: 4px;
+  transition: 0.2s ease;
+}
+
+#late, #early:hover{
+  cursor: pointer;
+}
+
+.borderless td, .borderless th {
+    border: none;
+}
+
+.borderless{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.closeFirstTransIcon{
+  float: right;
+  color: white; 
+  font-size: 20px;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
+.closeFirstTransIcon:hover{
+  cursor: pointer;
+}
+
+.rest{
+  padding-top: 10px !important;
+}
+#fullScreen{
+  margin-top: 11px
+}
+
+.headerS{
+  margin-left: 10px;
+}
+
+.marginHeader{
+  margin-right: 10px;
+}
+
+#mapBtnsContainer{
+  position: absolute;
+  z-index: 1;
+  right: 0 !important;
+  margin-top: 10px;
+}
+
+.btn-dash{
+  margin-right: 10px !important; 
+  margin-top: 0.3rem;
+  border-radius: 100% !important;
+  height: 35px !important;
+  width: 35px !important;
+  outline: none !important;
+  background-color: #676a70;
+  color: white;
+}
+
+.btn-dash:hover{
+  color: white;
+}
+
+.btnrestore{
+  margin-right: 5px;
+  border-radius: 100%;
+  height: 40px;
+  width: 40px;
+  border: solid 0.2px #629dfc;
+}
+
+.btnrestore img{
+  height: 19px;
+  width: 19px;
+}
+
+.dashboardDisplayCont tbody tr td{
+  padding: 2px;
+}
+
+
+
+

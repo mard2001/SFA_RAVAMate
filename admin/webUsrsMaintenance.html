@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Admin</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="design/design.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="shortcut icon" href="../img/mdlogo_web.png" type="image/png">
+</head>
+
+<body>
+<nav class="navbar navbar-expand-sm fixed-top navbarcustom bg-dark">
+  <a class="navbar-brand" href="#"> <img src="../img/mdlogo_web.png" class="homeLogo"> mybuddy</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</nav>
+
+<div class="jumbotron text-center">
+</div>
+
+<div class="container">
+  <div class="">
+    <div class="selectionHolder">
+          <div class="card">
+          <div class="card-header"><i class="fas fa-user-tie"></i> User List
+          <span class="float-right" id="reloadData"><i class="fas fa-redo-alt"></i></span>
+          </div>
+            <div class="card-body">
+              <input type="text" class="form-control" id="searchUser" placeholder="search..">
+              <table class="table table-condensed">
+                <thead>
+                  <tr>
+                    <th>FULLNAME</th>
+                    <th>ACTION</th>
+                  </tr>
+                </thead>
+                <tbody id="details_cont">
+                </tbody>
+              </table>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="userDetailsmod">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">DETAILS</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <table class="table table-condensed">
+                    <tr><td><i class="far fa-user"></i></td><td><input type="text" class="form-control" id="uptfullname" placeholder="FULLNAME"></td></tr>
+                    <tr><td><i class="far fa-envelope"></i></td><td><input type="text" class="form-control" id="uptemail" placeholder="EMAIL"></td></tr>
+                    <tr><td><i class="fas fa-mobile-alt"></i></td><td><input type="text" class="form-control" id="uptcontactno" placeholder="CONTACT NO."></td></tr>
+                    <!--<tr><td colspan="2"><input disabled type="text" class="form-control" id="uptcreated"></td></tr>-->
+                    <tr><td><i class="fas fa-satellite-dish"></i></td><td><strong id="onlineStatus"></strong></td></tr>
+                </table>
+                <input type="hidden" id="userIDHolder">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="deleteUser()"><i class="fas fa-trash-alt"></i></button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal" onclick="updateUser()">Update</button>
+                <button type="button" class="btn btn-dark" data-dismiss="modal" onclick="forceLogout()">Logout</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="/js/scrolling.js"></script>
+<script type="text/javascript">
+
+
+$('#searchUser').on('keyup',function(){
+    var searchTerm = $(this).val().toLowerCase();
+    $('#details_cont tr').each(function(){
+        var lineStr = $(this).text().toLowerCase();
+        if(lineStr.indexOf(searchTerm) === -1){
+            $(this).hide();
+        }else{
+            $(this).show();
+        }
+    });
+});
+
+$('#reloadData').click(function (){
+  $('#searchUser').val('');
+  get_userDetails();
+});
+
+get_userDetails();
+function get_userDetails(){
+  $('#details_cont').html('<tr><td colspan="2"><i class="fa fa-spin fa-spinner"></i> Please wait..</tr></td>');
+    $.ajax ({
+      url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+        type: "GET",
+        data: {
+            "type":"get_web_users_all"
+          },
+        dataType: "json",
+        crossDomain: true,
+        cache: false,  
+        async: false,          
+        success: function(r){
+          var cont = '';
+          if(r.length == 0){
+            $('#details_cont').html('No records to show.');
+          }else{
+            for(var x = 0; x < r.length; x++){
+                var ol_indicator = '';
+                var paramsindi = '';
+                if(r[x].AISONLINE == '1'){
+                    ol_indicator = '<i class="fas fa-circle onl"></i> ';
+                    paramsindi = ol_indicator + ' ONLINE';
+                }else{
+                    ol_indicator = '<i class="fas fa-circle offl"></i> ';
+                    paramsindi = ol_indicator + ' OFFLINE';
+                }
+                cont += '<tr>'+
+                            '<td>'+ ol_indicator + r[x].AFULLNAME+'</td>'+
+                            '<td><button class="btn btn-sm btn-info" onclick="viewDetails(\''+r[x].AUSERID+'\', \''+r[x].AFULLNAME+'\', \''+r[x].AEMAIL+'\', \''+r[x].ACONTACTNO+'\', \''+r[x].ADATECREATED+'\', \''+r[x].AISONLINE+'\')">view</button></td>'+
+                        '</tr>';
+            }
+            $('#details_cont').html(cont);
+          }
+        }
+      });
+}
+
+function deleteUser(){
+  var f = confirm('Are you sure you want to delete this user ?');
+  if(f){
+    var userID = $('#userIDHolder').val();
+    $.ajax ({
+        url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+          type: "GET",
+          data: {
+              "type":"EXEC_DELETE_WEB_USER",
+              "userID":userID
+            },
+          dataType: "json",
+          crossDomain: true,
+          cache: false,  
+          async: false,
+          success: function(r){
+            if(r){
+              alert('USER WAS SUCCESSFULLY DELETED!');
+              get_userDetails();
+              $('#userDetailsmod').modal('hide');
+            }
+          }
+      });
+  }
+}
+
+function forceLogout(){
+  var f = confirm('Are you sure you want to logout this user ?');
+  if(f){
+    var userID = $('#userIDHolder').val();
+    $.ajax ({
+        url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+          type: "GET",
+          data: {
+              "type":"EXEC_FORCELOGOUT_ADM",
+              "userID":userID
+            },
+          dataType: "json",
+          crossDomain: true,
+          cache: false,  
+          async: false,
+          success: function(r){
+            if(r){
+              alert('USER WAS SUCCESSFULLY LOGOUT!');
+              get_userDetails();
+              $('#userDetailsmod').modal('hide');
+            }
+          }
+      });
+  }
+}
+
+function updateUser(){
+  var f = confirm('Are you sure you want to update this user ?');
+  if(f){
+    var userID = $('#userIDHolder').val();
+    var fname =  $('#uptfullname').val();
+    var email = $('#uptemail').val();
+    var contno = $('#uptcontactno').val();
+    $.ajax ({
+        url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+          type: "GET",
+          data: {
+              "type":"EXEC_UPDATE_WEB_USER",
+              "userID":userID,
+              "fullname":fname,
+              "email":email,
+              "contno":contno
+            },
+          dataType: "json",
+          crossDomain: true,
+          cache: false,  
+          async: false,
+          success: function(r){
+            if(r){
+              alert('USER WAS SUCCESSFULLY UPDATED!');
+              get_userDetails();
+              $('#userDetailsmod').modal('hide');
+            }
+          }
+      });
+  }
+}
+
+function viewDetails(userID, flname, email, contactno, datecreated, olindi){
+  var onlineindi = '';
+  if(olindi == 1){
+    onlineindi = '<span style="color:#42d69b;">ONLINE</span>';
+  }else
+    onlineindi = '<span style="color:#d64c42;">OFFLINE</span>';
+
+    $('#userIDHolder').val(userID);
+    $('#uptfullname').val(flname);
+    $('#uptemail').val(email);
+    $('#uptcontactno').val(contactno);
+    $('#uptcreated').val(datecreated);
+    $('#onlineStatus').html(onlineindi);
+    $('#userDetailsmod').modal('show');
+}
+
+function etextMo_send(fullname, number){
+      var message = 'WELCOME TO MYBUDDY '+fullname+'! \n You may now access the realtime dashboard using this link: \n'+
+      'https://mybuddy.dynns.com';
+      console.log('uyuyuy');
+      $.ajax ({
+            url: "https://www.itexmo.com/php_api/api.php",
+            type: "POST",
+            data: {
+                   "1" : number,
+                   "2" : message,
+                   "3" : "DE-FASTD139785_N8FG8",
+                   "5" : "HIGH" 
+                  },
+            crossDomain: true,
+            cache: false,            
+            success: function(r){ 
+                console.log('Etextmo res: ' + r);
+              }
+       });
+    }
+
+
+</script>
+</body>
+</html>

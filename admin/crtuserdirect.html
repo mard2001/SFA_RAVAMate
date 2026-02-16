@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mybuddy Create - User Direct</title> 
+    <meta content="utf-8" http-equiv="encoding">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+       
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script> 
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
+</head>
+<body>
+
+
+    <div class="" style="margin-top: 5% !important; width: 95%; margin: 0 auto;">
+
+        <!-- <div class="card">
+            <h5 class="card-header bg-dark text-light">Admin Creation <small>v_2.1</small>
+                <button class="btn btn-sm btn-info" style="float: right !important;" onclick="createUserBatch()">Batch Upload Creation</button>
+            </h5>
+            <div class="card-body">
+                
+            </div>
+          </div> -->
+
+
+          <div class="card" style="margin-top: 2%;">
+                <h5 class="card-header bg-dark text-light">Mybuddy Admin User List
+                    <button class="btn btn-sm btn-info" style="float: right !important;" onclick="createMybuddyAdmin()">Create Admin</button>
+                </h5>
+                <div class="card-body">
+                    <table class="table table-hover table-sm" id="userlisttable" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>FULLNAME</th>
+                                <th>PHONE #.</th>
+                                <th>EMAIL</th>
+                                <th>POSITION</th>
+                                <th>DATECREATED</th>
+                                <th>LASTLOGIN</th>
+                                <th>SITENAME</th>
+                                <th>USERTYPE</th>
+                                <th>OTP</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+    </div>
+
+
+    <div class="modal" id="addUserModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add User </h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <tr>
+                            <td>
+                                <label for="">Fullname</label>
+                            </td>
+                            <td><input type="text" name="" id="flname" class="form-control form-control-lg"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="">Designation</label>
+                            </td>
+                            <td><input type="text" name="" id="desgntion" class="form-control form-control-lg"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="">Contact #</label>
+                            </td>
+                            <td><input type="text" name="" id="contno" class="form-control form-control-lg"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="">Email</label>
+                            </td>
+                            <td><input type="text" name="" id="email" class="form-control form-control-lg"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="">Site/Branch Name</label>
+                            </td>
+                            <td><input type="text" name="" id="site" class="form-control form-control-lg"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="">User Type</label>
+                            </td>
+                            <td><select name="" id="usertype" class="form-control form-control-lg">
+                                <option value="" selected disabled hidden>Select here..</option>
+                                <option value="WEB">ADMIN</option>
+                                <option value="WEB_GUEST">GTM</option>
+                                <option value="WEB_GUEST">GUEST</option>
+                            </select></td>
+                        </tr>
+                    </table>
+                  
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" onclick="createUser()">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="modal" id="batchUploadModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><i class="fas fa-user"></i> User Batch Upload</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form  method="post" enctype='multipart/form-data'>
+                    <label for="">File:</label>
+                    <input type="file" name="user_file" id="user_file" class="form-control">
+                </form>
+                <small class="text-info">Please select batch upload format via CSV file.</small>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="exec_upload_user()">Upload</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal" id="updatePatchModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><i class="fas fa-user"></i> User Details</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-condensed">
+                    <tr>
+                        <td>Fullname</td>
+                        <td>
+                            <input type="text" class="form-control" id="nwfname">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Phone</td>
+                        <td>
+                            <input type="text" class="form-control" id="nwphonenumber">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>
+                            <input type="text" class="form-control" id="nwemail">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Position</td>
+                        <td>
+                            <input type="text" class="form-control" id="nwposition">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>UserType</td>
+                        <td>
+                            <input type="text" class="form-control" id="nwusertype">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Site</td>
+                        <td>
+                            <input type="text" class="form-control" id="nwsite">
+                        </td>
+                    </tr>
+                </table>
+                <input type="hidden" id="USERCIDHOLDER">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="updateUser()">Update</button>
+                <button type="button" class="btn btn-danger" onclick="deleteUser()">Removed</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function createMybuddyAdmin(){
+            $('#addUserModal').modal('show');
+        }
+
+        function userList(){
+                $.ajax ({
+                 url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+                type: "GET",
+                data: {
+                    "type":"get_web_users_all"
+                },
+                dataType: "json",
+                crossDomain: true,
+                cache: false,  
+                async: false,          
+                success: function(r){
+                    pl_source = r;
+                }
+            });   
+        } 
+        
+        userList();
+        var tableDatam, pl_source;
+        userListTable();
+        function userListTable(){
+            tableData = $('#userlisttable').DataTable({
+                "dom": 'Bfrtip',
+                "responsive": true,
+                "data": pl_source,
+                "scrollX": true,
+                "ordering": true,
+                // "order": [[ 3, "desc" ]],
+                "pageLength": 10,
+                language: {
+                    select: {
+                        rows: ""
+                    }
+                },
+                columns: [
+                    { data: "AUSERID"},
+                    { data: "AFULLNAME"},
+                    { data: "ACONTACTNO" },
+                    { data: "AEMAIL" },
+                    { data: "ADESIGNATION" },
+                    { data: "ADATECREATED" },
+                    { data: "ALOGTIME" },
+                    { data: "ASITENAME" },
+                    { data: "AUSERTYPE" },
+                    { data: "OTP"}
+                ],
+                buttons: [
+                    // {
+                    //     text: '<i class="fas fa-plus-circle"></i> NEW PATCH',
+                    //     className: 'btn btn-primary btn-sm',
+                    //     action: function(e, dt, node, config){
+                    //         $('#newPatchModal').modal('show');
+                    //     }
+                    // }
+                ],
+                rowCallback: function(row, data, index){
+                    // if(data.PLStatus.toString() == '0'){
+                    //     $(row).find('td:eq(2)').css({'color':'green', 'letter-spacing':'3px', 'font-size':'12px'});
+                    //     $(row).find('td:eq(2)').text('enabled');
+                    // }else{
+                    //     $(row).find('td:eq(2)').css({'color':'red', 'letter-spacing':'3px', 'font-size':'12px'});
+                    //     $(row).find('td:eq(2)').text('disabled');
+                    // }
+                },
+            });
+            
+            $('#userlisttable tbody').on('click', 'tr', function () {
+                var tr = $(this).closest('tr');
+                var row = tableData.row(tr);
+                //showsvr(row.data());
+                setPatchdata_update(row.data());
+            });
+            
+            function setPatchdata_update(r){
+                $('#nwfname').val(r.AFULLNAME);
+                $('#nwphonenumber').val(r.ACONTACTNO);
+                $('#nwemail').val(r.AEMAIL);
+                $('#nwposition').val(r.ADESIGNATION);
+                $('#nwusertype').val(r.AUSERTYPE);
+                $('#nwsite').val(r.ASITENAME);
+                $('#USERCIDHOLDER').val(r.AUSERID);
+                $('#updatePatchModal').modal('show');
+                
+            }
+        }
+
+        function exec_upload_user(){
+            
+            var product_file = $('#user_file').val();
+
+            if(product_file == '' || product_file == undefined){
+                alert('Please select a file.');
+            }else{
+            $('.temp1').hide();
+            $('#uploadv1Btn').html('<i class="icon-copy fa fa-spinner fa-spin" aria-hidden="true"></i> Uploading please wait..');
+            $("#uploadv1Btn").prop("disabled", true);
+
+
+            var formData = new FormData();
+            var files = $('#user_file')[0].files[0];
+            formData.append('user_file', files);
+
+            $.ajax ({
+                url: 'https://mybuddy-sfa.com/admin/connection/uploadUser.php',
+                // url: 'https://bakuna-ph.com/upload/16sandbox.php',
+                type: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                dataType: 'text',
+                async: false,
+                success: function(r){ 
+                if(r == 1){
+                    // sourceData();
+                    // datatables.clear().rows.add(sourceDat).draw();
+                    
+                    $('.temp1').show();
+                    $('#uploadv1Btn').html('Upload');
+                    $("#uploadv1Btn").prop("disabled", false);
+
+                    alert('Data Successfully Uploaded');
+                    location.reload();
+                    // textTOHr('09399139785');
+                    $('#template1Modal').modal('hide');
+
+                    
+                }else{
+                    alert('ERROR WHILE UPDATING: ' + r + '\n' + 'Please try again.');
+                    $('#uploadv1Btn').html('Upload');
+                    $("#uploadv1Btn").prop("disabled", false);
+                    $('#template1Modal').modal('hide');
+                }
+                },
+                error: function (request, status, error) {
+                // alert('Please Try Again:\n'+request.responseText);
+                alert('Server takes to long to respond, please try again.');
+                $('#uploadv1Btn').html('Upload');
+                $("#uploadv1Btn").prop("disabled", false);
+                $('#template1Modal').modal('hide');
+                }
+            });
+            }
+        }
+
+
+        function createUserBatch(){
+            $('#batchUploadModal').modal('show');
+        }
+
+        function createUser(){
+                var fullname = $('#flname').val();
+                var designation = $('#desgntion').val();
+                var contactno = $('#contno').val();
+                var email = $('#email').val();
+                // var distributor = $('#Distributor').val();
+                var siteName = $('#site').val();
+                var usertype = $('#usertype').val();
+                $.ajax({
+                     url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+                    type: "GET",
+                    data: {
+                            "type":"add_user_web_admin_direct",
+                            "fullname": fullname.toUpperCase(),
+                            "designation":designation.toUpperCase(),
+                            "contactno":contactno.toUpperCase(),
+                            "email":email,
+                            "distributor":'NPI',
+                            "usertype":usertype,
+                            "siteName":siteName
+                        },
+                    dataType: "json",
+                    crossDomain: true,
+                    cache: false,            
+                    async: false,
+                    success: function(r){ 
+                        if(r){
+                            alert('User successfully inserted!');
+                            location.reload();
+                        }
+                    }
+                });
+        }
+
+
+        function updateUser(){
+            var f = confirm('Are you sure you want to update this user details?');
+            if(f){
+             
+                var fname = $('#nwfname').val();
+                var phone = $('#nwphonenumber').val();
+                var email = $('#nwemail').val();
+                var pos = $('#nwposition').val();
+                var usertype = $('#nwusertype').val();
+                var site = $('#nwsite').val();
+                var id = $('#USERCIDHOLDER').val();
+
+                $.ajax({
+                     url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+                    type: "GET",
+                    data: {
+                            "type":"UPDATE_USER_INFO",
+                            'fullname':fname,
+                            'contno':phone,
+                            'email':email,
+                            'id':id,
+                            'usertype':usertype
+                        },
+                    dataType: "json",
+                    crossDomain: true,
+                    cache: false,            
+                    async: false,
+                    success: function(r){ 
+                        if(r){
+                            alert('User successfully updated!');
+                            location.reload();
+                        }
+                    }
+                });
+            } 
+        }
+
+
+        function deleteUser(){
+            var f = confirm('Are you sure you want to delete this user?');
+            if(f){
+                var id = $('#USERCIDHOLDER').val();
+
+                $.ajax({
+                     url: "https://fastdevs-api.com/MYBUDDYGLOBALAPI/web/databaseApi.php",
+                    type: "GET",
+                    data: {
+                            "type":"EXEC_DELETE_WEB_USER",
+                            'userID':id
+                        },
+                    dataType: "json",
+                    crossDomain: true,
+                    cache: false,            
+                    async: false,
+                    success: function(r){ 
+                        if(r){
+                            alert('User successfully deleted!');
+                            location.reload();
+                        }
+                    }
+                });
+            } 
+        }
+
+    </script>
+
+</body>
+</html>
