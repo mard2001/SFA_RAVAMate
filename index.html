@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>RAVAMate</title>
+  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css"  type="text/css">
+  <!-- Custom fonts for this template-->
+  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="JQUERYUI/jquery-ui.css">
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin.css" rel="stylesheet">
+  <link rel="shortcut icon" href="img/mdlogo_web.png" type="image/png">
+  <style>
+      img{
+        text-align: center;
+        width: 190px;
+        height: 45px;
+        margin: 0 auto;
+      }
+      .fa{
+        width: 15px;
+      }
+
+      .mobile{
+        font-size: 15px !important;
+      }
+
+      body{
+        /*background-image: linear-gradient(to bottom right, #2c73d6, #021735);*/
+      }
+      
+      .moveBod{
+        margin-top: 150px !important;
+      }
+
+      .img1{
+        width: 50px;
+        height: 50px;
+      }
+
+      .img2{
+        width: 200px;
+      }
+
+      .mybudtext{
+        font-weight: bold;
+        font-size: 30px;
+      }
+      .simplenot{
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+        top: 0 !important;
+        font-size: 10px;
+      }
+
+      .logohead span{
+        display: block;
+      }
+
+      .hidden{
+        display: none;
+      }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="card card-login mx-auto mt-5 moveBod">
+      <div class="card-header">
+        <div class="pull-left logohead">
+          <span class="mybudtext"><b style="color: #FF9800 !important;">RAVA</b>mate</span>
+          <span class="simplenot">Connecting Options, Ensuring Presence</span>
+        </div>
+        <img id='portalLogo' class='pull-right img1' src='SFA/v2/img/mybuddyLogo.jpg'/>
+      </div>
+      <div class="card-body">
+        <div id="checkNumberGroup">
+          <div class="input-group">
+            <span class="input-group-addon">+63</span>
+            <input class="form-control" placeholder="mobile number" name="" type="text" autofocus="" id="moobilenoint" maxlength="10">
+          </div>
+          <br/>
+          <div class="alert alert-danger ifEmpty hidden"></div> 
+          <button class="btn btn-primary btn-block" id="checkNumBtn" onclick="checknumber()">Login</button> 
+         
+        </div>
+        <div id="checkOTPGroup" class="hidden">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-key"></i></span>
+            <input class="form-control" placeholder="OTP" name="" type="text" autofocus="" id="otpint">
+          </div>
+          <br/>
+          <div class="alert alert-danger checkOTPmessage"></div> 
+          <button class="btn btn-primary btn-block" id="checkOTPBtn" onclick="confirmOTP()">Verify</button>
+        </div>
+        <div class="text-center downloadsfasec" style="margin-top: 10px;">
+          <a class="d-block small downLinkBtn" style="float:left;" data-toggle="modal" data-target="#appVerifier" href="#"><i class="fa fa-mobile mobile"></i>Download SFA here!</a>
+          <!-- <a class="d-block small" href="generic_user" style="float:right;"><i class="fa fa-user"></i> Back Office Login</a> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="appVerifier" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	      	<h4 class="modal-title">Enter Passcode:</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        
+	      </div>
+	      <div class="modal-body">
+	       <input class='form-control' type="password" name="" id='passcode'>
+	      </div>
+	      <div class="modal-footer">
+	      	<button type="button" class="btn btn-primary verifyBtn" data-dismiss="modal" onclick="download()">Verify</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+
+	  </div>
+	</div>
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/popper/popper.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="JQUERYUI/jquery-ui.js"></script>
+
+  <script src="SFA/v2/HASH/md5.js"></script>
+  <script src="SFA/v2/HASH/aes.js"></script>
+  <script type="text/javascript" src="web/web-commonsIP.js"></script>
+  
+  <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?v=quarterly&key=AIzaSyAt0Pxe9_3DTav3DmUQzHfgd07s_LcJo7I&callback=initMap"></script> -->
+  <script type="text/javascript" src="js/bootbox.min.js"></script>  
+  <script type="text/javascript" src="js/indexjs.js"></script>
+
+</body>
+
+</html>
