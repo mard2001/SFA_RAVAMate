@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+	body{
+      font-family: 'Poppins', sans-serif;
+      font-size: 10px;
+	}
+
+	#heading{
+	  text-align: center;
+	}
+
+	#subHeading{
+	  float: left;
+	  text-align: left;
+	  padding: 10px;
+	}
+
+	#subHeading2{
+	  text-align: left;
+	  padding: 10px;
+	  float: right;
+	}
+
+	.maintable {
+	  border-collapse: collapse;
+	  text-align: center;
+	}
+
+	.maintable th, thead, td {
+	  border: 1px solid black;
+	}
+
+	.maintable td:nth-child(1){
+			border-left: none !important;
+	}
+
+	.maintable td:nth-child(8){
+		border-right: none !important;
+	}
+
+	.maintable tr:nth-child(even) {
+	  background-color: #e1e9eb;
+	}
+
+	.firstfooter tr:nth-child(odd) {
+	  background-color: #e1e9eb;
+	}
+
+	.firstfooter{
+		padding-bottom: 20px;
+	}
+
+	.scndInput{
+		margin-left: 30px;
+		width: 100px !important;
+	}
+
+	.scndText{
+		margin-left: 110px;
+		font-weight: bold;
+	}
+
+	.scndText1{
+		margin-left: 97px;
+		font-weight: bold;
+	}
+
+	.thrdText{
+		margin-left: 65%;
+		font-weight: bold;
+	}
+
+	h3{
+		letter-spacing: 2px;
+	}
+	
+	.text-left{
+		text-align: left;
+	}
+
+	.text-right{
+		text-align: right;
+	}
+
+    td{
+		padding: 2px;
+	}
+
+	.fotter-table{
+		margin-top: 30px;
+		font-size: 8px;
+	}
+
+	.footerText{
+		border-top: none;
+		border-left: none;
+		border-right: none;
+		width: 150px;
+		border-bottom: solid 1px;
+		margin-left:50px;
+	}
+
+	.entries{
+		font-weight: bold;
+		text-align: center;
+		margin-left: 10px;
+	}

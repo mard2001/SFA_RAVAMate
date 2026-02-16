@@ -1,0 +1,534 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Sales Report</title>
+    <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/BOOTSTRAP3/css/bootstrap.min.css"/>
+    <script src="/BOOTSTRAP3/AJAX/jquery.min.js"></script>
+    <script src="/BOOTSTRAP3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/mdDesign.css">
+    <link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+    
+   <!--=================================data reports import-=============================-->
+    <script type="text/javascript" src="/DATERANGEPICKER/moment.min.js"></script>
+    <script type="text/javascript" src="/DATERANGEPICKER/daterangepicker.js"></script>
+    <link rel="stylesheet" href="/DATERANGEPICKER/daterangepicker.css">
+    <link rel="stylesheet" href="DATATABLES/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="DATATABLES/editor.dataTables.min.css"/>
+    <link rel="stylesheet" href="DATATABLES/buttons.dataTables.min.css "/>
+    
+
+</head>
+
+<body class="" id="page-top">
+  <div id="mySidenav" class="sidenav">
+      <div class='image'><img alt='mdbuddylogo' class='logoMd' src='/img/mdbuddylogo_jeff.png'/></div>
+      <a href="salesReport" class="activeYes"><i class="fas fa-file-alt"></i> Sales Report</a>
+      <a href="transactionLedger"><i class="fas fa-file-alt"></i> Transaction Ledger</a>
+      <a href="UnprocessedOrders"><i class="fas fa-file-alt"></i> Unprocessed Orders</a>
+      <a href="dsr"><i class="fas fa-file-alt"></i> DSR</a>
+      <a href="stockRequest"><i class="fas fa-file-alt"></i> Stock Request</a>
+      <a href="sfaQueuing"><i class="fas fa-file-alt"></i> Data Maintenance</a>
+      <a href="unuploaded"><i class="fas fa-file-alt"></i> Unuploaded</a>
+      <a href="BOReport"><i class="fas fa-file-alt"></i> BO</a>
+      <a href="dcr"><i class="fas fa-file-alt"></i> Daily Collection</a>
+      <a href="Stocktake Report"><i class="fas fa-file-alt"></i> Stocktake</a>
+      <a href="inventory"><i class="fas fa-file-alt"></i> Inventory Valuation</a>
+      <a href="jobberMaintenance"><i class="fas fa-file-alt"></i> Jobber</a>
+      <a href="customerTagging"><i class="fas fa-file-alt"></i> Customer Tagging</a>
+  </div>
+    <div id="main">
+        <h4 class="display-4">
+           <a href="#" id='navBtn' class="btn btn-primary"  style='margin-right: 15px;'>
+             <span class="glyphicon glyphicon-menu-hamburger"></span> 
+           </a>
+          <span class='glyphicon glyphicon-file'></span> Sales Report
+          <span class="nav navbar-nav navbar-right">
+                  <li class="dropdown">
+                      <a style='float:right;' href="#" class="dropdown-toggle" data-toggle="dropdown" id='dropThisDown'>
+                          <span class="label label-pill label-danger count" style='border-radius: 10px; font-size: 10px;'></span>
+                          <span class="glyphicon glyphicon-bell"></span>
+                      </a>
+                      <ul class="dropdown-menu" style='padding: 0'>
+                        <div id='notif-body'>
+                           <div id='notifs-icon-div'></div>
+                        </div>
+                        <a type="button" class="btn btn-default btn-block" href='mdAlert_bohol.php' id='seeAll' >See all</a>
+                      </ul>
+                  </li>
+                   <li class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="glyphicon glyphicon-user"></i>
+                      </a>
+                      <ul class="dropdown-menu dropdown-user">
+                          <li><a href="Profile.html"><i class="glyphicon glyphicon-user"></i> My Account</a>
+                          </li>
+                          <li class="divider"></li>
+                          <li><a href="#" id="common-logout-btn"><i class="glyphicon glyphicon-lock"></i> Logout</a>
+                          </li>
+                      </ul>
+                   </li>
+                
+              </span>
+          </h4>
+         <div class="panel" style='background-color:#2c8dd6; color: white; margin-top: 20px;'>
+
+                <div class="panel-heading">
+                  <span class='glyphicon glyphicon-list-alt'></span>
+                  <span id="titleHeading" class="display-4"></span>
+
+                  <div id="reportrange1" class="pull-right" style="background-color: transparent; cursor: pointer; color: white;">
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                        <span>Filter by Date</span> <b class="caret"></b>
+                    </div>
+                </div>
+                <div class="panel-body" style='background-color:#fff; color: black;'> 
+                  <!--<button class="btn btn-success btn-sm" id="appvBtn">APPROVE</button>-->
+                    <div class="loading-table">
+                         <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i> Rendering data ...
+                          <span class="sr-only">Loading...</span>
+                    </div>
+                    <table id="stockRequest_TAB" class="display nowrap" width="100%">
+                      <thead>
+                         <tr>
+                           <th>STATUS</th>
+                           <th>SALESMAN</th>
+                           <th>DATE</th>
+                           <th>CUSTCODE</th>
+                           <th>CUSTOMER</th>
+                           <th>DOCUMENT NO.</th>
+                           <th>RANGE</th>
+                           <th>TIME TRAVEL (Min.)</th>
+                           <th>TIME SPENT (Min.)</th>
+                           <th>GEO DIFFERENCE</th>
+                           <th>LONGITUDE</th>
+                           <th>LATITUDE</th>
+                           <th>REMARKS</th>
+                           <th>SALES</th>
+                         </tr>
+                      </thead>
+                      <tbody></tbody>
+                      <tfoot>
+                          <tr>
+                              <th colspan="12" style="text-align:right">Total Sales:</th>
+                              <th></th>
+                          </tr>
+                      </tfoot>
+                    </table>
+                 </div>
+               </div>
+         </div><!--main panel end-->
+
+    <div id="salesDmodal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-800">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title"><i class="fa fa-list"></i> Sales Details</h4>
+          </div>
+          <div class="modal-body">
+              <table class="table table-hover table-condensed table-striped">
+                <tr>
+                  <td>Reference No.</td>
+                  <td id="refnoH" class="strong"></td>
+                </tr>
+                <tr>
+                  <td>Delivery Date</td>
+                  <td id="transactionDateH" class="strong"></td>
+                </tr>
+                <tr>
+                  <td>Customer</td>
+                  <td id="customerH" class="strong"></td>
+                </tr>
+                <tr>
+                  <td>Address</td>
+                  <td id="addressH" class="strong"></td>
+                </tr>
+                <tr>
+                  <td>Total Range</td>
+                  <td id="rangeH" class="strong"></td>
+                </tr>
+                <tr>
+                  <td>Time Spent (Min.)</td>
+                  <td id="timepentH" class="strong"></td>
+                </tr>
+                <tr>
+                  <td>Total Amount</td>
+                  <td id="amountH" class="strong"></td>
+                </tr>
+                <tr>
+                  <td>Remarks</td>
+                  <td id="remarksH" class="strong"></td>
+                </tr>
+              </table>
+              <table class="table table-hover table-striped fixed_header">
+                <thead>
+                  <tr>
+                    <th>STOCKCODE</th>
+                    <th style="text-align: left !important;">DESCRIPTION</th>
+                    <th style="text-align: right !important;">QUANTITY</th>
+                    <th style="text-align: right !important;">AMOUNT</th>
+                  </tr>
+                </thead>
+                <tbody id="salesDetailsBody"></tbody>
+              </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="modal fade" id="dssmodal" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">DAILY SALES SUMMARY (DSS)</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table table-hover" style="text-align:left;">
+                <tr>
+                  <td>Date:</td>
+                  <td>
+                    <span id="dssdatePicker"> &nbsp; 
+                      <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                      <span id="datestring"></span>
+                    </span>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" onclick="execprintDSS()">View</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    <script src="DATATABLES/jquery.dataTables.min.js"></script>
+    <script src="DATATABLES/dataTables.buttons.min.js"></script>
+    <script src="DATATABLES/buttons.print.min.js"></script>
+    <script src="DATATABLES/buttons.html5.min.js"></script>
+    <script src="DATATABLES/jszip.min.js"></script>
+    <script src="DATATABLES/ellipsis.js"></script>
+
+    <script type="text/javascript" src="/js/jasonday-printThis-c814846/printThis.js"></script>
+    <script type="text/javascript" src="/web/web-commons.js"></script>
+    <script type="text/javascript" src="/js/bootbox.min.js"></script>
+    <script type="text/javascript" src="/js/scrolling.js"></script>
+    <script type="text/javascript" src="js/commonusrs-cred.js"></script>
+    <script src="/HASH/md5.js"></script>
+    <script src="/HASH/aes.js"></script>
+    <script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+    <script type="text/javascript">
+      var usertype = localStorage.getItem("usertype");
+
+      determineUserType(usertype); 
+      
+      getcompname();
+      function getcompname(){
+      $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {"type":"GET_COMPANYNAME", "CONN":con_info},
+          dataType: "json",
+          crossDomain: true,
+          cache: false,            
+            success: function(r){ 
+              $('#titleHeading').html(r[0].company.toUpperCase() +' / Sales Report');
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              $('#titleHeading').html('<i class="fa fa-circle blinking"></i> <b style="color:red;">ERROR:</b> Unable to establish a connection from your server. Please check your server settings.');
+            }
+        });
+      } 
+      
+      var sourceDat;
+      $('.loading-table').hide();
+      function stockRequestSourceData(start, end){
+      $('#stockRequest_TAB').hide();
+      $('.loading-table').show();
+       var dialog = bootbox.dialog({
+              message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> please wait...</p>',
+              backdrop: true
+            });
+        var botboxMsg = '';
+         $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {"type":"salesReport", "startDate":start, "endDate":end, "CONN":con_info},
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(r){ 
+                if(r.lenght != 0){ 
+                  sourceDat = r;
+                  $('#stockRequest_TAB').show();
+                  $('.loading-table').hide();
+                }else{
+                  alert('NO DATA FOUND IN YOUR SELECTED DATE: ' + start +' to '+ end);
+                }
+
+                dialog.modal('hide');
+               },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+              botboxMsg = '<b class="text-danger">Ops! Something went wrong!</b><br/>' + XMLHttpRequest.responseText + ' CONTACT SYSTEM ADMINISTRATOR!';
+              dialog.init(function(){
+                    setTimeout(function(){
+                      dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                  }, 1000);
+              });
+             }
+            }).done(function () {
+                    dialog.init(function(){
+                          setTimeout(function(){
+                            dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                        }, 1000);
+                  });
+            });
+      }
+
+      datePicker();
+      var startPickDate, endPickDate;
+      function datePicker(){
+       var start = moment().subtract(29, 'days');
+        var end = moment();
+
+        $('#reportrange1').daterangepicker({
+            "alwaysShowCalendars": true,
+            "startDate": start,
+            "endDate": end,
+            "maxDate": moment(),
+            "applyClass": "btn-primary",
+            "autoApply": false,
+            ranges: {
+               'Today': [moment(), moment()],
+               'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+               'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+               'This Month': [moment().startOf('month'), moment().endOf('month')],
+               'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        }, function(start, end, label) {
+            $('#reportrange1 span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            startPickDate = start.format('YYYY-MM-DD');
+            endPickDate = end.format('YYYY-MM-DD')
+          });
+
+        $('#reportrange1').on('apply.daterangepicker', function(ev, picker) {
+          $('#stockRequest_TAB').hide();
+          var start = picker.startDate.format('YYYY-MM-DD');
+          var end = picker.endDate.format('YYYY-MM-DD');
+          stockRequestSourceData(start, end);
+          tableData.clear().rows.add(sourceDat).draw();
+        });
+      }
+      datatableApp();
+      var tableData;
+      function datatableApp(){
+           tableData = $('#stockRequest_TAB').DataTable({
+              "dom": 'Bfrtip',
+              "responsive": true,
+              "data": sourceDat,
+              "scrollX": true,
+              columns: [
+                  { data: "Status" },
+                  { data: "Salesman" },
+                  { data: "deliveryDate" },
+                  { data: "CustomerID"},
+                  { data: "Customer" },
+                  { data: "DocumentNo" },
+                  { data: "SKU" },
+                  { data: "TIMEBOUND" },
+                  { data: "upTime" },
+                  { data: "GEODIfference" },
+                  { data: "longitude" },
+                  { data: "latitude" },
+                  { data: "Notation" },
+                  { data: "Sales" }
+                ],
+            columnDefs: [
+    					{
+    						targets: 12,
+    						className: 'dt-body-left',
+                render: $.fn.dataTable.render.ellipsis(20)
+              },
+              {
+    						targets: 13,
+    						className: 'dt-body-right'
+    					}
+  				  ],rowCallback: function(row, data, index){
+                var stat = data.Status.toString().toUpperCase();
+                var salesFormat = data.Sales.toString();
+                  if(stat == 'VALID'){
+                    $(row).find('td:eq(0)').css({'color': 'green', 'font-size':'9px;'});
+                    $(row).find('td:eq(0)').html('&#10003; VALID');
+                  }else{
+                    $(row).find('td:eq(0)').css({'color': 'red', 'font-size':'10px;', 'letter-spacing': '0.5em', 'text-decoration':'line-through'});
+                  }
+                  $(row).find('td:eq(13)').text(Number(parseFloat(salesFormat).toFixed(2)).toLocaleString());
+            },
+            buttons: [
+                {
+                    text: '<i class="fa fa-file-archive-o"></i> SALES SUMMARY',
+                    // className: 'bringtoprint',
+                    action: function(e, dt, node, config){
+                      printDSS();
+                    }   
+                }, 'excel', 'print', 'copy'
+            ],
+            "footerCallback": function ( row, data, start, end, display ) {
+            var api = this.api(), data;
+
+            var intVal = function ( i ) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '')*1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+
+            total = api
+                .column( 13 )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+ 
+            pageTotal = api
+                .column( 13, { page: 'current'} )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+ 
+            $( api.column( 13 ).footer() ).html(
+                '₱ '+pageTotal.toLocaleString() +' ('+ total.toLocaleString() +')'
+            );
+          }
+        });
+
+      $('#stockRequest_TAB tbody').on('click', 'tr', function () {
+            var tr = $(this).closest('tr');
+            var row = tableData.row(tr);
+            viewDetails(row.data());
+      });
+
+      function viewDetails(r){
+        $('#transactionDateH').html(r.deliveryDate);
+        //$('#salesmanH').html(r.Salesman);
+        //$('#transactionIDH').html(r.transactionID);
+        $('#customerH').html(r.CustomerID +' '+ r.Customer);
+        $('#rangeH').html(r.SKU);
+        $('#amountH').html(Number(parseFloat(r.Sales).toFixed(2)).toLocaleString());
+        $('#timepentH').html(r.upTime);
+        $('#remarksH').html(r.Notation);
+        $('#addressH').html(r.Address);
+          $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {"type":"salesReport_details", "transactionID":r.transactionID, "CONN":con_info},
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(r){
+                var cont = '';
+                $('#refnoH').html(r[0].refno);
+                for(var x = 0; x < r.length; x++){
+                  cont += '<tr>'+
+                            '<td>'+r[x].stockCode+'</td>'+
+                            '<td style="text-align: left !important;">'+r[x].description+'</td>'+
+                            '<td style="text-align: center !important;">'+r[x].quantity+'</td>'+
+                            '<td style="text-align: right !important;">'+r[x].amount+'</td>'+
+                          '</tr>';
+                }
+                $('#salesDetailsBody').html(cont);
+                $('#salesDmodal').modal('show');
+              }
+          });
+      }
+    }
+
+    function printDSS(){
+      $('#dssmodal').modal('show');
+    }
+
+    function execprintDSS(){
+      if(dssdate == 'undefined' || dssdate == null){
+        alert('Please select a date.');
+      }else{
+        localStorage.setItem('DSSdateSelected', dssdate);
+        window.open('https://mybuddy-sfa.com/SFA/print-dashboard-dailysales.html', '_blank');
+      }  
+    }
+
+    dsspicker();
+    var dssdate;
+    function dsspicker(){
+      $('#datestring').html('Pick a date');
+      $('#dssdatePicker').daterangepicker({
+          "singleDatePicker": true,
+          "startDate": moment(),
+          "endDate": moment(),
+          "maxDate": moment(),
+      }, function(start, end, label) {
+        dssdate = start.format('YYYY-MM-DD');
+        var today = moment().format('YYYY-MM-DD');
+        $('#datestring').html(dssdate);
+      });
+    }
+
+       (function($) {
+          $.fn.clickToggle = function(func1, func2) {
+              var funcs = [func1, func2];
+              this.data('toggleclicked', 0);
+              this.click(function() {
+                  var data = $(this).data();
+                  var tc = data.toggleclicked;
+                  $.proxy(funcs[tc], this)();
+                  data.toggleclicked = (tc + 1) % 2;
+              });
+              return this;
+          };
+         }(jQuery));
+
+       
+          $("#navBtn").clickToggle(function() {   
+            openNav();
+          }, function() {
+              closeNav();
+          });
+
+          $(window).bind("load", function () {
+              $('#work-in-progress').fadeOut();
+          });
+        
+          function imgError2(image) {
+            image.onerror = "";
+            image.src = "../img/salesmanPic.jpg";
+            return true;
+          }  
+
+          function openNav() {
+              document.getElementById("mySidenav").style.width = "270px";
+              document.getElementById("main").style.marginLeft = "270px";
+          }
+
+          function closeNav() {
+              document.getElementById("mySidenav").style.width = "0";
+              document.getElementById("main").style.marginLeft= "0";
+          }
+    </script>
+</body>
+</html>

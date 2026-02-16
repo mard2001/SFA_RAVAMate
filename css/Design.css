@@ -1,0 +1,1415 @@
+#div1{
+        		
+    margin: 0 auto;
+    text-align: center;
+    }
+
+    body{
+    margin: 0 auto;
+    font-family: Segoe UI;
+    background: linear-gradient(-60deg, #152330, #193654) no-repeat fixed center;     		
+    padding: 0px;
+    width: 100%;
+    position: relative;
+
+    }
+
+    #topNav{
+    height: 100%;
+    position:fixed;
+    left: 0;
+    right: 0;
+    background-color: #333;
+    }
+
+    #NavButton{
+    width: 100%;
+    height: 100px;
+    z-index: 1;
+    position: absolute;
+    <!-- background-color: 282357;-->
+    }
+
+    .NavButton-IMG{
+    margin-top: 10px;
+    height: 40px;
+    width: 40px;
+    background: rgba(50,34,34, 0.3);
+    padding: 3px;
+    margin-top: 40px;
+    margin-left: 10px;
+    }
+
+    #deviceready{
+    height: 100%;
+    width: 100%;
+    }
+
+    html{
+    height: 100%;
+    padding: 0;
+    }
+
+    .viewDetailBtn{
+    margin: 0 auto;
+    background-color: #0e1c37;
+    padding: 12px;
+    color: white;
+    border: none;
+    height: 50px;
+    width: 230px;
+    margin-bottom: 10px;
+    margin-top: 30px;
+    outline: none;
+
+    }
+
+    .Main_show_div_rep_adm{
+    display: none;
+    }
+
+    #menuAccountDiv{
+    transition: ease 0.2 s;
+    background-color: #33a3c8;
+    display: none;
+    }
+
+    .menuAccountTab{
+    border-collapse: collapse;
+    width: 300px;
+    margin-bottom: 10px;
+    margin-top: 0 px;
+    }
+
+    #menuAccountDiv2{
+    transition: ease 0.2 s;
+    background-color: #33a3c8;
+    display: none;
+    }
+
+    .menuAccountTab2{
+    border-collapse: collapse;
+    width: 300px;
+    margin-bottom: 10px;
+    margin-top: 0 px;
+    }
+
+    .h3{
+    font-size: 14px;
+    padding: 5px;
+    color:  #0e1c37;
+    }
+
+    .tdaccview{
+    border-bottom: 1px solid #0e1c37;
+    border-top: 1px solid #0e1c37;
+    width: 190px;
+    }
+
+    .viewDetailBtn:focus{
+    background-color: #0e1c37;
+    color: white;
+    width: 230px;
+    padding: 12px;
+    }
+
+
+
+    tdLogin{
+    padding: 10px;
+
+    }
+
+
+
+
+
+    input{
+    text-align: center;
+    padding: 10px;
+    background-color:  #13293e;
+    color: white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-color: #01729d;
+    width: 250px;
+    height: 40px;
+    font-size: 16px;
+
+    }
+
+    .inputGender{
+
+    padding: 0px;
+    background-color: black;
+    float: left;
+    }
+
+
+
+
+    .inputAccMenuItem_Profile{
+    text-align: center;
+    padding: 10px;
+    background-color:  #13293e;
+    color: white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-color: #01729d;
+    width: 250px;
+    height: 25px;
+    font-size: 16px;
+    margin-top: 15px;
+    }
+
+    .inputAccMenuItem_Profile:focus{
+    background-color:  #13293e;
+    color: white;
+    }
+
+    .underNot{
+    margin: 0 auto;
+    background-color:#01729d;
+    width: 250px;
+    padding: 10px;
+    font-size: 13px;
+     
+    }
+
+    .underNot_rep{
+    margin: 0 auto;
+    background-color:#01729d;
+    width: 150px;
+    padding: 10px;
+    font-size: 13px;
+    margin-left: 5px;
+     
+    }
+
+    .underNot_update{
+    text-align: center;
+    margin: 0 auto;
+    background-color:#01729d;
+    width: 321px;
+    padding: 5px;
+    font-size: 13px;
+    margin-left: 5px;
+     
+    }
+
+    .underNot_update_2{
+    text-align: center;
+    margin: 0 auto;
+    background-color:#01729d;
+    width: 153px;
+    padding: 5px;
+    font-size: 13px;
+
+
+
+     
+    }
+
+    input:focus{
+    background-color: white;
+    color: #01729d;
+    width: 250px;       		
+    }
+
+    .button{	
+    margin: 0 auto;
+    background-color: #0e1c37;
+    padding: 12px;
+    color: white;
+    border: none;
+    height: 60px;
+    width: 200px;
+    margin-bottom: 60px;
+    margin-top: 30px;
+    outline: none;
+    }
+
+    .button:focus{
+    background-color: #0e1c37;
+    color: white;
+    width: 200px;
+    }
+
+    .buttonAccMenuItem_Prof{
+    margin: 0 auto;
+    background-color: #0e1c37;
+    padding: 12px;
+    color: white;
+    border: none;
+    height: 60px;
+    width: 275px;
+    margin-bottom: 120px;
+    margin-top: 30px;
+    outline: none;
+    }
+
+    .buttonAccMenuItem_Prof:focus{
+    background-color: #0e1c37;
+    color: white;
+    width: 275px;
+    outline: none;
+    }
+
+
+    .buttonReportMenuItem{
+    margin: 0 auto;
+    background-color: #0e1c37;
+    padding: 12px;
+    color: white;
+    border: none;
+    height: 60px;
+    width: 160px;
+    margin-bottom: 120px;
+    margin-top: 30px;
+    }
+
+    .buttonSpecFishermenRec{
+    margin: 0 auto;
+    background-color: #0e1c37;
+    padding: 12px;
+    color: white;
+    border: none;
+    height: 60px;
+    width: 160px;
+    margin-bottom: 60px;
+    margin-top: 30px;
+    }
+
+    .buttonManageFisher{
+    margin: 0 auto;
+    background-color: #0e1c37;
+    padding: 12px;
+    color: white;
+    border: none;
+    height: 60px;
+    width: 160px;
+    margin-bottom: 120px;
+    margin-top: 30px;
+
+    }
+
+    .fisherMen_SG{
+    width: 230px;
+    height: 300px;
+
+    }
+
+    .fishermenInput{
+
+    margin-top: 30px;
+    width: 210px;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    border-radius: 10px;
+
+    }
+    .fishermenInput:focus{
+
+    width: 200px;
+
+    }
+
+    .fishermanBody{
+    margin: 0 auto;
+    margin-top: 30px;
+    }
+
+    .h4manageAdminstrator{
+    color: white;
+    border-bottom: 1px solid white;
+    padding: 3px;
+    font-weight: bold;
+    margin-top: 9px;
+    margin-bottom: 5px;
+    }
+
+    .buttonManageAdmin_del{
+    margin: 0 auto;
+    background-color: #0e1c37;
+    padding: 12px;
+    color: white;
+    border: none;
+    height: 60px;
+    width: 325px;
+    outline: none;
+    margin-top: 20px;
+
+    }
+
+    .buttonManageAdmin_del:focus{
+    background-color: #0e1c37;
+    width: 325px;
+    color: white;
+    }
+
+    .buttonManageAdmin{
+    margin: 0 auto;
+    background-color: #0e1c37;
+    padding: 12px;
+    color: white;
+    border: none;
+    height: 60px;
+    width: 325px;
+    margin-top: 30px;
+
+    }
+
+    .buttonManageAdmin_spec{
+    margin: 0 auto;
+    background-color: #0e1c37;
+    padding: 12px;
+    color: white;
+    border: none;
+    height: 60px;
+    width: 325px;
+    margin-top: 5px;
+    margin-bottom: 120px;
+    outline: none;
+    }
+
+    .buttonManageAdmin_delete{
+    margin: 0 auto;
+    background-color: #0e1c37;
+    padding: 12px;
+    color: white;
+    border: none;
+    height: 60px;
+    width: 325px;
+    margin-top: 10px;
+    margin-bottom: 90px;
+    outline: none;
+    }
+
+    .buttonManageAdmin_delete:focus{
+    width: 325px;
+    background-color: #0e1c37;
+    color: white;
+    outline: none;
+    }
+
+    .buttonManageAdmin_spec:focus{
+    width: 325px;
+    background-color: #0e1c37;
+    color: white;
+    outline: none;
+    }
+
+    .buttonManageAdmin:focus{
+
+    width: 160px;
+    }
+
+    .buttonManageEnforcer{
+    margin: 0 auto;
+    background-color: #0e1c37;
+    padding: 12px;
+    color: white;
+    border: none;
+    height: 60px;
+    width: 160px;
+    margin-top: 30px;
+    }
+
+    .divbot{
+    margin-bottom: 2px;
+    }
+
+    .buttonManageEnforcer{
+
+    width: 160px;
+    }
+
+    .buttonManageEnforcer_del{
+    margin: 0 auto;
+    background-color: #0e1c37;
+    padding: 12px;
+    color: white;
+    border: none;
+    height: 60px;
+    width: 325px;
+    margin-bottom: 120px;
+    margin-top: 10px;
+
+    }
+
+    .buttonManageEnforcer_del:focus{
+
+    width: 325px;
+    }
+
+    .buttonViewMenuItem{
+    margin: 0 auto;
+    background-color: #0e1c37;
+    padding: 12px;
+    color: white;
+    border: none;
+    height: 80px;
+    width: 250px;
+    margin-bottom: 10px;
+    font-size: 15px;
+
+    }
+
+    .buttonViewMenuItem:focus{
+    border: solid 1px #fff;
+    }
+
+    .detailMarginReportMenuItem{
+    margin-top: 20px;
+    }
+
+    .buttonAccountMenuItem{
+    margin: 0 auto;
+    background-color: #0e1c37;
+    padding: 12px;
+    color: white;
+    border: none;
+    height: 80px;
+    width: 320px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    }
+
+    .imgAccountMenuItem_Prof{
+    width: 200px;
+    height: 200px;
+    background-color: black;
+    margin-top: 20px;
+    }
+
+    .tableViewMenuItem{
+    margin-top: 100px;
+    }
+
+    .tableAccountMen{
+    margin-top: 100px;
+    }
+
+
+    .inputViewRep{
+    background-color: #ecf1f7;;
+    text-decoration: italic;
+    color: black;
+    text-align: left;
+    }
+
+    .imgButtonViewRep{
+
+    height: 35px;
+    width: 34px;
+    padding: 8px;
+
+    }
+
+    .buttonViewRep{
+    background-color: #05779c;
+    border: solid 1px #05779c;
+
+
+    }
+
+    .imgLogo{
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 230px;
+    height: 275px;
+    }
+
+    .navagationBtn{
+
+    height: 90px;
+    background-color: #132d46;
+    margin-top: 500px;
+    position: fixed;
+    margin: 0 auto;
+    bottom: 0;
+    border-top:1px solid #58f;
+    width: 100%;
+
+
+    }
+
+    .viewMenuNavagationBtn{
+
+    height: 90px;
+    background-color: #132d46;
+    position: fixed;
+    margin: 0 auto;
+    bottom: 0;
+    border-top:1px solid #58f;
+    width: 100%;
+    }
+
+    .detailNavagationHeader{
+    margin: 0 auto;
+    top: 0%;
+    height: 60px;
+    width: 200px;
+    }
+
+    th{
+    color: white;
+    }
+
+    .tdNavagationBtn{
+    padding: 10px;
+    width: 100px;
+    }
+
+    .arrowBtn{
+    	margin: 0 auto;
+    transform: translateY(90%);
+    }
+
+    .navagationBtn-show{
+    transform: translateY(0%);
+    }
+
+    .imgNavIcon{
+    width: 50px;
+    height: 60px;
+    margin: 0 auto;
+    margin-left: 12px; 	
+    }
+
+    table{  		
+    margin: 0 auto;  
+    font-size: 20%;      	
+    }
+
+    .menuAccountTable{
+
+    }
+
+    .searchButtonTop{
+    margin-top: 0px;
+    }
+
+    .inputReportMenuItem{
+    text-align: center;
+    padding: 10px;
+    background-color:  #13293e;
+    color: white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-color: #01729d;
+    width: 150px;
+    height: 20px;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-top: 20px;
+    }
+
+    .inputSaveMpa{
+    text-align: center;
+    padding: 10px;
+    background-color:  #13293e;
+    color: white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-color: #01729d;
+    width: 260px;
+    height: 23px;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-top: 20px;
+    }
+
+    .inputSaveMpa:focus{
+    background-color: white;
+    color: #01729d;
+    width: 260px;
+    }
+    .inputMenuItem_SpecFisherRec{
+    text-align: center;
+    padding: 5px;
+    background-color:  #13293e;
+    color: white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-color: #01729d;
+    width: 152px;
+    height: 30px;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-top: 12px;
+    }
+
+    .SELECT_GEN_2{
+    text-align: center;
+    padding: 5px;
+    background-color:  #13293e;
+    color: white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-color: #01729d;
+    width: 330px;
+    height: 50px;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-top: 12px;
+    }
+
+    .SELECT_GEN_2:focus{
+    background-color: #13293e;
+    width: 330px;
+    color: #01729d;
+    }
+
+    .INPUT_SAVE_ADM_2{
+    text-align: center;
+    padding: 5px;
+    background-color:  #13293e;
+    color: white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-color: #01729d;
+    width: 330px;
+    height: 50px;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-top: 12px;
+    }
+
+    .INPUT_UPDATE_ADM{
+    text-align: center;
+    padding: 5px;
+    background-color:  #13293e;
+    color: white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-color: #01729d;
+    width: 320px;
+    //height: 50px;
+    font-size: 16px;
+    margin-top: 12px;
+    }
+
+    .for_noneditable_id{
+    text-align: center;
+    padding: 5px;
+    background-color:  #13293e;
+    color: white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-color: #01729d;
+    width: 320px;
+    //height: 50px;
+    font-size: 16px;
+    margin-top: 12px;
+
+    }
+
+    .for_noneditable_id:focus{
+    width: 320px;
+    background-color: #13293e;
+    outline: none;
+    color: white;
+    }
+
+    .INPUT_UPDATE_ADM:focus{
+
+    width: 320px;
+    }
+
+    .INPUT_SAVE_ADM_2:focus{
+    background-color: white;
+    width: 330px;
+    color: #01729d;
+
+    }
+
+    .INPUT_SAVE_ADM{
+    text-align: center;
+    padding: 5px;
+    background-color:  #13293e;
+    color: white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-color: #01729d;
+    width: 152px;
+    height: 40px;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-top: 12px;
+    }
+
+    .INPUT_UPDATE_ADM2{
+    text-align: center;
+    padding: 5px;
+    background-color:  #13293e;
+    color: white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-color: #01729d;
+    width: 152px;
+    //height: 40px;
+    font-size: 16px;
+    margin-top: 12px;
+    }
+
+    .INPUT_UPDATE_ADM2:focus{
+    width: 152px;
+    color: #01729d;
+    background-color: white;
+    }
+
+    .INPUT_SAVE_ADM:focus{
+    background-color: white;
+    width: 152px;
+    color: #01729d;
+
+    }
+
+    .inputMenuItem_SpecFisherRec_2{
+    text-align: center;
+    padding: 5px;
+    background-color: #13293e;
+    color: white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-color: #01729d;
+    width: 320px;
+    height: 30px;
+    font-size: 16px;
+    margin-top: 12px;
+    }
+
+    .genDis{
+    text-align: center;
+    padding: 5px;
+    background-color:  #13293e;
+    color: white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-color: #01729d;
+    width: 320px;
+    height: 30px;
+    font-size: 16px;
+    margin-top: 12px;
+    }
+
+    .genDis:focus{
+    width: 320px;
+    background-color: #13293e;
+    color: white;
+    }
+
+    .selectGen{
+    text-align: center;
+    padding: 5px;
+    background-color:  #13293e;
+    color: white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-color: #01729d;
+    width: 330px;
+    height: 40px;
+    font-size: 16px;
+    margin-top: 12px;
+    }
+    .inputMenuItem_SpecFisherRec:focus{
+    background-color:#13293e;
+    color: #01729d;
+    width: 152px;
+    }
+
+    .inputMenuItem_SpecFisherRec_2:focus{
+    background-color: #13293e;
+    color: white
+    width: 320px;
+
+    }
+
+    .tdMenuItem_SpecFisherRec{
+    width: 100px;
+    }
+
+    .trReportMenuItem{
+    margin-top: 20px;
+    }
+
+    .inputReportMenuItem:focus{
+    background-color: white;
+    color: #01729d;
+    width: 150px;
+
+
+
+    }
+
+    .tableNav{
+
+    text-align: center;
+    color: white;
+    font-size: 12px;
+    border-collapse: collapse;
+    margin-top: 7px;
+    }
+
+    #aNav{
+
+    }
+    #body{
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+    height: 100%;
+    }
+
+    #bodyAdminViewMenu_ManageEnfor{
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+    height: 100%;
+    margin-button: 200px;
+
+
+    }
+
+
+    .tableAdminUi_SaveMpa{
+    margin: 0 auto;
+    margin-top: 70px;
+    width: 140px;
+
+
+    }
+
+    .trAdminUI{
+    margin-top: 10px;
+    width: 160px;
+
+    }
+
+    .trAdminUiBtn{
+    width: 150px;
+    }
+
+    .trAdminUiBtn_view{
+
+    width: 200px;
+    margin-bottom: 20px;
+
+    }
+
+    .trAdminUiBtn_viewMain{
+
+    width: 160px;
+
+    }
+
+    .trAdminUiBtn_viewMain2{
+
+    width: 160px;
+
+    }
+
+    	
+    #bodyAdminUi_SaveMpa{
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+    height: 100;
+    width: 300px;
+    }
+
+
+    #bodyAdminUi_viewMain{
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    }
+
+    #bodyAdminUi_viewAccount{
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+    width: 100%;
+    height: 100%;
+
+    }
+
+    #bodyProfile{
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+    height: 100%;
+    margin-bottom: 50px;
+    }
+
+    #bodyAccountMain{
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    }
+
+    #bodyViewMain{
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 50px;
+    }
+
+    #bodyAccountMenuItem_ManangeFisher{
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 120px;
+    color: white;
+    height: 800px;
+    }
+
+    .bodyViewMenuTable{
+    margin: 0 auto;
+    text-align: center;
+    color: white;	
+    }
+
+    .bodyViewMenuTable_delete{
+    margin: 0 auto;
+    text-align: center;
+    color: white;	
+    }
+
+    #bodyViewMenuChoices{
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+    height: 100%;
+    width:100%;
+    overflow: hidden;
+
+
+    }
+
+    .violatorImage{
+
+    width: 150px;
+    height:180px;
+    background-color: blue;
+    margin: 0 auto;
+    margin-top: 10px;
+
+    }
+
+    .fishermanImage{
+    width: 155px;
+    height:200px;
+    background-color: blue;
+    margin: 0 auto;
+    margin-left: 15px;
+    }
+
+    .divViewSpecViolationHeader{
+    text-align: left;
+    width: 300px;
+    margin: 0 auto;
+    margin-top: 30px;
+    }
+
+    #divViewSpecViolationContent{
+    width: 300px;
+    background-color: #fff;
+    height: 400px;
+    margin: 0 auto;
+    border-radius: 5px;
+    }
+
+    h1{
+    color: white;
+    border-bottom: 1px solid white;
+    padding: 3px;
+    font-weight: bold;
+    margin-top: 9px;
+    margin-bottom: 5px;
+    }
+
+
+    .marginDiv{
+
+    }
+
+    .h2RegisteredGearLabl{
+    color: white;
+    border-bottom: 1px solid white;
+    padding: 3px;
+    font-weight: bold;
+    margin: 0 auto;
+    margin-top: 30px;
+
+    }
+
+    .sf{
+    width: 80px;
+    height: 30px;
+    }
+
+    .reportMenuItemDetailTable{
+    font-size: 12px;
+    color: #333;
+    text-align: center;
+    margin: 0 auto;
+    width: 350px;
+    border: solid 1px #01729d;
+    border-collapse: collapse;
+    background-color: white;		
+    }
+
+    a{
+    text-decoration: none;
+    color: white;
+    }
+
+    .fishermenGearDetailTable{
+    font-size: 12px;
+    color: #333;
+    text-align: center;
+    margin: 0 auto;
+    width: 350px;
+    border: solid 1px #01729d;
+    border-collapse: collapse;
+    background-color: white;
+
+    		
+    }
+
+    .tdDetailTableSpecFisher{
+    border-collapse: collapse;
+    text-align: center;
+    padding: 10px;
+    width: 175px;
+    }
+
+    .inputGearCode{
+    display: block;
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+
+    }
+
+    .containerForReportMenuDetailTable{
+    margin: 0 auto;
+    width: 350px;
+    height: 200px;
+    overflow-y: scroll;
+    color: black;
+    }
+
+    .containerForSpecFisherRecTable{
+    margin: 0 auto;
+    width: 350px;
+    height: 200px;
+    overflow-y: scroll;
+    color: black;
+
+
+    }
+
+    .tableHeaderFixed{
+    height: 20px;
+    width: 350px;
+    font-size: 12px;
+    color: #333;
+    text-align: center;
+    margin: 0 auto;
+    border: solid 1px #01729d;
+    border-collapse: collapse;
+    background-color: white;
+    }
+
+    .div_viewMenuItem{
+    margin-top:30px;
+    }
+
+
+    .detailInt{
+    text-align: center;
+    padding: 10px;
+    background-color: #01729d; 
+    border: solid 1px #01729d;
+    width: 220px;
+    }
+
+    .detailIntSpec{
+    width: 220px;
+    }
+
+    .tdTextNavBtn{
+    text-align: center;
+    padding: 0;
+    background-color: #ecf1f7;
+    }
+
+    .tdViewMenuItem_Rep{
+    padding: 15px;
+    background-color: #ecf1f7;
+    font-size: 17px;
+    		width: 324px;
+    }
+
+    .tdViewMenuItem_Rep_deleteAdm{
+    padding: 15px;
+    background-color: #ecf1f7;
+    margin-left: 0px;
+    width: 20px;
+    transform: scale(1.5);
+    }
+
+
+
+    .tdViewMenuItem_Rep_deleteAdm:focus{
+    width:20px;
+
+    }
+
+    .deleteResultList{
+    font-size:17px;
+    width: 260px;
+    background-color: white;
+    color: black;
+    padding: 10px;
+
+
+    }
+
+    .divViewMenuItem_Rep{
+    margin: 0 auto;
+    width: 350px;
+    height: 340px;
+    overflow-y: scroll;	
+    margin-top: 15px;
+    margin-bottom: 10px;
+    }
+
+    .linkViewMenuItem_Rep{	
+    text-decoration: none;	
+    color: black;
+    }
+
+    .buttonDel{
+    margin: 0 auto;
+    margin-top: 10px;
+
+    }
+
+    .buttonViewSpecRep{
+    margin: 0 auto;
+    background-color: #0e1c37;
+    padding: 12px;
+    color: white;
+    border: none;
+    height: 60px;
+    width: 160px;
+    margin-bottom: 60px;
+    margin-top: 30px;
+    }
+
+    .buttonSaveMpa{
+    margin: 0 auto;
+    background-color: #0e1c37;
+    padding: 12px;
+    color: white;
+    border: none;
+    height: 60px;
+    width: 220px;
+    margin-top: 20px;
+    }
+
+    .buttonSaveMpa:focus{
+    width: 220px;
+    background-color: #0e1c37;
+    color: white;
+
+
+    }
+
+    .buttonSaveView{
+    margin: 0 auto;
+    background-color: #0e1c37;
+    padding: 12px;
+    color: white;
+    border: none;
+    height: 60px;
+    width: 320px;
+    margin-right: 20px;
+    }
+
+    .buttonViewMain{
+    margin: 0 auto;
+    background-color: #0e1c37;
+    padding: 12px;
+    color: white;
+    border: none;
+    height: 60px;
+    width: 300px;
+    margin-top: 10px;
+    outline: none;
+
+    }
+
+    .buttonAccountView2{
+    margin: 0 auto;
+    background-color: #0e1c37;
+    padding: 12px;
+    color: white;
+    border: none;
+    height: 60px;
+    width: 300px;
+    margin-bottom: 100px;
+    outline: none;
+
+    }
+
+    .buttonView_hoy{
+    margin: 0 auto;
+    background-color: #0e1c37;
+    padding: 12px;
+    color: white;
+    border: none;
+    height: 60px;
+    width: 300px;
+    margin-bottom: 100px;
+    outline: none;
+
+    }
+
+    .buttonAccountView{
+    margin: 0 auto;
+    background-color: #0e1c37;
+    padding: 12px;
+    color: white;
+    border: none;
+    height: 80px;
+    width: 300px;
+    font-size: 15px;
+    margin-bottom: 10px;
+    outline: none;
+
+    }
+
+
+    .buttonView{
+    margin: 0 auto;
+    background-color: #0e1c37;
+    padding: 12px;
+    color: white;
+    border: none;
+    height: 60px;
+    width: 400px;
+    margin-right: 20px;
+    }
+
+    .tableButtonSaveMpa{
+    width: 300px;
+    margin: 0 auto;
+    margin-top: 70px;
+    	
+    }
+
+    #select{
+    display:none;
+    }
+
+    /* The Modal (background) */
+    .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width defualt: 100%*/
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+    }
+
+    /* Add Animation */
+    @-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+    }
+
+    @keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+    }
+
+    /* The Close Button */
+    .close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    }
+
+    .modal-header {
+    padding: 2px 16px;
+    background-color: #2b5aa5;
+    color: white;
+    }
+
+    .modal-body {padding: 2px 16px; text-align:center;}
+
+    .modal-footer {
+    padding: 2px 16px;
+    background-color: white;
+    color: white;
+    }
+

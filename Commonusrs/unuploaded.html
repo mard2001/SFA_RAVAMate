@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    Unuploaded
+  </title>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+ <meta content="utf-8" http-equiv="encoding">
+ <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/BOOTSTRAP3/css/bootstrap.min.css"/>
+<script src="/BOOTSTRAP3/AJAX/jquery.min.js"></script>
+<script src="/BOOTSTRAP3/js/bootstrap.min.js"></script>
+
+<link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+<link rel="stylesheet" href="/css/mdDesign.css"/>
+
+<script type="text/javascript" src="/DATERANGEPICKER/moment.min.js"></script>
+<script type="text/javascript" src="/DATERANGEPICKER/daterangepicker.js"></script>
+<link rel="stylesheet" href="/DATERANGEPICKER/daterangepicker.css">
+
+<link rel="stylesheet" href="DATATABLES/jquery.dataTables.min.css"/>
+<link rel="stylesheet" href="DATATABLES/editor.dataTables.min.css"/>
+<link rel="stylesheet" href="DATATABLES/select.dataTables.min.css"/>
+<link rel="stylesheet" href="DATATABLES/buttons.dataTables.min.css "/>
+ 
+ 
+ <style type="text/css"></style>
+   
+</head>
+ <!--<div id="work-in-progress">
+          <div style="margin: 0 auto;">
+            <img src="img/fast.png" style="height: 80px; width: 480px; z-index: 1;"></br>
+            <img src="img/orbit-400px.gif" style="position: block; height: 200px;">
+          </div>
+   </div>-->
+<body>
+
+  <div id="mySidenav" class="sidenav">
+    <div class='image'><img alt='mdbuddylogo' class='logoMd' src='/img/mdbuddylogo_jeff.png'/></div>
+    <a href="salesReport"><i class="fas fa-file-alt"></i> Sales Report</a>
+    <a href="transactionLedger"><i class="fas fa-file-alt"></i> Transaction Ledger</a>
+    <a href="UnprocessedOrders"><i class="fas fa-file-alt"></i> Unprocessed Orders</a>
+    <a href="dsr"><i class="fas fa-file-alt"></i> DSR</a>
+    <a href="stockRequest" ><i class="fas fa-file-alt"></i> Stock Request</a>
+    <a href="sfaQueuing"><i class="fas fa-file-alt"></i> Data Maintenance</a>
+    <a href="unuploaded" class="activeYes"><i class="fas fa-file-alt"></i> Unuploaded</a>
+    <a href="BOReport"><i class="fas fa-file-alt"></i> BO</a>
+    <a href="dcr"><i class="fas fa-file-alt"></i> Daily Collection</a>
+    <a href="Stocktake Report"><i class="fas fa-file-alt"></i> Stocktake</a>
+    <a href="inventory"><i class="fas fa-file-alt"></i> Inventory Valuation</a>
+    <a href="jobberMaintenance"><i class="fas fa-file-alt"></i> Jobber</a>
+    <a href="customerTagging"><i class="fas fa-file-alt"></i> Customer Tagging</a>
+  </div>
+
+  <div id="main">
+          <h4 class="display-4 dispMargin">
+            <a href="#" id='navBtn' class="btn btn-primary"  style='margin-right: 15px;'>
+             <span class="glyphicon glyphicon-menu-hamburger"></span> 
+            </a>
+             Unuploaded
+           <span class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                  <a style='float:right;' href="#" class="dropdown-toggle" data-toggle="dropdown" id='dropThisDown'>
+                      <span class="label label-pill label-danger count" style='border-radius: 10px; font-size: 10px;'></span>
+                      <span class="glyphicon glyphicon-bell"></span>
+                  </a>
+                  <ul class="dropdown-menu" style='padding: 0'>
+                    <div id='notif-body'>
+                       <div id='notifs-icon-div'></div>
+                    </div>
+                    <a type="button" class="btn btn-default btn-block" href='mdAlert_bohol.php' id='seeAll' >See all</a>
+                  </ul>
+              </li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  <i class="glyphicon glyphicon-user"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                  <li><a href="Profile.html"><i class="glyphicon glyphicon-user"></i> My Account</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#" id="admin-logout-btn"><i class="glyphicon glyphicon-lock"></i>Logout</a></li>
+                </ul>
+              </li>
+          </span>
+         </h4>
+
+         <div class="panel cust-panel">
+           <div class="panel-heading">
+                <i class='glyphicon glyphicon-cog'></i> <span id="titleHeading"></span>
+
+                <div id="reportrange1" class="pull-right" style="background-color: transparent; cursor: pointer; color: white;">
+                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                    <span>Filter by Date</span> <b class="caret"></b>
+                </div>
+           </div>
+           <div class="panel-body" style='background-color:#fff; color: black;'> 
+              <div class="table-responsive">
+
+                <table class="table table-hover display nowrap overridesList" style="width: 100%;">
+                   <thead>
+                    <tr>
+                      <th></th>
+                      <th>SALESPERSON</th>
+                      <th>PO NUMBER</th>
+                      <th>CUSTOMER ID</th>
+                      <th>CUSTOMER NAME</th>
+                      <th>SALES ORDER DATE</th>
+                      <th>REQUIRED DELIVERY DATE</th>
+                      <th>PO: 2</th>
+                      <th>STOCK CODE</th>
+                      <th>CASE</th>
+                      <th>PIECE</th>
+                      <th>ITEM DESCRIPTION</th>
+                      <th>PIECESPERCASE</th>
+                      <th>PRICEPERCASE</th>
+                      <th>UNIT PRICE</th>
+                      <th>TOTAL_AMOUNT</th>
+                      <th>GRAND TOTAL</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                  <tfoot>
+                      <tr>
+                          <th colspan="15" style="text-align:right">Total:</th>
+                          <th></th>
+                      </tr>
+                  </tfoot>
+                </table>
+              </div>
+           </div>
+         </div><!--main panel end-->
+
+         <div class="modal fade" id="updateIsexportModal" role="dialog">
+          <div class="modal-dialog">
+          
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Update Transaction</h4>
+              </div>
+              <div class="modal-body">
+                <table class="table table-condensed table-striped">
+                  <tr>
+                    <td>TRANSACTION ID</td>
+                    <td id="transactionIDH"></td>
+                  </tr>
+                  <tr>
+                    <td>PO NUMBER</td>
+                    <td id="ponumberH"></td>
+                  </tr>
+                  <tr>
+                    <td>SALES PERSON</td>
+                    <td id="salespersonH"></td>
+                  </tr>
+                  <tr>
+                    <td>CUSTOMER</td>
+                    <td id="customerH"></td>
+                  </tr>
+                </table>
+                <!--<table class="table table-condensed">
+                  <tr>
+                    <td>STOCKCODE</td>
+                    <td>DESCRIPTION</td>
+                    <td>QUANTITY</td>
+                    <td>TOTAL</td>
+                  </tr>
+                  <tr>
+                    <td id="stockH"></td>
+                    <td id="descH"></td>
+                    <td id="quantH"></td>
+                    <td id="totalH"></td>
+                  </tr>
+                </table>-->
+                <input type="hidden" id="transactionGlobalHolder">
+              </div>
+              <div class="modal-footer">
+                <small class="text-info notif">Click 'UPDATE' to tag this transaction as uploaded</small>
+                <button type="button" class="btn btn-primary" onclick="exec_isexport()">Update</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+            
+          </div>
+         </div>
+  </div><!--#main-->
+
+  <script src="DATATABLES/jquery.dataTables.min.js"></script>
+  <script src="DATATABLES/dataTables.buttons.min.js"></script>
+  <script src="DATATABLES/buttons.print.min.js"></script>
+  <script src="DATATABLES/buttons.html5.min.js"></script>
+  <script src="DATATABLES/jszip.min.js"></script>
+  <script src="DATATABLES/ellipsis.js"></script>
+  <script src="DATATABLES/dataTables.select.min.js"></script>
+  <script type="text/javascript" src="DATATABLES/dataTables.checkboxes.min.js"></script>
+
+  <script type="text/javascript" src="/web/web-commons.js"></script>
+  <script type="text/javascript" src="/bootbox/bootbox.min.js"></script>
+
+  <script type="text/javascript" src="js/commonusrs-cred.js"></script>
+  <script src="/HASH/md5.js"></script>
+  <script src="/HASH/aes.js"></script>
+  <script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+  <script type="text/javascript" language="javascript">
+
+var user = localStorage.getItem("adminUserName");
+var usertype = localStorage.getItem("usertype");
+  
+determineUserType(usertype); 
+getcompname();
+  function getcompname(){
+  $.ajax ({
+          url:  GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {"type":"GET_COMPANYNAME", "CONN":con_info},
+          dataType: "json",
+          crossDomain: true,
+          cache: false,            
+            success: function(r){ 
+            $('#titleHeading').html(r[0].company.toUpperCase() +' / Unuploaded');
+            }
+        });
+  }  
+
+$('#userConnection').val(user);
+
+ $('#navDrop').click(function() {
+   $("i", this).toggleClass("glyphicon-menu-up glyphicon-menu-down");
+  });
+ 
+ datePicker();
+  var startPickDate, endPickDate, if1dayisSelected;
+  function datePicker(){
+   var start = moment().subtract(29, 'days');
+    var end = moment();
+    $('#reportrange1').daterangepicker({
+        "alwaysShowCalendars": true,
+        "startDate": start,
+        "endDate": end,
+        "maxDate": end,
+        "applyClass": "btn-primary",
+        "autoApply": false,
+        ranges: {
+           'Today': [moment(), moment()],
+           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+           'This Month': [moment().startOf('month'), moment().endOf('month')],
+           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        }
+    }, function(start, end, label) {
+         $('#reportrange1 span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+         var d1 = moment(start);
+         var d2 = moment(end);
+         if1dayisSelected = d2.diff(d1);
+         startPickDate = start.format('MMMM D, YYYY');
+         endPickDate = end.format('MMMM D, YYYY');
+      });
+
+    $('#reportrange1').on('apply.daterangepicker', function(ev, picker) {
+      $('#stockRequest_TAB').hide();
+      var start = picker.startDate.format('YYYY-MM-DD');
+      var end = picker.endDate.format('YYYY-MM-DD');
+      salesmanDataObject(start, end);
+      tableData.clear().rows.add(sourceData).draw();
+    });
+  }
+
+  //salesmanDataObject();
+  salesmanDataTable();
+
+  var sourceData;
+  function salesmanDataObject(start, end){
+    var dialog = bootbox.dialog({
+          message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> fetching unploaded sales data...</p>',
+          backdrop: true,
+          //closeButton: false
+        });
+    var message = 'Successfully Saved!';
+    var botboxMsg = '';
+    var ajaxTime= new Date().getTime();
+      $.ajax ({
+            url:  GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {"type":"UNUPLOADED_SALES", "start":start, "end":end, "CONN":con_info},
+            dataType: "json",
+            crossDomain: true,
+            cache: false,   
+            async: false,         
+              success: function(r){
+                var sucmessage = '';
+                if(r.length != 0){
+                  sourceData = r;
+                  dialog.modal('hide');
+                }else{
+                  sourceData = [];
+                  if(if1dayisSelected == '86399999'){
+                    sucmessage = startPickDate;
+                  }else{
+                    sucmessage = startPickDate +' to ' + endPickDate;
+                  }
+                  dialog.modal('hide');
+                  bootbox.alert({
+                      message: "<p class='text-danger'><i class='fa fa-exclamation-triangle'></i> Data not found on your requested date: </p><p>"+sucmessage+'</p>',
+                      size: 'medium'
+                  });
+                }
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                botboxMsg = '<p class="text-danger"><b>Ops! Unable to retrived unuploaded sales data!</b></p>' + XMLHttpRequest.responseText;
+                 dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+               }
+            });
+
+    }
+
+    function salesmanDataObject_datatables(start, end){
+    var message = 'Successfully Saved!';
+    var botboxMsg = '';
+    var ajaxTime= new Date().getTime();
+      $.ajax ({
+            url:  GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {"type":"UNUPLOADED_SALES", "start":start, "end":end, "CONN":con_info},
+            dataType: "json",
+            crossDomain: true,
+            cache: false,   
+            async: false,         
+              success: function(r){
+                var sucmessage = '';
+                if(r.length != 0){
+                  sourceData = r;
+                }else{
+                  sourceData = [];
+                  if(if1dayisSelected == '86399999'){
+                    sucmessage = startPickDate;
+                  }else{
+                    sucmessage = startPickDate +' to ' + endPickDate;
+                  }
+                  bootbox.alert({
+                      message: "<p class='text-danger'><i class='fa fa-exclamation-triangle'></i> Data not found on your requested date: </p><p>"+sucmessage+'</p>',
+                      size: 'medium'
+                  });
+                }
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                botboxMsg = '<p class="text-danger"><b>Ops! Unable to retrived unuploaded sales data!</b></p>' + XMLHttpRequest.responseText;
+                 dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+               }
+            });
+
+    }
+
+  var tableData;
+  var prerouteData, postrouteData, stoctakeData, eodData;
+    function salesmanDataTable(){
+      //salesmanDataObject();
+      $('.loader-indicator h3').hide();
+        tableData =  $('table.overridesList').DataTable({
+                    "dom": 'Bfrtip',
+                    "data": sourceData,
+                    //"ajax": "../nestle/ApplicationAPI.php?type=UNUPLOADED_SALES&site=roxas",
+                    "scrollX": true,
+                    "ordering": false,
+                    language: {
+                        select: {
+                            rows: ""
+                        }
+                    },
+                    select: true,
+                    select: {
+                        style: 'multi',
+                        //selector: 'td:first-child'
+                    },
+                    // order: [[ 1, 'asc' ]],
+                    "columns": [
+                        {   
+                        'data': null,
+                        'targets': 0,
+                        'checkboxes': {
+                            'selectRow': true
+                            }
+                        },
+                        { "data": "Salesperson"},
+                        { "data": "PO Number"},
+                        { "data": "Customer"},
+                        { "data": "Customer Name" },
+                        { "data": "Sales Order Date" },
+                        { "data": "Required Delivery Date" },
+                        { "data": "PO: 2"},
+                        { "data": "Stock Code"},
+                        { "data": "CASE"},
+                        { "data": "PIECE" },
+                        { "data": "ITEM DESCRIPTION" },
+                        { "data": "PIECESPERCASE"},
+                        { "data": "PRICEPERCASE"},
+                        { "data": "UNIT PRICE"},
+                        { "data": "TOTAL_AMOUNT" },
+                        { "data": "GRAND TOTAL"}
+                    ],
+                    columnDefs: [
+                      {
+                          className: 'text-right',
+                          "targets": [11, 12, 13, 14, 15]
+                      }
+                    ],
+                    buttons: [ 
+                        {
+                            text: 'TAG AS UPLOADED',
+                            className: 'approveBtn_stocReq',
+                            action: function(e, dt, node, config){
+                            var row = tableData.rows('.selected').data();
+                                if(row.length == 0){
+                                    alert('NO DATA SELECTED!');
+                                }else{
+                                    var c = confirm('Are you sure you want to update this transaction?');
+                                    if(c){
+                                        var dialog = bootbox.dialog({
+                                            message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> tagging unploaded sales please wait...</p>',
+                                            backdrop: true,
+                                            //closeButton: false
+                                            });
+                                        for(var x = 0; x < row.length; x++){
+                                            console.log(row[x].transactionID);
+                                            exec_isexport_datatables(row[x].transactionID);
+                                        }
+                                        
+                                        salesmanDataObject_datatables(startPickDate, endPickDate);
+                                        tableData.clear().rows.add(sourceData).draw();
+                                        dialog.modal('hide');
+                                        alert('Transaction successfull updated!');
+                                    }
+                                }
+                            }   
+                        }, 'excel', 'print'
+                    ],
+                    "language": {
+                      "emptyTable": "No available records as of now."
+                    },
+                    "drawCallback": function( settings ) {
+                      $('[data-toggle="tooltip1"]').tooltip();
+                      $('[data-toggle="tooltip2"]').tooltip();
+                    },
+                    "aaSorting": [[ 0, "desc" ]],
+                    rowCallback: function(row, data, index){
+                      var salesFormat = $(row).find('td:eq(14)').text();
+                      var grandSalesFormat = $(row).find('td:eq(15)').text();
+                      $(row).find('td:eq(14)').text(Number(parseFloat(salesFormat).toFixed(2)).toLocaleString());
+                      $(row).find('td:eq(15)').text(Number(parseFloat(grandSalesFormat).toFixed(2)).toLocaleString());
+                    },
+                    "footerCallback": function ( row, data, start, end, display ) {
+                    var api = this.api(), data;
+         
+                    var intVal = function ( i ) {
+                        return typeof i === 'string' ?
+                            i.replace(/[\$,]/g, '')*1 :
+                            typeof i === 'number' ?
+                                i : 0;
+                    };
+         
+                    total = api
+                        .column( 15 )
+                        .data()
+                        .reduce( function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0 );
+         
+                    pageTotal = api
+                        .column( 15, { page: 'current'} )
+                        .data()
+                        .reduce( function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0 );
+         
+                    $( api.column( 15 ).footer() ).html(
+                        '&#x20b1;'+Number(parseFloat(pageTotal).toFixed(2)).toLocaleString() +' ( &#x20b1;'+ Number(parseFloat(total).toFixed(2)).toLocaleString() +')'
+                    );
+                } 
+            
+           });
+
+        //    $('table.overridesList').on( 'click', 'tr', function () {
+        //         $(this).toggleClass('selected');
+        //     });
+          
+          
+          //$("div.toolbar").html('<p class="text-info">NOTE: Double click transaction to tag as uploaded if it is already processed using diff PONumber.</p>');
+
+          $('table.overridesList tbody').on( 'dblclick', 'tr', function () {
+              var tr = $(this).closest('tr');
+              var row = tableData.row(tr);
+              var po = tr.find('td:eq(1)').text();
+              var cust = tr.find('td:eq(2)').text() +' '+ tr.find('td:eq(3)').text();
+              var stock = tr.find('td:eq(7)').text();
+              var item = tr.find('td:eq(10)').text();
+             /* var transactionID = tr.find('td:eq(0)').text();
+              var mdCode = tr.find('td:eq(2)').text();
+              customerList(row.data());
+              $('#transactionIDHolder').val(transactionID);
+              $('.selected_trasactionID').html(transactionID);
+              $('#salesmanTypeHolder').val('booking');
+              $('#updatecustomerModal').modal('toggle');*/
+              exec_update_isexport(row.data(), po, cust, stock, item);
+          });
+
+          function exec_update_isexport(r, po, cust, stock, item){
+            $('#transactionIDH').html(r.transactionID);
+            $('#ponumberH').html(po);
+            $('#salespersonH').html(r.Salesperson);
+            $('#customerH').html(cust);
+            $('#stockH').html(stock);
+            $('#descH').html(item);
+            $('#quantH').html(r.CASE +' / '+ r.PIECESPERCASE);
+            $('#totalH').html(Number(parseFloat(r.TOTAL_AMOUNT).toFixed(2)).toLocaleString());
+            $('#transactionGlobalHolder').val(r.transactionID);
+            $('#updateIsexportModal').modal('show');
+          }
+    }
+
+    function exec_isexport(){
+      var transactionID = $('#transactionGlobalHolder').val();
+      console.log(transactionID);
+      var c = confirm('Are you sure you want to update this transaction?');
+      if(c){
+        $.ajax ({
+        url:  GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+        type: "GET",
+        data: {"type":"EXEC_ISEXPORT_UPDATE", "CONN":con_info, 'transactionID':transactionID},
+        dataType: "JSON",
+        crossDomain: true,
+        cache: false,            
+            success: function(r){
+              if(r){
+                salesmanDataObject(startPickDate, endPickDate);
+                tableData.clear().rows.add(sourceData).draw();
+                //tableData.search( '' ).columns().search( '' ).draw();
+                alert('Transaction successfull updated!');
+                $('#updateIsexportModal').modal('hide');
+              }
+            }
+        });
+      }
+    }
+
+    function exec_isexport_datatables(transactionID){
+    //   var transactionID = $('#transactionGlobalHolder').val();
+    //   console.log(transactionID);
+    //   var c = confirm('Are you sure you want to update this transaction?');
+    //   if(c){
+        $.ajax ({
+        url:  GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+        type: "GET",
+        data: {"type":"EXEC_ISEXPORT_UPDATE", "CONN":con_info, 'transactionID':transactionID},
+        dataType: "JSON",
+        crossDomain: true,
+        cache: false,            
+            // success: function(r){
+            //   if(r){
+            //     salesmanDataObject(startPickDate, endPickDate);
+            //     tableData.clear().rows.add(sourceData).draw();
+            //     alert('Transaction successfull updated!');
+            //     $('#updateIsexportModal').modal('hide');
+            //   }
+            // }
+        });
+      //}
+    }
+showNotif();
+
+$(document).on('click', '.dropdown-toggle', function(){
+$('.count').html('');
+ showNotif('yes');
+});
+
+setInterval(function(){
+//showNotif();
+}, 9000);
+
+  function showNotif(view=''){
+       $.ajax ({
+        url: "../geofencing/GeofencingAPI.php",
+        type: "GET",
+        data: {"type":"view_notifications_icon_"+user, "view":view},
+        dataType: "JSON",
+        crossDomain: true,
+        cache: false,            
+          success: function(response){ 
+         // console.log('Notification function has been refresh');                
+          $("#notifs-icon-div").html(response.notification);
+
+            if(response.unseen_notification > 0)
+            {
+             $('.count').html(response.unseen_notification);
+            }
+          
+          }
+      });
+  }
+        
+
+  (function($) {
+    $.fn.clickToggle = function(func1, func2) {
+        var funcs = [func1, func2];
+        this.data('toggleclicked', 0);
+        this.click(function() {
+            var data = $(this).data();
+            var tc = data.toggleclicked;
+            $.proxy(funcs[tc], this)();
+            data.toggleclicked = (tc + 1) % 2;
+        });
+        return this;
+    };
+   }(jQuery));
+
+ $("#navBtn").clickToggle(function() {   
+   openNav();
+ }, function() {
+     closeNav();
+ });
+
+ function imgError2(image) {
+   image.onerror = "";
+   image.src = "../img/salesmanPic.jpg";
+   return true;
+ } 
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "270px";
+    document.getElementById("main").style.marginLeft = "270px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+</body>
+</html> 

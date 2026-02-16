@@ -1,0 +1,650 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Jobber Pullout</title>
+  <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+  <link rel="stylesheet" href="/BOOTSTRAP3/css/bootstrap.min.css"/>
+  <script src="/BOOTSTRAP3/AJAX/jquery.min.js"></script>
+  <script src="/BOOTSTRAP3/js/bootstrap.min.js"></script>
+
+  <link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+  <link rel="stylesheet" href="/css/mdDesign.css">
+
+  <script type="text/javascript" src="/DATERANGEPICKER/moment.min.js"></script>
+  <script type="text/javascript" src="/DATERANGEPICKER/daterangepicker.js"></script>
+  <link rel="stylesheet" href="/DATERANGEPICKER/daterangepicker.css">
+
+  <link rel="stylesheet" href="DATATABLES/jquery.dataTables.min.css"/>
+  <link rel="stylesheet" href="DATATABLES/editor.dataTables.min.css"/>
+  <link rel="stylesheet" href="DATATABLES/buttons.dataTables.min.css "/>
+  <link rel="stylesheet" href="/js/multi/dist/css/bootstrap-multiselect.css" type="text/css"/>
+    <STYLE>
+      .checker{
+        margin-top: 20px;
+      }
+
+      .tabtables tbody tr{
+        cursor: pointer;
+      }
+
+      .modal-dialog.modal-800 {
+        width: 800px;
+        margin: 30px auto;
+      }
+
+      .baseTD{
+        font-weight: bold;
+      }
+
+    </STYLE>
+</head>
+<div id="mySidenav" class="sidenav">
+  <div class='image'><img alt='mdbuddylogo' class='logoMd' src='/img/mdbuddylogo_jeff.png'/></div>
+  <a href="salesReport"><i class="fas fa-file-alt"></i> Sales Report</a>
+  <a href="transactionLedger"><i class="fas fa-file-alt"></i> Transaction Ledger</a>
+  <a href="UnprocessedOrders"><i class="fas fa-file-alt"></i> Unprocessed Orders</a>
+  <a href="dsr"><i class="fas fa-file-alt"></i> DSR</a>
+  <a href="stockRequest" ><i class="fas fa-file-alt"></i> Stock Request</a>
+  <a href="sfaQueuing"><i class="fas fa-file-alt"></i> Data Maintenance</a>
+  <a href="unuploaded"><i class="fas fa-file-alt"></i> Unuploaded</a>
+  <a href="BOReport"><i class="fas fa-file-alt"></i> BO</a>
+  <a href="dcr"><i class="fas fa-file-alt"></i> Daily Collection</a>
+  <a href="Stocktake Report"><i class="fas fa-file-alt"></i> Stocktake</a>
+  <a href="inventory"><i class="fas fa-file-alt"></i> Inventory Valuation</a>
+  <a href="jobberMaintenance" class="activeYes"><i class="fas fa-file-alt"></i> Jobber</a>
+  <a href="customerTagging"><i class="fas fa-file-alt"></i> Customer Tagging</a>
+</div>
+<body class="" id="page-top">
+    <div id="main">
+      <h4 class="display-4 dispMargin">
+          <a href="#" id='navBtn' class="btn btn-primary"  style='margin-right: 15px;'>
+           <span class="glyphicon glyphicon-menu-hamburger"></span> 
+          </a>
+          <span id="page-title">Jobber Pullout</span> 
+            <span class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a style='float:right;' href="#" class="dropdown-toggle" data-toggle="dropdown" id='dropThisDown'>
+                        <span class="label label-pill label-danger count" style='border-radius: 10px; font-size: 10px;'></span>
+                        <span class="glyphicon glyphicon-bell"></span>
+                    </a>
+                    
+                       <ul class="dropdown-menu" style='padding: 0'>
+                        <div id='notif-body'>
+                            <div id='notifs-icon-div'></div>
+                        </div>
+                        <a type="button" class="btn btn-default btn-block" href='mdAlert_bohol.php' id='seeAll' >See all</a>
+                       </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                      <i class="glyphicon glyphicon-user"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="Profile.html"><i class="glyphicon glyphicon-user"></i> My Account</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="#" id="common-logout-btn"><i class="glyphicon glyphicon-lock"></i>Logout</a>
+                        </li>
+                    </ul>
+                 </li>
+            </span>
+       </h4>
+         <div class="panel cust-panel">
+                <div class="panel-heading">
+                  <!--<span class='glyphicon glyphicon-list-alt'></span>
+                  <span id="titleHeading" class="display-4"></span>
+
+                  <i class='glyphicon glyphicon-cog'></i> <span id="titleHeading"></span>
+                    <span class="pull-right btn btn-primary btn-xs pulloutBTN"><i class="fas fa-arrow-right"></i> Jobber Customer</span>-->
+                    <i class="fa fa-map-marker"></i> <span id="titleHeading"></span>
+                    <span class="pull-right btn btn-primary btn-xs pulloutBTN"><i class="fa fa-arrow-right"></i> JOBBER CUSTOMER LIST</span>
+                </div>
+                <div class="panel-body" style='background-color:#fff; color: black;'> 
+                  <div class="btn-group tabbt" style="margin-bottom: 20px;">
+                    <button type="button" class="btn tabbt activeTab btn1">Open Transactions</button>
+                    <button type="button" class="btn tabbt inactiveTab btn2">Verified Transactions</button>
+                  </div> 
+                    <div id="pending_stockrequestlist">
+                      <table id="" class="table table-hovered pendingTBL display nowrap tabtables" width='100%'>
+                        <thead>
+                           <tr>
+                              <th>TRANS DATE</th>
+                              <th>SALES PERSON</th>
+                              <th>REFERENCE NO.</th>
+                              <th># ITEMS</th>
+                              <th>AMOUNT</th>
+                              <TH>CUST CODE</TH>
+                              <th>REMARKS</th>
+                           </tr>
+                        </thead>
+                        <tbody></tbody>
+                      </table>
+                    </div>
+
+                    <div id="approved_stockrequestlist" class="hidden">
+                      <table id="" class="table table-hovered approvedTBL display nowrap tabtables" width='100%'>
+                        <thead>
+                            <tr>
+                              <th>TRANS DATE</th>
+                              <th>SALES PERSON</th>
+                              <th>REFERENCE NO.</th>
+                              <th># ITEMS</th>
+                              <th>AMOUNT</th>
+                              <TH>CUST CODE</TH>
+                              <th>REMARKS</th>
+                           </tr>
+                        </thead>
+                        <tbody></tbody>
+                      </table>
+                    </div>
+                 </div>
+               </div>
+         </div><!--main panel end-->
+
+          <div class="modal fade" id="updateTransactionModal" role="dialog" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-800">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">TRANS DATE: <span id="transdateH"></span></h4>
+                </div>
+                <div class="modal-body">
+                  <table class="table table-striped">
+                    <tr>
+                      <td>SALES PERSON:</td>
+                      <td class="text-left baseTD" id="salesmanH"></td>
+                    </tr>
+                    <TR>
+                      <td>CUSTOMER:</td>
+                      <td class="text-left baseTD" id="customerH"></td>
+                    </TR>
+                    <tr>
+                      <td>REFNO:</td>
+                      <td class="text-left baseTD" id="refnoH"></td>
+                    </tr>
+                    <tr>
+                      <td>TOTAL ITEMS:</td>
+                      <td class="text-left baseTD" id="stockCodeH"></td>
+                    </tr>
+                    <tr>
+                      <td>TOTAL AMOUNT:</td>
+                      <td class="text-left baseTD" id="amountH"></td>
+                    </tr>
+                  </table>
+                  <input type="hidden" name="" id="mdCode_dataTrans"/>
+                  <input type="hidden" name="" id="stockCode_dataTrans"/>
+                  <input type="hidden" name="" id="refNo_dataTrans"/>
+                  <input type="hidden" name="" id="transDate_dataTrans"/>
+                  
+                  <div class="table-details-holder">                
+                   <table class="table table-hover">
+                     <thead>
+                       <tr>
+                         <th>STOCKCODE</th>
+                         <th>DESCRIPTION</th>
+                         <th class="text-center">CS</th>
+                         <th class="text-center">IB</th>
+                         <th class="text-center">PCS</th>
+                         <th class="text-right">AMOUNT</th>
+                       </tr>
+                     </thead>
+                     <tbody id="stockCard_details_body">
+                     </tbody>
+                     <!--<tfoot>
+                       <tr>
+                         <td colspan="9" class="text-right" style="color: #1365a2;">TOTAL AMOUNT: <strong id="totalAmount"></strong></td>
+                       </tr>
+                     </tfoot>-->
+                   </table>
+                  </div>
+                  <p class="text-info textindicator"></p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger btn-printjps" id='printJPSbtn' onclick="printJPS()"><i class="fas fa-print"></i> PRINT</button>
+                  <button type="button" class="btn btn-primary btn-updateOpen" id='updateCustomertbtn' onclick="execute_update_open()">Update</button>
+                  <button type="button" class="btn btn-primary btn-updateVerified" id='updateCustomertbtn' onclick="execute_update_verified()">Update</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+    <script src="DATATABLES/jquery.dataTables.min.js"></script>
+    <script src="DATATABLES/dataTables.buttons.min.js"></script>
+    <script src="DATATABLES/buttons.print.min.js"></script>
+    <script src="DATATABLES/buttons.html5.min.js"></script>
+    <script src="DATATABLES/jszip.min.js"></script>
+    <script src="DATATABLES/ellipsis.js"></script>
+
+    <script type="text/javascript" src="/web/web-commons.js"></script>
+    <script type="text/javascript" src="js/commonusrs-cred.js"></script>
+    <script type="text/javascript" src="/js/bootbox.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-multiselect-master/dist/js/bootstrap-multiselect.js"></script>
+    <script src="/HASH/md5.js"></script>
+    <script src="/HASH/aes.js"></script>
+    <script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+    <script type="text/javascript">
+      $('.pulloutBTN').click(function (){
+        window.open('stockCard', '_blank'); 
+      });
+      var user = localStorage.getItem("adminUserName");
+      var usernm = localStorage.getItem("adminUserName");
+      var usertype = localStorage.getItem("usertype");
+      getcompname();
+      function getcompname(){
+      $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {"type":"GET_COMPANYNAME", "CONN":con_info},
+          dataType: "json",
+          crossDomain: true,
+          cache: false,            
+            success: function(r){ 
+            $('#titleHeading').html(r[0].company.toUpperCase());
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              $('#titleHeading').html('<i class="fas fa-circle blinking"></i> <b style="color:red;">ERROR:</b> Unable to establish a connection from your server. Please check your server settings.');
+            }
+        });
+      } 
+
+      stockRequestSourceData();
+      datatableApp();
+      
+      stockRequestSourceData2();
+      datatableApp2();
+
+      $('#approved_stockrequestlist').removeClass('hidden');
+      $('#approved_stockrequestlist').hide();
+      $('.btn1').click(function (){
+           
+           $('.btn1').removeClass('inactiveTab');
+           $('.btn1').addClass('activeTab');
+
+           $('.btn2').removeClass('activeTab');
+           $('.btn2').addClass('inactiveTab');
+
+           $('#approved_stockrequestlist').hide();
+           $('#pending_stockrequestlist').show();
+
+           //stockRequestSourceData();
+           //tableData.clear().rows.add(sourceDat).draw();
+      });
+
+      $('.btn2').click(function (){
+
+           $('.btn2').removeClass('inactiveTab');
+           $('.btn2').addClass('activeTab');
+
+           $('.btn1').removeClass('activeTab');
+           $('.btn1').addClass('inactiveTab');
+
+           $('#pending_stockrequestlist').hide();
+           $('#approved_stockrequestlist').show();
+
+           stockRequestSourceData2();
+           tableData2.clear().rows.add(sourceDat2).draw();        
+      });
+
+      var sourceDat;
+      function stockRequestSourceData(){
+         $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {"type":"STOCKCARD_DATA_OPEN", "CONN":con_info},
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(r){
+                sourceDat = r;
+               }//success
+              });
+      }
+
+      var tableData;
+      function datatableApp(){
+          tableData = $('table.pendingTBL').DataTable({
+              "dom": 'Bfrtip',
+              "responsive": true,
+              "data": sourceDat,
+              "scrollX": true,
+              "ordering": false,
+              columns: [
+                  { "data": "transDate" },
+                  { "data": "salesmanrep"},
+                  { "data": "refNo"},
+                  { "data": "tQuantity"},
+                  { "data": "tamount" },
+                  { "data": "custCode" },
+                  { "data": "remarks" },
+                ],
+                /*buttons: [
+                   {
+                    text: '<i class="far fa-user"></i> Filter Salesman',
+                    className: 'filterdate_booking',
+                    action: function(e, dt, node, config){
+                    }
+                  }
+                ]*/
+          });
+
+        $('table.pendingTBL tbody').on( 'click', 'tr', function () {
+           var tr = $(this).closest('tr');
+           var row = tableData.row(tr);
+           var transactionID = tr.find('td:eq(7)').text();
+           var mdCode = tr.find('td:eq(2)').text();
+
+          $('.btn-updateVerified').hide();
+          $('.btn-updateOpen').show();
+          $('.textindicator').html("Click <b>'UPDATE'</b> button to verify pullout.");
+           dislplayOpenTransModal(row.data());
+        });
+
+        function dislplayOpenTransModal(r){
+          $('#mdCode_dataTrans').val(r.mdCode);
+          $('#stockCode_dataTrans').val(r.StockCode);
+          $('#refNo_dataTrans').val(r.refNo);
+          $('#transDate_dataTrans').val(r.transDate);
+
+          $('#transactionIDH').html(r.transactionID);
+          $('#customerH').html(r.custCode);
+          $('#salesmanH').html(r.salesmanrep);
+          $('#refnoH').html(r.refNo);
+          $('#stockCodeH').html(r.tQuantity);
+          $('#transdateH').html(r.transDate);
+          $('#amountH').html(r.tamount);
+          //$('#totalAmount').html(r.tamount);
+
+          get_stockCard_Details();
+          $('#updateTransactionModal').modal('toggle');
+        } 
+      }
+
+      function execute_update_open(){
+          var mdCode = $('#mdCode_dataTrans').val();
+          var stockCode = $('#stockCode_dataTrans').val();
+          var refNo = $('#refNo_dataTrans').val();
+          var transDate = $('#transDate_dataTrans').val();
+
+          console.log(mdCode +' - '+ stockCode +' - '+ refNo +' - '+ transDate);
+
+          $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {
+                      "type":"UPDATE_STOCKCARD_OPEN",
+                      "CONN":con_info,
+                      "mdCode":mdCode,
+                      "stockCode":stockCode,
+                      "refNo":refNo,
+                      "transDate":transDate
+                    },
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(r){
+                if(r == 1){
+                  stockRequestSourceData();
+                  tableData.clear().rows.add(sourceDat).draw();
+                  alert('Transaction successfully updated!');
+                  $('#updateTransactionModal').modal('hide');
+                }
+               }//success
+              });
+      }
+
+      function get_stockCard_Details(){
+
+        $('.table-details-holder').show();
+        var refNo = $('#refNo_dataTrans').val();
+         $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {
+                      "type":"GET_STOCKCARD_DETAILS",
+                      "CONN":con_info,
+                      "refNo":refNo
+                    },
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(r){
+                var cont = '';
+                $('#customerH').html(r[0].customer);
+                for(var x = 0; x < r.length; x++){
+                  cont += '<tr>'+
+                         '<td>'+r[x].StockCode+'</td>'+
+                         '<td>'+r[x].Description+'</td>'+
+                         '<td class="text-center">'+r[x].QTYStockUOM+'</td>'+
+                         '<td class="text-center">'+r[x].QTYOtherUom+'</td>'+
+                         '<td class="text-center">'+r[x].QTYPCS+'</td>'+
+                         '<td class="text-right">'+r[x].amount +'</td>'+
+                       +'</tr>';
+                }
+                $('#stockCard_details_body').html(cont);
+               }//success
+              });
+      }
+
+      function printJPS(){
+        var refNo = $('#refNo_dataTrans').val();
+        localStorage.setItem('jpsprintRefno', refNo);
+        window.open('https://mybuddy.dynns.com/SFA/print-jps.html', '_blank');
+        //alert('coming soon');
+      }
+
+      var sourceDat2;
+      function stockRequestSourceData2(){
+         $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {
+                      "type":"STOCKCARD_DATA_VERIFIED", "CONN":con_info
+                    },
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(r){ 
+                sourceDat2 = r;
+               }//success
+              });
+      }
+
+      var tableData2;
+      function datatableApp2(){
+         tableData2 = $('table.approvedTBL').DataTable({
+              "dom": 'Bfrtip',
+              "responsive": true,
+              "data": sourceDat2,
+              "scrollX": true,
+              "ordering": false,
+              order: [[ 1, 'asc' ]],
+              columns: [
+                  { "data": "transDate" },
+                  { "data": "salesmanrep"},
+                  { "data": "refNo"},
+                  { "data": "tQuantity"},
+                  { "data": "tamount" },
+                  { "data": "custCode" },
+                  { "data": "remarks" },
+                ],
+                /*buttons: [
+                   {
+                    text: '<i class="far fa-user"></i> Filter Salesman',
+                    className: 'filterdate_extruct',
+                    action: function(e, dt, node, config){
+
+                    }
+                  }
+                ]*/
+          });
+
+          $('table.approvedTBL tbody').on( 'click', 'tr', function () {
+           var tr = $(this).closest('tr');
+           var row = tableData2.row(tr);
+           var transactionID = tr.find('td:eq(7)').text();
+           var mdCode = tr.find('td:eq(2)').text();
+           $('.btn-updateOpen').hide();
+           $('.btn-updateVerified').show();
+
+           $('.textindicator').show();
+           $('.textindicator').html("Note: Click only <b>'UPDATE'</b> when Jobber Pullout is already encoded in SYSPRO to allow salesman to sync data from SFA Server.");
+           dislplayOpenTransModal2(row.data());
+          });
+
+          function dislplayOpenTransModal2(r){
+          $('#mdCode_dataTrans').val(r.mdCode);
+          $('#stockCode_dataTrans').val(r.StockCode);
+          $('#refNo_dataTrans').val(r.refNo);
+          $('#transDate_dataTrans').val(r.transDate);
+
+          $('#transactionIDH').html(r.transactionID);
+          $('#customerH').html(r.custCode);
+          $('#salesmanH').html(r.salesmanrep);
+          $('#refnoH').html(r.refNo);
+          $('#stockCodeH').html(r.tQuantity);
+          $('#transdateH').html(r.transDate);
+
+          $('#amountH').html(r.tamount);
+          get_stockCard_Details();
+          $('#updateTransactionModal').modal('toggle');
+        }
+      }
+
+      function execute_update_verified(){
+          var mdCode = $('#mdCode_dataTrans').val();
+          var stockCode = $('#stockCode_dataTrans').val();
+          var refNo = $('#refNo_dataTrans').val();
+          var transDate = $('#transDate_dataTrans').val();
+
+          console.log(mdCode +' - '+ stockCode +' - '+ refNo +' - '+ transDate);
+
+          $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {
+                      "type":"UPDATE_STOCKARD_VERIFIED",
+                      "CONN":con_info,
+                      "mdCode":mdCode,
+                      "stockCode":stockCode,
+                      "refNo":refNo,
+                      "transDate":transDate
+                    },
+              dataType: "json",
+              crossDomain: true,
+              cache: false,  
+              async: false,          
+              success: function(r){
+                if(r == 1){
+                  stockRequestSourceData2();
+                  tableData2.clear().rows.add(sourceDat2).draw();
+                  pushnotif(refNo, mdCode);
+                  alert('Transaction successfully updated!');
+                  $('#updateTransactionModal').modal('hide');
+                }
+               }//success
+              });
+          }
+
+          function pushnotif(refno, mdCode){
+            var token = getToken(mdCode);
+             $.ajax({        
+                type : 'POST',
+                url : "https://fcm.googleapis.com/fcm/send",
+                headers : {
+                    Authorization : 'key=' + 'AAAA6gFzY08:APA91bGhXSORj4yKI5GDwvYIsIRCqJJn2UwO7dz_l5ZFjGmUsMj2-zpOu9R1RA7QSh0ECQ_zRibaoDLv1Z5fzk3LXqqUuaKlKJ_18ba822I4iHpgVtjSdMGdLaB37IPoGt2zFmx9Kmfy'
+                },
+                contentType : 'application/json',
+                dataType: 'json',
+                data: JSON.stringify({"to": token,
+                  "data": {
+                          "title":"Jobber Pullout Status",
+                          "body":"Your jobber pullout with reference no: " + refno + " has been encoded."
+                        }
+                    }),
+                //change "to" parameter located in tblUser column TOKEN
+                success : function(response) {
+                    console.log(response);
+                },
+                error : function(xhr, status, error) {
+                    console.log(xhr.error);                   
+                }
+            });
+          }
+
+          function getToken(mdCode){
+            var token = '';
+            $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {
+                      "type":"GET_USER_TOKEN",
+                      "CONN":con_info,
+                      "mdCode":mdCode
+                    },
+              dataType: "json",
+              crossDomain: true,
+              cache: false,
+              async: false,         
+              success: function(r){
+                token = r;
+              }
+            });
+            return token;
+          }
+         
+       (function($) {
+          $.fn.clickToggle = function(func1, func2) {
+              var funcs = [func1, func2];
+              this.data('toggleclicked', 0);
+              this.click(function() {
+                  var data = $(this).data();
+                  var tc = data.toggleclicked;
+                  $.proxy(funcs[tc], this)();
+                  data.toggleclicked = (tc + 1) % 2;
+              });
+              return this;
+          };
+         }(jQuery));
+
+       
+          $("#navBtn").clickToggle(function() {   
+            openNav();
+          }, function() {
+              closeNav();
+          });
+
+          $(window).bind("load", function () {
+              $('#work-in-progress').fadeOut();
+          });
+        
+          function imgError2(image) {
+            image.onerror = "";
+            image.src = "../img/salesmanPic.jpg";
+            return true;
+          }  
+
+          function openNav() {
+              document.getElementById("mySidenav").style.width = "270px";
+              document.getElementById("main").style.marginLeft = "270px";
+          }
+
+          function closeNav() {
+              document.getElementById("mySidenav").style.width = "0";
+              document.getElementById("main").style.marginLeft= "0";
+          }
+    </script>
+</body>
+</html>

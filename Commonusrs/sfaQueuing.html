@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  <title>
+    DATA Maintenance
+  </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/BOOTSTRAP3/css/bootstrap.min.css"/>
+<script src="/BOOTSTRAP3/AJAX/jquery.min.js"></script>
+<script src="/BOOTSTRAP3/js/bootstrap.min.js"></script>
+ 
+<link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+<link rel="stylesheet" href="MULTISELECT/bootstrap-select.min.css"/>
+<link rel="stylesheet" href="/css/mdDesign.css">
+
+<script type="text/javascript" src="/DATERANGEPICKER/moment.min.js"></script>
+<script type="text/javascript" src="/DATERANGEPICKER/daterangepicker.js"></script>
+<link rel="stylesheet" href="/DATERANGEPICKER/daterangepicker.css">
+
+<link rel="stylesheet" href="/js/multi/dist/css/bootstrap-multiselect.css" type="text/css"/>
+</head>
+
+<body>
+<div id="mySidenav" class="sidenav">
+    <div class='image'><img alt='mdbuddylogo' class='logoMd' src='/img/mdbuddylogo_jeff.png'/></div>
+    <a href="salesReport.php"><i class="fas fa-file-alt"></i> Sales Report</a>
+    <a href="transactionLedger"><i class="fas fa-file-alt"></i> Transaction Ledger</a>
+    <a href="UnprocessedOrders"><i class="fas fa-file-alt"></i> Unprocessed Orders</a>
+    <a href="dsr"><i class="fas fa-file-alt"></i> DSR</a>
+    <a href="stockRequest"><i class="fas fa-file-alt"></i> Stock Request</a>
+    <a href="sfaQueuing" class="activeYes"><i class="fas fa-file-alt"></i> Data Maintenance</a>
+    <a href="unuploaded"><i class="fas fa-file-alt"></i> Unuploaded</a>
+    <a href="BOReport"><i class="fas fa-file-alt"></i> BO</a>
+    <a href="dcr"><i class="fas fa-file-alt"></i> Daily Collection</a>
+    <a href="Stocktake Report"><i class="fas fa-file-alt"></i> Stocktake</a>
+    <a href="inventory"><i class="fas fa-file-alt"></i> Inventory Valuation</a>
+    <a href="jobberMaintenance"><i class="fas fa-file-alt"></i> Jobber</a>
+    <a href="customerTagging"><i class="fas fa-file-alt"></i> Customer Tagging</a>
+</div>
+
+  <div id="main">
+        <h4 class="display-4 dispMargin">
+          <a href="#" id='navBtn' class="btn btn-primary"  style='margin-right: 15px;'>
+           <span class="glyphicon glyphicon-menu-hamburger"></span> 
+          </a>
+          <span class='glyphicon glyphicon-cog'></span> Data Maintenance <small>v.3.7</small>
+            <span class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                    <a style='float:right;' href="#" class="dropdown-toggle" data-toggle="dropdown" id='dropThisDown'>
+                        <span class="label label-pill label-danger count" style='border-radius: 10px; font-size: 10px;'></span>
+                        <span class="glyphicon glyphicon-bell"></span>
+                    </a>
+                    
+                       <ul class="dropdown-menu" style='padding: 0'>
+                        <div id='notif-body'>
+                            <div id='notifs-icon-div'></div>
+                        </div>
+                        <a type="button" class="btn btn-default btn-block" href='mdAlert_bohol.php' id='seeAll' >See all</a>
+                       </ul>
+                </li>
+
+                 <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                      <i class="glyphicon glyphicon-user"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="Profile.html"><i class="glyphicon glyphicon-user"></i> My Account</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="#" id="admin-logout-btn"><i class="glyphicon glyphicon-lock"></i>Logout</a>
+                        </li>
+                    </ul>
+                 </li>
+              
+            </span>
+       </h4>
+
+         <div class="panel cust-panel">
+           <div class="panel-heading">
+                <i class='glyphicon glyphicon-cog'></i> <span id="titleHeading"></span>
+           </div>
+            <div class="panel-body" style='background-color:#fff; color: black;'>   
+               <!--<button class='btn btn-info' onclick='custSync()'>Sync Customer</button>
+               <button class='btn btn-info' onclick='executeInventorySync()'>Sync Inventory</button>
+               <button class='btn btn-info' onclick='executeQueingSync()'>Sync SFA Queuing</button>-->
+
+                 <div class="row">
+                  <div class="col-sm-6">
+                    <div class="card card-block">
+                      <h3 class="card-title">Sync SFA Queuing</h3>
+                      <p class="card-text">This will populate data for Nesle Queuing Services</p>
+                      <!--<a href="#" class="btn btn-primary" onclick='executeQueingSync()'>EXECUTE</a>-->
+                      <!--<a href="#" class="btn btn-warning" onclick='betasSync()'>EXECUTE (beta)</a>-->
+                      <a href="#" class="btn btn-primary" onclick='betasSync()'>EXECUTE</a>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="card card-block">
+                      <h3 class="card-title">Sync Stock Request</h3>
+                      <p class="card-text">This will populate stock request to Nestle Queing Services</p>
+                      <a href="#" class="btn btn-primary" onclick='exec_view_stocktakeModal()'>EXECUTE</a>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="card card-block">
+                      <h3 class="card-title">Sync Customer</h3>
+                      <p class="card-text">This will allign customer details on MCP, NPIReturns Reason, Salesman details, Offtake, Musthave,Cycle Plan, buying Accounts from syspro.</p>
+                      <a href="#" class="btn btn-primary" onclick='custSync()'>EXECUTE</a>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="card card-block">
+                      <h3 class="card-title">Sync Product</h3>
+                      <p class="card-text">This will allign product details & price list.</p>
+                      <a href="#" class="btn btn-primary" onclick='invSync()'>EXECUTE</a>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="card card-block">
+                      <h3 class="card-title">Sync Invoice (IDELIVER)</h3>
+                      <p class="card-text">This will populate ideliver invoice data for creating trip / freight order.</p>
+                      <a href="#" class="btn btn-primary" onclick='goSyncinVoice()'>EXECUTE</a>
+                    </div>
+                  </div>
+
+
+                  <div class="col-sm-6">
+                    <div class="card card-block">
+                      <h3 class="card-title">Sync BTDT Orders</h3>
+                      <p class="card-text">This will send BTDT Salesman orders to BTDT Driver.
+                        <br>
+                        <small class="">
+                          Note: For alternate code taggingg please click this button <a href="#" onclick="showskutaggingbtdt()" class="text-info" style="font-weight: bold;">[ ALTERNATE CODE ]</a> 
+                          </small>
+                      </p>
+                    
+                      <a href="#" class="btn btn-primary" onclick='openBtdtDrivermodal()'>EXECUTE</a>
+                    </div>
+                  </div>
+
+                </div>
+           </div>
+         </div><!--main panel end-->
+
+         <div class="modal fade" id="syncStockRequestModal" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">STOCK REQUEST SYNCHING</h4>
+              </div>
+              <div class="modal-body">
+                <table class="table table-hover">
+                  <tr>
+                    <td>SALESMAN:</td>
+                    <td><select id="salesmanList_stk" name="salesmanList_stk[]" multiple="multiple"></select>
+                   </td>
+                  </tr>
+                  <tr>
+                    <td>DATE:</td>
+                    <td><span class="dssdatePicker" style="text-align: left; margin-left: 70px;"> &nbsp; 
+                      <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                      <span class="datestring"></span>
+                     </span>
+                   </td>
+                  </tr>
+                </table>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="exec_stockTake()">Execute</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+         <div class="modal fade" id="SyncInventoryModal" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Data Replication</h4>
+                </div>
+                <div class="modal-body">
+                  <table>
+                    <tr>
+                      <td>SALESMAN:</td>
+                      <td><select id="salesmanList" name="salesmanList[]"></select>
+                     </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="execDatareplication()">Execute</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="syncBetaModal" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">SFA QUEUING</h4>
+                </div>
+                <div class="modal-body">
+                  <table class="table table-hover">
+                    <tr>
+                      <td>SALESMAN:</td>
+                      <td><select id="salesmanList_beta" name="salesmanList_beta[]" multiple="multiple"></select>
+                     </td>
+                    </tr>
+                    <tr>
+                      <td>DATE:</td>
+                      <td><span class="dssdatePicker" style="text-align: left; margin-left: 70px;"> &nbsp; 
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                        <span class="datestring"></span>
+                       </span>
+                     </td>
+                    </tr>
+                    <tr>
+                      <!-- <td>PRIORITIZE SYNCHING:</td> -->
+                      <td colspan="2"><span class="text-indicator-priosyching"></span>
+                        <label class="switch pull-right"><input type="checkbox" class="priosyching">
+                          <span class="slider round"></span>
+                        </label></td>
+                    </tr>
+                  </table>
+
+                  <br>
+                  <small class="text-info"><b>Note:</b> By prioritizing syncing, salesman sending and syncing functionalities will be temporarily turned off until SFA Sync is complete.</small>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="executeQueingSync_beta()">Execute</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="SyncInvoiceModal" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Sync invoice to iDeliver</h4>
+                </div>
+                <div class="modal-body">
+                  <table>
+                    <tr>
+                      <td>INVOICE DATE:</td>
+                      <td><span class="dssdatePicker" style="text-align: left; margin-left: 70px;"> &nbsp; 
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                        <span class="datestring"></span>
+                       </span>
+                     </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="execSyncInvoiceIdeliver()">Execute</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal fade" id="syncbtdtDriverModal" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Select BTDT Driver</h4>
+                </div>
+                <div class="modal-body">
+                  <table class="table table-striped">
+                    <tr>
+                      <td>BTDT Driver:</td>
+                      <td><select id="btdtdrvierList" name="btdtdrvierList[]"></select>
+                     </td>
+                    </tr>
+                    <tr>
+                      <td>Booking Date:</td>
+                      <td><span class="dssdatePicker" style="text-align: left; margin-left: 70px;"> &nbsp; 
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                        <span class="datestring"></span>
+                       </span>
+                     </td>
+                  </table>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="execSyncBtdt()">Execute</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal fade" id="skutaggingModal" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">BTDT SKU Tagging</h4>
+                </div>
+                <div class="modal-body">
+                  <table class="table" style="width: 100%;">
+                    <thead>
+                      <tr>
+                        <td>BTDT Driver</td>
+                        <td>
+                            <select id="bdtdDriverSelection" name="bdtdDriverSelection[]"></select>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Booking Date</td>
+                        <td>
+                          <span id="btdtBookingDate" style="text-align: left; margin-left: 70px;"> &nbsp; 
+                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                            <span id="btdtspan"></span>
+
+                           </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">
+                          <button class="btn btn-primary" style="float: right; text-align: right;" onclick="searchbtdtSku()">Search</button>
+                        </td>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                  <hr>
+                  <h4 class="skuDetailsTable"><span id="btdtdrivername"></span> SKU Transaction List</h4>
+                  <br>
+                  <div style="max-height: 350px; overflow: auto;">
+                    <table class="table table-hover table-sm skuDetailsTable" style="width: 100%;" id="">
+                      <thead>
+                        <tr>
+                          <th>Stock Code</th>
+                          <th>Description</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody id="skuDetailstbody"></tbody>
+                    </table>
+                  </div>
+                 
+                </div>
+                <!-- <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="">Execute</button>
+                </div> -->
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal fade" id="productselectionModal" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Replaced Product: <b id="stockCodetoReplaced"></b></h4>
+                </div>
+                <div class="modal-body">
+                  <table class="table" style="width: 100%;">
+                    <tbody>
+                      <tr>
+                        <td>Product</td>
+                        <td>
+                            <select id="btdtProductList" name="btdtProductList[]"></select>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                 
+                  <input type="hidden" id="btdtstockCodeHolder">
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-primary" style="float: right; text-align: right;"  onclick="replacedBtdtProduct()">Replace</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+  </div><!--#main-->
+     <!-- Bootstrap core JavaScript-->
+  
+  <script type="text/javascript" src="/web/web-commons.js"></script>
+  <script type="text/javascript" src="/js/bootbox.min.js"></script>
+  <script type="text/javascript" src="/js/multi/dist/js/bootstrap-multiselect.js"></script>
+  <script src="/HASH/md5.js"></script>
+  <script src="/HASH/aes.js"></script>
+  <script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+  <script>
+  var usernm = localStorage.getItem("username");
+  var user = localStorage.getItem("adminUserName");
+
+      $('#userConnection').val(user);
+      var GLBLCIDHOLDER;
+      getcompname();
+      function getcompname(){
+      $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {"type":"GET_COMPANYNAME", "CONN":con_info},
+          dataType: "json",
+          crossDomain: true,
+          cache: false,            
+          async: false,
+            success: function(r){ 
+            $('#titleHeading').html(r[0].company.toUpperCase() + ' v.2.1.1');
+            GLBLCIDHOLDER = r[0].DIST_CD;
+            }
+        });
+      } 
+      /*NOTIFICATION SECTION*/
+    //  showNotif();
+
+    $('#navDrop').click(function() {
+      $("i", this).toggleClass("glyphicon-menu-up glyphicon-menu-down");
+    });
+    
+    // $(document).on('click', '.dropdown-toggle', function(){
+    //   $('.count').html('');
+    //    showNotif('yes');
+    // });
+
+  //   setInterval(function(){
+  //    //loadPopup();
+  //    showNotif();
+  //  }, 9000); 
+
+    dsspicker();
+    var dssdate;
+    function dsspicker(){
+      $('.datestring').html('Pick a date here..');
+      $('.dssdatePicker').daterangepicker({
+          "singleDatePicker": true,
+          "startDate": moment(),
+          "endDate": moment(),
+          "maxDate": moment(),
+      }, function(start, end, label) {
+        dssdate = start.format('YYYY-MM-DD');
+        var today = moment().format('YYYY-MM-DD');
+        $('.datestring').html(dssdate);
+      });
+
+
+
+      $('#btdtspan').html('Pick a date here..');
+      $('#btdtBookingDate').daterangepicker({
+          "singleDatePicker": true,
+          "startDate": moment(),
+          "endDate": moment(),
+          "maxDate": moment(),
+      }, function(start, end, label) {
+        dssdate = start.format('YYYY-MM-DD');
+        var today = moment().format('YYYY-MM-DD');
+        $('#btdtspan').html(dssdate);
+      });
+
+    }
+
+    function betasSync(){
+      salesmansendingchecker();
+      $('#syncBetaModal').modal('show');
+    }
+    
+    loadSalesman();
+
+    function loadSalesman(){
+     $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {"type":"dsr_salesmanLoad", "CONN":con_info},
+          dataType: "json",
+          crossDomain: true,
+          cache: false,            
+            success: function(data){ 
+              for(var x = 0; x<data.length; x++){
+                  $('#salesmanList').append('<option value="'+data[x].mdCode+'">'+data[x].Salesman+'</option>');
+                  $('#salesmanList_beta').append('<option value="'+data[x].mdCode+'">'+data[x].Salesman+'</option>');
+                  $('#salesmanList_stk').append('<option value="'+data[x].mdCode+'">'+data[x].Salesman+'</option>');
+               }
+
+               $('#salesmanList_stk').multiselect({
+                  numberDisplayed: 1,
+                  enableCaseInsensitiveFiltering: true,
+                  includeSelectAllOption: true,
+                  selectAllNumber: true,
+                  buttonWidth: '300px',
+                  maxHeight: 300
+               });
+
+               $('#salesmanList').multiselect({
+                  numberDisplayed: 1,
+                  enableCaseInsensitiveFiltering: true,
+                  includeSelectAllOption: true,
+                  selectAllNumber: true,
+                  buttonWidth: '300px',
+                  maxHeight: 300
+               });
+
+               $('#salesmanList_beta').multiselect({
+                  numberDisplayed: 1,
+                  enableCaseInsensitiveFiltering: true,
+                  includeSelectAllOption: true,
+                  selectAllNumber: true,
+                  buttonWidth: '300px',
+                  maxHeight: 300
+               });
+             }
+        });
+    }
+
+    function exec_salesman_sending_priority(){
+      $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {
+                  "type":"UPDATE_SALESMAN_SENDING",
+                  'switchChecker':priosychingData,
+                  "CONN":con_info
+                },
+          dataType: "json",
+          crossDomain: true,
+          cache: false,          
+          async: false,  
+            success: function(r){ 
+               if(priosychingData == 1){
+                alert('Success:\nPriority syching is enabled.');
+               }else{
+                alert('Success:\nPriority syching is disabled.');
+               }
+             }
+        });
+    }
+
+    function exec_view_stocktakeModal(){
+        $('#syncStockRequestModal').modal('show');
+      }
+
+
+     function loadPopup(){
+           //notification
+
+             $.ajax ({
+              url: "../geofencing/GeofencingAPI.php",
+              type: "GET",
+              data: {"type":"view_notifications_popUp"},
+              dataType: "html",
+              crossDomain: true,
+              cache: false,            
+                success: function(response){ 
+               // console.log('Notification function has been refresh');                
+                $(".content").html(response);
+                
+                }
+            });
+        }
+
+
+
+    getProductList();
+    function getProductList(){
+     $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {"type":"GET_ALL_PRODUCT_BTDT", "CONN":con_info},
+          dataType: "json",
+          crossDomain: true,
+          cache: false,          
+          async: false,  
+            success: function(data){ 
+              for(var x = 0; x<data.length; x++){
+                  $('#btdtProductList').append('<option value="'+data[x].stockCode+'">'+data[x].stockCode+' - '+data[x].Description+'</option>');                  
+               }
+
+               $('#btdtProductList').multiselect({
+                  numberDisplayed: 1,
+                  enableCaseInsensitiveFiltering: true,
+                  includeSelectAllOption: true,
+                  selectAllNumber: true,
+                  buttonWidth: '300px',
+                  maxHeight: 300
+               });
+
+              
+             }
+        });
+    }
+
+        function showNotif(view=''){
+           //notification
+
+             $.ajax ({
+              url: "../geofencing/GeofencingAPI.php",
+              type: "GET",
+              data: {"type":"view_notifications_icon_"+user, "view":view},
+              dataType: "JSON",
+              crossDomain: true,
+              cache: false,            
+                success: function(response){ 
+               // console.log('Notification function has been refresh');                
+                $("#notifs-icon-div").html(response.notification);
+
+                  if(response.unseen_notification > 0)
+                  {
+                   $('.count').html(response.unseen_notification);
+                  }
+                
+                }
+            });
+        }
+        
+        function executeInventorySync(){
+          $('#SyncInventoryModal').modal('show');
+        }
+
+       
+        function invSync(){
+        var r = confirm('This could take time, please wait while we process your request.');
+        if(r){
+
+          insertsyncLogs('INVENTORY_SYNC');
+
+          var mdCode = $('#salesmanList').val();
+          var dialog = bootbox.dialog({
+                message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Syncing inventory please wait...</p>',
+                backdrop: true
+               // closeButton: false
+              });
+          var message = 'Successfully Saved!';
+          var botboxMsg = '';
+          var ajaxTime= new Date().getTime();
+          $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              //data: {"type":"SyncInventory", "mdCode":mdCode,"CONN":con_info , "site":user}, 
+              data: {"type":"SyncInventory", "CONN":con_info}, 
+              dataType: 'json',     
+              crossDomain: true,
+              cache: false,   
+              success: function(response){   
+               if(response){
+                  botboxMsg = '<b style="color: green;">Success!</b><p>Buddy inventory Successfully updated. Thank You!</p>';
+                }else{
+                  botboxMsg = '<b style="color: red;">Ops! Unable to Sync to Inventory!</b>' + response;
+                }
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                botboxMsg = '<b style="color: red;">Ops! Unable to Sync to Inventory!</b>' + XMLHttpRequest.responseText;
+                var totalTime = new Date().getTime()-ajaxTime;
+                dialog.init(function(){
+                      setTimeout(function(){
+                        dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                    }, 1000);
+                });
+               }
+              }).done(function () {
+                      dialog.init(function(){
+                            setTimeout(function(){
+                              dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                          }, 1000);
+                    });
+               });
+        }
+      }
+
+      function custSync(){
+        var r = confirm('This could take time, please wait while we process your request.');
+        if(r){
+          insertsyncLogs('CUSTOMER_SYNC');
+          var dialog = bootbox.dialog({
+             // title: '<h4 id="botboxT">Server Response</h4>',
+              message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Syncing customer please wait...</p>',
+              backdrop: true
+              //closeButton: false
+            });
+        var message = 'Successfully Saved!';
+        var botboxMsg = '';
+        var ajaxTime= new Date().getTime();
+        $.ajax ({
+            url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+            type: "GET",
+            data: {"type":"SyncCustomer", "CONN":con_info}, 
+            dataType: 'json',     
+            crossDomain: true,
+            cache: false,   
+            success: function(response){   
+                 if(response == 1){
+                    botboxMsg = '<b style="color: green;">Success!</b><p>Buddy customers Successfully updated. Thank You!</p>';
+                  }else{
+                    botboxMsg = '<b style="color: red;">Ops! Unable to Sync to Customer!</b>' + response;
+                  }
+              },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              botboxMsg = '<b style="color: red;">Ops! Unable to Sync to Customer!</b> Please try again. ' + XMLHttpRequest.responseText;
+              dialog.init(function(){
+                    setTimeout(function(){
+                      dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                  }, 1000);
+              });
+             }
+          }).done(function () {
+                  dialog.init(function(){
+                        setTimeout(function(){
+                            dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                        }, 1000);
+                  });    
+          });
+        }
+      }
+
+      function exec_stockTake(){
+        var r = confirm('This could take time, please wait while we process your request.');
+        if(r){
+          insertsyncLogs('STOCKREQUEST_SYNC');
+          var salesmanList = $('#salesmanList_stk').val();
+          var dialog = bootbox.dialog({
+                message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Syncing stock request please wait...</p>',
+                backdrop: true
+               // closeButton: false
+              });
+          var message = 'Successfully Saved!';
+          var botboxMsg = '';
+          var ajaxTime= new Date().getTime();
+          $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/POST_applicationAPI.php",
+              type: "POST",
+              data: {
+                    "type":"SYNC_STOCKTAKE",
+                    "CONN":con_info,
+                    "date":dssdate,
+                    "salesman":salesmanList
+                  }, 
+              dataType: 'json',     
+              crossDomain: true,
+              cache: false,   
+              success: function(response){   
+               if(response){
+                  botboxMsg = '<b style="color: green;">Success!</b><p>Sync Stock Request was Successful. Thank You!</p>';
+                }else{
+                  botboxMsg = '<b style="color: red;">Ops! Unable to sync Stock Request data!</b>' + response;
+                }
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                botboxMsg = '<b style="color: red;">Ops! Unable to sync Stock Request data!</b>' + XMLHttpRequest.responseText;
+                var totalTime = new Date().getTime()-ajaxTime;
+                dialog.init(function(){
+                      setTimeout(function(){
+                        dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                    }, 1000);
+                });
+               }
+              }).done(function () {
+                      dialog.init(function(){
+                            setTimeout(function(){
+                              dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                          }, 1000);
+                    });
+               });
+        }
+      }
+
+      function executeQueingSync_beta(){
+        var r = confirm('This could take time, please wait while we process your request.');
+        if(r){
+
+          insertsyncLogs('QUEUING_SYNC');
+          exec_salesman_sending_priority();
+          var salesmanList = $('#salesmanList_beta').val();
+          var dialog = bootbox.dialog({
+               // title: '<h4 id="botboxT">Server Response</h4>',
+                message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Syncing SFA queues please wait...</p>',
+                backdrop: true
+                //closeButton: false
+              });
+          var message = 'Successfully Saved!';
+          var botboxMsg = '';
+          var ajaxTime= new Date().getTime();
+          $.ajax ({
+            url: GLOBALLINKAPI+"/nestle/connectionString/POST_applicationApi.php",
+            type: "POST",
+            data: {
+                    "type":"SYNC_SFA_QUEUING_BETA",
+                    "CONN":con_info,
+                    "date":dssdate,
+                    "salesman":salesmanList
+                  }, 
+            dataType: 'json',     
+            crossDomain: true,
+            cache: false,   
+            success: function(response){   
+                  if(response == 1){
+                    botboxMsg = '<b style="color: green;">Success!</b><p>SFA Queuing successfully updated. Thank You!</p>';
+                  }else{
+                    botboxMsg = '<b style="color: red;">Ops! Unable to Sync to SFA Queuing beta!</b>' + response;
+                  }
+                  priosychingData = 0;
+                  exec_salesman_sending_priority();
+              },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              botboxMsg = '<b style="color: red;">Ops! Unable to Sync to SFA Queuing beta!</b>' + XMLHttpRequest.responseText;
+              dialog.init(function(){
+                    setTimeout(function(){
+                      dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                  }, 1000);
+              });
+            }
+          }).done(function () {
+                  dialog.init(function(){
+                        setTimeout(function(){
+                            dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                        }, 1000);
+                  });
+                    
+          });
+        }
+      }
+
+      function executeQueingSync(){
+        var r = confirm('This could take time, please wait while we process your request.');
+        if(r){
+          insertsyncLogs('QUEUING_SYNC');
+          var dialog = bootbox.dialog({
+               // title: '<h4 id="botboxT">Server Response</h4>',
+                message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Syncing SFA queues please wait...</p>',
+                backdrop: true
+                //closeButton: false
+              });
+          var message = 'Successfully Saved!';
+          var botboxMsg = '';
+          var ajaxTime= new Date().getTime();
+          $.ajax ({
+                    url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+                    type: "GET",
+                    data: {"type":"SYNC_SFA_QUEUING", "CONN":con_info}, 
+                    dataType: 'json',     
+                    crossDomain: true,
+                    cache: false,   
+                    success: function(response){   
+                         if(response == 1){
+                            botboxMsg = '<b style="color: green;">Success!</b><p>SFA Queuing successfully updated. Thank You!</p>';
+                          }else{
+                            botboxMsg = '<b style="color: red;">Ops! Unable to Sync SFA QUEUING!</b>' + response;
+                          }
+                      },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                      botboxMsg = '<b style="color: red;">Ops! Unable to Sync SFA QUEUING!</b>' + XMLHttpRequest.responseText;
+                      dialog.init(function(){
+                            setTimeout(function(){
+                              dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                          }, 1000);
+                      });
+                     }
+                  }).done(function () {
+                          dialog.init(function(){
+                                setTimeout(function(){
+                                    dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                                }, 1000);
+                          });
+                           
+                     });
+        }
+        
+      }
+
+      function execSyncInvoiceIdeliver(){
+      
+      if(dssdate == null || dssdate == '' || dssdate == undefined){
+        alert('Unable to Proceed:\nPlease select invoice date.');
+      }else{
+
+        var r = confirm('This could take time, please wait while we process your request.');
+        if(r){
+          console.log(dssdate);
+
+        $('#SyncInvoiceModal').modal('hide');
+      var dialog = bootbox.dialog({
+            message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Syncing inventory please wait...</p>',
+            backdrop: true
+           // closeButton: false
+          });
+      var message = 'Successfully Saved!';
+      var botboxMsg = '';
+      var ajaxTime= new Date().getTime();
+      $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/POST_applicationAPI.php",
+          type: "POST",
+          data: {"type":"SYNC_IDELIVER_INVOICE", "CONN":con_info , "site":GLBLCIDHOLDER, 'dateselected':dssdate}, 
+          dataType: 'json',     
+          crossDomain: true,
+          cache: false,   
+          success: function(response){   
+           if(response){
+              botboxMsg = '<b style="color: green;">Success!</b><p>Ideliver invoice successfully sync. Thank You!</p>';
+            }else{
+              botboxMsg = '<b style="color: red;">Ops! Unable to Sync to Invoice!</b>' + response;
+            }
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            botboxMsg = '<b style="color: red;">Ops! Unable to Sync to Invoice!</b>' + XMLHttpRequest.responseText;
+            var totalTime = new Date().getTime()-ajaxTime;
+            dialog.init(function(){
+                  setTimeout(function(){
+                    dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                }, 1000);
+            });
+           }
+          }).done(function () {
+                  dialog.init(function(){
+                        setTimeout(function(){
+                          dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                      }, 1000);
+                });
+           });
+      }
+      
+    }
+  }
+
+
+      function execDatareplication(){
+        var r = confirm('This could take time, please wait while we process your request.');
+        if(r){
+          insertsyncLogs('DATA_DUPLICATION');
+          var mdCode = $('#salesmanList').val();
+          var dialog = bootbox.dialog({
+                message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Syncing inventory please wait...</p>',
+                backdrop: true
+               // closeButton: false
+              });
+          var message = 'Successfully Saved!';
+          var botboxMsg = '';
+          var ajaxTime= new Date().getTime();
+          $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {"type":"SYNC_DATA_REPLACATION", "mdCode":mdCode,"CONN":con_info}, 
+              dataType: 'json',     
+              crossDomain: true,
+              cache: false,   
+              success: function(response){   
+               if(response){
+                  botboxMsg = '<b style="color: green;">Success!</b><p>Buddy Data Replication was Successful. Thank You!</p>';
+                }else{
+                  botboxMsg = '<b style="color: red;">Ops! Unable to replacate data!</b>' + response;
+                }
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                botboxMsg = '<b style="color: red;">Ops! Unable to replacate data!</b>' + XMLHttpRequest.responseText;
+                var totalTime = new Date().getTime()-ajaxTime;
+                dialog.init(function(){
+                      setTimeout(function(){
+                        dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                    }, 1000);
+                });
+               }
+              }).done(function () {
+                      dialog.init(function(){
+                            setTimeout(function(){
+                              dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                          }, 1000);
+                    });
+               });
+        }
+      }
+
+
+      function execSyncBtdt(){
+          var r = confirm('This could take time, please wait while we process your request.');
+          if(r){
+
+            var dialog = bootbox.dialog({
+                  message: '<p style="text-align: center;"><i class="fa fa-spin fa-spinner"></i> Synching BTDT orders please wait...</p>',
+                  backdrop: true
+                // closeButton: false
+                });
+            var message = 'Successfully Saved!';
+            var botboxMsg = '';
+            var ajaxTime= new Date().getTime();
+
+            var btdtdriver = $('#btdtdrvierList').val();
+            $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/POST_applicationApi.php",
+              type: "POST",
+                data: {
+                        "type":"SYNC_BTDT_DATA",
+                        "btdtdrivermdCode":btdtdriver,
+                        "bookingDate":dssdate,
+                        "CONN":con_info
+                      }, 
+                dataType: 'json',     
+                crossDomain: true,
+                cache: false,   
+                success: function(response){   
+                if(response){
+                    botboxMsg = '<b style="color: green;">Success!</b><p>Sync BTDT was successfull. Thank You!</p>';
+                  }else{
+                    botboxMsg = '<b style="color: red;">Ops! Unable to Sync BTDT data!</b>' + response;
+                  }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  botboxMsg = '<b style="color: red;">Ops! Unable to Sync BTDT data!</b>' + XMLHttpRequest.responseText;
+                  var totalTime = new Date().getTime()-ajaxTime;
+                  dialog.init(function(){
+                        setTimeout(function(){
+                          dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                      }, 1000);
+                  });
+                }
+                }).done(function () {
+                        dialog.init(function(){
+                              setTimeout(function(){
+                                dialog.find('.bootbox-body').html('<p>'+botboxMsg+'</p>');
+                            }, 1000);
+                      });
+                });
+          }
+        }
+
+        loadBTDTDrivers();
+     function loadBTDTDrivers(){
+     $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {"type":"get_all_btdt_Drivers", "CONN":con_info},
+          dataType: "json",
+          crossDomain: true,
+          cache: false,          
+          async: false,  
+            success: function(data){ 
+              $('#btdtdrvierList').html('<option value="" selected disabled hidden>Choose here..</option>');
+              for(var x = 0; x<data.length; x++){
+                  $('#btdtdrvierList').append('<option value="'+data[x].mdCode+'">'+data[x].Salesman+'</option>');
+               }
+
+               $('#btdtdrvierList').multiselect({
+                  numberDisplayed: 1,
+                  enableCaseInsensitiveFiltering: true,
+                  includeSelectAllOption: true,
+                  selectAllNumber: true,
+                  buttonWidth: '300px',
+                  maxHeight: 300
+               });
+
+             }
+        });
+    }
+
+    loadActiveBTDTDrivers();
+    function loadActiveBTDTDrivers(){
+     $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {"type":"get_all_active_btdt_Drivers", "CONN":con_info},
+          dataType: "json",
+          crossDomain: true,
+          cache: false,          
+          async: false,  
+            success: function(data){ 
+              $('#bdtdDriverSelection').html('<option value="" selected disabled hidden>Choose here..</option>');
+              for(var x = 0; x<data.length; x++){
+                  $('#bdtdDriverSelection').append('<option value="'+data[x].mdCode+'">'+data[x].Salesman+'</option>');
+               }
+
+  
+               $('#bdtdDriverSelection').multiselect({
+                  numberDisplayed: 1,
+                  enableCaseInsensitiveFiltering: true,
+                  includeSelectAllOption: true,
+                  selectAllNumber: true,
+                  buttonWidth: '300px',
+                  maxHeight: 300
+               });
+             }
+        });
+    }
+
+
+    function showskutaggingbtdt(){
+      $('#skutaggingModal').modal('show');
+    }
+
+    $('.skuDetailsTable').hide();
+
+    function searchbtdtSku(){
+      var bdtdDriverSelection = $('#bdtdDriverSelection').val();
+      var btdtspan = $('#btdtspan').text();
+      $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {
+                  "type":"GET_BTDT_PRODUCT",
+                  "btdtDriver":bdtdDriverSelection,
+                  "btdtbookingDate":btdtspan, 
+                  "CONN":con_info
+                },
+          dataType: "json",
+          crossDomain: true,
+          cache: false,          
+          async: false,  
+            success: function(r){ 
+
+              $('#btdtdrivername').html($('#bdtdDriverSelection option:selected').text());
+
+              var cont = ``;
+
+              for(var x = 0; x < r.length; x++){
+                cont += `<tr>
+                          <td>`+r[x].stockCode+`</td>
+                          <td>`+r[x].Description+`</td>`+
+                          '<td><button class="btn btn-danger btn-sm" onclick="replacedmodal(\''+r[x].stockCode+'\')">Replace</button></td>'+`
+                        </tr>`;
+              }
+
+              $('#skuDetailstbody').html(cont);
+             }
+        });
+
+        $('.skuDetailsTable').show();
+    }
+
+    function replacedmodal(stockCode){
+      $('#stockCodetoReplaced').html(stockCode);
+      $('#btdtstockCodeHolder').val(stockCode);
+
+      $('#productselectionModal').modal('show');
+
+    }
+
+
+    function replacedBtdtProduct(){
+      var stockCode = $('#btdtstockCodeHolder').val();
+      var newstockCode = $('#btdtProductList').val();
+      var btdtspan = $('#btdtspan').text();
+      var f = confirm('Are you sure you want to replaced '+stockCode+' to '+newstockCode+' ?');
+      if(f){
+
+        $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {
+                  "type":"EXEC_REPLACED_BDTDT_PRODUCT",
+                  "stockCode":stockCode,
+                  "newstockCode":newstockCode, 
+                  "bookingDate":btdtspan,
+                  "CONN":con_info
+                },
+          dataType: "json",
+          crossDomain: true,
+          cache: false,          
+          async: false,  
+            success: function(r){ 
+                if(r){
+                  $('#btdtstockCodeHolder').val('');
+                  $('#productselectionModal').modal('hide');
+
+                  alert('Stockcode '+stockCode+' successfully replaced to ' + newstockCode);
+                }
+             }
+        });
+
+        // console.log('sulod');
+
+      }
+
+    }
+
+
+
+     function openBtdtDrivermodal(){
+        $('#syncbtdtDriverModal').modal('show');
+     }
+
+
+     function salesmansendingchecker(){
+        $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {
+                  "type":"SALESMAN_SENDING_CHECKER",
+                  "CONN":con_info
+                },
+          dataType: "json",
+          crossDomain: true,
+          cache: false,          
+          async: false,  
+            success: function(r){ 
+                if(r == 1){
+                  $('.priosyching').prop("checked", true);
+                  $('.text-indicator-priosyching').html('PRIORITIZE SYNCHING: <b style="color: green">ENABLED</b>');
+                }else{
+                  $('.priosyching').prop("checked", false);
+                  $('.text-indicator-priosyching').html('PRIORITIZE SYNCHING: <b style="color: red">DISABLED</b>');
+                }
+             }
+        });
+    }
+
+     var priosychingData = '';
+    $('.priosyching').click(function() {
+          if($('.priosyching').prop("checked") == true){
+              $('.text-indicator-priosyching').html('PRIORITIZE SYNCHING: <b style="color: green">ENABLED</b>');
+              // priosychingData = '1';
+              // console.log('priosyching val: ' + priosychingData);
+              priosychingData = 1;
+              // exec_salesman_sending_priority(1);
+            }
+            else if($('.priosyching').prop("checked") == false){
+                $('.text-indicator-priosyching').html('PRIORITIZE SYNCHING: <b style="color: red">DISABLED</b>');
+                // priosychingData = '0';
+              // console.log('priosyching val: ' + priosychingData);
+              priosychingData = 0;
+              // exec_salesman_sending_priority(0);
+            }
+        });
+
+    $(window).bind("load", function () {
+          $('#work-in-progress').fadeOut();
+
+      });
+
+      function goSyncinVoice(){
+        $('#SyncInvoiceModal').modal('show');
+        
+      }
+
+  function myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+          x.className += " responsive";
+      } else {
+          x.className = "topnav";
+      }
+  } 
+
+
+  (function($) {
+    $.fn.clickToggle = function(func1, func2) {
+        var funcs = [func1, func2];
+        this.data('toggleclicked', 0);
+        this.click(function() {
+            var data = $(this).data();
+            var tc = data.toggleclicked;
+            $.proxy(funcs[tc], this)();
+            data.toggleclicked = (tc + 1) % 2;
+        });
+        return this;
+    };
+   }(jQuery));
+
+ 
+    $("#navBtn").clickToggle(function() {   
+      openNav();
+    }, function() {
+        closeNav();
+    });
+  
+function imgError2(image) {
+      image.onerror = "";
+      image.src = "../img/salesmanPic.jpg";
+      return true;
+    }  
+</script>
+   
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "270px";
+    document.getElementById("main").style.marginLeft = "270px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+}
+
+function insertsyncLogs(description){
+  var lockby = localStorage.getItem('user_id') +'-'+localStorage.getItem('fullname');
+    $.ajax ({
+        url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+        type: "GET",
+        data: {
+                "type":"INSERT_SYNC_LOGS",
+                "description":description,
+                "isLock":'1',
+                "lockby":lockby,
+                "CONN":con_info
+              }, 
+        dataType: 'json',     
+        crossDomain: true,
+        cache: false,   
+        success: function(r){   
+          console.log(r);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          var botboxMsg = '<b style="color: red;">Ops! Unable to replacate data!</b>' + XMLHttpRequest.responseText;
+          console.log(botboxMsg);
+          }
+    });
+
+
+  
+
+   
+}
+
+
+</script>
+
+     
+</body>
+</html> 

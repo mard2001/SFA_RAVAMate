@@ -1,0 +1,865 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>DSR</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   
+  <link rel="shortcut icon" href="img/mdlogo_web.png" type="image/png">
+  <link rel="stylesheet" type="text/css" href="/css/scroll.css">
+  <link rel="stylesheet" href="/css/mdDesign.css">
+
+  <link rel="shortcut icon" href="/img/mdlogo_web.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+  <link rel="stylesheet" href="/js/multi/dist/css/bootstrap-multiselect.css" type="text/css"/>
+  <style type="text/css">
+      /*body {
+        page-break-before: avoid;
+        width:100%;
+        height:100%;
+        -webkit-transform: rotate(-90deg) scale(.68,.68); 
+        -moz-transform:rotate(-90deg) scale(.58,.58);
+        zoom: 200% 
+      } */   
+  </style>
+</head>
+<body class="" id="page-top">
+    <div id="mySidenav" class="sidenav">
+        <div class='image'><img alt='mdbuddylogo' class='logoMd' src='/img/mdbuddylogo_jeff.png'/></div>
+        <a href="salesReport"><i class="fas fa-file-alt"></i> Sales Report</a>
+        <a href="transactionLedger"><i class="fas fa-file-alt"></i> Transaction Ledger</a>
+        <a href="UnprocessedOrders"><i class="fas fa-file-alt"></i> Unprocessed Orders</a>
+        <a href="dsr" class="activeYes"><i class="fas fa-file-alt"></i> DSR</a>
+        <a href="stockRequest" ><i class="fas fa-file-alt"></i> Stock Request</a>
+        <a href="sfaQueuing"><i class="fas fa-file-alt"></i> Data Maintenance</a>
+        <a href="unuploaded"><i class="fas fa-file-alt"></i> Unuploaded</a>
+        <a href="BOReport"><i class="fas fa-file-alt"></i> BO</a>
+        <a href="dcr"><i class="fas fa-file-alt"></i> Daily Collection</a>
+        <a href="Stocktake Report"><i class="fas fa-file-alt"></i> Stocktake</a>
+        <a href="inventory"><i class="fas fa-file-alt"></i> Inventory Valuation</a>
+        <a href="jobberMaintenance"><i class="fas fa-file-alt"></i> Jobber</a>
+        <a href="customerTagging"><i class="fas fa-file-alt"></i> Customer Tagging</a>
+    </div>
+
+    <div id="main">
+        <h4 class="display-4 dispMargin hideThis-header">
+           <a href="#" id='navBtn' class="btn btn-primary"  style='margin-right: 15px;'>
+             <span class="glyphicon glyphicon-menu-hamburger"></span> 
+           </a>
+          <span class='glyphicon glyphicon-file hideThis-header'></span> <span class="hideThis-header">DAILY SALES REPORT</span>
+          <span class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                    <a style='float:right;' href="#" class="dropdown-toggle" data-toggle="dropdown" id='dropThisDown'>
+                        <span class="label label-pill label-danger count" style='border-radius: 10px; font-size: 10px;'></span>
+                        <span class="fa fa-bell"></span>
+                    </a>
+                    
+                       <ul class="dropdown-menu" style='padding: 0'>
+                        <div id=''>
+                            <div id='notifs-icon-div'></div>
+                        </div>
+                        <a type="button" class="btn btn-default btn-block" href='mdAlert_bohol.php' id='seeAll' >See all</a>
+                       </ul>
+                </li>
+
+                  <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                      <i class="fa fa-user-circle-o"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="Profile.html"><i class="fa fa-user-circle-o"></i> My Account</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="#" id="admin-logout-btn"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                        </li>
+                    </ul>
+                 </li>
+            </span>
+        </h4>
+         <div class="panel cust-panel removeThis">
+            <div class="panel-heading hideThis-header">
+              <span class='glyphicon glyphicon-list-alt'></span>
+              <span id="titleHeading" class="display-4"></span>
+            </div>
+                <div id='removeThis2' class="panel-body" style='background-color:#fff; color: black;'> 
+                    <div id="nutriDSR-container">
+                         <div id="nutriDSR-header">
+                        <h4 class="text-center bold removeThisHeader"><strong>DAILY SALES REPORT</strong></h4>
+                        <!--<img src="../img/fast.png" class="pull-left fdc-image"/>-->
+                        <!--<img src="../img/nestle_logo.png" class="pull-right nestle-image"/>-->
+                        <!--<div style="margin-bottom: 20px !important;">
+                            <span class="area"><strong>Area:</strong><input type="text" class="inpt" id="inpt-area"/></span>
+                        </div>-->
+                     </div>
+                    <div class="dsrHeader-choices">
+                        <table>
+                        <tr>
+                          <td>
+                            <span><strong>Salesman Name: </strong><select placeholder='' class='inpt' id="salesmanList" style="width: 200px; margin-left: 10px;">
+                               <option value="" disabled selected hidden>Choose here..</option>
+                                             </select></span>
+                          </td>
+                          <td style="float:right;">
+                            <p><strong>Date: </strong><span class='input-daterange pull-right'>
+                                <input type='text' class='inpt' style="text-align: left; margin-left: 5px; width: 170px;" placeholder="Choose here.." id="dsrDate"/>
+                            </span>
+                            </p> 
+                             <button type="button" class="btn btn-default btn-sm" id='generateBtn' onclick="getDsrData()">Generate</button>
+                            <button class="btn btn-success btn-sm" id="printButton">Print</button>
+                          </td>
+                        </tr>
+                       </table>  
+                      </div>
+
+                      <div id='notif-empty'>
+                        <h2 class="text-center"></h2>
+                        <h4 class="text-center">Please select another saleman and/or date.</h4>
+                      </div>
+
+                    <div class='text-center' id='printThisTable'>
+                        <table border='1' class='dsrTable'>
+                            <tr>
+                              <td rowspan="2">#</td>
+                              <td rowspan="2">DSI No.</td>
+                              <td rowspan="2">Actual Range</td>
+                              <td rowspan="2">Actual/ <br/> Booked Sales</td>
+                              <td rowspan="2">Customer Name / TimeSpent(Min)</td>
+                              <td rowspan="2">Sales Target</td>
+                              <td rowspan="2">BTS</td>
+                              <td rowspan="2">Store Check</td>
+                              <td colspan="4">New Product</td>
+                              <td colspan="4">CP Activities</td>
+                              <td colspan="3">Merchandising</td>
+                              <td colspan="3">Market Returns</td>
+                              <td colspan="2" rowspan="2" style="width: 200px;">Remarks</td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td>Damaged</td>
+                              <td>Expired</td>
+                              <td>Total</td>
+                            </tr>
+                          <tbody id='dsrSalesmanData'>
+                          </tbody>
+                          <tfoot>
+                            <TR>
+                               <td colspan="2">
+                                <strong> Ave. Range >></strong>
+                               </td>
+                               <td>
+                               </td>
+                               <td>
+                                <strong id='average'></strong>
+                               </td>
+                               <td>
+                                <strong class="pull-left"><< Today's Sales</strong> <strong class="pull-right">Today's Target >> </strong>
+                               </td>
+                               
+                               <td><strong id="targetTotal"></strong></td>
+                               <td><strong id='btsTotal'></strong></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                             </TR>
+                              <TR>
+                               <td colspan='3'>
+                                
+                               </td>
+                               <td colspan="4">
+                                <strong class="pull-right">Total Actual Perf >></strong>
+                               </td>
+                               <td>
+                               
+                               </td>
+                               <td>
+                               
+                               </td>
+                               
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                                <td></td>
+                             </TR>
+                              <TR>
+                               <td colspan='3'>
+                                  <strong id='todaysSalesAch' class="pull-right"></strong>
+                               </td>
+                               <td colspan="4">
+                                 <strong class="pull-left"><< Today's % Sales Ach</strong> <strong class="pull-right"> Today % Ach >></strong>
+                               
+                               </td>
+                               <td>
+                               
+                               </td>
+                               <td>
+                               
+                               </td>
+                               
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                             </TR>
+
+                              <TR>
+                               <td colspan='3' >
+                                <strong id='monthSalesTarget' class="pull-right"></strong>
+                               </td>
+                               <td colspan="4">
+                                <strong class="pull-left"><< Month Sales Target</strong><strong class="pull-right">Month Target >></strong>
+                               </td>
+                               <td>
+                               
+                               </td>
+                               <td>
+                               
+                               </td>
+                               
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                             </TR>
+                             <TR>
+                               <td colspan='3'>
+                                  <strong id='mtdActualSales' class="pull-right"></strong>
+                               </td>
+                               <td colspan="4">
+                                <strong class="pull-left"><< MTD Actual Sales</strong>  <strong class="pull-right">MTD Performance >></strong>
+                               </td>
+                               <td>
+                               
+                               </td>
+                               <td>
+                               
+                               </td>
+                               
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                                <td></td>
+                             </TR>
+                             <TR>
+                               <td colspan='3'>
+                                 <strong id='mtdActPercent' class="pull-right"></strong>
+                               </td>
+                               <td colspan="4">
+                                 <strong class="pull-left"><< MTD % Sales</strong>  <strong class="pull-right"> Ach MTD % Perf >></strong>
+                               </td>
+                               <td>
+                               
+                               </td>
+                               <td>
+                               
+                               </td>
+                               
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                              <td></td>
+                             </TR>
+                             <TR>
+                               <td colspan='3'>
+                                <strong id='balanceToSell' class="pull-right"></strong>
+                               </td>
+                               <td colspan="4">
+                               <strong class="pull-left"><< Balance to Sell</strong>  <strong class="pull-right"> Balances >></strong>
+                               </td>
+                               <td>
+                               
+                               </td>
+                               <td>
+                               
+                               </td>
+                               
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                                <td></td>
+                             </TR>
+                              <TR>
+                               <td colspan='3'>
+                                 <strong id='daliySalesTarget' class="pull-right"></strong>
+                               </td>
+                               <td colspan="4">
+                                 <strong class="pull-left"> << Daily Sales Target</strong>
+                               </td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                             </TR>
+                              <TR>
+                                 <td colspan='3'>
+                                  <strong>Today's Productive Calls</strong>
+                                 </td>
+                                 <td colspan="4">
+                                  <strong>Month-To-Date Productive Calls</strong>
+                                 </td>
+                                 <td colspan="4">
+                                    <strong>Selling Days</strong>
+                                 </td>
+                                 <td colspan="10" rowspan="2">
+                                 <small class="pull-left">Prepared by:</small>
+                                 </td>
+                                 
+                                 <td colspan="4" rowspan="2">
+                                 <small class="pull-left">Recieved by:</small>
+                                 </td>
+                             </TR>
+                              <TR>
+                                 <td ><strong>Target</strong> </td>
+                                 <td><strong>Actual</strong> </td>
+                                 <td><strong>% Productive</strong></td>
+
+                                 <td><strong>Target</strong> </td>
+                                 <td><strong>Active</strong></td>
+                                 <td><strong>% Productive</strong></td>
+                                 <td><strong>Balance</strong> </td>
+
+                                 <td><strong>Target</strong> </td>
+                                 <td><strong>Actual</strong> </td>
+                                 <td><strong>Lapse</strong> </td>
+                                 <td><strong>Balance</strong> </td>
+                             </TR>
+                             <TR>
+                                 <td id='targetTPC'></td>
+                                 <td id='actualTPC'></td>
+                                 <td id="percentProd"></td>
+
+                                 <td id='mtdTarget'></td>
+                                 <td id ='mtdActive'></td>
+                                 <td id='mtdPrdPercent'></td>
+                                 <td id='mtdBalance'></td>
+
+                                 <td id='targetSellingD'></td>
+                                 <td id='actualSellingD'></td>
+                                 <td id='lapesSellingD'></td>
+                                 <td id='balanceSellingD'></td>
+                                 <td colspan="10" ><small>Salesman Signature/Date</small></td>
+                                 <td colspan="4"><small>GTM Signature/Date</small></td>
+                             </TR>
+                          </tfoot>
+                        </table>
+                    </div>
+                    
+                    </div><!--nutriDSR container end-->
+                 </div><!--panel body-->
+               </div>
+              
+         </div><!--main panel end-->
+   
+         <script type="text/javascript" src="/js/multi/dist/js/bootstrap-multiselect.js"></script>
+         <script type="text/javascript" src="/js/jasonday-printThis-c814846/printThis.js"></script>
+         <script type="text/javascript" src="/web/web-commons.js"></script>
+         <script type="text/javascript" src="/js/bootbox.min.js"></script>
+         <script type="text/javascript" src="/js/scrolling.js"></script>
+         <script src="/HASH/md5.js"></script>
+         <script src="/HASH/aes.js"></script>
+         <script src="/nestle/connectionString/LOCALSTORAGE/storage.js"></script>
+    <script type="text/javascript">
+      var user = localStorage.getItem("adminUserName");
+      var usertype = localStorage.getItem("usertype");
+
+      determineUserType(usertype);
+
+      getcompname();
+      function getcompname(){
+      $.ajax ({
+          url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+          type: "GET",
+          data: {"type":"GET_COMPANYNAME", "CONN":con_info},
+          dataType: "json",
+          crossDomain: true,
+          cache: false,            
+            success: function(r){ 
+            $('#titleHeading').html(r[0].company.toUpperCase() +' / DSR');
+            }
+        });
+      } 
+
+      console.log(user);
+      loadSalesman();
+
+       $("#printThisTable").hide();
+       //$("#collapse1").show();
+       //$("#navDrop").prop('disabled', true);
+
+       $("#printButton").click(function () {
+         var salesman = $("#salesmanList option:selected").text();
+         var selectedSalesman = $("#salesmanList").val();
+         var date = $('#dsrDate').val();
+         var datePrinted = new Date().toLocaleString();
+         $('#printButton').hide();
+         $('#generateBtn').hide();
+
+         if(selectedSalesman == ''){
+          alert('Please select date first!');
+         }else{
+         
+          $('#nutriDSR-container').addClass("removeTopMargin");
+          $('#printButton').hide();
+          $('#generateBtn').hide();
+          $('.hideThis-header').hide();
+          $('.fdc-image').hide();
+          //$('#removeThis').removeClass('cust-panel');
+          //$('#removeThis2').removeClass('panel-body');
+          //$('#dsrDate').addClass('removeBorder');
+          $('.removeThisHeader').hide();
+          window.print();
+
+          $('.removeThisHeader').show();
+          //$('#dsrDate').removeClass('removeBorder');
+          //$('#removeThis').addClass('cust-panel');
+          //$('#removeThis2').addClass('panel-body');
+          $('.fdc-image').show();
+          $('#printButton').show();
+          $('#generateBtn').show();
+          $('.hideThis-header').show();
+          $('#nutriDSR-container').removeClass("removeTopMargin");
+         }
+         
+        });
+
+
+      function loadSalesman(){
+         $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {"type":"get_all_salesman_georeset", "CONN":con_info},
+              dataType: "json",
+              crossDomain: true,
+              cache: false,            
+                success: function(data){ 
+                    for(var x = 0; x<data.length; x++){
+                         $('#salesmanList').append('<option value="'+data[x].mdCode+'">'+data[x].mdSalesmancode+'_'+data[x].Salesman+'</option>');
+                     }
+
+                      $('#salesmanList').multiselect({
+                        nonSelectedText: 'asdfsdf',
+                        enableCaseInsensitiveFiltering: true,
+                        buttonWidth: '200px',
+                        maxHeight: 400
+                     });
+                 }
+
+            });
+      }
+
+       $('.input-daterange').datepicker({
+          format: "yyyy-mm-dd",
+          autoclose: true,
+          todayBtn:'linked'
+         });
+
+       function todaysProductive(){
+         var salesman = $('#salesmanList').val();
+         var date = $('#dsrDate').val();
+           $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {
+              			"type":"todayProductive",
+              		    "salesman": salesman,
+              		    "date":date,
+              		    "CONN":con_info
+              		},
+              dataType: "html",
+              crossDomain: true,
+              cache: false,            
+              success: function(response){ 
+                  var data = [], productive = 0;
+                  data = JSON.parse(response);
+                  productive = (data[1].actual / data[0].target) * 100;
+                  $("#targetTPC").html(data[0].target);
+                  $("#actualTPC").html(data[1].actual);
+                  $("#percentProd").html(productive.toFixed(2) +'%');
+                  
+               }
+              });
+       }
+
+        //var todaysAch_dailyTarget = 0;
+        function sellingDays(){
+         var salesman = $('#salesmanList').val();
+         var date = $('#dsrDate').val();
+         var numericMonth = new Date(date).getMonth() + 1;
+         var targetData = 0;
+           $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {"type":"sellingDays",
+              		 "salesman": salesman,
+              		 "date":date,
+              		 "numericMonth":numericMonth,
+              		 "CONN":con_info
+              		},
+              dataType: "html",
+              crossDomain: true,
+              cache: false,
+              async: false,            
+              success: function(response){ 
+                 var data = [];
+                  data = JSON.parse(response);
+                   var montly = parseInt(data.amount);
+                   var balance = data.day - data.actualDays;
+                   var mtdSales = parseFloat(Number(data.mtdSales.sales).toFixed(2)).toLocaleString();
+                   var mtdPercent = (parseFloat(Number(data.mtdSales.sales).toFixed(2)) / parseFloat(montly)) * 100;
+                   var balanceToSell = montly - parseFloat(Number(data.mtdSales.sales).toFixed(2));
+                   var daliySalesTarget = parseFloat(Number(montly / data.day).toFixed(2)).toLocaleString();
+                   var lapse = data.day - balance - data.actualDays;
+                   //assign the daily target to use as global variable
+                   targetData = parseFloat(Number(montly / data.day).toFixed(2));
+                   $("#targetSellingD").html(data.day);
+                   $("#monthSalesTarget").html(montly.toLocaleString());
+                   $("#actualSellingD").html(data.actualDays);
+                   $("#balanceSellingD").html(balance);
+                   $("#mtdActualSales").html(mtdSales);
+                   $("#mtdActPercent").html(mtdPercent.toFixed(2) + '%');
+                   $("#balanceToSell").html(Number(balanceToSell.toFixed(2)).toLocaleString());
+                   $("#daliySalesTarget").html(daliySalesTarget);
+                   $("#lapesSellingD").html(lapse);
+                   
+               }
+              });
+              
+                 todaysAch_dailyTarget = targetData;
+       }
+
+       function getDsrData_average(){
+         var salesman = $('#salesmanList').val();
+         var date = $('#dsrDate').val();
+         var dataAve = 0;
+         $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {"type":"dsr_average", "salesman": salesman, "date":date, "CONN":con_info},
+              dataType: "html",
+              crossDomain: true,
+              cache: false,
+              async: false,            
+              success: function(response){ 
+               // var data = [];
+                var data = JSON.parse(response);
+                var average = parseFloat(Number(data.average).toFixed(2)).toLocaleString();
+                //var todaysArch = (parseFloat(Number(data.average).toFixed(2)) / todaysAch_dailyTarget) * 100;
+                dataAve = parseFloat(Number(data.average).toFixed(2));
+                $("#average").html(average);
+               }
+              });
+
+         	  dataAverage = dataAve;
+       }
+
+       function monthToDatePRD(){
+         var salesman = $('#salesmanList').val();
+         var date = $('#dsrDate').val();
+         $.ajax ({
+              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+              type: "GET",
+              data: {"type":"monthToDatePRD", "salesman": salesman, "date":date, "CONN":con_info},
+              dataType: "html",
+              crossDomain: true,
+              cache: false,
+              async: false,            
+              success: function(response){ 
+               // var data = [];
+                var data = JSON.parse(response);
+                var active = data.active.active;
+                var target = data.target.target;
+                var prdPercent = (active / target) * 100;
+                var balance = target - active;
+                
+                 $("#mtdTarget").html(active);
+                 $("#mtdActive").html(target);
+                 $("#mtdPrdPercent").html(prdPercent.toFixed(2) + '%');
+                 $("#mtdBalance").html(Math.abs(balance));
+
+               }
+              });
+       }
+
+        $('#notif-empty').hide();
+       function getDsrData(){
+          var salesman = $('#salesmanList').val();
+          var date = $('#dsrDate').val();
+
+            var name = $('#salesmanList option:selected').text();
+          if(date == ''){
+          	 alert('Please select a date first!');
+          }else{
+          	var ajaxTime= new Date().getTime();
+	          var totalTime= 0;
+
+	          //$("#printThisTable").show();
+
+	           $('#generateBtn').html("<i class='fa fa-spin fa-spinner'></i> Generating..");
+	           $('#generateBtn').prop('disabled', true);
+	           $('#generateBtn').css('background-color', "white");
+
+	           getDsrData_average();
+	           todaysProductive();
+	           sellingDays();
+	           monthToDatePRD();
+
+	           var todaysArch = (dataAverage / todaysAch_dailyTarget) * 100;
+
+	           $("#todaysSalesAch").html(todaysArch.toFixed(2)+ '%');
+
+	         $.ajax ({
+	              url: GLOBALLINKAPI+"/nestle/connectionString/applicationipAPI.php",
+	              type: "GET",
+	              data: {"type":"dsr_data", "dsrSalesman": salesman, "dsrDate":date, "CONN":con_info},
+	              dataType: "json",
+	              crossDomain: true,
+	              cache: false,            
+	              success: function(response){ 
+                    $('#printThisTable').hide();
+	                  if(response.delimeter == 0){
+  	                   $('#content-header').hide();
+                       $('#notif-empty').show();
+                       $('#notif-empty h2').html('No data to show for salesman <strong>' + name +'</strong> in <strong>'+date+'</strong>');
+                    
+	                  }else{
+                        $('#notif-empty').hide();
+  	                    var sales = $(calculateAve);
+                        $('#printThisTable').show();
+  	                    $('#dsrSalesmanData').html(response.content);
+                        $('#btsTotal').html(response.btsTotal);
+                        $('#targetTotal').html(response.targetTotal);
+  	                    totalTime = new Date().getTime()-ajaxTime;
+	                  }
+	                 
+                    $('#generateBtn').html("Generate");
+                    $('#generateBtn').prop('disabled', false);
+	               },error: function(XMLHttpRequest, textStatus, errorThrown) {
+                     alert('NETWORK ERROR: ' + JSON.stringify(XMLHttpRequest.responseText));
+                    $('#generateBtn').html("Generate");
+                    $('#generateBtn').prop('disabled', false);
+                  }
+
+	              });
+          }//else close
+           
+       }
+
+       function printData()
+        {
+           
+        	window.print();
+           /*var myStyle = '<link rel="stylesheet" href="css/mdDesign.css" />';
+           var divToPrint=document.getElementById("printThisTable");
+           newWin= window.open("");
+           newWin.document.write(myStyle + jQuery(divToPrint).html());
+           newWin.print();
+           newWin.close();*/
+        }
+
+        function calculateAve(){
+          var sum = 0;
+            // iterate through each td based on class and add the values
+            $(".sales").each(function() {
+
+                var value = $(this).text();
+                // add only if the value is number
+                if(!isNaN(value) && value.length != 0) {
+                    sum += parseFloat(value);
+                }
+            });
+        }
+
+   
+    </script>
+
+    
+    
+</body>
+<script type="text/javascript">
+  
+
+  (function($) {
+    $.fn.clickToggle = function(func1, func2) {
+        var funcs = [func1, func2];
+        this.data('toggleclicked', 0);
+        this.click(function() {
+            var data = $(this).data();
+            var tc = data.toggleclicked;
+            $.proxy(funcs[tc], this)();
+            data.toggleclicked = (tc + 1) % 2;
+        });
+        return this;
+    };
+   }(jQuery));
+
+ 
+    $("#navBtn").clickToggle(function() {   
+      openNav();
+    }, function() {
+        closeNav();
+    });
+
+    $(window).bind("load", function () {
+        $('#work-in-progress').fadeOut();
+    });
+  
+    function imgError2(image) {
+      image.onerror = "";
+      image.src = "../img/salesmanPic.jpg";
+      return true;
+    }  
+
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "270px";
+        document.getElementById("main").style.marginLeft = "270px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft= "0";
+    }
+
+    showNotif();
+
+    $(document).on('click', '.dropdown-toggle', function(){
+      $('.count').html('');
+       showNotif('yes');
+    });
+
+    setInterval(function(){
+     showNotif();
+   }, 9000);
+
+
+    function showNotif(view=''){
+           //notification
+
+             $.ajax ({
+              url: "../geofencing/GeofencingAPI.php",
+              type: "GET",
+              data: {"type":"view_notifications_icon_"+user, "view":view},
+              dataType: "JSON",
+              crossDomain: true,
+              cache: false,            
+                success: function(response){ 
+               // console.log('Notification function has been refresh');                
+                $("#notifs-icon-div").html(response.notification);
+
+                  if(response.unseen_notification > 0)
+                  {
+                   $('.count').html(response.unseen_notification);
+                  }
+                
+                }
+            });
+        }
+
+</script>
+
+</html>
